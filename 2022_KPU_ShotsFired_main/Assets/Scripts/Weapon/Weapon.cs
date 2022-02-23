@@ -48,6 +48,7 @@ public class Weapon : MonoBehaviour
     private State state;    // 현재 상태
     private bool isTriggered = false;   // 트리거가 눌려저 있는지
     private bool isHipFire = true;  // 기본 사격 상태인지
+    private float lastFireTime; // 마지막 발사 시간
     // 사격
     private Vector3 fireDirection; // 의도하는 사격 방향
     [Header("현재 스프레드 수치")]
@@ -57,13 +58,23 @@ public class Weapon : MonoBehaviour
     private float yVar; // y스프레드 값
     
     #endregion
-    
+
+    private void OnEnable() {
+        // 재장전 중에 무기를 집어넣었다가 다시 꺼낼 때, 재장전 중이였다면 자동 재장전을 시도한다.
+        if( state == State.reloading) Reload(); 
+        
+        // 발사 중 무기를 집어넣었다가 다시 꺼낼 때, 현재 무기 상태를 다시 점검한다.
+        if((Time.time >= lastFireTime + fireInterval) && (curRemainAmmo > 0)) state = State.ready;
+
+    }
     private void Start()
     {
         SettingData();
         weaponUser = transform.root.gameObject;
         curRemainAmmo = magCappacity;
         maxSpreadStandard = MOA * moaMultiple;
+
+        UpdateUI();
 
         #region 오브젝트 풀링
         bulletPool = new ObjectPool<Bullet>
@@ -100,7 +111,7 @@ public class Weapon : MonoBehaviour
     #region 사격
     // 1티어 사격 메소드
     public void Fire()
-    {   
+    {      
         if(state != State.ready) return;
 
         switch( havingFireMode[curFireMode] ){
@@ -131,7 +142,7 @@ public class Weapon : MonoBehaviour
         isTriggered = true;
     }
     
-    // 2티어 사격 메소드: 사격 장치
+    // 2티어 사격 메소드: 사격 통제 장치
     IEnumerator Shots(int _remainShotCount)
     {   
         // 자동사격이 끝났거나, 총알이 없는 경우
@@ -141,15 +152,19 @@ public class Weapon : MonoBehaviour
             yield break;
         }
 
-        Shot();
+        if(Time.time >= lastFireTime + fireInterval)
+        {
+            Shot();
 
-        yield return new WaitForSeconds(fireInterval);
-        StartCoroutine( Shots(--_remainShotCount) );        
+            yield return new WaitForSeconds(fireInterval);
+            StartCoroutine( Shots(--_remainShotCount) );
+        }
     }
 
     // 3티어 사격 메소드: 최종 1회 사격
     private void Shot(){
         curRemainAmmo--;
+        UpdateUI();
 
         fireDirection = transform.eulerAngles;
         
@@ -166,7 +181,10 @@ public class Weapon : MonoBehaviour
         curSpread += recoilPerShot;
 
         var bullet = bulletPool.Get();
+
+        lastFireTime = Time.time;
     }
+    
 
     public void Detached() =>  isTriggered = false;
     #endregion
@@ -190,11 +208,11 @@ public class Weapon : MonoBehaviour
     {
         if(curRemainMag <= 0) return;
 
-        StartCoroutine( reloadging() );
+        StartCoroutine( Reloadging() );
     }
 
     // 실제 재장전
-    IEnumerator reloadging()
+    IEnumerator Reloadging()
     {
         state = State.reloading;
         curRemainAmmo = 0;
@@ -204,6 +222,8 @@ public class Weapon : MonoBehaviour
         curRemainAmmo = magCappacity;
         curRemainMag--;
         state = State.ready;
+
+        UpdateUI();
     }
     #endregion
 
@@ -237,5 +257,11 @@ public class Weapon : MonoBehaviour
         var x1 = Random.Range(0f, 1f);
         var x2 = Random.Range(0f, 1f);
         return mean + standard * (Mathf.Sqrt(-2.0f * Mathf.Log(x1)) * Mathf.Sin(2.0f * Mathf.PI * x2));
+    }
+
+    public void UpdateUI()
+    {
+        GameUIManager.Instance.UpdateAmmo(curRemainAmmo);
+        GameUIManager.Instance.Updatemag(curRemainMag);
     }
 }

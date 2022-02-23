@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {   
     private Rigidbody m_rigidbody;
@@ -50,6 +51,7 @@ public class Bullet : MonoBehaviour
             DamageMessage damageMessage;
 
             damageMessage.attacker = topLevelParent;
+            damageMessage.ID = Random.Range(0, 2147483647);
             damageMessage.damageKind = DamageMessage.DamageKind.bullet;
             damageMessage.amount = bulletDamage;
             //damageMessage.hitPoint = other.contactOffset[0].point;
