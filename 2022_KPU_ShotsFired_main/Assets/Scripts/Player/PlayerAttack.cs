@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 #region 필요한 컴포넌트
 [RequireComponent(typeof(PlayerInput))]
@@ -27,7 +28,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float m_minScreenAngle = 80f;  // 화면 최대 아래 각도
     [SerializeField] float m_maxScreenAngle = 80f;  //화면 최개 위 각도
     [SerializeField] GameObject m_virtualMainCamera;    // 메인 카메라 자리
-    
+    [SerializeField] CinemachineVirtualCamera m_mainCam;    // 메인 카메라의 가상카메라
+    [SerializeField] CinemachineVirtualCamera m_zoomCam;    // 줌 카메라의 가상카메라
+
     [Header("카메라 거치대 위치")] 
     [SerializeField] private float m_idleCamHolderHeight = 1.8f;
     [SerializeField] private float m_zoomCamHolderHeught = 1.55f;
@@ -45,16 +48,21 @@ public class PlayerAttack : MonoBehaviour
         curCamHolderLocalPosition.y = m_idleCamHolderHeight;
         m_cameraHolder.localPosition = curCamHolderLocalPosition;
         playerInput = GetComponent<PlayerInput>();
+
+        m_virtualMainCamera = GameObject.Find("Camera Main");   
+        m_mainCam = m_virtualMainCamera.GetComponent<CinemachineVirtualCamera>();   
+        m_zoomCam = GameObject.Find("Camera Zoom").GetComponent<CinemachineVirtualCamera>();
+        m_mainCam.Follow = m_zoomCam.Follow = transform.Find("Camera Holder");
     }
     private void Update()
     {
-        RotateScreen();
+        if(m_virtualMainCamera != null) RotateScreen();
 
         isZoomMode = playerInput.zoom;
     }
 
     private void FixedUpdate() {
-        SetScreenMode();
+        if(m_virtualMainCamera != null) SetScreenMode();
     }
 
     // 화면 회전
