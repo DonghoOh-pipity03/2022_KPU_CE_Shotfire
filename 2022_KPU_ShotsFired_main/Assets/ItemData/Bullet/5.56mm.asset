@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletName: 5.56mm
   damage: 27
+  suppress: 5
   speed: 125
   lifeTime: 3
