@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletName: 45 ACP
   damage: 35
+  suppress: 5
   speed: 100
   lifeTime: 4

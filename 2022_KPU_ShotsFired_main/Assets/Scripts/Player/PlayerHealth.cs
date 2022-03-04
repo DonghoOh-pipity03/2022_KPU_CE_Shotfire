@@ -4,7 +4,6 @@ using UnityEngine;
 
 class PlayerHealth : LivingEntity
 {
-    
     protected override void OnEnable() 
     {
         base.OnEnable();    

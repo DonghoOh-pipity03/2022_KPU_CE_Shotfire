@@ -6,7 +6,6 @@ public enum HitParts{ head, upBody, arm, leg}
 public class HitPoint : MonoBehaviour, IDamageable
 {
     private LivingEntity EntityHealth;
-    private Collider coll;
 
     [SerializeField] HitParts hitPart;
 

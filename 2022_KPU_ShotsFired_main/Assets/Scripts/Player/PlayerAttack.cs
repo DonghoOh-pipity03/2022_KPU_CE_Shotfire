@@ -1,12 +1,3 @@
-/*
-최초작성자: 오동호
-최종수정자: 오동호
-수정날짜: 20220217
-버전: 0.01.00
- */
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 

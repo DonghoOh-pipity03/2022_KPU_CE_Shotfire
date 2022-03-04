@@ -7,6 +7,8 @@ public class BulletData : ScriptableObject
     public string BulletName{get{return bulletName;} set{}}
     [SerializeField]private float damage; // 총알 데미지
     public float Damage{ get{return damage;} set{}}
+    [SerializeField] private float suppress;    // 총알 제압량
+    public float Suppress{ get{return suppress;} set{} }
         // 총격 충격력
     [SerializeField]private float speed;  // 총알 속도
     public float Speed{get{return speed;} set{}}
