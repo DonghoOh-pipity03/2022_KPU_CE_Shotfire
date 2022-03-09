@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum HitParts{ head, upBody, arm, leg}
+public enum HitParts{ head, upBody, arm, leg}   // 피격 부위 종류
 public class HitPoint : MonoBehaviour, IDamageable
 {
-    private LivingEntity EntityHealth;
+    private LivingEntity EntityHealth;  // 데미지를 전달할 상위 LivingEntity
 
-    [SerializeField] HitParts hitPart;
+    [SerializeField] HitParts hitPart;  // 피격 부위
 
     private void Start() {
         EntityHealth = transform.root.gameObject.GetComponent<LivingEntity>();

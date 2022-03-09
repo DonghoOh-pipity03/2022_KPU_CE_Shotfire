@@ -4,7 +4,7 @@ using TMPro;
 public class GameUIManager : MonoBehaviour
 {
 #region 전역 변수
-    [SerializeField] private GameObject m_miniMap;
+    [SerializeField] private GameObject m_miniMap;  // 플레이어_미니맵 
     // 체력 계열
     [SerializeField] private TextMeshProUGUI playerHealth;  // 플레이어_체력
     // 무기 계열

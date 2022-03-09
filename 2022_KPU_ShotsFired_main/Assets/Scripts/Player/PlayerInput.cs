@@ -26,8 +26,8 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float m_sprintInvokeTime = 0.25f;  // 질주 감지 시간
 
     #region 전역 동작 변수
-    private float m_lastSprintInputTime = 0f;
-    private float m_curSprintInputTime = 0f;
+    private float m_lastSprintInputTime = 0f;   // 마지막 질주 키 입력 시간
+    private float m_curSprintInputTime = 0f;    // 현재 질주 키 입력 시간: 나중에 '마지막 질주 키 입력시간'으로 복사됨
     #endregion
 
     private void Update()
