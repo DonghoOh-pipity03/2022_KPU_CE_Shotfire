@@ -1,8 +1,3 @@
-/*
-작성자: 오동호
-수정자: 오동호
-최종수정일: 22-02-19
-*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

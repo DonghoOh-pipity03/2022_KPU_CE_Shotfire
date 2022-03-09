@@ -9,7 +9,7 @@ public class Action_Publisher : MonoBehaviour
 
     public float HealthMultiple = 2f;
 
-    // ÆÛºí¸®¼Å ½ÇÇà
+    // í¼ë¸”ë¦¬ì…” ì‹¤í–‰
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) publishTester(HealthMultiple);

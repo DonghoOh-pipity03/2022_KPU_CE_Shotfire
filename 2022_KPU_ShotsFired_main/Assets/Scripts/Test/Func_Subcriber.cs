@@ -13,7 +13,7 @@ public class Func_Subcriber : MonoBehaviour
         publisher.publishTester += SetMoveConf;
     }
 
-    // ±¸µ¶ÀÚ µî·Ï ÇÔ¼ö
+    // êµ¬ë…ì ë“±ë¡ í•¨ìˆ˜
     public bool SetMoveConf(float temp)
     {
         Debug.Log("Subscriber: "+temp);

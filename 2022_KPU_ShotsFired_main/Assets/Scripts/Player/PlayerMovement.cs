@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private float currentVelocityY; // 목표 y축 속도
     private float speedSmoothVelocity;  // 이동속도 변환의 부드러운 정도
     private float curSpeed =>
-        new Vector2(charController.velocity.x, charController.velocity.z).magnitude;
+        new Vector2(charController.velocity.x, charController.velocity.z).magnitude;    // 현재 캐릭터 속도
     // 회피
     private bool isDodge = false;   // 회피 상태 여부
     private float lastDodgeTime = 0;    //마지막 회피 입력시간
