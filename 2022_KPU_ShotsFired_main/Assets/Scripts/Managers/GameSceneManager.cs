@@ -6,6 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class GameSceneManager : MonoBehaviour
 {   
+
     [SerializeField] private PostProcessVolume m_postProcesser; // 배경에 필터를 줄 포스트프로세서
     #region 전역 함수
     
@@ -47,6 +48,7 @@ public class GameSceneManager : MonoBehaviour
     }
 
     public IEnumerator UnloadSceneWithAsync(string _sceneName)
+
     {
         var targetScene = SceneManager.GetSceneByName(_sceneName);
         if(targetScene.isLoaded)
@@ -60,15 +62,27 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+
     public void SetActiveWallPaper(bool _active) 
     {
         m_postProcesser.enabled = _active;
+    }
+
+
+    public void QiutProgram()
+    {
+        Application.Quit();
+    }
+     public void DisableGameObject(GameObject _UI)
+    {
+        _UI.SetActive(false);
     }
 
     public void QiutProgram()
     {
         Application.Quit();
     }
+
 
 
     public void RescaleGameTime(float _time)

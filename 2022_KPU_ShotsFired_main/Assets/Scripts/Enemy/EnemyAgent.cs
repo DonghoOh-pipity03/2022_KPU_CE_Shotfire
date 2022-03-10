@@ -96,7 +96,6 @@ class EnemyAgent : LivingEntity
                     // 시야에 확인
                     if (Physics.Raycast(ray, out hit, eyeDistance))//, attackTarget))  
                     {   
-                        Debug.Log("1");
                         Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 5f);
                         if(hit.transform.root.gameObject == collider.gameObject) 
                         {
