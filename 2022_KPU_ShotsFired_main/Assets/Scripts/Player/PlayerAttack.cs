@@ -23,14 +23,14 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera m_zoomCam;    // 줌 카메라의 가상카메라
 
     [Header("카메라 거치대 위치")] 
-    [SerializeField] private float m_idleCamHolderHeight = 1.8f;
-    [SerializeField] private float m_zoomCamHolderHeught = 1.55f;
+    [SerializeField] private float m_idleCamHolderHeight = 1.8f;    // 평소 상태 카메라 높이
+    [SerializeField] private float m_zoomCamHolderHeught = 1.55f;   // 줌 상태 카메라 높이
     #endregion
 
     #region 전역 동작 변수
-    private float curScreenSpeed;
-    private Vector3 curCamHolderLocalPosition = Vector3.zero;
-    private bool isZoomMode = false;
+    private float curScreenSpeed;   // 현재 화면 회전 속도
+    private Vector3 curCamHolderLocalPosition = Vector3.zero;   // 현재 카메라 홀더의 로컬 위치
+    private bool isZoomMode = false;    // 줌 상태 여부
     #endregion
 
     private void Start()

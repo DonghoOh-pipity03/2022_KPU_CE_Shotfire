@@ -5,10 +5,11 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     [Tooltip("사용을 원하지 않으면 공백으로 두기")]
-    [SerializeField] string nextSceneName;
-    [SerializeField] string prevSceneName;
+    [SerializeField] private string nextSceneName;  // 다음 스테이지 씬 이름
+    [SerializeField] private string prevSceneName;  // 이전 스테이지 씬 이름
     private int curPlayerCountInRoom;   // 현재 세이프룸 인원
     private bool startedNextScene = false;  // 다음 씬의 로드가 시작되었는지 여부
+    
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "Player") curPlayerCountInRoom++;
     }

@@ -11,7 +11,7 @@ public class Func_Publisher : MonoBehaviour
 
     private void Update()
     {
-        // ÆÛºí¸®¼Å ½ÇÇà
+        // í¼ë¸”ë¦¬ì…” ì‹¤í–‰
         if (Input.GetKey(KeyCode.Space))
         {
             var temp = publishTester(damageMultiple);

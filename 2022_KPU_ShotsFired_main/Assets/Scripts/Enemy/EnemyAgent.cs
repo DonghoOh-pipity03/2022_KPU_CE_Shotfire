@@ -6,10 +6,10 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public enum AIState{ wait, move, engage}
+public enum AIState{ wait, move, engage}    // AI가 가질 수 있는 경계상태
 class EnemyAgent : LivingEntity
 {   
-    [SerializeField] private Transform eyeTransform;
+    [SerializeField] private Transform eyeTransform;    // 눈의 위치 정보
     #region 전역 변수
     // 시야
     [SerializeField] private float eyeDistance; // 시야 거리
@@ -164,16 +164,16 @@ class EnemyAgent : LivingEntity
         int maxValue = targetWeight.Max();
         targetPlayer = targetWeight.ToList().IndexOf(maxValue);
         // 공격 방법 선정 & 공격
-        if( playerDistance[targetPlayer] > melleeDistance ) melleeAttack();    //근접공격
-        else shotAttack();  // 원거리 공격
+        if( playerDistance[targetPlayer] > melleeDistance ) MelleeAttack();    //근접공격
+        else ShotAttack();  // 원거리 공격
     }
 
-    private void melleeAttack()
+    private void MelleeAttack()
     {
 
     }
 
-    private void shotAttack()
+    private void ShotAttack()
     {
 
     }

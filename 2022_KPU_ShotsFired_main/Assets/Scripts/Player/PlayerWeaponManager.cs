@@ -13,7 +13,7 @@ public class PlayerWeaponManager : MonoBehaviour
    #endregion
 
    #region 전역 동작 변수
-   private int curWeapon = 0;
+   private int curWeapon = 0;   // 현재 들고 있는 무기의 배열 번호
    #endregion
    
     private void Start() {

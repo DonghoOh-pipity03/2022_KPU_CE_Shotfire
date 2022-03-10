@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PressToLoadScene : MonoBehaviour
 {   
-    [SerializeField] Image progressBar;
-    [SerializeField] private string nextSceneName; 
+    [SerializeField] Image progressBar; // 로딩 바 이미지
+    [SerializeField] private string nextSceneName;  // 다음 씬 이름
 
     private void Start() {
-        StartCoroutine(asyncLoadScene());
+        StartCoroutine(AsyncLoadScene());
     }
 
     // 출처: https://wergia.tistory.com/183
-    IEnumerator asyncLoadScene()
+    IEnumerator AsyncLoadScene()
     {
         yield return null;
         AsyncOperation op = SceneManager.LoadSceneAsync(nextSceneName);
