@@ -62,28 +62,15 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-
     public void SetActiveWallPaper(bool _active) 
     {
         m_postProcesser.enabled = _active;
     }
 
-
     public void QiutProgram()
     {
         Application.Quit();
     }
-     public void DisableGameObject(GameObject _UI)
-    {
-        _UI.SetActive(false);
-    }
-
-    public void QiutProgram()
-    {
-        Application.Quit();
-    }
-
-
 
     public void RescaleGameTime(float _time)
     {
