@@ -43,7 +43,7 @@ public class Weapon : MonoBehaviour
     private State state;    // 현재 상태
     private bool isTriggered = false;   // 트리거가 눌려저 있는지
     private bool isHipFire = true;  // 기본 사격 상태인지
-    private float lastFireTime; // 마지막 발사 시간
+    private float lastFireTime = -1; // 마지막 발사 시간
     // 사격
     private Vector3 fireDirection; // 의도하는 사격 방향
     [Header("현재 스프레드 수치")]
@@ -146,7 +146,7 @@ public class Weapon : MonoBehaviour
             AmmoCheck();
             yield break;
         }
-
+        
         if(Time.time >= lastFireTime + fireInterval)
         {
             Shot();
