@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8183899530102939272}
   m_Layer: 10
   m_Name: Prototype Shooter
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +58,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8183899530102939273}
-  m_LocalRotation: {x: -0, y: -0.70710677, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 12, y: 1.5, z: -20}
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 6237f8c89c192d04a8b515f029a7a3f8, type: 2}
   bulletPrefab: {fileID: 3228379026309742222, guid: 945fba1098d16fd4894e90a1bcda75d4, type: 3}
   muzzlePosition: {fileID: 8183899529902422850}
+  useUI: 0
   autoReload: 1
   moaMultiple: 4
   havingFireMode: 

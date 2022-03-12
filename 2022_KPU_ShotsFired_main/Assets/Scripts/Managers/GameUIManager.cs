@@ -31,6 +31,7 @@ public class GameUIManager : MonoBehaviour
 
     private void Awake() 
     {   
+        if(playerHealthBackground != null && playerMaxHealthBar != null)
         playerHealthBackgorundHorizonMargine = (playerHealthBackground.sizeDelta.x - playerMaxHealthBar.sizeDelta.x) / 2f; 
     }
 

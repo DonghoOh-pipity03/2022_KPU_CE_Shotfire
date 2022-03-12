@@ -45,9 +45,9 @@ abstract class LivingEntity : MonoBehaviour
         }
     }
 
-    public virtual void TakeSuppress(DamageMessage _damageMessage)
+    public virtual void TakeSuppress(float _suppressAmount)
     {
-        curSuppress += _damageMessage.suppressAmount;
+        curSuppress += _suppressAmount;
     }
 
     public virtual void RestoreHealth(float _restoreAmount)
