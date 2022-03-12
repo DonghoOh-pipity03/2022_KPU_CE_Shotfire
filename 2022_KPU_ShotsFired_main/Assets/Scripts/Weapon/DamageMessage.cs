@@ -1,9 +1,9 @@
 using UnityEngine;
 
+public enum DamageKind{ bullet, explosion, fire, gas, GM }   // 데미지의 종류
+
 public struct DamageMessage
 {
-    public enum DamageKind{ bullet, explosion, fire }   // 데미지의 종류
-
     public GameObject attacker; // 공격자
     public int ID;    // 공격체 식별을 위한 난수 저장공간
     public float damageAmount;  // 데미지 양

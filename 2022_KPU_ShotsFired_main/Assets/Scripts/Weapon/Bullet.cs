@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
 
             damageMessage.attacker = topLevelParent;
             damageMessage.ID = Random.Range(0, 2147483647); // 사용안함_원래는 관통시스템 사용시 중복 공격 방지용이였던 것
-            damageMessage.damageKind = DamageMessage.DamageKind.bullet;
+            damageMessage.damageKind = DamageKind.bullet;
             damageMessage.damageAmount = bulletDamage;
             damageMessage.suppressAmount = bulletSuppress;
             damageMessage.hitPoint = Vector3.zero;
@@ -73,7 +73,7 @@ public class Bullet : MonoBehaviour
 
             damageMessage.attacker = topLevelParent;
             damageMessage.ID = Random.Range(0, 2147483647); // 사용안함_원래는 관통시스템 사용시 중복 공격 방지용이였던 것
-            damageMessage.damageKind = DamageMessage.DamageKind.bullet;
+            damageMessage.damageKind = DamageKind.bullet;
             damageMessage.damageAmount = bulletDamage;
             damageMessage.suppressAmount = bulletSuppress;
             damageMessage.hitPoint = other.contacts[0].point;
