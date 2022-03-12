@@ -37,7 +37,11 @@ abstract class LivingEntity : MonoBehaviour
 
         curHealth -= _damageMessage.damageAmount * HitMultiple[(int)_hitPart];
 
-        if(curHealth <= 0) Die();
+        if(curHealth <= 0) 
+        {
+            curHealth = 0;
+            Die();
+        }
     }
 
     public virtual void TakeSuppress(DamageMessage _damageMessage)
