@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
     [SerializeField]private Bullet bulletPrefab;  // 총알 프리팹
     [SerializeField]private Transform muzzlePosition; // 총구 위치
     #region 전역 변수
-    [SerializeField] private bool useUI = false;    // 무기 관련 UI를 사용하는지 여부
     [SerializeField] private bool autoReload = true;    // 자동 재장전 정책 허용여부
     [SerializeField] private float moaMultiple = 4f;    // 실제 총기 명중률의 계수
     
@@ -257,7 +256,6 @@ public class Weapon : MonoBehaviour
 
     public void UpdateUI()
     {
-        if(!useUI) return;
         GameUIManager.Instance.UpdateAmmo(curRemainAmmo);
         GameUIManager.Instance.Updatemag(curRemainMag);
     }
