@@ -752,6 +752,7 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: eede114320a381f4d90402df8012c253, type: 2}
   bulletPrefab: {fileID: 3228379026309742222, guid: 945fba1098d16fd4894e90a1bcda75d4, type: 3}
   muzzlePosition: {fileID: 5596406285379891948}
+  useUI: 1
   autoReload: 1
   moaMultiple: 4
   havingFireMode: 
@@ -894,6 +895,7 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 781acfdbc6d520e4fbd029f7c1dd5860, type: 2}
   bulletPrefab: {fileID: 3768384580321215853, guid: b0c9452bb20017542b06893933178abf, type: 3}
   muzzlePosition: {fileID: 2481927748038057919}
+  useUI: 1
   autoReload: 1
   moaMultiple: 4
   havingFireMode: 
