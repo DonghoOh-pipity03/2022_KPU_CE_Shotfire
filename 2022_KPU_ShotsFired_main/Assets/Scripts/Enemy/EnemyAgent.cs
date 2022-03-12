@@ -80,7 +80,7 @@ class EnemyAgent : LivingEntity
         {   
             // 시야 거리 내에서 존재한 상황
             var livingEntity = collider.GetComponent<LivingEntity>();
-            if (livingEntity != null && !livingEntity.isDead)   
+            if (livingEntity != null && livingEntity.state != EntityState.dead)   
             {   
                 RaycastHit hit;
                 var direction = collider.transform.position - eyeTransform.position;

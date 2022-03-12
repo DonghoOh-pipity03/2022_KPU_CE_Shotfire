@@ -2,6 +2,7 @@
 
 public class PlayerInput : MonoBehaviour
 {
+    private PlayerController playerController;
     #region 입력 변수
     public Vector2 move { get; private set; }
     public Vector2 look { get; private set; }
@@ -30,6 +31,10 @@ public class PlayerInput : MonoBehaviour
     private float m_curSprintInputTime = 0f;    // 현재 질주 키 입력 시간: 나중에 '마지막 질주 키 입력시간'으로 복사됨
     #endregion
 
+    private void Start() 
+    {
+        playerController = GetComponent<PlayerController>();
+    }
     private void Update()
     {
         DetectInput();
@@ -38,17 +43,30 @@ public class PlayerInput : MonoBehaviour
 
     private void DetectInput() 
     {
+        // 이동 관련
+        if(playerController.ableControlMove)
+        {
         move = (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized;
-        look = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         jump = Input.GetButtonDown("Jump");
         sprint = DetectSprint();
         dodge = Input.GetButtonDown("Dodge");
         crouch = Input.GetButton("Crunch");
+        }
+        else
+        {
+            move = Vector2.zero;
+            jump = false;
+            sprint = false;
+            dodge = false;
+            crouch = false;
+        }
+
+        // 공격 관련
+        if(playerController.ableControlAttack)
+        {
         fire = Input.GetButton("Fire1");
         zoom = Input.GetButton("Fire2");
-        mouseWheel = Input.GetAxis("Mouse ScrollWheel");
         reload = Input.GetButtonDown("Reload");
-        interaction = Input.GetButton("Interaction");
         melee = Input.GetButtonDown("Melee");
         frag = Input.GetButtonDown("Frag");
         fireMode = Input.GetButtonDown("Firemode");
@@ -56,7 +74,28 @@ public class PlayerInput : MonoBehaviour
         weapon2 = Input.GetButtonDown("Weapon2");
         weapon3 = Input.GetButtonDown("Weapon3");
         weapon4 = Input.GetButtonDown("Weapon4");
-    }
+        }
+        else
+        {
+            fire = false;
+            zoom = false;
+            reload = false;
+            melee = false;
+            frag = false;
+            fireMode = false;
+            weapon1 = false;
+            weapon2 = false;
+            weapon3 = false;
+            weapon4 = false;
+        }
+
+        // 화면 관련
+        look = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        
+        //기타
+        mouseWheel = Input.GetAxis("Mouse ScrollWheel");
+        interaction = Input.GetButton("Interaction");
+        }
 
     private bool DetectSprint() // UNITY_STANDALONE 전용_다른 장치는 별도 구현 필요
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EntityState{ alive, down, dead }   // 생명체의 상태
 abstract class LivingEntity : MonoBehaviour
 {
     #region 전역 변수
@@ -13,12 +14,12 @@ abstract class LivingEntity : MonoBehaviour
     #region 전역 동작 변수
     protected float curHealth;    // 현재 체력
     protected float curSuppress = 0;    // 현재 제압량
-    public bool isDead;    // 사망여부
+    public EntityState state;   // 생명체의 상태
     #endregion
 
     protected virtual void OnEnable() 
     {
-        isDead = false;
+        state = EntityState.alive;
         curHealth = MaxHealth;   
     }
 
@@ -33,7 +34,7 @@ abstract class LivingEntity : MonoBehaviour
 
     public virtual void TakeDamage(DamageMessage _damageMessage, HitParts _hitPart)
     {
-        if(isDead) return;
+        if(state == EntityState.dead) return;
 
         curHealth -= _damageMessage.damageAmount * HitMultiple[(int)_hitPart];
 
@@ -51,12 +52,12 @@ abstract class LivingEntity : MonoBehaviour
 
     public virtual void RestoreHealth(float _restoreAmount)
     {
-        if(isDead) return;
+        if(state == EntityState.dead) return;
 
         curHealth += _restoreAmount;
     }
 
     protected virtual void Die() {
-        isDead = true;
+        state = EntityState.dead;
     }
 }

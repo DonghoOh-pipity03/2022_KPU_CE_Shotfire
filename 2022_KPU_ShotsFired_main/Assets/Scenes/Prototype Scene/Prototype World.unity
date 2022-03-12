@@ -1601,7 +1601,7 @@ MonoBehaviour:
   - 1
   - 0.8
   - 0.8
-  isDead: 0
+  state: 0
   eyeTransform: {fileID: 2118775742}
   eyeDistance: 5
   attackTarget:
@@ -6409,6 +6409,18 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 5596406285412985385, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
+      propertyPath: downMaxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5596406285412985385, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
+      propertyPath: restoreStartTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5596406285412985385, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
+      propertyPath: autoRestoreAmount
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
 --- !u!1001 &8183899530905075165
