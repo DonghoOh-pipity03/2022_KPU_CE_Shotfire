@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 7844730}
   - component: {fileID: 7844729}
   m_Layer: 5
-  m_Name: Background
+  m_Name: MaxHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -378,7 +378,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59204
+  m_Name: pb_Mesh65676
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1168,7 +1168,7 @@ GameObject:
   - component: {fileID: 468360522}
   - component: {fileID: 468360521}
   m_Layer: 5
-  m_Name: Background
+  m_Name: MaxHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1618,7 +1618,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh39964
+  m_Name: pb_Mesh65884
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2801,7 +2801,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100 / 110
+  m_text: 100 / 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3490,7 +3490,7 @@ GameObject:
   - component: {fileID: 1047826037}
   - component: {fileID: 1047826036}
   m_Layer: 5
-  m_Name: Background
+  m_Name: MaxHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3882,7 +3882,7 @@ GameObject:
   - component: {fileID: 1183565371}
   - component: {fileID: 1183565370}
   m_Layer: 5
-  m_Name: Background
+  m_Name: MaxHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3906,7 +3906,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 15, y: 0}
-  m_SizeDelta: {x: 180, y: 20}
+  m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1183565370
 MonoBehaviour:
@@ -4708,7 +4708,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -875.1, y: -431.6}
-  m_SizeDelta: {x: 210, y: 40}
+  m_SizeDelta: {x: 230, y: 40}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1516583125
 MonoBehaviour:
@@ -4754,7 +4754,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-43658
+  m_Name: pb_Mesh65802
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5991,7 +5991,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 15, y: 0}
-  m_SizeDelta: {x: 170, y: 20}
+  m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2069511729
 MonoBehaviour:
@@ -6273,6 +6273,10 @@ PrefabInstance:
       value: Game Managers
       objectReference: {fileID: 0}
     - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
+      propertyPath: m_miniMap
+      value: 
+      objectReference: {fileID: 1894054991}
+    - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
       propertyPath: remainMag
       value: 
       objectReference: {fileID: 680991789}
@@ -6284,6 +6288,18 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 875926008}
+    - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
+      propertyPath: playerCurHealthBar
+      value: 
+      objectReference: {fileID: 2069511728}
+    - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
+      propertyPath: playerMaxHealthBar
+      value: 
+      objectReference: {fileID: 1183565369}
+    - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
+      propertyPath: playerHealthBackground
+      value: 
+      objectReference: {fileID: 1516583124}
     - target: {fileID: 4401816778765267645, guid: 612b4824ecec58042a32de80adf37936, type: 3}
       propertyPath: m_RootOrder
       value: 1

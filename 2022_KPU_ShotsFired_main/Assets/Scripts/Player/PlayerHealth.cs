@@ -29,7 +29,7 @@ class PlayerHealth : LivingEntity
     }
 
     private void UpdateUI()
-    {
+    {   
         GameUIManager.Instance.UpdatePlayerHealth(curHealth, MaxHealth);
     }
 }
