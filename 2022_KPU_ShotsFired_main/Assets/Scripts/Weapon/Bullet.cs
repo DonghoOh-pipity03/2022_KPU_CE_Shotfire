@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletDamage;    // 총알 데미지
     [SerializeField] private float bulletSuppress;  // 제압량
     [SerializeField] private float lifeTime; // 생명주기
+    [SerializeField] private float gravityMultiple;// 중력 계수
     #endregion
     #region 전역 동작 변수
     private float enabledTime;  // 발사된 시간
@@ -39,56 +40,42 @@ public class Bullet : MonoBehaviour
         topLevelParent = _topLevelParent;
         transform.position = _firePosition;
         transform.rotation = Quaternion.Euler(_direction);
-        m_rigidbody.velocity = transform.forward * bulletSpeed;
+        m_rigidbody.velocity = transform.forward * bulletSpeed + Physics.gravity * gravityMultiple;
     }
 
     private void OnTriggerEnter(Collider other) 
     {
-        var target = other.GetComponent<SuppressPoint>();
+        // 제압
+        var target1 = other.GetComponent<SuppressPoint>();
+        if( target1 != null) 
+        {   
+            if(other.transform.root.tag != topLevelParent.tag) target1.ApplySuppress(bulletSuppress);
+        }
 
-        if( target != null)
+        // 공격
+        var target2 = other.GetComponent<IDamageable>();
+        if( target2 != null)
         {
-            DamageMessage damageMessage;
+            if(other.transform.root.tag != topLevelParent.tag)
+            {
+                 DamageMessage damageMessage;
 
-            damageMessage.attacker = topLevelParent;
-            damageMessage.ID = Random.Range(0, 2147483647); // 사용안함_원래는 관통시스템 사용시 중복 공격 방지용이였던 것
-            damageMessage.damageKind = DamageKind.bullet;
-            damageMessage.damageAmount = bulletDamage;
-            damageMessage.suppressAmount = bulletSuppress;
-            damageMessage.hitPoint = Vector3.zero;
-            damageMessage.hitNormal = Vector3.zero;
+                damageMessage.attacker = topLevelParent;
+                damageMessage.ID = Random.Range(0, 2147483647); // 사용안함_원래는 관통시스템 사용시 중복 공격 방지용이였던 것
+                damageMessage.damageKind = DamageKind.bullet;
+                damageMessage.damageAmount = bulletDamage;
+                damageMessage.suppressAmount = bulletSuppress;
+                damageMessage.hitPoint = transform.position;
+                damageMessage.hitNormal = transform.forward * -1;
 
-            target.ApplySuppress(damageMessage);
+                target2.ApplyDamage(damageMessage);
+                poolToReturn.Release(this);
+            }
         }
     }
-
     private void OnCollisionEnter(Collision other) 
     {
-        var target = other.collider.GetComponent<IDamageable>();
-
-        // 체력이 있는 물체를 맞췄을 때
-        if( target != null)
-        {
-            DamageMessage damageMessage;
-
-            damageMessage.attacker = topLevelParent;
-            damageMessage.ID = Random.Range(0, 2147483647); // 사용안함_원래는 관통시스템 사용시 중복 공격 방지용이였던 것
-            damageMessage.damageKind = DamageKind.bullet;
-            damageMessage.damageAmount = bulletDamage;
-            damageMessage.suppressAmount = bulletSuppress;
-            damageMessage.hitPoint = other.contacts[0].point;
-            damageMessage.hitNormal = other.contacts[0].normal;
-
-            target.ApplyDamage(damageMessage);
-        }
-
-        // 레벨 디자인에 맞췄을 때 -> 밑에서 같이 처리
-        /*
-        if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            poolToReturn.Release(this);
-        }
-        */
+        // 레벨디자인에 맞았을 때
         poolToReturn.Release(this);
     }
 
@@ -100,5 +87,6 @@ public class Bullet : MonoBehaviour
         bulletSuppress = bulletData.Suppress;
         lifeTime = bulletData.LifeTime;
         bulletName = bulletData.BulletName;
+        gravityMultiple = bulletData.GravityMultiple;
     }
 }

@@ -289,6 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
+  ableControlMove: 1
+  ableControlAttack: 1
 --- !u!114 &5596406285412985387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +392,10 @@ MonoBehaviour:
   - 1
   - 0.8
   - 0.8
-  isDead: 0
+  state: 0
+  restoreStartTime: 5
+  autoRestoreAmount: 10
+  downMaxHealth: 50
 --- !u!1 &5596406285606084926
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +437,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5596406285606084926}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.18
