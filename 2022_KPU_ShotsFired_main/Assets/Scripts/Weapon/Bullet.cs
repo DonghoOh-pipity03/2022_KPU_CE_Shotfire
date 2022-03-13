@@ -51,10 +51,12 @@ public class Bullet : MonoBehaviour
         {   
             if(other.transform.root.tag != topLevelParent.tag) target1.ApplySuppress(bulletSuppress);
         }
-
+    }
+    private void OnCollisionEnter(Collision other) 
+    {
         // 공격
-        var target2 = other.GetComponent<IDamageable>();
-        if( target2 != null)
+        var target = other.gameObject.GetComponent<IDamageable>();
+        if( target != null)
         {
             if(other.transform.root.tag != topLevelParent.tag)
             {
@@ -65,17 +67,13 @@ public class Bullet : MonoBehaviour
                 damageMessage.damageKind = DamageKind.bullet;
                 damageMessage.damageAmount = bulletDamage;
                 damageMessage.suppressAmount = bulletSuppress;
-                damageMessage.hitPoint = transform.position;
-                damageMessage.hitNormal = transform.forward * -1;
+                damageMessage.hitPoint = other.contacts[0].point;
+                damageMessage.hitNormal =  other.contacts[0].normal;
 
-                target2.ApplyDamage(damageMessage);
-                poolToReturn.Release(this);
+                target.ApplyDamage(damageMessage);
             }
         }
-    }
-    private void OnCollisionEnter(Collision other) 
-    {
-        // 레벨디자인에 맞았을 때
+        // 레벨디자인에 맞았을 때와 공격한 후
         poolToReturn.Release(this);
     }
 
