@@ -48,6 +48,7 @@ abstract class LivingEntity : MonoBehaviour
     public virtual void TakeSuppress(float _suppressAmount)
     {
         curSuppress += _suppressAmount;
+        if(curSuppress > MaxSuppress) curSuppress = MaxSuppress;
     }
 
     public virtual void RestoreHealth(float _restoreAmount)
