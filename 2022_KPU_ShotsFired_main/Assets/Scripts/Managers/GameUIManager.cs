@@ -4,7 +4,7 @@ using TMPro;
 public class GameUIManager : MonoBehaviour
 {
 #region 전역 변수
-    [SerializeField] private GameObject m_miniMap;  // 플레이어_미니맵 
+    [SerializeField] private GameObject m_miniMap;  // 플레이어_ 미니맵UI 오브젝트 자리
     // 체력 계열
     [SerializeField] private RectTransform playerHealthBackground;  // 플레이어_체력 GUI 배경
     [SerializeField] private RectTransform playerMaxHealthBar;  // 플레이어_최대 체력 GUI
@@ -34,7 +34,7 @@ public class GameUIManager : MonoBehaviour
         if(playerHealthBackground != null && playerMaxHealthBar != null)
         playerHealthBackgorundHorizonMargine = (playerHealthBackground.sizeDelta.x - playerMaxHealthBar.sizeDelta.x) / 2f; 
     }
-
+    
     public void SetActiveMiniMap(bool _active) 
     {
         m_miniMap.SetActive(_active);

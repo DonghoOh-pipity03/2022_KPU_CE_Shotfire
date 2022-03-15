@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable() 
     {
-        GameManager.Instance.ReturnID(ID);
+        if(GameManager.Instance != null) GameManager.Instance.ReturnID(ID);  // 에디터 버전에서 게임 종료시 경고 알림 방지용
         ID = 0;
     }
 }
