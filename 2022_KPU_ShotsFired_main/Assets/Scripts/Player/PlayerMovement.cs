@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Jump()
-    {
+    {   
         if (!charController.isGrounded) return;
         currentVelocityY = m_jumpPower;
     }
