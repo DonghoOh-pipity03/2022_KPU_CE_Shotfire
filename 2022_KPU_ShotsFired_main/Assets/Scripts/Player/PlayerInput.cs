@@ -4,24 +4,25 @@ public class PlayerInput : MonoBehaviour
 {
     private PlayerController playerController;
     #region 입력 변수
+    // 메모: get set 패턴이 아닌 변수들은, 사용하는 클래스에서 사용후 true, false로 조작해 줘야한다.
     public Vector2 move { get; private set; }
     public Vector2 look { get; private set; }
-    public bool jump { get; private set; }
+    public bool jump;
     public bool sprint { get; private set; }
-    public bool dodge { get; private set; }
+    public bool dodge;
     public bool crouch { get; private set; }
     public bool fire { get; private set; }
     public bool zoom { get; private set; }
     public float mouseWheel { get; private set; }
-    public bool reload { get; private set; }
     public bool interaction { get; private set; }
-    public bool melee { get; private set; }
-    public bool frag { get; private set; }
-    public bool fireMode { get; private set; }
-    public bool weapon1 { get; private set; }
-    public bool weapon2 { get; private set; }
-    public bool weapon3 { get; private set; }
-    public bool weapon4 { get; private set; }
+    public bool reload;
+    public bool melee;
+    public bool frag;
+    public bool fireMode;
+    public bool weapon1;
+    public bool weapon2;
+    public bool weapon3;
+    public bool weapon4;
     #endregion
 
     [SerializeField] private float m_sprintInvokeTime = 0.25f;  // 질주 감지 시간
@@ -47,9 +48,9 @@ public class PlayerInput : MonoBehaviour
         if(playerController.ableControlMove)
         {
         move = (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized;
-        jump = Input.GetButtonDown("Jump");
+        if( Input.GetButtonDown("Jump")) jump = true;
         sprint = DetectSprint();
-        dodge = Input.GetButtonDown("Dodge");
+        if( Input.GetButtonDown("Dodge")) dodge = true;
         crouch = Input.GetButton("Crunch");
         }
         else
@@ -66,14 +67,14 @@ public class PlayerInput : MonoBehaviour
         {
         fire = Input.GetButton("Fire1");
         zoom = Input.GetButton("Fire2");
-        reload = Input.GetButtonDown("Reload");
-        melee = Input.GetButtonDown("Melee");
-        frag = Input.GetButtonDown("Frag");
-        fireMode = Input.GetButtonDown("Firemode");
-        weapon1 = Input.GetButtonDown("Weapon1");
-        weapon2 = Input.GetButtonDown("Weapon2");
-        weapon3 = Input.GetButtonDown("Weapon3");
-        weapon4 = Input.GetButtonDown("Weapon4");
+        if( Input.GetButtonDown("Reload")) reload = true;
+        if( Input.GetButtonDown("Melee")) melee = true;
+        if( Input.GetButtonDown("Frag")) frag = true;
+        if( Input.GetButtonDown("Firemode")) fireMode = true;
+        if( Input.GetButtonDown("Weapon1")) weapon1 = true;
+        if( Input.GetButtonDown("Weapon2")) weapon2 = true;
+        if( Input.GetButtonDown("Weapon3")) weapon3 = true;
+        if( Input.GetButtonDown("Weapon4")) weapon4 = true;
         }
         else
         {
