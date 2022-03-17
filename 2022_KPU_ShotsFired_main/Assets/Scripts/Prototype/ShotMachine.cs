@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ShotMachine : MonoBehaviour
 {
+    public bool shot = false;
+    
     // 총알 발사기 
-
     [SerializeField] Weapon weapon;
 
     private void Start() {
@@ -13,6 +14,6 @@ public class ShotMachine : MonoBehaviour
     }
 
     private void Update() {
-        weapon.Fire();
+        if(shot) weapon.Fire();
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,6 +11,7 @@ public enum AIState{ wait, move, engage}    // AI가 가질 수 있는 경계상
 class EnemyAgent : LivingEntity
 {   
     [SerializeField] private Transform eyeTransform;    // 눈의 위치 정보
+    [SerializeField] private NavMeshAgent agent; // 경로 AI 에이전트
     #region 전역 변수
     // 시야
     [SerializeField] private float eyeDistance; // 시야 거리
@@ -20,6 +22,8 @@ class EnemyAgent : LivingEntity
     [SerializeField] private float melleeDistance; // 근접공격을 시작하는 거리
     [SerializeField] private float distanceTargetWeight;    // 공격 타겟 선정을 위한 거리별 가중치
     [SerializeField] private float attackerTargetWeight;    // 공격 타겟 선정을 위한 마지막 공격자 가중치
+    // 이동
+    [SerializeField] private float moveSpeed;   // 이동 속도
     #endregion
     #region 전역 동작변수
     private AIState curState;  // AI의 경계상태
@@ -27,11 +31,17 @@ class EnemyAgent : LivingEntity
     private GameObject[] players = new GameObject[4];   // 플레이어들의 게임 오브젝트 정보
     private float[] playerDistance = {9999,9999,9999,9999};  // 각 플레이어와의 거리
     private int[] targetWeight = new int[4];    // 각 플레이어별 타겟팅(어그로) 가중치
+    private int target; // 최우선 공격 대상: 0~3 플레이어
     private int lastAttacker;   // 마지막으로 AI를 공격한 플레이어: 0은 판단불가 의미
     private Ray ray;    // 플레이어 탐색용 레이
-    private int targetPlayer;   // 공격 대상: 0은 없음
     #endregion
 
+    private void Awake() 
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.stoppingDistance = engageDistance;
+        agent.speed = moveSpeed;
+    }
     protected override void OnEnable() 
     {
         base.OnEnable();
@@ -67,8 +77,8 @@ class EnemyAgent : LivingEntity
         }
     }
 
-    // 시야내 모든 타겟 감지 
-    private void SenseEntity()
+    // 시야내 모든 타겟 감지: 플레이어별로 시야 확인 유무를 저장하고, 1명이라도 시야내에 있다면 true를 반환한다.
+    private bool SenseEntity()
     {   
         for(int i = 0; i < 4; i++)
         {
@@ -94,7 +104,7 @@ class EnemyAgent : LivingEntity
                     ray.direction = direction;
 
                     // 시야에 확인
-                    if (Physics.Raycast(ray, out hit, eyeDistance))//, attackTarget))  
+                    if (Physics.Raycast(ray, out hit, eyeDistance))  
                     {   
                         Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 5f);
                         if(hit.transform.root.gameObject == collider.gameObject) 
@@ -117,6 +127,12 @@ class EnemyAgent : LivingEntity
                 }
             }
         }
+        
+        for(int i = 0; i < 4; i++)
+        {
+            if( isPlayerOnSight[i] == 1 ) return true;
+        }
+        return false;
     }
 
     #if UNITY_EDITOR
@@ -129,9 +145,10 @@ class EnemyAgent : LivingEntity
     }
     #endif
 
-    // 각 플레이어와의 거리, 타겟 가중치 계산
+    // 각 플레이어와의 거리, 타겟 가중치 계산 및 최우선 공격 대상 선정
     private void RenewPlayerInfo()
     {
+        // 가중치 계산
         for(int i=0; i < 4 ; i++)
         {
             if( players[i] == null) continue;
@@ -142,29 +159,37 @@ class EnemyAgent : LivingEntity
                                 Mathf.Clamp( ( -1 * playerDistance[i] +25 ), 0, 25 ) * distanceTargetWeight 
                                 + ( (lastAttacker == i+1) ? attackerTargetWeight : 0 ) );    // 타겟 가중치 계산
         }
+        
+        // 최우선 타겟 선정
+        int maxValue = targetWeight.Max();
+        target = targetWeight.ToList().IndexOf(maxValue);
     }   
 
     // AI 행동트리_상태
     private void AIStateBT()
     {
         curState = AIState.move;
-        foreach(var i in playerDistance)
+
+        for(int i = 0; i < 4; i++)
         {
-            if( i < engageDistance)
-            {   
+            // 시야 내에 있고 교전거리 내에 있을 때: 정지
+            if( isPlayerOnSight[i] == 1 || playerDistance[i] < engageDistance)
+            {
                 curState = AIState.engage;
-                break;
+                agent.isStopped = true;
+                return;
             }
         }
+
+        // 이동
+        agent.isStopped = false;
+        agent.SetDestination( players[target].transform.position );
     }
     // AI 행동트리_공격
     private void AIAttackBT()
     {
-        // 공격 타겟 선정
-        int maxValue = targetWeight.Max();
-        targetPlayer = targetWeight.ToList().IndexOf(maxValue);
         // 공격 방법 선정 & 공격
-        if( playerDistance[targetPlayer] > melleeDistance ) MelleeAttack();    //근접공격
+        if( playerDistance[target] > melleeDistance ) MelleeAttack();    //근접공격
         else ShotAttack();  // 원거리 공격
     }
 
@@ -176,5 +201,12 @@ class EnemyAgent : LivingEntity
     private void ShotAttack()
     {
 
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+
+        agent.enabled = false;
     }
 }
