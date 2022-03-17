@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1528
+  m_Name: pb_Mesh-7210
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -366,7 +366,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1500
+  m_Name: pb_Mesh-7182
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -697,7 +697,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1542
+  m_Name: pb_Mesh-7224
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1172,7 +1172,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1514
+  m_Name: pb_Mesh-7196
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1330,9 +1330,9 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!224 &1622279509 stripped
+--- !u!224 &1651483278 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6967012056461070793, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6967012056225531367, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
   m_PrefabInstance: {fileID: 6967012054855832732}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1662227801
@@ -1866,6 +1866,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1035576073, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 5596406285412985361, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
       propertyPath: m_Name
       value: Prototype Player
@@ -1918,26 +1922,10 @@ PrefabInstance:
       propertyPath: m_virtualMainCamera
       value: 
       objectReference: {fileID: 2052528448}
-    - target: {fileID: 5596406285412985366, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: m_Center.y
-      value: 0.88
-      objectReference: {fileID: 0}
     - target: {fileID: 5596406285412985384, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 5596406285412985387, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: m_jumpPower
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406285412985387, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: m_gravityMultiple
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406285412985387, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: GroundLayers.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
 --- !u!1001 &6967012054855832732
@@ -2034,10 +2022,6 @@ PrefabInstance:
     - target: {fileID: 6967012055809291265, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6967012056461070793, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.7500296
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
@@ -2324,7 +2308,7 @@ PrefabInstance:
     - target: {fileID: 8738450672390624168, guid: c2c8928868fff1c4d873486bfc160dbc, type: 3}
       propertyPath: AimTargetReticle
       value: 
-      objectReference: {fileID: 1622279509}
+      objectReference: {fileID: 1651483278}
     - target: {fileID: 8738450672390624169, guid: c2c8928868fff1c4d873486bfc160dbc, type: 3}
       propertyPath: m_Follow
       value: 
@@ -2332,15 +2316,11 @@ PrefabInstance:
     - target: {fileID: 8738450672825070410, guid: c2c8928868fff1c4d873486bfc160dbc, type: 3}
       propertyPath: AimTargetReticle
       value: 
-      objectReference: {fileID: 1622279509}
+      objectReference: {fileID: 1651483278}
     - target: {fileID: 8738450672825070411, guid: c2c8928868fff1c4d873486bfc160dbc, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1069938618}
-    - target: {fileID: 8738450673414432665, guid: c2c8928868fff1c4d873486bfc160dbc, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 2039
-      objectReference: {fileID: 0}
     - target: {fileID: 8738450673414432667, guid: c2c8928868fff1c4d873486bfc160dbc, type: 3}
       propertyPath: m_Name
       value: Main Camera
