@@ -1,8 +1,3 @@
-/*
-최초작성자: 오동호
-최종수정자: 오동호
-수정날짜: 20220217
- */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -121,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {   
+        playerInput.jump = false;
         if (!charController.isGrounded) return;
         currentVelocityY = m_jumpPower;
     }
@@ -130,6 +126,8 @@ public class PlayerMovement : MonoBehaviour
         // 회피의 (비)활성 처리
         if (playerInput.dodge)
         {
+            playerInput.dodge = false;
+            
             if (m_dodgeCount >= 1 && charController.velocity.magnitude > 0 && charController.isGrounded)
             {
                 m_dodgeCount--;
