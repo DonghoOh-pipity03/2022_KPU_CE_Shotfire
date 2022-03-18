@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 
@@ -10,11 +11,17 @@ namespace PhotonInit
 {
     class PhotonInit : MonoBehaviourPunCallbacks
     {
+        public PhotonView PV;
+
         #region  MonoBehaviourCallBack
         void Awake() {
             PhotonNetwork.AutomaticallySyncScene = true;
         }
         void Start() {
+            Lobby_position.Add(new Vector3(49.0f, 1.5f, 0.5f));
+            Lobby_position.Add(new Vector3(50.5f, 1.5f, 0.5f));
+            Lobby_position.Add(new Vector3(52.0f, 1.5f, 0.5f));
+            Lobby_position.Add(new Vector3(53.5f, 1.5f, 0.5f));
             UI_delete_map();
             UI_delete();
             UI_Select(MainHome_UI,MainHome_Map);
@@ -24,6 +31,9 @@ namespace PhotonInit
         #region Private value  
         private string gameVersion = "1";
         private byte maxPlayersPerRoom = 4;
+        private List<Vector3>Lobby_position = new List<Vector3>();
+
+        
         #endregion
 
         #region  Private Method
@@ -45,13 +55,14 @@ namespace PhotonInit
         }
         private void UI_delete()
         {
+            Player_UI.SetActive(false);
             MainHome_UI.SetActive(false);
             lodding_UI.SetActive(false);
             IdInput_UI.SetActive(false);
             RoomList_UI.SetActive(false);
             Lobby_UI.SetActive(false);
         }
-
+        
         #endregion
         
         #region Public value
@@ -60,16 +71,18 @@ namespace PhotonInit
         public TextMeshProUGUI nickname;
         public TextMeshProUGUI roomname;
         public TextMeshProUGUI Lobby_roomName;
-        public GameObject player_Lobby;
+
         [Header("UI Selecter")]
         public GameObject MainHome_UI;
         public GameObject lodding_UI;
         public GameObject IdInput_UI;
         public GameObject RoomList_UI;
         public GameObject Lobby_UI;
+        public GameObject Player_UI;
         public GameObject MainHome_Map;
         public GameObject Lobby_Map;
 
+        
         #endregion
 
         #region  Public Method 
@@ -104,6 +117,7 @@ namespace PhotonInit
                 return ;
                 // empty or null
             }
+            
             PhotonNetwork.CreateRoom(roomname.text,new RoomOptions{MaxPlayers = maxPlayersPerRoom});
         }
         public void escRoom()
@@ -112,6 +126,15 @@ namespace PhotonInit
                 PhotonNetwork.LeaveRoom();
                 // 자동으로 서버는 연결된다. 
                 // 방 로그아웃만 구현 
+        }
+        public void start_game()
+        {
+            if(PhotonNetwork.IsMasterClient)
+            {
+                // PhotonNetwork.LoadLevel("Temp Stage 1-1");
+                // SceneManager.LoadScene("Temp Stage 1-1", LoadSceneMode.Additive);
+                base.photonView.RPC("game_start",RpcTarget.All);
+            }
         }
         #endregion
 
@@ -136,6 +159,8 @@ namespace PhotonInit
         }
         public override void OnCreatedRoom()
         {
+            // 자기 자신의 캐릭터 생성 
+            PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[0],Quaternion.identity);
             Debug.LogFormat("{0} create room {1}", PhotonNetwork.NickName, roomname.text);
         }
 
@@ -154,10 +179,12 @@ namespace PhotonInit
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("Player entered {0}", other.NickName);
-            Debug.Log(Instantiate(player_Lobby, new Vector3(0.2f,1.5f,0.5f),Quaternion.identity));
+            // PV.RPC("log",RpcTarget.All);
+            // 들어온 캐릭터 별로 생성 
+            PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[1],Quaternion.identity);
             if(PhotonNetwork.IsMasterClient)
             {
-                Debug.LogFormat("{0} master", PhotonNetwork.NickName);
+                Debug.LogFormat("{0} is master", PhotonNetwork.NickName);
             }
         }
         
@@ -166,11 +193,25 @@ namespace PhotonInit
             Debug.LogFormat("Player Left {0}", other.NickName);
             if(PhotonNetwork.IsMasterClient)
             {
-                // testing 
+                // PV.RPC("exitRoom", RpcTarget.All);
+                // 오류 해결 
             }
         }
         #endregion
 
-
+        #region 
+        [PunRPC]
+        void game_start()
+        {
+            UI_delete();
+            UI_delete_map();
+            UI_Select(Player_UI);
+            // PhotonNetwork.Destroy();
+            SceneManager.LoadScene("Temp Stage 1-1", LoadSceneMode.Additive);
+            // 범위내에서 랜덤한 위치 리스폰 필요 
+            Vector3 pos = new Vector3(Random.Range(99.3f,100.3f),Random.Range(-0.3f,0.3f),1.0f);
+            PhotonNetwork.Instantiate("Prototype Player", pos,Quaternion.identity);
+        }
+        #endregion
     }
 }
