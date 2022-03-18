@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-
-public class PlayerInput : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+public class PlayerInput : MonoBehaviourPunCallbacks
 {
     #region 입력 변수
     public Vector2 move { get; private set; }
@@ -32,6 +33,10 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
+        if(!photonView.IsMine)
+        {
+            return ;
+        }
         DetectInput();
         //SelfDebug();
     }

@@ -1,11 +1,14 @@
 using UnityEngine;
 using Cinemachine;
+using Photon.Pun;
+using Photon.Realtime;
+
 
 #region 필요한 컴포넌트
 [RequireComponent(typeof(PlayerInput))]
 #endregion
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : MonoBehaviourPunCallbacks
 {
     private PlayerInput playerInput;
 
@@ -35,6 +38,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start()
     {
+        if(!photonView.IsMine)
+        {
+            return ;
+        }
         curScreenSpeed = m_screenNormalSpeed;
         curCamHolderLocalPosition.y = m_idleCamHolderHeight;
         m_cameraHolder.localPosition = curCamHolderLocalPosition;
@@ -47,12 +54,20 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Update()
     {
+        if(!photonView.IsMine)
+        {
+            return ;
+        }
         if(m_virtualMainCamera != null) RotateScreen();
 
         isZoomMode = playerInput.zoom;
     }
 
     private void FixedUpdate() {
+        if(!photonView.IsMine)
+        {
+            return ;
+        }
         if(m_virtualMainCamera != null) SetScreenMode();
     }
 

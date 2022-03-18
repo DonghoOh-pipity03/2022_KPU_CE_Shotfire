@@ -6,12 +6,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 #region 필요한 컴포넌트
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
 #endregion
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     private CharacterController charController;
     private PlayerInput playerInput;
@@ -67,6 +69,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!photonView.IsMine)
+        {
+            return ;
+        }
         if (playerInput.jump) Jump();
         Dodge();
         Crouch();
@@ -74,6 +80,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update() {
+        if(!photonView.IsMine)
+        {
+            return ;
+        }
         if (DetectRotationGap() || charController.velocity.magnitude > m_minMovementLowerBodyArrange) ArrangeLowerBody();
         if(playerInput.fire == true || playerInput.zoom == true) ArrangeLowerBody();
     }
