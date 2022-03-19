@@ -38,10 +38,8 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if(!photonView.IsMine)
-        {
-            return ;
-        }
+        if(!photonView.IsMine) return ; // 네트워크 통제 구역
+
         curScreenSpeed = m_screenNormalSpeed;
         curCamHolderLocalPosition.y = m_idleCamHolderHeight;
         m_cameraHolder.localPosition = curCamHolderLocalPosition;

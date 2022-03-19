@@ -177,7 +177,7 @@ namespace Photon.Pun
         /// True in case the controller matches the local Player.
         /// True if this is a scene photonview (null owner and ownerId == 0) on the Master client.
         /// </remarks>
-        public bool IsMine { get; private set; }
+        public bool IsMine; // { get; private set; }
         public bool AmController
         {
             get { return this.IsMine; }
