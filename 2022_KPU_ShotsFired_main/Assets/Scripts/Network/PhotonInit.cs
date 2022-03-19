@@ -3,58 +3,215 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 using TMPro;
 
-public class PhotonInit : MonoBehaviourPunCallbacks
+
+namespace PhotonInit
 {
-    // Start is called before the first frame update
-    public GameObject game_start_button;
-    TextMeshPro mText;
+    class PhotonInit : MonoBehaviourPunCallbacks
+    {
+        public PhotonView PV;
 
-    void Start()
-    {
-        // 추후 수정 
-        game_start_button = GameObject.Find("Button-game start");
-        mText = gameObject.GetComponent<TextMeshPro>();
-        PhotonNetwork.ConnectUsingSettings();
-    }
+        #region  MonoBehaviourCallBack
+        void Awake() {
+            PhotonNetwork.AutomaticallySyncScene = true;
+        }
+        void Start() {
+            Lobby_position.Add(new Vector3(49.0f, 1.5f, 0.5f));
+            Lobby_position.Add(new Vector3(50.5f, 1.5f, 0.5f));
+            Lobby_position.Add(new Vector3(52.0f, 1.5f, 0.5f));
+            Lobby_position.Add(new Vector3(53.5f, 1.5f, 0.5f));
+            UI_delete_map();
+            UI_delete();
+            UI_Select(MainHome_UI,MainHome_Map);
+        }
+        #endregion
 
-    public void ID_input()
-    {
-        Debug.Log(mText.text);
-    }
-    public void button_Action()
-    {
-        Debug.Log("Start Click");
-        PhotonNetwork.CreateRoom("Testing");
-    }
+        #region Private value  
+        private string gameVersion = "1";
+        private byte maxPlayersPerRoom = 4;
+        private List<Vector3>Lobby_position = new List<Vector3>();
 
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("Connect to server");
-    }
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.Log(cause);
-    }
+        
+        #endregion
 
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Create Room");
-    }
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("Join Room");
-    }
+        #region  Private Method
+        // UI select 
+        private void UI_Select(GameObject UI)
+        {
+            UI.SetActive(true);
+        }
+        private void UI_Select(GameObject UI, GameObject Map)
+        {
+            
+            UI.SetActive(true);
+            Map.SetActive(true);
+        }
+        private void UI_delete_map()
+        {
+            MainHome_Map.SetActive(false);
+            Lobby_Map.SetActive(false);
+        }
+        private void UI_delete()
+        {
+            Player_UI.SetActive(false);
+            MainHome_UI.SetActive(false);
+            lodding_UI.SetActive(false);
+            IdInput_UI.SetActive(false);
+            RoomList_UI.SetActive(false);
+            Lobby_UI.SetActive(false);
+        }
+        
+        #endregion
+        
+        #region Public value
+        [SerializeField]
+        [Header("Network Nickname")]
+        public TextMeshProUGUI nickname;
+        public TextMeshProUGUI roomname;
+        public TextMeshProUGUI Lobby_roomName;
 
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        Debug.Log(message);
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        // mText
+        [Header("UI Selecter")]
+        public GameObject MainHome_UI;
+        public GameObject lodding_UI;
+        public GameObject IdInput_UI;
+        public GameObject RoomList_UI;
+        public GameObject Lobby_UI;
+        public GameObject Player_UI;
+        public GameObject MainHome_Map;
+        public GameObject Lobby_Map;
+
+        
+        #endregion
+
+        #region  Public Method 
+        public void ConnectNetwork()
+        {
+            if(!PhotonNetwork.IsConnected)
+            {
+                PhotonNetwork.GameVersion = gameVersion;
+                PhotonNetwork.ConnectUsingSettings();
+            }
+        }
+        public void selectName()
+        {
+            PhotonNetwork.NickName = nickname.text;
+            PhotonNetwork.JoinLobby();
+            // Debug.Log(PhotonNetwork.GetRoomList());
+        }
+
+        public void JoinRoom()
+        {
+            if(string.IsNullOrEmpty(roomname.text))
+            {
+                return ;
+                // empty or null
+            }
+            PhotonNetwork.JoinRoom(roomname.text);
+        }
+        public void createRoom()
+        {
+            if(string.IsNullOrEmpty(roomname.text))
+            {
+                return ;
+                // empty or null
+            }
+            
+            PhotonNetwork.CreateRoom(roomname.text,new RoomOptions{MaxPlayers = maxPlayersPerRoom});
+        }
+        public void escRoom()
+        {
+            if(PhotonNetwork.IsConnected)
+                PhotonNetwork.LeaveRoom();
+                // 자동으로 서버는 연결된다. 
+                // 방 로그아웃만 구현 
+        }
+        public void start_game()
+        {
+            if(PhotonNetwork.IsMasterClient)
+            {
+                // PhotonNetwork.LoadLevel("Temp Stage 1-1");
+                // SceneManager.LoadScene("Temp Stage 1-1", LoadSceneMode.Additive);
+                base.photonView.RPC("game_start",RpcTarget.All);
+            }
+        }
+        #endregion
+
+        #region  MonoBehaviourPunCallbacks
+        public override void OnConnectedToMaster()
+        {
+            Debug.Log("Connect to server");
+            UI_delete();
+            UI_Select(IdInput_UI);
+        }
+
+        public override void OnDisconnected(DisconnectCause cause)
+        {
+            Debug.LogWarningFormat("Photon disconnected {0}", cause);
+        }
+
+        public override void OnJoinedLobby()
+        {
+            Debug.LogFormat("{0} joined Lobby", PhotonNetwork.NickName);
+            UI_delete();
+            UI_Select(RoomList_UI);
+        }
+        public override void OnCreatedRoom()
+        {
+            // 자기 자신의 캐릭터 생성 
+            PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[0],Quaternion.identity);
+            Debug.LogFormat("{0} create room {1}", PhotonNetwork.NickName, roomname.text);
+        }
+
+        public override void OnJoinedRoom()
+        {
+            UI_delete();
+            UI_delete_map();
+            UI_Select(Lobby_UI, Lobby_Map);
+            Lobby_roomName.text = "Room info :"+roomname.text;
+        }
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            Debug.LogWarning("Join Failed : "+ message);
+        }
+
+        public override void OnPlayerEnteredRoom(Player other)
+        {
+            Debug.LogFormat("Player entered {0}", other.NickName);
+            // PV.RPC("log",RpcTarget.All);
+            // 들어온 캐릭터 별로 생성 
+            PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[1],Quaternion.identity);
+            if(PhotonNetwork.IsMasterClient)
+            {
+                Debug.LogFormat("{0} is master", PhotonNetwork.NickName);
+            }
+        }
+        
+        public override void OnPlayerLeftRoom(Player other)
+        {
+            Debug.LogFormat("Player Left {0}", other.NickName);
+            if(PhotonNetwork.IsMasterClient)
+            {
+                // PV.RPC("exitRoom", RpcTarget.All);
+                // 오류 해결 
+            }
+        }
+        #endregion
+
+        #region 
+        [PunRPC]
+        void game_start()
+        {
+            UI_delete();
+            UI_delete_map();
+            UI_Select(Player_UI);
+            // PhotonNetwork.Destroy();
+            SceneManager.LoadScene("Temp Stage 1-1", LoadSceneMode.Additive);
+            // 범위내에서 랜덤한 위치 리스폰 필요 
+            Vector3 pos = new Vector3(Random.Range(99.3f,100.3f),Random.Range(-0.3f,0.3f),1.0f);
+            PhotonNetwork.Instantiate("Prototype Player", pos,Quaternion.identity);
+        }
+        #endregion
     }
 }

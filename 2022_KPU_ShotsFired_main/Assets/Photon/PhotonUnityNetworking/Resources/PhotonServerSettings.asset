@@ -39,6 +39,9 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - exitRoom
+  - log
+  - game_start
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
