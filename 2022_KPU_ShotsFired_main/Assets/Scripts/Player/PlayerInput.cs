@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
-public class PlayerInput : MonoBehaviourPunCallbacks
+
+public class PlayerInput : MonoBehaviour
 {
     private PlayerController playerController;
     #region 입력 변수
@@ -39,10 +38,6 @@ public class PlayerInput : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        if(!photonView.IsMine)
-        {
-            return ;
-        }
         DetectInput();
         //SelfDebug();
     }
