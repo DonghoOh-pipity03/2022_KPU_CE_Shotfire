@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 
@@ -82,8 +83,17 @@ namespace PhotonInit
         public GameObject MainHome_Map;
         public GameObject Lobby_Map;
 
+        [Header("LobbyPanel")]
+        public Button[] CellBtn;
+        public Button PreviousBtn;
+        public Button NextBtn;
+
+        List<RoomInfo> myList = new List<RoomInfo>();
+        int currentPage = 1, maxPage, multiple;
+        
         
         #endregion
+
 
         #region  Public Method 
         public void ConnectNetwork()
@@ -127,6 +137,31 @@ namespace PhotonInit
                 // 자동으로 서버는 연결된다. 
                 // 방 로그아웃만 구현 
         }
+        public void MyListRenewal()
+        {
+            // 최대페이지
+            maxPage = (myList.Count % CellBtn.Length == 0) ? myList.Count / CellBtn.Length : myList.Count / CellBtn.Length + 1;
+
+            // 이전, 다음버튼
+            PreviousBtn.interactable = (currentPage <= 1) ? false : true;
+            NextBtn.interactable = (currentPage >= maxPage) ? false : true;
+
+            // 페이지에 맞는 리스트 대입
+            multiple = (currentPage - 1) * CellBtn.Length;
+            for (int i = 0; i < CellBtn.Length; i++)
+            {
+                CellBtn[i].interactable = (multiple + i < myList.Count) ? true : false;
+                CellBtn[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (multiple + i < myList.Count) ? myList[multiple + i].Name : "";
+
+            }
+        }
+        public void MyListClick(int num)
+        {
+            if(num == -2) --currentPage; //페이지 제거
+            else if(num == -1) ++currentPage; //페이지 추가
+            else PhotonNetwork.JoinRoom(myList[multiple + num].Name);
+            MyListRenewal();
+        }
         public void start_game()
         {
             if(PhotonNetwork.IsMasterClient)
@@ -136,6 +171,7 @@ namespace PhotonInit
                 base.photonView.RPC("game_start",RpcTarget.All);
             }
         }
+
         #endregion
 
         #region  MonoBehaviourPunCallbacks
@@ -156,7 +192,24 @@ namespace PhotonInit
             Debug.LogFormat("{0} joined Lobby", PhotonNetwork.NickName);
             UI_delete();
             UI_Select(RoomList_UI);
+            myList.Clear();
         }
+
+        public override void OnRoomListUpdate(List<RoomInfo> roomList)
+        {
+            int roomCount = roomList.Count;
+            for (int i = 0; i < roomCount; i++)
+            {
+                if (!roomList[i].RemovedFromList)
+                {
+                    if (!myList.Contains(roomList[i])) myList.Add(roomList[i]);
+                    else myList[myList.IndexOf(roomList[i])] = roomList[i];
+                }
+                else if (myList.IndexOf(roomList[i]) != -1) myList.RemoveAt(myList.IndexOf(roomList[i]));
+            }
+            MyListRenewal();
+        }
+
         public override void OnCreatedRoom()
         {
             // 자기 자신의 캐릭터 생성 
@@ -187,7 +240,6 @@ namespace PhotonInit
                 Debug.LogFormat("{0} is master", PhotonNetwork.NickName);
             }
         }
-        
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("Player Left {0}", other.NickName);
