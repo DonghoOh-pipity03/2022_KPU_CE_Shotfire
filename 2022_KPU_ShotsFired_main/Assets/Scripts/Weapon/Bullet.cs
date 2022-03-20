@@ -7,17 +7,16 @@ public class Bullet : MonoBehaviour
     private Rigidbody m_rigidbody;
     [SerializeField] private BulletData bulletData;
     #region 전역 변수
-    [Header("이하 디버그용 표시")]
-    [SerializeField] private string bulletName; // 총알 이름
-    [SerializeField] private float bulletSpeed;   // 총알 속도
-    [SerializeField] private float bulletDamage;    // 총알 데미지
-    [SerializeField] private float bulletSuppress;  // 제압량
-    [SerializeField] private float lifeTime; // 생명주기
-    [SerializeField] private float gravityMultiple;// 중력 계수
+    string bulletName; // 총알 이름
+    float bulletSpeed;   // 총알 속도
+    float bulletDamage;    // 총알 데미지
+    float bulletSuppress;  // 제압량
+    float lifeTime; // 생명주기
+    float gravityMultiple;// 중력 계수
     #endregion
     #region 전역 동작 변수
-    private float enabledTime;  // 발사된 시간
-    private GameObject topLevelParent;  // 총알 주인
+    GameObject topLevelParent;  // 총알 주인
+    float enabledTime;  // 발사된 시간
     public IObjectPool<Bullet> poolToReturn;    // 자신을 관리하는 오브젝트 풀 변수
     #endregion
 

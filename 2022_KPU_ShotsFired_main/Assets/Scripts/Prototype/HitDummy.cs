@@ -28,7 +28,7 @@ class HitDummy : LivingEntity
     {
         base.TakeDamage(_damageMessage, _hitPart);
         
-        UpdateUI( _hitPart.ToString(), _damageMessage.damageAmount * HitMultiple[(int)_hitPart] );
+        UpdateUI( _hitPart.ToString(), _damageMessage.damageAmount * hitMultiple[(int)_hitPart] );
     }
 
     private void UpdateUI(string _hitPoint, float _damage) 

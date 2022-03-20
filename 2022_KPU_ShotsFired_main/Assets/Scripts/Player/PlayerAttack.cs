@@ -10,34 +10,37 @@ using Photon.Realtime;
 
 public class PlayerAttack : MonoBehaviourPunCallbacks
 {
-    private PlayerInput playerInput;
+    PlayerInput playerInput;
 
     #region 전역 변수
-    [Header("카메라 세팅")]
     [SerializeField] Transform m_cameraHolder; // 카메라 거치대 자리
+    [Header("화면 이동 속도")]
     [SerializeField] float m_screenXSpeed = 1f; // X축 화면 이동속도
     [SerializeField] float m_screenYSpeed = 1f; // Y축 화면 이동속도
     [SerializeField] float m_screenNormalSpeed = 1f;    // 평상시 화면 이동속도 계수
     [SerializeField] float m_screenZoomSpeed = 0.5f;    // 줌화면 이동속도 계수
+    [Header("화면 최대 각도")]
     [SerializeField] float m_minScreenAngle = 80f;  // 화면 최대 아래 각도
-    [SerializeField] float m_maxScreenAngle = 80f;  //화면 최개 위 각도
-    [SerializeField] GameObject m_virtualMainCamera;    // 메인 카메라 자리
-    [SerializeField] CinemachineVirtualCamera m_mainCam;    // 메인 카메라의 가상카메라
-    [SerializeField] CinemachineVirtualCamera m_zoomCam;    // 줌 카메라의 가상카메라
+    [SerializeField] float m_maxScreenAngle = 80f;  //화면 최대 위 각도
     [Header("카메라 거치대 위치")] 
-    [SerializeField] private float m_idleCamHolderHeight = 1.8f;    // 평소 상태 카메라 높이
-    [SerializeField] private float m_zoomCamHolderHeught = 1.55f;   // 줌 상태 카메라 높이
+    GameObject m_virtualMainCamera;    // 메인 카메라 자리
+    CinemachineVirtualCamera m_mainCam;    // 메인 카메라의 가상카메라
+    CinemachineVirtualCamera m_zoomCam;    // 줌 카메라의 가상카메라
+    Vector3 curCamHolderLocalPosition = Vector3.zero;   // 현재 카메라 홀더의 로컬 위치
+    [SerializeField] float m_idleCamHolderHeight = 1.8f;    // 평소 상태 카메라 높이
+    [SerializeField] float m_zoomCamHolderHeught = 1.55f;   // 줌 상태 카메라 높이
     [Header("무기")] 
     [SerializeField] Weapon[] weaponArray = new Weapon[2];   // 1~4번 슬릇에 사용할 무기 배열
     #endregion
 
     #region 전역 동작 변수
-    private float curScreenSpeed;   // 현재 화면 회전 속도
-    private Vector3 curCamHolderLocalPosition = Vector3.zero;   // 현재 카메라 홀더의 로컬 위치
-    private bool isZoomMode = false;    // 줌 상태 여부
-    private int curWeapon = 0;   // 현재 들고 있는 무기의 배열 번호
+    // 화면
+    float curScreenSpeed;   // 현재 화면 회전 속도
+    bool isZoomMode = false;    // 줌 상태 여부
+    // 무기
+    int curWeapon = 0;   // 현재 들고 있는 무기의 배열 번호
     #endregion
-
+#region 콜백함수
     private void Start()
     {
         // 하이어라키 상의 무기를 배열에 세팅
@@ -87,13 +90,11 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     }
 
     private void FixedUpdate() {
-        if(!photonView.IsMine)
-        {
-            return ;
-        }
+        if(!photonView.IsMine) return ; // 네트워크 통제 구역
         if(m_virtualMainCamera != null) SetScreenMode();
     }
-
+#endregion
+#region 함수
     // 화면 회전
     private void RotateScreen()
     {
@@ -152,4 +153,5 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
 
         weaponArray[curWeapon].UpdateUI();
     }
+#endregion
 }

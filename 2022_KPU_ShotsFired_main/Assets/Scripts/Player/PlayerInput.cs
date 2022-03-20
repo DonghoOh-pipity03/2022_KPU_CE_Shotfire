@@ -4,30 +4,30 @@ using Photon.Realtime;
 public class PlayerInput : MonoBehaviourPunCallbacks
 {
     private PlayerController playerController;
-    #region 입력 변수
-    // 메모: get set 패턴이 아닌 변수들은, 사용하는 클래스에서 사용후 true, false로 조작해 줘야한다.
-    public Vector2 move { get; private set; }
-    public Vector2 look { get; private set; }
-    public bool jump;
-    public bool sprint { get; private set; }
-    public bool dodge;
-    public bool crouch { get; private set; }
-    public bool fire { get; private set; }
-    public bool zoom { get; private set; }
-    public float mouseWheel { get; private set; }
-    public bool interaction { get; private set; }
-    public bool reload;
-    public bool melee;
-    public bool frag;
-    public bool fireMode;
-    public bool weapon1;
-    public bool weapon2;
-    public bool weapon3;
-    public bool weapon4;
-    #endregion
-
+    #region 전역 변수
     [SerializeField] private float m_sprintInvokeTime = 0.25f;  // 질주 감지 시간
-
+    #endregion
+    #region 입력 변수
+    // 주의: get set 패턴이 아닌 변수들은, 사용하는 클래스에서 사용후 true, false로 조작해 줘야한다.
+    [HideInInspector] public Vector2 move { get; private set; }
+    [HideInInspector] public Vector2 look { get; private set; }
+    [HideInInspector] public bool jump;
+    [HideInInspector] public bool sprint { get; private set; }
+    [HideInInspector] public bool dodge;
+    [HideInInspector] public bool crouch { get; private set; }
+    [HideInInspector] public bool fire { get; private set; }
+    [HideInInspector]  public bool zoom { get; private set; }
+    [HideInInspector] public float mouseWheel { get; private set; }
+    [HideInInspector] public bool interaction { get; private set; }
+    [HideInInspector] public bool reload;
+    [HideInInspector]  public bool melee;
+    [HideInInspector] public bool frag;
+    [HideInInspector] public bool fireMode;
+    [HideInInspector] public bool weapon1;
+    [HideInInspector] public bool weapon2;
+    [HideInInspector]  public bool weapon3;
+    [HideInInspector] public bool weapon4;
+    #endregion
     #region 전역 동작 변수
     private float m_lastSprintInputTime = 0f;   // 마지막 질주 키 입력 시간
     private float m_curSprintInputTime = 0f;    // 현재 질주 키 입력 시간: 나중에 '마지막 질주 키 입력시간'으로 복사됨
@@ -39,10 +39,7 @@ public class PlayerInput : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        if(!photonView.IsMine)
-        {
-            return ;
-        }
+        if(!photonView.IsMine) return ; // 네트워크 통제 구역
         DetectInput();
         //SelfDebug();
     }

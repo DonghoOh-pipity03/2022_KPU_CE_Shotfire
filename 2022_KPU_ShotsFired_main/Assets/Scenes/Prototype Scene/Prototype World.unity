@@ -736,7 +736,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &848308149
 Mesh:
@@ -1017,7 +1017,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1782606929}
   - {fileID: 1448762348}
   m_Father: {fileID: 0}
   m_RootOrder: 17
@@ -1055,7 +1054,7 @@ RectTransform:
   - {fileID: 1456899121}
   - {fileID: 1113527594}
   m_Father: {fileID: 1216757586}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1550,7 +1549,7 @@ GameObject:
   - component: {fileID: 1782606929}
   - component: {fileID: 1782606928}
   m_Layer: 0
-  m_Name: temp
+  m_Name: Mouse Locker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1568,6 +1567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b004e5c3ee17b4f8e5bc395f4fe158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useMouseLock: 1
 --- !u!4 &1782606929
 Transform:
   m_ObjectHideFlags: 0
@@ -1576,12 +1576,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782606927}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.3078716, y: -2.352473, z: 14.369275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1216757586}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1984026864 stripped
 MonoBehaviour:
@@ -1730,6 +1730,10 @@ PrefabInstance:
     - target: {fileID: 833959457552068178, guid: 09059a6742ea6e044a7f2b47c74fa033, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 833959457552068179, guid: 09059a6742ea6e044a7f2b47c74fa033, type: 3}
+      propertyPath: maxHealth
+      value: 1e+20
       objectReference: {fileID: 0}
     - target: {fileID: 833959457638406507, guid: 09059a6742ea6e044a7f2b47c74fa033, type: 3}
       propertyPath: m_IsTrigger
@@ -2286,6 +2290,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 542560017, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
+      propertyPath: enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8d2879801402c8c42b2cce075d91adac, type: 2}
+    - target: {fileID: 542560017, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
       propertyPath: moveSpeed
       value: 3
       objectReference: {fileID: 0}
@@ -2431,6 +2439,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4168991318271931823, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5596406285412985361, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
       propertyPath: m_Name
       value: Prototype Player
