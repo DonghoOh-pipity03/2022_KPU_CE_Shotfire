@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using Photon.Pun;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviourPunCallbacks
 {
     [SerializeField] private WeaponData weaponData; // 총기 SO
     [SerializeField]private Bullet bulletPrefab;  // 총알 프리팹
@@ -55,13 +56,13 @@ public class Weapon : MonoBehaviour
     
     #endregion
 
-    private void OnEnable() {
+    public override void OnEnable() {
+        base.OnEnable();
         // 재장전 중에 무기를 집어넣었다가 다시 꺼낼 때, 재장전 중이였다면 자동 재장전을 시도한다.
         if( state == State.reloading) Reload(); 
         
         // 발사 중 무기를 집어넣었다가 다시 꺼낼 때, 현재 무기 상태를 다시 점검한다.
         if((Time.time >= lastFireTime + fireInterval) && (curRemainAmmo > 0)) state = State.ready;
-
     }
     private void Start()
     {
@@ -257,7 +258,7 @@ public class Weapon : MonoBehaviour
 
     public void UpdateUI()
     {
-        if(!useUI) return;
+        if(!useUI || !photonView.IsMine) return;
         GameUIManager.Instance.UpdateAmmo(curRemainAmmo);
         GameUIManager.Instance.Updatemag(curRemainMag);
     }

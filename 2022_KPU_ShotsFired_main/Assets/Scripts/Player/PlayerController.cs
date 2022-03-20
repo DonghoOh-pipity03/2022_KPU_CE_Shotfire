@@ -20,4 +20,9 @@ public class PlayerController : MonoBehaviour
         if(GameManager.Instance != null) GameManager.Instance.ReturnID(ID);  // 에디터 버전에서 게임 종료시 경고 알림 방지용
         ID = 0;
     }
+
+    private void OnApplicationQuit() {
+        if(GameManager.Instance != null) GameManager.Instance.ReturnID(ID);  // 에디터 버전에서 게임 종료시 경고 알림 방지용
+        ID = 0;
+    }
 }

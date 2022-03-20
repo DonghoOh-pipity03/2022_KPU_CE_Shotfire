@@ -42,7 +42,7 @@ class EnemyAgent : LivingEntity
         agent.stoppingDistance = engageDistance;
         agent.speed = moveSpeed;
     }
-    protected override void OnEnable() 
+    public override void OnEnable() 
     {
         base.OnEnable();
 

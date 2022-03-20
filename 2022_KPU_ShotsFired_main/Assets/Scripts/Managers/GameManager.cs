@@ -41,5 +41,6 @@ public class GameManager : MonoBehaviour
     {
         if(_ID == 0 ) return;
         curPlayerCount[_ID-1] = 0;
+        curLivingPlayer--;
     }
 }

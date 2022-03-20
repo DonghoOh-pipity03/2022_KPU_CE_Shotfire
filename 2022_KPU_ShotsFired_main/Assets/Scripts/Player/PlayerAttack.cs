@@ -24,20 +24,29 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     [SerializeField] GameObject m_virtualMainCamera;    // 메인 카메라 자리
     [SerializeField] CinemachineVirtualCamera m_mainCam;    // 메인 카메라의 가상카메라
     [SerializeField] CinemachineVirtualCamera m_zoomCam;    // 줌 카메라의 가상카메라
-
     [Header("카메라 거치대 위치")] 
     [SerializeField] private float m_idleCamHolderHeight = 1.8f;    // 평소 상태 카메라 높이
     [SerializeField] private float m_zoomCamHolderHeught = 1.55f;   // 줌 상태 카메라 높이
+    [Header("무기")] 
+    [SerializeField] Weapon[] weaponArray = new Weapon[2];   // 1~4번 슬릇에 사용할 무기 배열
     #endregion
 
     #region 전역 동작 변수
     private float curScreenSpeed;   // 현재 화면 회전 속도
     private Vector3 curCamHolderLocalPosition = Vector3.zero;   // 현재 카메라 홀더의 로컬 위치
     private bool isZoomMode = false;    // 줌 상태 여부
+    private int curWeapon = 0;   // 현재 들고 있는 무기의 배열 번호
     #endregion
 
     private void Start()
     {
+        // 하이어라키 상의 무기를 배열에 세팅
+        foreach(Weapon weapon in weaponArray)
+        {
+            weapon.gameObject.SetActive(false);
+        }
+        weaponArray[curWeapon].gameObject.SetActive(true);
+
         if(!photonView.IsMine) return ; // 네트워크 통제 구역
 
         curScreenSpeed = m_screenNormalSpeed;
@@ -52,13 +61,29 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        if(!photonView.IsMine)
-        {
-            return ;
-        }
-        if(m_virtualMainCamera != null) RotateScreen();
+        if(!photonView.IsMine) return ; // 네트워크 통제 구역
 
+        if(m_virtualMainCamera != null) RotateScreen();
         isZoomMode = playerInput.zoom;
+
+        if(playerInput.fire) weaponArray[curWeapon].Fire();
+        else weaponArray[curWeapon].Detached();
+        
+        if(playerInput.reload) 
+        {
+            weaponArray[curWeapon].Reload();
+            playerInput.reload = false;
+        }
+        if(playerInput.fireMode) 
+        {
+            weaponArray[curWeapon].ChangeFireMode();
+            playerInput.fireMode = false;
+        }
+
+        if(playerInput.zoom) weaponArray[curWeapon].SetFireState(false);
+        else weaponArray[curWeapon].SetFireState(true);
+
+        ChangeWeaponCommand();
     }
 
     private void FixedUpdate() {
@@ -112,6 +137,19 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
             m_cameraHolder.localPosition = curCamHolderLocalPosition;
         }
     }
+    private void ChangeWeaponCommand()
+    {
+        if(Input.GetButtonDown("Weapon1")) ChangeWeapon(0);
+        else if(Input.GetButtonDown("Weapon2")) ChangeWeapon(1);
+        else if(Input.GetButtonDown("Weapon3")) ChangeWeapon(2);
+        else if(Input.GetButtonDown("Weapon4")) ChangeWeapon(3);
+    }
+    private void ChangeWeapon(int _newWeaponIndex)
+    {
+        weaponArray[curWeapon].gameObject.SetActive(false);
+        curWeapon = _newWeaponIndex;
+        weaponArray[curWeapon].gameObject.SetActive(true);
 
-    
+        weaponArray[curWeapon].UpdateUI();
+    }
 }

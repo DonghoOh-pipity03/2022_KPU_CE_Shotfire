@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 class PlayerHealth : LivingEntity
 {
     private PlayerController playerController;
@@ -18,7 +17,7 @@ class PlayerHealth : LivingEntity
     {
       playerController = GetComponent<PlayerController>();  
     }
-    protected override void OnEnable() 
+    public override void OnEnable() 
     {
         base.OnEnable();    
 
@@ -76,6 +75,7 @@ class PlayerHealth : LivingEntity
 
     private void UpdateUI()
     {   
+        if( !photonView.IsMine ) return;
         GameUIManager.Instance.UpdatePlayerHealth(( (int)curHealth), (int)MaxHealth);
     }
 }
