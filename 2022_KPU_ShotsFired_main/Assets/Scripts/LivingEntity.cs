@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public enum EntityState{ alive, down, dead }   // 생명체의 상태
-abstract class LivingEntity : MonoBehaviour
+abstract class LivingEntity : MonoBehaviourPunCallbacks
 {
     #region 전역 변수
     [SerializeField] protected float MaxHealth = 100; // 시작 및 최대 체력
@@ -17,8 +18,9 @@ abstract class LivingEntity : MonoBehaviour
     public EntityState state;   // 생명체의 상태
     #endregion
 
-    protected virtual void OnEnable() 
-    {
+    public override void OnEnable() 
+    {   
+        base.OnEnable();
         state = EntityState.alive;
         curHealth = MaxHealth;   
     }
