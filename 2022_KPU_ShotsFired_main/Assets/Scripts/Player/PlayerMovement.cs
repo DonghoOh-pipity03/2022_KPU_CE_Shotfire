@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [Header("기본 이동")]
     [SerializeField] float m_walkFrontVelo = 1f;    // 앞 이동속도
     [SerializeField] float m_runVelo = 2.5f;    // 질주 이동속도
-    [SerializeField] float m_walkSideRat = 0.7f;    // 옆뒤 이동속도 감소비율
+    [SerializeField] float m_walkSideRat = 0.7f;    // 앞과 옆뒤 이동속도 비율
     [SerializeField] float m_speedSmoothTime = 0.05f;   // 이동속도 스무스 시간
 
     [Header("카메라와 하체정렬")]
@@ -30,14 +30,13 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     [Header("회피")]
     [SerializeField] float m_maxDodgeCount = 3; // 최대 회피 개수
-    [SerializeField] float m_dodgeCount = 3;    // 현재 남은 회피 개수
     [SerializeField] float m_dodgeRecoverPerSecond = 0.66f; // 초당 회피 개수 회복량
     [SerializeField] float m_dodgeSpeed = 10;   // 회피 중 이동 속도
     [SerializeField] float m_dodgeTime = 0.1f;  // 회피 지속시간
 
     [Header("앉기")]
-    [SerializeField] float m_CrouchSpeed = 4;   // 앉기 중 이동 속도
-    [SerializeField] float m_CrouchHeightRatio = 0.5f;  // 앉기 중 키 비율
+    [SerializeField] float m_CrouchSpeed;   // 앉기 중 이동 속도
+    [SerializeField] float m_CrouchHeightRatio;  // 앉기 중 키 비율
     #endregion
 
     #region 전역 동작 변수
@@ -50,12 +49,13 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private float curSpeed =>
         new Vector2(charController.velocity.x, charController.velocity.z).magnitude;    // 현재 캐릭터 속도
     // 회피
+    private float m_dodgeCount = 3;    // 현재 남은 회피 개수
     private bool isDodge = false;   // 회피 상태 여부
     private float lastDodgeTime = 0;    //마지막 회피 입력시간
     // 앉기
     private bool isCrouch = false;  // 앉기 상태 여부
     #endregion
-
+#region 콜백함수
     private void Start()
     {
         charController = GetComponent<CharacterController>();
@@ -77,9 +77,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if(!photonView.IsMine) return ; // 네트워크 통제 구역
 
         if (DetectRotationGap() || charController.velocity.magnitude > m_minMovementLowerBodyArrange) ArrangeLowerBody();
-        if(playerInput.fire == true || playerInput.zoom == true) ArrangeLowerBody();
+        if (playerInput.fire == true || playerInput.zoom == true) ArrangeLowerBody();
     }
-
+#endregion
+#region 함수
     private void Move()
     {
         // 목표 이동속도 결정
@@ -183,4 +184,5 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             }
         }
     }
+#endregion
 }

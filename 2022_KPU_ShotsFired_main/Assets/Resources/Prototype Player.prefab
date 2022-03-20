@@ -565,7 +565,6 @@ GameObject:
   - component: {fileID: 587433748376144957}
   - component: {fileID: 5596406285412985387}
   - component: {fileID: 5596406285412985365}
-  - component: {fileID: 5596406285412985384}
   - component: {fileID: 5596406285412985386}
   - component: {fileID: 5596406285412985385}
   - component: {fileID: 4168991318271931823}
@@ -748,7 +747,6 @@ MonoBehaviour:
   m_jumpPower: 10
   m_gravityMultiple: 3
   m_maxDodgeCount: 3
-  m_dodgeCount: 2.1543875
   m_dodgeRecoverPerSecond: 0.66
   m_dodgeSpeed: 40
   m_dodgeTime: 0.1
@@ -773,28 +771,8 @@ MonoBehaviour:
   m_screenZoomSpeed: 0.5
   m_minScreenAngle: 80
   m_maxScreenAngle: 80
-  m_virtualMainCamera: {fileID: 0}
-  m_mainCam: {fileID: 0}
-  m_zoomCam: {fileID: 0}
   m_idleCamHolderHeight: 1.8
   m_zoomCamHolderHeught: 1.55
-  weaponArray:
-  - {fileID: 5596406286887223228}
-  - {fileID: 9132649899341931792}
---- !u!114 &5596406285412985384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5596406285412985361}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc4587348fea5154b96d3b327521f0e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
-  weapon: {fileID: 5596406286887223228}
   weaponArray:
   - {fileID: 5596406286887223228}
   - {fileID: 9132649899341931792}
@@ -810,6 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80006a7b65dc1c4e84fc95a76ca6d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_sprintInvokeTime: 0.25
   jump: 0
   dodge: 0
   reload: 0
@@ -820,7 +799,6 @@ MonoBehaviour:
   weapon2: 0
   weapon3: 0
   weapon4: 0
-  m_sprintInvokeTime: 0.25
 --- !u!114 &5596406285412985385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,14 +811,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f67a8c9999f98488248ef6ac105694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  MaxSuppress: 100
-  UnsuppressAmount: 7
-  HitMultiple:
+  maxHealth: 100
+  hitMultiple:
   - 2
   - 1
   - 0.8
   - 0.8
+  maxSuppress: 100
+  unsuppressAmount: 7
   state: 0
   restoreStartTime: 5
   autoRestoreAmount: 10
@@ -1247,17 +1225,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3228379026309742222, guid: 945fba1098d16fd4894e90a1bcda75d4, type: 3}
   muzzlePosition: {fileID: 5596406285379891948}
   useUI: 1
-  autoReload: 1
   moaMultiple: 4
-  havingFireMode: 
-  curFireMode: 0
   maxSpreadStandard: 0
   recoilPerShot: 0
   recoilRecoverTime: 0
-  magCappacity: 5
-  curRemainAmmo: 0
-  curRemainMag: 5
-  curSpread: 0
 --- !u!1 &5596406287090765619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,14 +1361,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3768384580321215853, guid: b0c9452bb20017542b06893933178abf, type: 3}
   muzzlePosition: {fileID: 2481927748038057919}
   useUI: 1
-  autoReload: 1
   moaMultiple: 4
-  havingFireMode: 
-  curFireMode: 0
   maxSpreadStandard: 0
   recoilPerShot: 0
   recoilRecoverTime: 0
-  magCappacity: 5
-  curRemainAmmo: 0
-  curRemainMag: 5
-  curSpread: 0

@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region 전역동작변수
-    public int ID;     // 플레이어 ID
-    public bool ableControlMove = true;    // 캐릭터의 움직임 조작가능 여부
-    public bool ableControlAttack = true;   // 캐릭터의 공격 가능 여부
+    [HideInInspector]public int ID;     // 플레이어 ID
+    [HideInInspector]public bool ableControlMove = true;    // 캐릭터의 움직임 조작가능 여부
+    [HideInInspector]public bool ableControlAttack = true;   // 캐릭터의 공격 가능 여부
     #endregion
 
     private void OnEnable() 

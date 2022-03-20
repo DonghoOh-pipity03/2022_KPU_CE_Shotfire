@@ -10,20 +10,22 @@ using UnityEditor;
 public enum AIState{ wait, move, engage}    // AI가 가질 수 있는 경계상태
 class EnemyAgent : LivingEntity
 {   
-    [SerializeField] private Transform eyeTransform;    // 눈의 위치 정보
-    [SerializeField] private NavMeshAgent agent; // 경로 AI 에이전트
+    private NavMeshAgent agent; // 경로 AI 에이전트
     #region 전역 변수
-    // 시야
-    [SerializeField] private float eyeDistance; // 시야 거리
-    [SerializeField] private LayerMask attackTarget;    // 공격 및 타겟 대상 레이어
-    [SerializeField] private float fieldOfView; // 시야각
-    // 공격
-    [SerializeField] private float engageDistance;  // 교전을 위한 이동 정지거리
-    [SerializeField] private float melleeDistance; // 근접공격을 시작하는 거리
-    [SerializeField] private float distanceTargetWeight;    // 공격 타겟 선정을 위한 거리별 가중치
-    [SerializeField] private float attackerTargetWeight;    // 공격 타겟 선정을 위한 마지막 공격자 가중치
-    // 이동
-    [SerializeField] private float moveSpeed;   // 이동 속도
+    [SerializeField] private EnemyData enemyData;   // 적 AI SO
+    [SerializeField] private Transform eyeTransform;    // 눈의 위치 정보
+    [SerializeField] private LayerMask attackTarget;   // 공격 대상의 레이어
+    private string enemyName;   // AI의 이름
+    // 시야 파라미터
+    private float eyeDistance; // 시야 거리
+    private float fieldOfView; // 시야각
+    // 공격 파라미터
+    private float engageDistance;  // 교전을 위한 이동 정지거리
+    private float melleeDistance; // 근접공격을 시작하는 거리
+    private float distanceTargetWeight;    // 공격 타겟 선정을 위한 거리별 가중치
+    private float attackerTargetWeight;    // 공격 타겟 선정을 위한 마지막 공격자 가중치
+    // 이동 파라미터
+    private float moveSpeed;   // 이동 속도
     #endregion
     #region 전역 동작변수
     private AIState curState;  // AI의 경계상태
@@ -32,12 +34,14 @@ class EnemyAgent : LivingEntity
     private float[] playerDistance = {9999,9999,9999,9999};  // 각 플레이어와의 거리
     private int[] targetWeight = new int[4];    // 각 플레이어별 타겟팅(어그로) 가중치
     private int target; // 최우선 공격 대상: 0~3 플레이어
-    private int lastAttacker;   // 마지막으로 AI를 공격한 플레이어: 0은 판단불가 의미
+    private int lastAttacker;   // 마지막으로 AI를 공격한 플레이어: 0_없음, 1~4_플레이어
     private Ray ray;    // 플레이어 탐색용 레이
     #endregion
-
+    #region 콜백함수
     private void Awake() 
     {
+        Debug.Log("2");
+        SettingData();
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = engageDistance;
         agent.speed = moveSpeed;
@@ -60,7 +64,8 @@ class EnemyAgent : LivingEntity
             AIAttackBT();
         }
     }
-
+    #endregion
+    #region 함수
     public override void TakeDamage(DamageMessage _damageMessage, HitParts _hitPart)
     {
         base.TakeDamage(_damageMessage, _hitPart);
@@ -68,13 +73,21 @@ class EnemyAgent : LivingEntity
         // 마지막 공격자를 저장
         var player = _damageMessage.attacker.GetComponent<PlayerController>();
         if( player != null) lastAttacker = player.ID;
-
-        if(curState == AIState.wait)    // 데미지를 받으면 대기상태에서 해제
+        
+        // 데미지를 받으면 대기상태에서 해제
+        if(curState == AIState.wait)
         {   
             var distance = (_damageMessage.attacker.transform.position - eyeTransform.position).magnitude;
             if(distance > engageDistance) curState = AIState.move;
             else curState = AIState.engage;
         }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+
+        agent.enabled = false;
     }
 
     // 시야내 모든 타겟 감지: 플레이어별로 시야 확인 유무를 저장하고, 1명이라도 시야내에 있다면 true를 반환한다.
@@ -136,6 +149,7 @@ class EnemyAgent : LivingEntity
     }
 
     #if UNITY_EDITOR
+    // 시야 디버그용
     private void OnDrawGizmosSelected()
     {
         var leftRayRotation = Quaternion.AngleAxis(-fieldOfView * 0.5f, Vector3.up);
@@ -185,6 +199,7 @@ class EnemyAgent : LivingEntity
         agent.isStopped = false;
         agent.SetDestination( players[target].transform.position );
     }
+
     // AI 행동트리_공격
     private void AIAttackBT()
     {
@@ -203,10 +218,20 @@ class EnemyAgent : LivingEntity
 
     }
 
-    protected override void Die()
+    private void SettingData()
     {
-        base.Die();
-
-        agent.enabled = false;
+        enemyName = enemyData.EnemyName;
+        maxHealth = enemyData.MaxHealth;
+        maxSuppress = enemyData.MaxSuppress;
+        unsuppressAmount = enemyData.UnsuppressAmount;
+        hitMultiple = enemyData.HitMultiple;
+        eyeDistance = enemyData.EyeDistance;
+        fieldOfView = enemyData.FieldOfView;
+        engageDistance = enemyData.EngageDistance;
+        melleeDistance = enemyData.MelleeDistance;
+        distanceTargetWeight = enemyData.DistanceTargetWeight;
+        attackerTargetWeight = enemyData.AttackerTargetWeight;
+        moveSpeed = enemyData.MoveSpeed;
     }
+    #endregion
 }
