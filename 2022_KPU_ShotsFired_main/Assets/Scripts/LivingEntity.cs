@@ -25,7 +25,6 @@ abstract class LivingEntity : MonoBehaviourPunCallbacks
         base.OnEnable();
         state = EntityState.alive;
         curHealth = maxHealth;   
-        Debug.Log("1");
     }
 
     protected virtual void Update() 

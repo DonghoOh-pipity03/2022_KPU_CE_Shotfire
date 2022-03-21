@@ -16,7 +16,11 @@ MonoBehaviour:
   maxHealth: 100
   maxSuppress: 100
   unsuppressAmount: 5
-  hitMultiple: []
+  hitMultiple:
+  - 2
+  - 1
+  - 0.8
+  - 0.8
   eyeDistance: 5
   fieldOfView: 120
   engageDistance: 4
