@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Temp : MonoBehaviour
+public class DevelopTool : MonoBehaviour
 {
     public bool useMouseLock = false;
     private void Start()

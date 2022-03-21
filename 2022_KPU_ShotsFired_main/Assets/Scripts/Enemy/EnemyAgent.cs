@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -15,6 +17,8 @@ class EnemyAgent : LivingEntity
     [SerializeField] private EnemyData enemyData;   // 적 AI SO
     [SerializeField] private Transform eyeTransform;    // 눈의 위치 정보
     [SerializeField] private LayerMask attackTarget;   // 공격 대상의 레이어
+    [SerializeField] private TextMeshProUGUI sign;  // 디버그용 머리 위 텍스트
+    [SerializeField] private bool useSign;  // 디버그용 텍스트 사용 여부
     private string enemyName;   // AI의 이름
     // 시야 파라미터
     private float eyeDistance; // 시야 거리
@@ -40,7 +44,6 @@ class EnemyAgent : LivingEntity
     #region 콜백함수
     private void Awake() 
     {
-        Debug.Log("2");
         SettingData();
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = engageDistance;
@@ -53,8 +56,15 @@ class EnemyAgent : LivingEntity
         curState = AIState.wait;
     }
 
+    protected override void Update() {
+        base.Update();
+
+        if(useSign) sign.text = state.ToString() + "\n" + curState.ToString();
+    }
     private void FixedUpdate() 
     {
+        if(state == EntityState.dead) return;
+        
         SenseEntity();
         RenewPlayerInfo();
 
@@ -72,7 +82,13 @@ class EnemyAgent : LivingEntity
 
         // 마지막 공격자를 저장
         var player = _damageMessage.attacker.GetComponent<PlayerController>();
-        if( player != null) lastAttacker = player.ID;
+        if( player != null)
+        {
+            lastAttacker = player.ID;
+            
+            // 플레이어 정보가 없으면 플레이어 저장
+            if(players[lastAttacker-1] == null) players[lastAttacker-1] = _damageMessage.attacker;
+        }
         
         // 데미지를 받으면 대기상태에서 해제
         if(curState == AIState.wait)
@@ -224,7 +240,7 @@ class EnemyAgent : LivingEntity
         maxHealth = enemyData.MaxHealth;
         maxSuppress = enemyData.MaxSuppress;
         unsuppressAmount = enemyData.UnsuppressAmount;
-        hitMultiple = enemyData.HitMultiple;
+        hitMultiple = (float[])(enemyData.HitMultiple.Clone());
         eyeDistance = enemyData.EyeDistance;
         fieldOfView = enemyData.FieldOfView;
         engageDistance = enemyData.EngageDistance;

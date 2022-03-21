@@ -98,18 +98,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eba4ecacf498c94d97233d0e06b1cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  MaxSuppress: 100
-  UnsuppressAmount: 7
-  HitMultiple:
+  maxHealth: 100
+  hitMultiple:
   - 2
   - 1
   - 0.8
   - 0.8
+  maxSuppress: 100
+  unsuppressAmount: 7
   state: 0
-  display: {fileID: 7950745781796203547}
+  debugKind: 0
+  Display: {fileID: 7950745781796203547}
   hitCount: 0
   lastHitTime: 0
+  supCount: 0
+  lastSupTime: 0
 --- !u!1 &7950745780497140346
 GameObject:
   m_ObjectHideFlags: 0
