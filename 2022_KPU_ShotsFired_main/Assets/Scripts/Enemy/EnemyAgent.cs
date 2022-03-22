@@ -9,9 +9,9 @@ using TMPro;
 using UnityEditor;
 #endif
 
-public enum AIState{ wait, move, engage}    // AI가 가질 수 있는 경계상태
+public enum AIState { wait, move, engage }    // AI가 가질 수 있는 경계상태
 class EnemyAgent : LivingEntity
-{   
+{
     private NavMeshAgent agent; // 경로 AI 에이전트
     #region 전역 변수
     [SerializeField] private EnemyData enemyData;   // 적 AI SO
@@ -35,40 +35,45 @@ class EnemyAgent : LivingEntity
     private AIState curState;  // AI의 경계상태
     private int[] isPlayerOnSight = new int[4]; // 플레이어가 시야 내에 보이는지 여부
     private GameObject[] players = new GameObject[4];   // 플레이어들의 게임 오브젝트 정보
-    private float[] playerDistance = {9999,9999,9999,9999};  // 각 플레이어와의 거리
+    private float[] playerDistance = { 9999, 9999, 9999, 9999 };  // 각 플레이어와의 거리
     private int[] targetWeight = new int[4];    // 각 플레이어별 타겟팅(어그로) 가중치
     private int target; // 최우선 공격 대상: 0~3 플레이어
     private int lastAttacker;   // 마지막으로 AI를 공격한 플레이어: 0_없음, 1~4_플레이어
     private Ray ray;    // 플레이어 탐색용 레이
+    RaycastHit hit; // 레이의 충돌 정보
+    int rayMask;    // 레이마스크
     #endregion
     #region 콜백함수
-    private void Awake() 
+    private void Awake()
     {
         SettingData();
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = engageDistance;
         agent.speed = moveSpeed;
+        rayMask = 1 << LayerMask.NameToLayer("Suppress");
+        rayMask = ~rayMask;
     }
-    public override void OnEnable() 
+    public override void OnEnable()
     {
         base.OnEnable();
 
         curState = AIState.wait;
     }
 
-    protected override void Update() {
+    protected override void Update()
+    {
         base.Update();
 
-        if(useSign) sign.text = state.ToString() + "\n" + curState.ToString();
+        if (useSign) sign.text = state.ToString() + "\n" + curState.ToString();
     }
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
-        if(state == EntityState.dead) return;
-        
+        if (state == EntityState.dead) return;
+
         SenseEntity();
         RenewPlayerInfo();
 
-        if(curState != AIState.wait) 
+        if (curState != AIState.wait)
         {
             AIStateBT();
             AIAttackBT();
@@ -82,19 +87,19 @@ class EnemyAgent : LivingEntity
 
         // 마지막 공격자를 저장
         var player = _damageMessage.attacker.GetComponent<PlayerController>();
-        if( player != null)
+        if (player != null)
         {
             lastAttacker = player.ID;
-            
+
             // 플레이어 정보가 없으면 플레이어 저장
-            if(players[lastAttacker-1] == null) players[lastAttacker-1] = _damageMessage.attacker;
+            if (players[lastAttacker - 1] == null) players[lastAttacker - 1] = _damageMessage.attacker;
         }
-        
+
         // 데미지를 받으면 대기상태에서 해제
-        if(curState == AIState.wait)
-        {   
+        if (curState == AIState.wait)
+        {
             var distance = (_damageMessage.attacker.transform.position - eyeTransform.position).magnitude;
-            if(distance > engageDistance) curState = AIState.move;
+            if (distance > engageDistance) curState = AIState.move;
             else curState = AIState.engage;
         }
     }
@@ -108,47 +113,43 @@ class EnemyAgent : LivingEntity
 
     // 시야내 모든 타겟 감지: 플레이어별로 시야 확인 유무를 저장하고, 1명이라도 시야내에 있다면 true를 반환한다.
     private bool SenseEntity()
-    {   
-        for(int i = 0; i < 4; i++)
+    {
+        for (int i = 0; i < 4; i++)
         {
             isPlayerOnSight[i] = 0;
         }
 
         var colliders = Physics.OverlapSphere(eyeTransform.position, eyeDistance, attackTarget);
         foreach (var collider in colliders)
-        {   
+        {
             // 시야 거리 내에서 존재한 상황
             var livingEntity = collider.GetComponent<LivingEntity>();
-            if (livingEntity != null && livingEntity.state != EntityState.dead)   
-            {   
-                RaycastHit hit;
+            if (livingEntity != null && livingEntity.state != EntityState.dead)
+            {
                 var direction = collider.transform.position - eyeTransform.position;
                 direction.y = eyeTransform.forward.y;
-                
-                // 시야각 내에 있음
-                if (Vector3.Angle(direction, eyeTransform.forward) < fieldOfView * 0.5f)
-                {   
-                    ray = new Ray();
-                    ray.origin = eyeTransform.position;
-                    ray.direction = direction;
 
-                    // 시야에 확인
-                    if (Physics.Raycast(ray, out hit, eyeDistance))  
-                    {   
-                        Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 5f);
-                        if(hit.transform.root.gameObject == collider.gameObject) 
+                // 대기상태라면 시야각 내에 있는지 파악한다.
+                if ((curState == AIState.wait && Vector3.Angle(direction, eyeTransform.forward) < fieldOfView * 0.5f)
+                    || (curState != AIState.wait))
+                {
+                    ShotRay(direction);
+                    Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 5f);
+                    if (hit.transform != null)
+                    {
+                        if (hit.transform.root.gameObject == collider.gameObject)
                         {
                             int ID = hit.transform.root.gameObject.GetComponent<PlayerController>().ID;
-                            if(ID != 0)isPlayerOnSight[ ID -1 ] = 1;
-                            
+                            if (ID != 0) isPlayerOnSight[ID - 1] = 1;
+
                             // 플레이어 정보 등록
-                            if(players[ID-1] == null) players[ID-1] = hit.transform.root.gameObject;
+                            if (players[ID - 1] == null) players[ID - 1] = hit.transform.root.gameObject;
 
                             // AI 상태 변경
-                            if(curState == AIState.wait)
+                            if (curState == AIState.wait)
                             {
                                 var distance = (hit.transform.position - eyeTransform.position).magnitude;
-                                if(distance > engageDistance) curState = AIState.move;
+                                if (distance > engageDistance) curState = AIState.move;
                                 else curState = AIState.engage;
                             }
                         }
@@ -156,15 +157,24 @@ class EnemyAgent : LivingEntity
                 }
             }
         }
-        
-        for(int i = 0; i < 4; i++)
+
+        for (int i = 0; i < 4; i++)
         {
-            if( isPlayerOnSight[i] == 1 ) return true;
+            if (isPlayerOnSight[i] == 1) return true;
         }
         return false;
     }
 
-    #if UNITY_EDITOR
+    // 방향을 입력 받아, 레이를 쏜다.
+    private void ShotRay(Vector3 _dir)
+    {
+        //ray = new Ray();
+        ray.origin = eyeTransform.position;
+        ray.direction = _dir;
+        Physics.Raycast(ray, out hit, eyeDistance, rayMask);
+    }
+
+#if UNITY_EDITOR
     // 시야 디버그용
     private void OnDrawGizmosSelected()
     {
@@ -173,54 +183,58 @@ class EnemyAgent : LivingEntity
         Handles.color = new Color(1f, 1f, 1f, 0.2f);
         Handles.DrawSolidArc(eyeTransform.position, Vector3.up, leftRayDirection, fieldOfView, eyeDistance);
     }
-    #endif
+#endif
 
     // 각 플레이어와의 거리, 타겟 가중치 계산 및 최우선 공격 대상 선정
     private void RenewPlayerInfo()
     {
         // 가중치 계산
-        for(int i=0; i < 4 ; i++)
+        for (int i = 0; i < 4; i++)
         {
-            if( players[i] == null) continue;
-            
+            if (players[i] == null) continue;
+
             playerDistance[i] = (players[i].transform.position - transform.position).magnitude; // 거리 계산
 
             targetWeight[i] = (int)(
-                                Mathf.Clamp( ( -1 * playerDistance[i] +25 ), 0, 25 ) * distanceTargetWeight 
-                                + ( (lastAttacker == i+1) ? attackerTargetWeight : 0 ) );    // 타겟 가중치 계산
+                                Mathf.Clamp((-1 * playerDistance[i] + 25), 0, 25) * distanceTargetWeight
+                                + ((lastAttacker == i + 1) ? attackerTargetWeight : 0));    // 타겟 가중치 계산
         }
-        
+
         // 최우선 타겟 선정
         int maxValue = targetWeight.Max();
         target = targetWeight.ToList().IndexOf(maxValue);
-    }   
+    }
 
     // AI 행동트리_상태
     private void AIStateBT()
     {
         curState = AIState.move;
 
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             // 시야 내에 있고 교전거리 내에 있을 때: 정지
-            if( isPlayerOnSight[i] == 1 || playerDistance[i] < engageDistance)
+            if (isPlayerOnSight[i] == 1 && playerDistance[i] < engageDistance)
             {
                 curState = AIState.engage;
-                agent.isStopped = true;
+                agent.speed = 0;
+                //agent.isStopped = true;
                 return;
             }
         }
 
         // 이동
-        agent.isStopped = false;
-        agent.SetDestination( players[target].transform.position );
+        //agent.isStopped = false;
+        agent.speed = moveSpeed;
+        agent.SetDestination(players[target].transform.position);
     }
 
     // AI 행동트리_공격
     private void AIAttackBT()
-    {
+    {   
+        // 회전
+
         // 공격 방법 선정 & 공격
-        if( playerDistance[target] > melleeDistance ) MelleeAttack();    //근접공격
+        if (playerDistance[target] > melleeDistance) MelleeAttack();    //근접공격
         else ShotAttack();  // 원거리 공격
     }
 
