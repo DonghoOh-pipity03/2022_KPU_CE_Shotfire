@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameUIManager : MonoBehaviour
@@ -15,6 +18,10 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerHealth;  // 플레이어_체력 텍스트
     private float playerHealthGUIRatio => playerMaxHealthBar.sizeDelta.x / 100f; // 플레이어_체력 포인트와 체력 GUI 바의 비율 
     private float playerHealthBackgorundHorizonMargine;    // 플레이어_체력 배경 GUI 가로 마진
+     // 피격 필터
+    [SerializeField] Image playerDamaged;    // 플레이어_피격시 핏빛 이미지
+    [SerializeField] float playerDamageRestoreTime;   // 플레이어_피격 이미지가 옅어지는 시간
+    IEnumerator playerDamagedFadeOut;    // 플레이어_피격 이미지를 옅게 할 함수명
     [Header("플레이어 무기 계열")]
     [SerializeField] private TextMeshProUGUI remainAmmo;   // 플레이어_남은 탄환
     [SerializeField] private TextMeshProUGUI remainMag;    // 플레이어_남은 탄창
@@ -58,6 +65,23 @@ public class GameUIManager : MonoBehaviour
         playerCurHealthBar.sizeDelta = new Vector2(_playerHealth * playerHealthGUIRatio, 
                                                 playerCurHealthBar.sizeDelta.y);
     }
+
+    public void SetActviePlayerDamaged(bool _active)
+    {
+        if(_active)
+        {
+            if(playerDamagedFadeOut != null) StopCoroutine(playerDamagedFadeOut);
+            Color c = playerDamaged.color;
+            c.a = 1;
+            playerDamaged.color = c;
+        }
+        else
+        {
+            playerDamagedFadeOut = FadeOut(playerDamaged, playerDamageRestoreTime);
+            StartCoroutine(playerDamagedFadeOut);
+        }
+    }
+
     #endregion
     #region 플레이어 무기
     public void UpdateAmmo(int _remainAmmo)
@@ -84,5 +108,21 @@ public class GameUIManager : MonoBehaviour
         if(_active) Cursor.lockState = CursorLockMode.Locked;
         else Cursor.lockState = CursorLockMode.None;
         Cursor.visible = !_active;
+    }
+
+    IEnumerator FadeOut(Image _image, float _time)
+    {
+        float i = 1;
+        Color c = _image.color;
+        while(i > 0)
+        {
+            i -= 1 / (_time * 50);
+            if(i<0) i = 0;
+
+            c.a = i;
+            _image.color = c;
+
+            yield return new WaitForSeconds(0.02f);
+        }
     }
 }
