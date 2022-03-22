@@ -13,7 +13,6 @@ class PlayerHealth : LivingEntity
     #endregion
     #region 전역동작변수
     private float lastHitTime;  //마지막 피격 시간
-    bool isRestoring;   // 자동회복 중인지 여부
     #endregion
     #region 콜백함수
     private void Start() 
@@ -31,7 +30,7 @@ class PlayerHealth : LivingEntity
         AutoResore();
     }
     #endregion
-#region 함수
+    #region 함수
     public override void RestoreHealth(float _restoreAmount)
     {
         base.RestoreHealth(_restoreAmount);
@@ -45,10 +44,7 @@ class PlayerHealth : LivingEntity
         
         lastHitTime = Time.time;
 
-        if( !photonView.IsMine ) return;    // 네트워크 통제 구역
-        
         if(state == EntityState.alive) UpdateUI();
-        GameUIManager.Instance.SetActviePlayerDamaged(true);
     }
 
     protected override void Die()
@@ -72,34 +68,20 @@ class PlayerHealth : LivingEntity
 
     // 체력 자동회복
     private void AutoResore()
-    {   
-        // 회복 가능 조건일 때
+    {
         if( curHealth < maxHealth && Time.time >= lastHitTime + restoreStartTime && state == EntityState.alive)
         {   
-            if(!isRestoring)    // 회복 시작 타이밍일 때
-            {
-                isRestoring = true;
-
-                if( !photonView.IsMine ) return;    // 네트워크 통제 구역
-                GameUIManager.Instance.SetActviePlayerDamaged(false);
-            }
-            
             curHealth += autoRestoreAmount * Time.deltaTime;
             if(curHealth > maxHealth) curHealth = maxHealth;
 
-            if( !photonView.IsMine ) return;    // 네트워크 통제 구역
             UpdateUI();
         }
-        else isRestoring = false;
     }
 
-    #region UI 계열
     private void UpdateUI()
     {   
         if( !photonView.IsMine ) return;    // 네트워크 통제 구역
         GameUIManager.Instance.UpdatePlayerHealth(( (int)curHealth), (int)maxHealth);
     }
-
-    #endregion
-#endregion 
+    #endregion 
 }
