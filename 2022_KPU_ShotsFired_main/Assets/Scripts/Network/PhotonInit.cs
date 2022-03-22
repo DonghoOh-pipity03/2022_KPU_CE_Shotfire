@@ -62,6 +62,7 @@ namespace PhotonInit
             IdInput_UI.SetActive(false);
             RoomList_UI.SetActive(false);
             Lobby_UI.SetActive(false);
+            Report_UI.SetActive(false);
         }
         
         #endregion
@@ -80,6 +81,7 @@ namespace PhotonInit
         public GameObject RoomList_UI;
         public GameObject Lobby_UI;
         public GameObject Player_UI;
+        public GameObject Report_UI;
         public GameObject MainHome_Map;
         public GameObject Lobby_Map;
 

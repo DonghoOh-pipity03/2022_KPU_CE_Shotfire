@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 752f2ed92660cbc4d906b1e7d51b0c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_UI: {fileID: 0}
+  report_UI: {fileID: 0}
   m_miniMap: {fileID: 0}
   playerHealthBackground: {fileID: 0}
   playerMaxHealthBar: {fileID: 0}

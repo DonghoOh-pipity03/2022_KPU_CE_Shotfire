@@ -467,15 +467,15 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172586534}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &198032119 stripped
+--- !u!114 &318697133 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4401816778765267618, guid: 612b4824ecec58042a32de80adf37936, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
   m_PrefabInstance: {fileID: 733401170682080172}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e414f8116a477341b7082d65aecb701, type: 3}
+  m_Script: {fileID: 11500000, guid: 752f2ed92660cbc4d906b1e7d51b0c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &372548525
@@ -737,6 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useMouseLock: 0
+  timeScale: 1
 --- !u!4 &620578303
 Transform:
   m_ObjectHideFlags: 0
@@ -1039,6 +1040,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942268522}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1011535094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5693004795600286736, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
+  m_PrefabInstance: {fileID: 5693004795693853040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1058319576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,9 +2114,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4105942485253717771}
     - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
+      propertyPath: player_UI
+      value: 
+      objectReference: {fileID: 4105942485021095687}
+    - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
       propertyPath: remainMag
       value: 
       objectReference: {fileID: 4105942486730973033}
+    - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
+      propertyPath: report_UI
+      value: 
+      objectReference: {fileID: 1011535094}
     - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
       propertyPath: remainAmmo
       value: 
@@ -2322,7 +2336,7 @@ PrefabInstance:
     - target: {fileID: 5693004795008369823, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 198032119}
+      objectReference: {fileID: 318697133}
     - target: {fileID: 5693004795008369823, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2541,6 +2555,7 @@ MonoBehaviour:
   RoomList_UI: {fileID: 1296744321}
   Lobby_UI: {fileID: 828649597}
   Player_UI: {fileID: 4105942485021095687}
+  Report_UI: {fileID: 1011535094}
   MainHome_Map: {fileID: 1068885323}
   Lobby_Map: {fileID: 1093144930}
   CellBtn:

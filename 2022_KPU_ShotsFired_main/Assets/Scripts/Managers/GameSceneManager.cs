@@ -77,11 +77,4 @@ public class GameSceneManager : MonoBehaviour
     {
         Time.timeScale = _time;
     }
-    
-    public void SetMouseLock(bool _active)
-    {
-        if(_active) Cursor.lockState = CursorLockMode.Locked;
-        else Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = !_active;
-    }
 }

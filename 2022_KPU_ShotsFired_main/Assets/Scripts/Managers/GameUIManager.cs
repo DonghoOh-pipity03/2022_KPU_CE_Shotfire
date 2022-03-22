@@ -4,6 +4,9 @@ using TMPro;
 public class GameUIManager : MonoBehaviour
 {
 #region 전역 변수
+    [Header("UI 씬")]
+    [SerializeField] GameObject player_UI;
+    [SerializeField] GameObject report_UI;
     [SerializeField] private GameObject m_miniMap;  // 플레이어_ 미니맵UI 오브젝트 자리
     [Header("주인공 캐릭터 체력 계열")]
     [SerializeField] private RectTransform playerHealthBackground;  // 플레이어_체력 GUI 배경
@@ -34,10 +37,20 @@ public class GameUIManager : MonoBehaviour
     }
 #endregion
 #region 함수
+    #region UI 씬
+    public void SetActivePlayer(bool _active)
+    {
+        player_UI.SetActive(_active);
+    }
+    public void SetActiveReport(bool _active)
+    {
+        report_UI.SetActive(_active);
+    }
     public void SetActiveMiniMap(bool _active) 
     {
         m_miniMap.SetActive(_active);
     }
+    #endregion
     #region 주인공 캐릭터 체력
     public void UpdatePlayerHealth(float _playerHealth, float _maxHealth)
     {
@@ -66,4 +79,10 @@ public class GameUIManager : MonoBehaviour
     }
     */
 #endregion
+    public void SetMouseLock(bool _active)
+    {
+        if(_active) Cursor.lockState = CursorLockMode.Locked;
+        else Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = !_active;
+    }
 }

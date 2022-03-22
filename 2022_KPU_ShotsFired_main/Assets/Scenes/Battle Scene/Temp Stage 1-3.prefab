@@ -1,5 +1,66 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &862905954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 862905955}
+  - component: {fileID: 862905957}
+  - component: {fileID: 862905956}
+  m_Layer: 7
+  m_Name: EndGame Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &862905955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862905954}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 20}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7055145313650501556}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &862905957
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862905954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &862905956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862905954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c804aeecfb56c0145b9cf69695fc012e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneName: 
+  prevSceneName: Temp Stage 1-3
+  useForLastStage: 1
 --- !u!1 &238469086683324126
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,12 +73,12 @@ GameObject:
   - component: {fileID: 2104957811854421932}
   - component: {fileID: 1293894468804377035}
   - component: {fileID: 5948041331763928225}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Battle Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3472948426003544196
 Transform:
@@ -112,12 +173,12 @@ GameObject:
   - component: {fileID: 4830361184439814904}
   - component: {fileID: 2434721613914297409}
   - component: {fileID: 8700980832549473053}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7805419687920376040
 Transform:
@@ -346,7 +407,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1945
+  m_VersionIndex: 1951
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -453,12 +514,12 @@ GameObject:
   - component: {fileID: 8398214159104631210}
   - component: {fileID: 1913590086558076544}
   - component: {fileID: 2018169652112049024}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SafeRoom Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8398214159104631210
 Transform:
@@ -500,7 +561,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c804aeecfb56c0145b9cf69695fc012e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: End Game
+  nextSceneName: 
+  prevSceneName: Temp Stage 1-2
+  useForLastStage: 0
 --- !u!1 &4456537103678870850
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,12 +576,12 @@ GameObject:
   - component: {fileID: 3815089761982280373}
   - component: {fileID: 3973413884923702657}
   - component: {fileID: 8065457005596487291}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Safe Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1871796106698260772
 Transform:
@@ -618,12 +681,12 @@ GameObject:
   - component: {fileID: 8108584239726671048}
   - component: {fileID: 5720913632638948999}
   - component: {fileID: 3151759594010162797}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6654450391049069354
 Transform:
@@ -852,7 +915,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1948
+  m_VersionIndex: 1954
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -962,12 +1025,12 @@ GameObject:
   - component: {fileID: 3748738415376047474}
   - component: {fileID: 7509827260043232872}
   - component: {fileID: 3054137494958818285}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2469152937699637152
 Transform:
@@ -1415,7 +1478,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 8764
+  m_VersionIndex: 8770
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1528,12 +1591,12 @@ GameObject:
   - component: {fileID: 4678382887769732259}
   - component: {fileID: 6727992031726393838}
   - component: {fileID: 1863924165325910099}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2202104841347329336
 Transform:
@@ -1981,7 +2044,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 8767
+  m_VersionIndex: 8773
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2094,12 +2157,12 @@ GameObject:
   - component: {fileID: 5595287036675965606}
   - component: {fileID: 8313895676365778171}
   - component: {fileID: 7437454114234971438}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &9168291663018756443
 Transform:
@@ -2433,12 +2496,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7909652145303512131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Level Design
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7909652145303512131
 Transform:
@@ -2467,12 +2530,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7055145313650501556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Temp Stage 1-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7055145313650501556
 Transform:
@@ -2481,13 +2544,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8400090604208229358}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 100, y: -0, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8398214159104631210}
   - {fileID: 7909652145303512131}
+  - {fileID: 862905955}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2503,12 +2567,12 @@ GameObject:
   - component: {fileID: 5633159381509436632}
   - component: {fileID: 6989270688940378459}
   - component: {fileID: 817550175862559114}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mission Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8062195629346861372
 Transform:
