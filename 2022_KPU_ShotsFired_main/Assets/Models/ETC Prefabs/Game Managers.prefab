@@ -86,8 +86,6 @@ MonoBehaviour:
   playerMaxHealthBar: {fileID: 0}
   playerCurHealthBar: {fileID: 0}
   playerHealth: {fileID: 0}
-  playerDamaged: {fileID: 0}
-  playerDamageRestoreTime: 2
   remainAmmo: {fileID: 0}
   remainMag: {fileID: 0}
 --- !u!114 &4401816778765267647
