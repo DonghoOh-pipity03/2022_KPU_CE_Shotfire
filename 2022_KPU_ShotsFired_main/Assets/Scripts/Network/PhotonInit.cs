@@ -252,6 +252,7 @@ namespace PhotonInit
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("Player Left {0}", other.NickName);
+            
             if(PhotonNetwork.IsMasterClient)
             {
                 // PV.RPC("exitRoom", RpcTarget.All);
