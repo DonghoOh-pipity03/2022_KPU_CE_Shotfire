@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 632232556}
   - component: {fileID: 632232558}
   - component: {fileID: 632232557}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Suppress Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ MonoBehaviour:
   maxSuppress: 100
   unsuppressAmount: 7
   state: 0
-  restoreStartTime: 5
+  restoreStartTime: 4
   autoRestoreAmount: 10
   downMaxHealth: 50
 --- !u!114 &4168991318271931823
@@ -872,10 +872,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5596406285606084927}
-  - component: {fileID: 5596406285606084925}
   - component: {fileID: 5596406285606084924}
+  - component: {fileID: 6496625164733075869}
   m_Layer: 8
-  m_Name: Head
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -896,19 +896,6 @@ Transform:
   m_Father: {fileID: 5596406286858992907}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5596406285606084925
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5596406285606084926}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.18
-  m_Center: {x: 0, y: 0.77, z: 0}
 --- !u!114 &5596406285606084924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,7 +908,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17848b032e26684c86ce8b4936db3c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPart: 0
+  hitPart: 1
+--- !u!136 &6496625164733075869
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5596406285606084926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1 &5596406286781212257
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +935,7 @@ GameObject:
   - component: {fileID: 5596406286781212260}
   - component: {fileID: 5596406286781212263}
   m_Layer: 8
-  m_Name: Cylinder
+  m_Name: Head Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1050,7 +1051,7 @@ GameObject:
   - component: {fileID: 5596406286858992905}
   - component: {fileID: 5596406286858992904}
   m_Layer: 8
-  m_Name: Prototype mesh
+  m_Name: mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1071,6 +1072,7 @@ Transform:
   - {fileID: 5596406286781212262}
   - {fileID: 5596406285606084927}
   - {fileID: 632232556}
+  - {fileID: 4297522409375710356}
   m_Father: {fileID: 5596406285412985364}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1259,6 +1261,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5596406285412985364}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5947436953723167332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4297522409375710356}
+  m_Layer: 8
+  m_Name: Aim Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4297522409375710356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947436953723167332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5596406286858992907}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6174264087848744965
 GameObject:
