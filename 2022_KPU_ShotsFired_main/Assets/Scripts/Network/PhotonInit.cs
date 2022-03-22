@@ -33,6 +33,7 @@ namespace PhotonInit
         private string gameVersion = "1";
         private byte maxPlayersPerRoom = 4;
         private List<Vector3>Lobby_position = new List<Vector3>();
+        bool isConnecting;
 
         
         #endregion
@@ -100,12 +101,14 @@ namespace PhotonInit
         #region  Public Method 
         public void ConnectNetwork()
         {
+            isConnecting = true;
             if(!PhotonNetwork.IsConnected)
             {
                 PhotonNetwork.GameVersion = gameVersion;
                 PhotonNetwork.ConnectUsingSettings();
             }
         }
+        public void Disconnect() => PhotonNetwork.Disconnect();
         public void selectName()
         {
             PhotonNetwork.NickName = nickname.text;
@@ -179,13 +182,17 @@ namespace PhotonInit
         #region  MonoBehaviourPunCallbacks
         public override void OnConnectedToMaster()
         {
-            Debug.Log("Connect to server");
-            UI_delete();
-            UI_Select(IdInput_UI);
+            if (isConnecting)
+			{
+                Debug.Log("Connect to server");
+                UI_delete();
+                UI_Select(IdInput_UI);
+            }
         }
 
         public override void OnDisconnected(DisconnectCause cause)
         {
+            isConnecting = false;
             Debug.LogWarningFormat("Photon disconnected {0}", cause);
         }
 
