@@ -1202,6 +1202,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5693004795278077151, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8645399857329687208, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1289,6 +1293,10 @@ PrefabInstance:
     - target: {fileID: 8645399857329687209, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8645399857377353335, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
@@ -1811,6 +1819,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4168991318271931823, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5596406285412985361, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
       propertyPath: m_Name
       value: Prototype Player
