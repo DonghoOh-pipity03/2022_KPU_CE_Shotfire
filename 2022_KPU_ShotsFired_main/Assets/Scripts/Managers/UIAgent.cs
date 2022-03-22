@@ -10,7 +10,7 @@ public class UIAgent : MonoBehaviour
     [SerializeField] private Button AnyKey; // 아무 버튼을 아무 키로 대체한다.
    private void Update() 
    {    
-       if(ESC != null && Input.GetKey(KeyCode.Escape)) ESC.onClick.Invoke();
+       if(ESC != null && Input.GetKeyDown(KeyCode.Escape)) ESC.onClick.Invoke();
        if(AnyKey != null && Input.anyKey) AnyKey.onClick.Invoke(); 
    }
 
