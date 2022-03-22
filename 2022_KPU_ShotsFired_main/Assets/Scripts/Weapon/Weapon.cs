@@ -12,7 +12,6 @@ public class Weapon : MonoBehaviourPunCallbacks
 
     #region 전역 변수
     [SerializeField] bool useUI = false;    // 무기 관련 UI를 사용하는지 여부
-    [SerializeField] float moaMultiple = 4f;    // 실제 총기 명중률의 계수
     // 총기 정보
     GameObject weaponUser; // 무기 사용자 오브젝트
     bool autoReload = true;    // 자동 재장전 정책 허용여부
@@ -20,15 +19,14 @@ public class Weapon : MonoBehaviourPunCallbacks
     FireMode[] havingFireMode;   // 해당 무기가 가지는 발사모드
     float fireRPM;  // 발사 속도(1rpm = 1round per 1minute)(실제스펙)
     float fireInterval => (60 / fireRPM); // 발사 속도에 따른 발사 간격
-    float MOA; // 총기 명중률 (1moa = 1inch per 100yard)(실제스펙)
-    
-    [Header("명중률")]  // 개발 중인 영역
-    [SerializeField] private float maxSpreadStandard; // 최대 스프레드
-    [SerializeField] private float recoilPerShot;   // 발사 당 증가 스프레드
-    [SerializeField] private float recoilRecoverTime;   // 반동 회복 속도
-
     // 총알
     int magCappacity = 5; // 탄창 용량
+    [Header("명중률")]
+    [SerializeField] float maxSpread; // 최대 스프레드: 기본 스프레드는 1
+    [SerializeField] float recoilPerShot;   // 발사당 스프레드 증가량
+    [SerializeField] float recoilRecover;   // 초당 스프레드 회복량
+    [SerializeField] Vector2 recoilHorizon; // 기본 가로 반동
+    [SerializeField] Vector2 recoilVertical;    // 기본 세로 반동
     #endregion
 
     #region 전역 동작 변수
@@ -40,12 +38,11 @@ public class Weapon : MonoBehaviourPunCallbacks
     bool isTriggered = false;   // 트리거가 눌려져 있는지
     bool isHipFire = true;  // 기본 사격 상태인지
     float lastFireTime = -1; // 마지막 발사 시간
-    // 사격
     Vector3 fireDirection; // 의도하는 사격 방향
-    float curSpread;    // 현재 스프레드
-    float curSpreadVelocity; 
-    float xVar; // x스프레드 값
-    float yVar; // y스프레드 값
+    // 명중률
+    float curSpread = 1;    // 현재 스프레드
+    float recoilX;    // 현재 x 반동 값
+    float recoilY;    // 현재 y 반동 값
     // 총알
     int curRemainAmmo;    // 현재 탄창에 남은 총알 수
     int curRemainMag = 5;   // 현재 남은 탄창 수
@@ -66,7 +63,6 @@ public class Weapon : MonoBehaviourPunCallbacks
         SettingData();
         weaponUser = transform.root.gameObject;
         curRemainAmmo = magCappacity;
-        maxSpreadStandard = MOA * moaMultiple;
 
         UpdateUI();
 
@@ -97,11 +93,16 @@ public class Weapon : MonoBehaviourPunCallbacks
         #endregion
     }
 
-    private void Update() {
-        curSpread = Mathf.SmoothDamp(curSpread, 0, ref curSpreadVelocity, recoilRecoverTime);
-        curSpread = Mathf.Clamp(curSpread, 0, maxSpreadStandard);
+    private void FixedUpdate() 
+    {
+        if(curSpread > 1)
+        {
+            curSpread -= recoilRecover * Time.deltaTime;
+            if(curSpread < 1) curSpread = 1;
+        }
     }
 #endregion
+#region 함수
     #region 사격
     // 1티어 사격 메소드
     public void Fire()
@@ -162,17 +163,21 @@ public class Weapon : MonoBehaviourPunCallbacks
 
         fireDirection = transform.eulerAngles;
         
-        // idle 조준 상태일 경우 랜더스프레드 적용
-        if(isHipFire)
+        if(isHipFire)   // idle 조준 상태일 경우, 랜더스프레드 적용
         {
-            xVar = GetRandomNormalDistribution(0, curSpread);
-            yVar = GetRandomNormalDistribution(0, curSpread);
+            recoilX = Random.Range(recoilHorizon.x, recoilHorizon.y) * curSpread;
+            recoilY = Random.Range(recoilVertical.x, recoilVertical.y) * curSpread;
 
-            fireDirection = Quaternion.AngleAxis(xVar, Vector3.right) * fireDirection;
-            fireDirection = Quaternion.AngleAxis(yVar, Vector3.up) * fireDirection;
+            fireDirection = Quaternion.AngleAxis(recoilX, Vector3.right) * fireDirection;
+            fireDirection = Quaternion.AngleAxis(recoilY, Vector3.up) * fireDirection;
+        }
+        else    // zoom 조준 상태일 경우, 화면 반동 적용
+        {
+
         }
 
         curSpread += recoilPerShot;
+        if(curSpread > maxSpread) curSpread = maxSpread;
 
         var bullet = bulletPool.Get();
 
@@ -229,9 +234,12 @@ public class Weapon : MonoBehaviourPunCallbacks
         magCappacity = weaponData.MagCappacity;
         curRemainMag = weaponData.InitMagCount;
         reloadTime = weaponData.ReloadTime;
-        MOA = weaponData.MOA;
+        // 명중률
+        maxSpread = weaponData.MaxSpread;
         recoilPerShot = weaponData.RecoilPerShot;
-        recoilRecoverTime = weaponData.RecoilRecoverTime;
+        recoilRecover = weaponData.RecoilRecover;
+        recoilHorizon = weaponData.RecoilHorizontal;
+        recoilVertical = weaponData.RecoilVertical;
     }
 
     // 발사모드 변경: 다음 발사모드로 순환하며 바꾼다.
@@ -244,19 +252,11 @@ public class Weapon : MonoBehaviourPunCallbacks
     // 사격상태 변경: true를 받으면 기본사격상태(HipFire), 아니면 조준사격상태
     public void SetFireState(bool _hipFire) =>  isHipFire = _hipFire;
 
-    // 정규분포 난수 생성기
-    // 출처: https://github.com/IJEMIN/Unity-TPS-Sample
-    private float GetRandomNormalDistribution(float mean, float standard) // standard: 정규분포
-    {
-        var x1 = Random.Range(0f, 1f);
-        var x2 = Random.Range(0f, 1f);
-        return mean + standard * (Mathf.Sqrt(-2.0f * Mathf.Log(x1)) * Mathf.Sin(2.0f * Mathf.PI * x2));
-    }
-
     public void UpdateUI()
     {
         if(!useUI || !photonView.IsMine) return;    // 네트워크 통제 영역
         GameUIManager.Instance.UpdateAmmo(curRemainAmmo);
         GameUIManager.Instance.Updatemag(curRemainMag);
     }
+#endregion
 }

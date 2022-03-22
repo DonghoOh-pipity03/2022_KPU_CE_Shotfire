@@ -15,9 +15,11 @@ MonoBehaviour:
   weaponName: PrototpyeGun
   havingFireMode: 00000000
   fireRPM: 300
-  moa: 0.1
+  maxSpread: 1
   recoilPerShot: 0.1
-  recoilRecoverTime: 0.1
+  recoilRecover: 0.1
+  recoilHorizontal: {x: 0, y: 0}
+  recoilVertical: {x: 0, y: 0}
   magCappacity: 2000000000
   initMagCount: 1
   reloadTime: 1

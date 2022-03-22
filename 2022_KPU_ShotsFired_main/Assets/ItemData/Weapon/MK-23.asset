@@ -15,9 +15,11 @@ MonoBehaviour:
   weaponName: MK-23
   havingFireMode: 03000000
   fireRPM: 300
-  moa: 0.75
+  maxSpread: 5
   recoilPerShot: 1
-  recoilRecoverTime: 0.75
+  recoilRecover: 1
+  recoilHorizontal: {x: -0.75, y: 1.5}
+  recoilVertical: {x: -0.75, y: 1.5}
   magCappacity: 12
   initMagCount: 5
   reloadTime: 1.5
