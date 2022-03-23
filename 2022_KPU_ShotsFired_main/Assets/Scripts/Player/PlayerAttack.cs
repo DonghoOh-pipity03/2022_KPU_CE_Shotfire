@@ -13,7 +13,8 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     PlayerInput playerInput;
 
     #region 전역 변수
-    [SerializeField] Transform m_cameraHolder; // 카메라 거치대 자리
+    [SerializeField] Transform cameraHolder; // 카메라 거치대 자리
+    [SerializeField] Transform recoil;  // 카메라 거치대의 자식, 반동 담당
     [Header("화면 이동 속도")]
     [SerializeField] float m_screenXSpeed = 1f; // X축 화면 이동속도
     [SerializeField] float m_screenYSpeed = 1f; // Y축 화면 이동속도
@@ -22,8 +23,12 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     [Header("화면 최대 각도")]
     [SerializeField] float m_minScreenAngle = 80f;  // 화면 최대 아래 각도
     [SerializeField] float m_maxScreenAngle = 80f;  //화면 최대 위 각도
+    [Header("무기 반동")]
+     [SerializeField] float snappiness; //  -> 클수록 반동이 과격해짐 
+    [SerializeField] float returnIdleSpeed; // 기본 반동 회복 속도 -> 클수록 빨리 반동에서 회복됨
+    [SerializeField] float returnFireSpeed; // 사격중 반동 회복 속도 -> 클수록 빨리 반동에서 회복됨
     [Header("카메라 거치대 위치")] 
-    GameObject m_virtualMainCamera;    // 메인 카메라 자리
+    GameObject m_virtualMainCamera;    // Camera Main 자리
     CinemachineVirtualCamera m_mainCam;    // 메인 카메라의 가상카메라
     CinemachineVirtualCamera m_zoomCam;    // 줌 카메라의 가상카메라
     Vector3 curCamHolderLocalPosition = Vector3.zero;   // 현재 카메라 홀더의 로컬 위치
@@ -37,12 +42,17 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     // 화면
     float curScreenSpeed;   // 현재 화면 회전 속도
     bool isZoomMode = false;    // 줌 상태 여부
+    // 무기 반동
+    Vector3 currectRotation;    
+    Vector3 targetRotation;
     // 무기
     int curWeapon = 0;   // 현재 들고 있는 무기의 배열 번호
     #endregion
 #region 콜백함수
     private void Start()
     {
+        recoil = cameraHolder.GetChild(0);
+
         // 하이어라키 상의 무기를 배열에 세팅
         foreach(Weapon weapon in weaponArray)
         {
@@ -54,13 +64,13 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
 
         curScreenSpeed = m_screenNormalSpeed;
         curCamHolderLocalPosition.y = m_idleCamHolderHeight;
-        m_cameraHolder.localPosition = curCamHolderLocalPosition;
+        cameraHolder.localPosition = curCamHolderLocalPosition;
         playerInput = GetComponent<PlayerInput>();
 
         m_virtualMainCamera = GameObject.Find("Camera Main");   
         m_mainCam = m_virtualMainCamera.GetComponent<CinemachineVirtualCamera>();   
         m_zoomCam = GameObject.Find("Camera Zoom").GetComponent<CinemachineVirtualCamera>();
-        m_mainCam.Follow = m_zoomCam.Follow = transform.Find("Camera Holder");
+        m_mainCam.Follow = m_zoomCam.Follow = transform.Find("Camera Holder/Recoil");
     }
     private void Update()
     {
@@ -87,6 +97,13 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
         else weaponArray[curWeapon].SetFireState(true);
 
         ChangeWeaponCommand();
+
+        // 무기 반동 관련 처리
+        // 출처: https://www.youtube.com/watch?v=geieixA4Mqc
+        targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, 
+                        ( weaponArray[curWeapon].state == Weapon.State.shooting ? returnFireSpeed : returnIdleSpeed ) * Time.deltaTime);
+        currectRotation = Vector3.Slerp(currectRotation, targetRotation, snappiness * Time.fixedDeltaTime);
+        recoil.transform.localRotation = Quaternion.Euler(currectRotation);
     }
 
     private void FixedUpdate() {
@@ -95,14 +112,15 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     }
 #endregion
 #region 함수
+    #region 화면
     // 화면 회전
     private void RotateScreen()
     {
-        m_cameraHolder.rotation *= Quaternion.AngleAxis(playerInput.look.x * m_screenXSpeed * curScreenSpeed, Vector3.up);
-        m_cameraHolder.rotation *= Quaternion.AngleAxis(playerInput.look.y * m_screenYSpeed * curScreenSpeed, Vector3.left);
+        cameraHolder.rotation *= Quaternion.AngleAxis(playerInput.look.x * m_screenXSpeed * curScreenSpeed, Vector3.up);
+        cameraHolder.rotation *= Quaternion.AngleAxis(playerInput.look.y * m_screenYSpeed * curScreenSpeed, Vector3.left);
 
-        var angles = m_cameraHolder.localEulerAngles;
-        var angle = m_cameraHolder.localEulerAngles.x;
+        var angles = cameraHolder.localEulerAngles;
+        var angle = cameraHolder.localEulerAngles.x;
 
         if (180 < angle && angle < 360 - m_minScreenAngle)
         {
@@ -115,7 +133,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
 
         angles.z = 0;
 
-        m_cameraHolder.localEulerAngles = angles;
+        cameraHolder.localEulerAngles = angles;
     }
 
     // 줌 인/아웃 처리
@@ -128,16 +146,24 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
             curScreenSpeed = m_screenNormalSpeed;
 
             curCamHolderLocalPosition.y = m_idleCamHolderHeight;
-            m_cameraHolder.localPosition = curCamHolderLocalPosition;
+            cameraHolder.localPosition = curCamHolderLocalPosition;
         }
         else    // zoom 상태
         {
            curScreenSpeed = m_screenZoomSpeed;
 
             curCamHolderLocalPosition.y = m_zoomCamHolderHeught;
-            m_cameraHolder.localPosition = curCamHolderLocalPosition;
+            cameraHolder.localPosition = curCamHolderLocalPosition;
         }
     }
+
+    // 무기 반동 처리: 반동 방향을 입력받는다
+    public void FireRecoil(Vector3 _recoilDir)
+    {   
+        targetRotation += _recoilDir;
+    }
+#endregion
+    #region 무기
     private void ChangeWeaponCommand()
     {
         if(Input.GetButtonDown("Weapon1")) ChangeWeapon(0);
@@ -153,5 +179,6 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
 
         weaponArray[curWeapon].UpdateUI();
     }
+    #endregion
 #endregion
 }

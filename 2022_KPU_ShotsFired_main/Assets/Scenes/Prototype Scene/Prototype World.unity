@@ -1871,42 +1871,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5596406286887223228, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: maxSpread
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406286887223228, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: recoilPerShot
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406286887223228, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: recoilRecover
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406286887223228, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: recoilHorizon.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406286887223228, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: recoilHorizon.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406286887223228, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: recoilVertical.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406286887223228, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: recoilVertical.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406286887223228, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: maxSpreadStandard
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596406286887223228, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
-      propertyPath: recoilRecoverTime
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54a8ed0122eb6f24cbe185f70674424d, type: 3}
 --- !u!1001 &7950745781645806722

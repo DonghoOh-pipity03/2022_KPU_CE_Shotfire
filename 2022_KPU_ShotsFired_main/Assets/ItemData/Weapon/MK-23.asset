@@ -18,8 +18,10 @@ MonoBehaviour:
   maxSpread: 5
   recoilPerShot: 1
   recoilRecover: 1
-  recoilHorizontal: {x: -0.75, y: 1.5}
-  recoilVertical: {x: -0.75, y: 1.5}
+  recoilHorizontal: {x: -1, y: 2}
+  recoilVertical: {x: 0, y: 2}
+  recoilZ: {x: 0.35, y: 0.5}
+  recoilMultipleInIdle: 0
   magCappacity: 12
   initMagCount: 5
   reloadTime: 1.5
