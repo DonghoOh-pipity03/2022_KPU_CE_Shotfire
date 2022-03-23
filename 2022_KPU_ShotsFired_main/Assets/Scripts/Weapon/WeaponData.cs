@@ -12,21 +12,24 @@ public class WeaponData : ScriptableObject
 
         // 무기 인게임 UI 아이콘
 
-    [Header("무기 스펙 정보")]
+    [Header("무기 스펙")]
     [SerializeField] FireMode[] havingFireMode;   // 해당 무기가 가지는 발사모드
     public FireMode[] HavingFireMode => havingFireMode;
-        // 사격 반동
-    
     [SerializeField] float fireRPM;   // 사격 RPM
     public float FireRPM => fireRPM;
-    [SerializeField]  float moa; // 명중률 MOA
-    public float MOA => moa;
+    [Header("명중률")]
+    [SerializeField] float maxSpread;   // 최대 스프레드
+    public float MaxSpread => maxSpread;
     [SerializeField]  float recoilPerShot;   // 1회 사격 당 반동
     public float RecoilPerShot => recoilPerShot;
-    [SerializeField]  float recoilRecoverTime;   // 반동 회복 속도
-    public float RecoilRecoverTime => recoilRecoverTime;
+    [SerializeField]  float recoilRecover;   // 반동 회복 속도
+    public float RecoilRecover => recoilRecover;
+    [SerializeField] Vector2 recoilHorizontal;  // 기본 가로 반동
+    public Vector2 RecoilHorizontal => recoilHorizontal;
+    [SerializeField] Vector2 recoilVertical;  // 기본 세로 반동
+    public Vector2 RecoilVertical => recoilVertical;
     
-    [Header("무기 재장전 정보")]
+    [Header("무기 재장전")]
     [SerializeField] int magCappacity; // 탄창 용량
     public int MagCappacity => magCappacity;
     [SerializeField] int initMagCount; // 초기 지급 탄창 수
