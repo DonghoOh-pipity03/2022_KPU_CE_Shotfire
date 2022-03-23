@@ -266,6 +266,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1778783943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778783944}
+  m_Layer: 8
+  m_Name: Recoil
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1778783944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778783943}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5596406287090765616}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &286949831844031426
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,13 +795,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c990a83e677579d448c4597da7838a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_cameraHolder: {fileID: 5596406287090765616}
+  cameraHolder: {fileID: 5596406287090765616}
+  recoil: {fileID: 1778783944}
   m_screenXSpeed: 1
   m_screenYSpeed: 1
   m_screenNormalSpeed: 1
   m_screenZoomSpeed: 0.5
   m_minScreenAngle: 80
   m_maxScreenAngle: 80
+  snappiness: 12.5
+  returnIdleSpeed: 8.5
+  returnFireSpeed: 0.1
   m_idleCamHolderHeight: 1.8
   m_zoomCamHolderHeught: 1.55
   weaponArray:
@@ -1226,11 +1261,16 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3228379026309742222, guid: 945fba1098d16fd4894e90a1bcda75d4, type: 3}
   muzzlePosition: {fileID: 5596406285379891948}
   useUI: 1
-  maxSpread: 0
-  recoilPerShot: 0
-  recoilRecover: 0
-  recoilHorizon: {x: 0, y: 0}
-  recoilVertical: {x: 0, y: 0}
+  useRecoilInIdle: 1
+  maxSpread: 10
+  recoilPerShot: 1
+  recoilRecover: 5
+  recoilHorizon: {x: -1, y: 1}
+  recoilVertical: {x: -1, y: 1}
+  recoilZ: {x: 0, y: 0}
+  recoilMultipleInIdle: 1
+  state: 0
+  curRemainAmmo: 0
 --- !u!1 &5596406287090765619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1298,8 @@ Transform:
   m_LocalPosition: {x: 0.25, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1778783944}
   m_Father: {fileID: 5596406285412985364}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1363,8 +1404,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3768384580321215853, guid: b0c9452bb20017542b06893933178abf, type: 3}
   muzzlePosition: {fileID: 2481927748038057919}
   useUI: 1
+  useRecoilInIdle: 1
   maxSpread: 0
   recoilPerShot: 0
   recoilRecover: 0
   recoilHorizon: {x: 0, y: 0}
   recoilVertical: {x: 0, y: 0}
+  recoilZ: {x: 0, y: 0}
+  recoilMultipleInIdle: 1
+  state: 0
+  curRemainAmmo: 0

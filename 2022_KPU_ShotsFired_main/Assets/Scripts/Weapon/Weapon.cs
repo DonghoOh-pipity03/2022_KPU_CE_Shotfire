@@ -6,6 +6,7 @@ using Photon.Pun;
 
 public class Weapon : MonoBehaviourPunCallbacks
 {
+    PlayerAttack playerAttack;
     [SerializeField] WeaponData weaponData; // 총기 SO
     [SerializeField] Bullet bulletPrefab;  // 총알 프리팹
     [SerializeField] Transform muzzlePosition; // 총구 위치
@@ -13,8 +14,8 @@ public class Weapon : MonoBehaviourPunCallbacks
     #region 전역 변수
     [SerializeField] bool useUI = false;    // 무기 관련 UI를 사용하는지 여부
     // 총기 정보
-    GameObject weaponUser; // 무기 사용자 오브젝트
     bool autoReload = true;    // 자동 재장전 정책 허용여부
+    [SerializeField] bool useRecoilInIdle = true;    // idle 사격에서도 화면 반동을 사용하는지
     // 총기 스펙
     FireMode[] havingFireMode;   // 해당 무기가 가지는 발사모드
     float fireRPM;  // 발사 속도(1rpm = 1round per 1minute)(실제스펙)
@@ -27,13 +28,16 @@ public class Weapon : MonoBehaviourPunCallbacks
     [SerializeField] float recoilRecover;   // 초당 스프레드 회복량
     [SerializeField] Vector2 recoilHorizon; // 기본 가로 반동
     [SerializeField] Vector2 recoilVertical;    // 기본 세로 반동
+    [SerializeField] Vector2 recoilZ;   // 기본 Z 반동
+    [SerializeField] float recoilMultipleInIdle = 1;    // idle 사격에서 화면 반동의 계수
     #endregion
 
     #region 전역 동작 변수
     ObjectPool<Bullet> bulletPool;  // 총알 오브젝트 풀    
     // 총기 상태
-    enum State{ready, empty, reloading, shooting}
-    State state;    // 현재 상태
+    GameObject weaponUser; // 무기 사용자 오브젝트
+    public enum State{ready, empty, reloading, shooting}
+    public State state;    // 현재 상태
     int curFireMode = 0;    // 현재 발사모드
     bool isTriggered = false;   // 트리거가 눌려져 있는지
     bool isHipFire = true;  // 기본 사격 상태인지
@@ -41,10 +45,11 @@ public class Weapon : MonoBehaviourPunCallbacks
     Vector3 fireDirection; // 의도하는 사격 방향
     // 명중률
     float curSpread = 1;    // 현재 스프레드
-    float recoilX;    // 현재 x 반동 값
-    float recoilY;    // 현재 y 반동 값
+    float curRecoilX;    // 현재 x 반동 값
+    float curRecoilY;    // 현재 y 반동 값
+    float curRecoilZ;  // 현재 z 반동 값
     // 총알
-    int curRemainAmmo;    // 현재 탄창에 남은 총알 수
+    public int curRemainAmmo;    // 현재 탄창에 남은 총알 수
     int curRemainMag = 5;   // 현재 남은 탄창 수
     float reloadTime = 3;  // 재장전 시간
     #endregion
@@ -62,8 +67,8 @@ public class Weapon : MonoBehaviourPunCallbacks
     {
         SettingData();
         weaponUser = transform.root.gameObject;
+        if(weaponUser.tag == "Player") playerAttack = weaponUser.GetComponent<PlayerAttack>();
         curRemainAmmo = magCappacity;
-
         UpdateUI();
 
         #region 오브젝트 풀링
@@ -133,7 +138,6 @@ public class Weapon : MonoBehaviourPunCallbacks
             StartCoroutine( Shots(1) );
             break;
         }
-
         isTriggered = true;
     }
     
@@ -162,18 +166,24 @@ public class Weapon : MonoBehaviourPunCallbacks
         UpdateUI();
 
         fireDirection = transform.eulerAngles;
-        
-        if(isHipFire)   // idle 조준 상태일 경우, 랜더스프레드 적용
-        {
-            recoilX = Random.Range(recoilHorizon.x, recoilHorizon.y) * curSpread;
-            recoilY = Random.Range(recoilVertical.x, recoilVertical.y) * curSpread;
+        curRecoilX = Random.Range(recoilHorizon.x, recoilHorizon.y);
+        curRecoilY = Random.Range(recoilVertical.x, recoilVertical.y);
+        curRecoilZ = Random.Range(recoilZ.x, recoilZ.y);
 
-            fireDirection = Quaternion.AngleAxis(recoilX, Vector3.right) * fireDirection;
-            fireDirection = Quaternion.AngleAxis(recoilY, Vector3.up) * fireDirection;
+        if(isHipFire)   // idle 조준 상태일 경우, 화면 반동과 랜더스프레드 적용
+        {   
+            // 화면 반동
+            if(playerAttack != null && useRecoilInIdle){
+                playerAttack.FireRecoil( new Vector3(-1 * curRecoilY, curRecoilX, curRecoilZ) * recoilMultipleInIdle);
+            }
+
+            // 랜덤 스프레드
+            fireDirection = Quaternion.AngleAxis(curRecoilY * curSpread, Vector3.right) * fireDirection;
+            fireDirection = Quaternion.AngleAxis(curRecoilX * curSpread, Vector3.up) * fireDirection;
         }
-        else    // zoom 조준 상태일 경우, 화면 반동 적용
+        else    // zoom 조준 상태일 경우_플레이어만 가능한 사격 방법, 화면 반동 적용
         {
-
+            playerAttack.FireRecoil( new Vector3(-1 * curRecoilY, curRecoilX, curRecoilZ) );
         }
 
         curSpread += recoilPerShot;
@@ -240,6 +250,9 @@ public class Weapon : MonoBehaviourPunCallbacks
         recoilRecover = weaponData.RecoilRecover;
         recoilHorizon = weaponData.RecoilHorizontal;
         recoilVertical = weaponData.RecoilVertical;
+        recoilZ = weaponData.RecoilZ;
+        // 반동
+        recoilMultipleInIdle = weaponData.RecoilMultipleInIdle;
     }
 
     // 발사모드 변경: 다음 발사모드로 순환하며 바꾼다.

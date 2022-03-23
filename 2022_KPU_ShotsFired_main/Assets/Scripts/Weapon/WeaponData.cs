@@ -28,6 +28,11 @@ public class WeaponData : ScriptableObject
     public Vector2 RecoilHorizontal => recoilHorizontal;
     [SerializeField] Vector2 recoilVertical;  // 기본 세로 반동
     public Vector2 RecoilVertical => recoilVertical;
+    [SerializeField] Vector2 recoilZ;  // 기본 Z 반동
+    public Vector2 RecoilZ => recoilZ;
+    [Header("반동")]
+    [SerializeField] float recoilMultipleInIdle;  // idle 사격에서 화면 반동 계수
+    public float RecoilMultipleInIdle => recoilMultipleInIdle;    
     
     [Header("무기 재장전")]
     [SerializeField] int magCappacity; // 탄창 용량
