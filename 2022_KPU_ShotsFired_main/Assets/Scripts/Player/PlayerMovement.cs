@@ -66,19 +66,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     {
         if(!photonView.IsMine) return ; // 네트워크 통제 구역
 
+        if (DetectRotationGap() || charController.velocity.magnitude > m_minMovementLowerBodyArrange) ArrangeLowerBody();
+        if (playerInput.fire == true || playerInput.zoom == true) ArrangeLowerBody();
+
         if (playerInput.jump) Jump();
         Dodge();
         Crouch();
         Move();
     }
 
-    private void Update() 
-    {
-        if(!photonView.IsMine) return ; // 네트워크 통제 구역
-
-        if (DetectRotationGap() || charController.velocity.magnitude > m_minMovementLowerBodyArrange) ArrangeLowerBody();
-        if (playerInput.fire == true || playerInput.zoom == true) ArrangeLowerBody();
-    }
 #endregion
 #region 함수
     private void Move()
