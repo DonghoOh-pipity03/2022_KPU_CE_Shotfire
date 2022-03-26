@@ -51,6 +51,8 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
 #region 콜백함수
     private void Start()
     {
+        if(!photonView.IsMine) return ; // 이하 네트워크 통제 구역
+
         cameraHolder = transform.Find("Camera Holder");
         recoil = cameraHolder.GetChild(0);
         idleVirtualCam = GameObject.Find("Idle Virtual Camera");
@@ -64,8 +66,6 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
             weapon.gameObject.SetActive(false);
         }
         weaponArray[curWeapon].gameObject.SetActive(true);
-
-        if(!photonView.IsMine) return ; // 네트워크 통제 구역
 
         curScreenSpeed = m_screenNormalSpeed;
         curCamHolderLocalPosition.y = m_idleCamHolderHeight;

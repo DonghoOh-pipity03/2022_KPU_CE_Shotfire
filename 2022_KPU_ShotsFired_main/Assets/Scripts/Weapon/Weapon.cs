@@ -98,6 +98,13 @@ public class Weapon : MonoBehaviourPunCallbacks
         #endregion
     }
 
+    private void Update() 
+    {
+            if(!useUI || !photonView.IsMine) return;    // 네트워크 통제 영역
+            
+            if(isHipFire) GameUIManager.Instance.UpdateAim( Mathf.Clamp( (curSpread -1.5f)/1.5f , 0, 1));
+    }
+
     private void FixedUpdate() 
     {
         if(curSpread > 1)
