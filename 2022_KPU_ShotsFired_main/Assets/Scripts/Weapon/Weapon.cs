@@ -178,8 +178,9 @@ public class Weapon : MonoBehaviourPunCallbacks
             }
 
             // 랜덤 스프레드
-            fireDirection = Quaternion.AngleAxis(curRecoilY * curSpread, Vector3.right) * fireDirection;
-            fireDirection = Quaternion.AngleAxis(curRecoilX * curSpread, Vector3.up) * fireDirection;
+            //fireDirection = Quaternion.AngleAxis(curRecoilY * curSpread, Vector3.right) * fireDirection;
+            //fireDirection = Quaternion.AngleAxis(curRecoilX * curSpread, Vector3.up) * fireDirection;
+            fireDirection += new Vector3(curRecoilY, curRecoilX, 0) * curSpread;
         }
         else    // zoom 조준 상태일 경우_플레이어만 가능한 사격 방법, 화면 반동 적용
         {
