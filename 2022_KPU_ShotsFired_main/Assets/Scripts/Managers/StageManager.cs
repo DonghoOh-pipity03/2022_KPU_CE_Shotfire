@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class StageManager : MonoBehaviour
 {
+    
     #region 전역 변수
     [Tooltip("사용을 원하지 않으면 공백으로 두기")]
     [SerializeField] private string nextSceneName;  // 다음 스테이지 씬 이름
     [SerializeField] private string prevSceneName;  // 이전 스테이지 씬 이름
     [Header("마지막 스테이지 전용 세팅")]
+
     [SerializeField] bool useForLastStage;  // 게임이 최종적으로 끝나는 스테이지에서 사용할 것인지
     #endregion
     #region 전역 동작 변수
@@ -50,7 +54,7 @@ public class StageManager : MonoBehaviour
                 GameUIManager.Instance.SetMouseLock(false);
 
                 // 캐릭터 삭제 코드 작성!!! 네트워크에서 각자의 캐릭터를 삭제
-
+                PhotonInit.PhotonInit.Instance.end_game();
                 if (prevSceneName != "") StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName));
                 
                 startedNextScene = true;

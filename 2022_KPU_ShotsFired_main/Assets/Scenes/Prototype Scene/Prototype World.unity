@@ -1709,6 +1709,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prototype Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4991001191893788907, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
 --- !u!1001 &4401816777329874317

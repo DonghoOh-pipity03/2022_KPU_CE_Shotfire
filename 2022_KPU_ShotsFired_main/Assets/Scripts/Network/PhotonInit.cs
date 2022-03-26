@@ -12,7 +12,17 @@ namespace PhotonInit
 {
     class PhotonInit : MonoBehaviourPunCallbacks
     {
-        public PhotonView PV;
+
+        // 싱글톤 
+        private static PhotonInit instance;
+        public static PhotonInit Instance 
+        {
+            get
+            {
+                if (instance == null) instance = FindObjectOfType<PhotonInit>();
+                return instance;
+            }
+        }   
 
         #region  MonoBehaviourCallBack
         void Awake() {
@@ -33,9 +43,12 @@ namespace PhotonInit
         private string gameVersion = "1";
         private byte maxPlayersPerRoom = 4;
         private List<Vector3>Lobby_position = new List<Vector3>();
-        bool isConnecting;
 
-        
+        private List<GameObject> playerTemps = new List<GameObject>();
+        private List<GameObject> playerProtypes = new List<GameObject>();
+        private bool isConnecting;
+
+
         #endregion
 
         #region  Private Method
@@ -139,8 +152,6 @@ namespace PhotonInit
         {
             if(PhotonNetwork.IsConnected)
                 PhotonNetwork.LeaveRoom();
-                // 자동으로 서버는 연결된다. 
-                // 방 로그아웃만 구현 
         }
         public void MyListRenewal()
         {
@@ -171,9 +182,15 @@ namespace PhotonInit
         {
             if(PhotonNetwork.IsMasterClient)
             {
-                // PhotonNetwork.LoadLevel("Temp Stage 1-1");
-                // SceneManager.LoadScene("Temp Stage 1-1", LoadSceneMode.Additive);
                 base.photonView.RPC("game_start",RpcTarget.All);
+            }
+        }
+        public void end_game()
+        {
+            Debug.Log("end_game");
+            if(PhotonNetwork.IsMasterClient)
+            {
+                base.photonView.RPC("game_end",RpcTarget.All);
             }
         }
 
@@ -222,7 +239,7 @@ namespace PhotonInit
         public override void OnCreatedRoom()
         {
             // 자기 자신의 캐릭터 생성 
-            PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[0],Quaternion.identity);
+            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[0],Quaternion.identity));
             Debug.LogFormat("{0} create room {1}", PhotonNetwork.NickName, roomname.text);
         }
 
@@ -243,7 +260,7 @@ namespace PhotonInit
             Debug.LogFormat("Player entered {0}", other.NickName);
             // PV.RPC("log",RpcTarget.All);
             // 들어온 캐릭터 별로 생성 
-            PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[1],Quaternion.identity);
+            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[1],Quaternion.identity));
             if(PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("{0} is master", PhotonNetwork.NickName);
@@ -261,7 +278,7 @@ namespace PhotonInit
         }
         #endregion
 
-        #region 
+        #region PunRPC
         [PunRPC]
         void game_start()
         {
@@ -270,9 +287,19 @@ namespace PhotonInit
             UI_Select(Player_UI);
             // PhotonNetwork.Destroy();
             SceneManager.LoadScene("Temp Stage 1-1", LoadSceneMode.Additive);
-            // 범위내에서 랜덤한 위치 리스폰 필요 
+            foreach(GameObject playerTemp in playerTemps)
+            {
+                PhotonNetwork.Destroy(playerTemp);
+            }
             Vector3 pos = new Vector3(Random.Range(99.3f,100.3f),Random.Range(-0.3f,0.3f),1.0f);
-            PhotonNetwork.Instantiate("Prototype Player", pos,Quaternion.identity);
+            playerProtypes.Add(PhotonNetwork.Instantiate("Prototype Player", pos,Quaternion.identity));
+            // 추후 수정 필요 
+        }
+        [PunRPC]
+        void game_end()
+        {
+            // 추후 수정 필요 
+            PhotonNetwork.Destroy(playerProtypes[0]);
         }
         #endregion
     }
