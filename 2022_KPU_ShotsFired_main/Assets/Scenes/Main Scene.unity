@@ -1353,6 +1353,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124359041}
   m_CullTransparentMesh: 1
+--- !u!95 &1130915232 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 893223211, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
+  m_PrefabInstance: {fileID: 5693004795693853040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1142201670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,6 +1769,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320362021}
   m_CullTransparentMesh: 1
+--- !u!114 &1524295011 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2899507215744266631, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
+  m_PrefabInstance: {fileID: 5693004795693853040}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1667408022
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,9 +2196,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4105942485902369574}
     - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
+      propertyPath: aimAnimator
+      value: 
+      objectReference: {fileID: 1130915232}
+    - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 4105942486255014588}
+    - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
+      propertyPath: playerDamaged
+      value: 
+      objectReference: {fileID: 1524295011}
     - target: {fileID: 4401816778765267644, guid: 612b4824ecec58042a32de80adf37936, type: 3}
       propertyPath: playerCurHealthBar
       value: 

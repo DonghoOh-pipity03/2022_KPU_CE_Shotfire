@@ -23,6 +23,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] float playerDamageRestoreTime;   // 플레이어_피격 이미지가 옅어지는 시간
     IEnumerator playerDamagedFadeOut;    // 플레이어_피격 이미지를 옅게 할 함수명
     [Header("플레이어 무기 계열")]
+    [SerializeField] private Animator aimAnimator;  // 에임 애니메이터
     [SerializeField] private TextMeshProUGUI remainAmmo;   // 플레이어_남은 탄환
     [SerializeField] private TextMeshProUGUI remainMag;    // 플레이어_남은 탄창
 #endregion
@@ -84,6 +85,10 @@ public class GameUIManager : MonoBehaviour
 
     #endregion
     #region 플레이어 무기
+    public void UpdateAim(float _spread)
+    {
+        aimAnimator.SetFloat("Spread",_spread);
+    }
     public void UpdateAmmo(int _remainAmmo)
     {
         remainAmmo.text = _remainAmmo.ToString();
