@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: KAR-416
   havingFireMode: 000000000100000003000000
   fireRPM: 950
-  maxSpread: 10
+  maxSpread: 2.5
   recoilPerShot: 0.75
   recoilRecover: 5
   recoilHorizontal: {x: -0.8, y: 1}
