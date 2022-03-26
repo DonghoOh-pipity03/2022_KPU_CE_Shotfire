@@ -42,6 +42,7 @@ MonoBehaviour:
   - exitRoom
   - log
   - game_start
+  - game_end
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
