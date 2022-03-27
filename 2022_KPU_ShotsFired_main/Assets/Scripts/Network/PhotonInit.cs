@@ -106,8 +106,7 @@ namespace PhotonInit
 
         List<RoomInfo> myList = new List<RoomInfo>();
         int currentPage = 1, maxPage, multiple;
-        
-        
+
         #endregion
 
 
@@ -239,8 +238,6 @@ namespace PhotonInit
         public override void OnCreatedRoom()
         {
             // 자기 자신의 캐릭터 생성
-            Room room = PhotonNetwork.CurrentRoom;
-            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[room.PlayerCount-1],Quaternion.identity));
             Debug.LogFormat("{0} create room {1}", PhotonNetwork.NickName, roomname.text);
         }
 
@@ -249,7 +246,8 @@ namespace PhotonInit
             UI_delete();
             UI_delete_map();
             UI_Select(Lobby_UI, Lobby_Map);
-            Lobby_roomName.text = "Room info :"+roomname.text;
+            Lobby_roomName.text = "Room info : "+ PhotonNetwork.CurrentRoom.Name;
+            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[PhotonNetwork.CurrentRoom.PlayerCount-1],Quaternion.identity));
         }
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
@@ -259,10 +257,6 @@ namespace PhotonInit
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("Player entered {0}", other.NickName);
-            // PV.RPC("log",RpcTarget.All);
-            // 들어온 캐릭터 별로 생성 
-            Room room = PhotonNetwork.CurrentRoom;
-            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[room.PlayerCount-1],Quaternion.identity));
             if(PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("{0} is master", PhotonNetwork.NickName);
