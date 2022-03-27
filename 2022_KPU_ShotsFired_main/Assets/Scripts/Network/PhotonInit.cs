@@ -238,8 +238,9 @@ namespace PhotonInit
 
         public override void OnCreatedRoom()
         {
-            // 자기 자신의 캐릭터 생성 
-            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[0],Quaternion.identity));
+            // 자기 자신의 캐릭터 생성
+            Room room = PhotonNetwork.CurrentRoom;
+            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[room.PlayerCount-1],Quaternion.identity));
             Debug.LogFormat("{0} create room {1}", PhotonNetwork.NickName, roomname.text);
         }
 
@@ -260,7 +261,8 @@ namespace PhotonInit
             Debug.LogFormat("Player entered {0}", other.NickName);
             // PV.RPC("log",RpcTarget.All);
             // 들어온 캐릭터 별로 생성 
-            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[1],Quaternion.identity));
+            Room room = PhotonNetwork.CurrentRoom;
+            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[room.PlayerCount-1],Quaternion.identity));
             if(PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("{0} is master", PhotonNetwork.NickName);
