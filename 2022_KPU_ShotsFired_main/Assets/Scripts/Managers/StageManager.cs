@@ -18,8 +18,13 @@ public class StageManager : MonoBehaviour
     #region 전역 동작 변수
     private int curPlayerCountInRoom;   // 현재 세이프룸 인원
     private bool startedNextScene = false;  // 다음 씬의 로드가 시작되었는지 여부
+    List<GameObject> enemies;   // 해당 스테이지에 생존 중인 적들의 게임오브젝트 리스트
     #endregion
 
+    private void Start() 
+    {
+        enemies = new List<GameObject>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player") curPlayerCountInRoom++;
@@ -43,8 +48,9 @@ public class StageManager : MonoBehaviour
         {
             if (!useForLastStage)    // 일반 스테이지일 때
             {
-                if (nextSceneName != "") StartCoroutine(GameSceneManager.Instance.AddSceneWithAsync(nextSceneName));
-                if (prevSceneName != "") StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName));
+                if (nextSceneName != "") StartCoroutine(GameSceneManager.Instance.AddSceneWithAsync(nextSceneName));    // 다음 씬로딩
+                if (prevSceneName != "") GameObject.Find(prevSceneName).transform.Find("SafeRoom Trigger").GetComponent<StageManager>().DeleteAllAI(); // 이전 씬의 AI 삭제
+                if (prevSceneName != "") StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName)); // 이전 씬삭제
                 startedNextScene = true;
             }
             else    // 마지막 스테이지일 때
@@ -53,12 +59,25 @@ public class StageManager : MonoBehaviour
                 GameUIManager.Instance.SetActivePlayer(false);
                 GameUIManager.Instance.SetMouseLock(false);
 
-                // 캐릭터 삭제 코드 작성!!! 네트워크에서 각자의 캐릭터를 삭제
                 PhotonInit.PhotonInit.Instance.end_game();
+
                 if (prevSceneName != "") StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName));
                 
                 startedNextScene = true;
             }
+        }
+    }
+
+    public void AddAI(GameObject _AI)
+    {
+        enemies.Add(_AI);
+    }
+
+    public void DeleteAllAI()
+    {
+        foreach( var i in enemies)
+        {
+            if( i != null) Destroy(i, 0);
         }
     }
 }

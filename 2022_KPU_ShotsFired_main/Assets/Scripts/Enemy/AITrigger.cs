@@ -9,6 +9,7 @@ public class AITrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
+
         if(other.transform.root.tag == "Player")
         {
             respawnPoint.SetActive(respawnActive);
