@@ -177,6 +177,40 @@ namespace PhotonInit
             else PhotonNetwork.JoinRoom(myList[multiple + num].Name);
             MyListRenewal();
         }
+
+        public void update_room()
+        {
+            int cnt = 0;
+            foreach(GameObject playerTemp in playerTemps)
+            {
+                if(playerTemp == null)
+                {
+                    Debug.LogFormat("Continue");
+                    continue;
+                }
+                Debug.LogFormat("Destory");
+                PhotonNetwork.Destroy(playerTemp);
+            }
+            if(PhotonNetwork.MasterClient.GetNext() == PhotonNetwork.LocalPlayer)
+            {
+                Debug.LogFormat("Cnt = 1");
+                cnt = 1;
+            }
+            if(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()) == PhotonNetwork.LocalPlayer)
+            {
+                Debug.LogFormat("Cnt = 2");
+                cnt = 2;
+            }
+            if(PhotonNetwork.IsMasterClient)
+            {
+                Debug.LogFormat("Cnt = 0");
+                cnt = 0;
+            }
+            Debug.LogFormat("update_lobby");
+            Debug.LogFormat("Cnt == {0}", cnt);
+            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[cnt],Quaternion.identity));
+        }
+
         public void start_game()
         {
             if(PhotonNetwork.IsMasterClient)
@@ -192,6 +226,7 @@ namespace PhotonInit
                 base.photonView.RPC("game_end",RpcTarget.All);
             }
         }
+
 
         #endregion
 
@@ -265,16 +300,19 @@ namespace PhotonInit
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("Player Left {0}", other.NickName);
-            
-            if(PhotonNetwork.IsMasterClient)
+            if(photonView.IsMine)
             {
-                // PV.RPC("exitRoom", RpcTarget.All);
-                // 오류 해결 
+                base.photonView.RPC("update_lobby",RpcTarget.All);
             }
         }
         #endregion
 
         #region PunRPC
+        [PunRPC]
+        void update_lobby()
+        {
+            update_room();
+        }
         [PunRPC]
         void game_start()
         {
