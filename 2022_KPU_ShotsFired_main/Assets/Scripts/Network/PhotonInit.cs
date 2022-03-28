@@ -185,7 +185,7 @@ namespace PhotonInit
             {
                 if(playerTemp == null)
                 {
-                    Debug.LogFormat("Continue");
+                    //Debug.LogFormat("Continue");
                     continue;
                 }
                 Debug.LogFormat("Destory");
@@ -193,21 +193,21 @@ namespace PhotonInit
             }
             if(PhotonNetwork.MasterClient.GetNext() == PhotonNetwork.LocalPlayer)
             {
-                Debug.LogFormat("Cnt = 1");
+                //Debug.LogFormat("Cnt = 1");
                 cnt = 1;
             }
             if(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()) == PhotonNetwork.LocalPlayer)
             {
-                Debug.LogFormat("Cnt = 2");
+                //Debug.LogFormat("Cnt = 2");
                 cnt = 2;
             }
             if(PhotonNetwork.IsMasterClient)
             {
-                Debug.LogFormat("Cnt = 0");
+                //Debug.LogFormat("Cnt = 0");
                 cnt = 0;
             }
             Debug.LogFormat("update_lobby");
-            Debug.LogFormat("Cnt == {0}", cnt);
+            Debug.LogFormat("Cnt : {0}", cnt);
             playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[cnt],Quaternion.identity));
         }
 
@@ -300,19 +300,11 @@ namespace PhotonInit
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("Player Left {0}", other.NickName);
-            if(photonView.IsMine)
-            {
-                base.photonView.RPC("update_lobby",RpcTarget.All);
-            }
+            update_room();
         }
         #endregion
 
         #region PunRPC
-        [PunRPC]
-        void update_lobby()
-        {
-            update_room();
-        }
         [PunRPC]
         void game_start()
         {
