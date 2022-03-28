@@ -325,7 +325,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh98404
+  m_Name: pb_Mesh37756
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -489,7 +489,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh98482
+  m_Name: pb_Mesh37834
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -751,7 +751,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh98456
+  m_Name: pb_Mesh37808
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1121,7 +1121,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh98454
+  m_Name: pb_Mesh37806
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3440,7 +3440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2930723714414388611}
   m_Layer: 7
-  m_Name: Trigger
+  m_Name: Temp Stage 1-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
