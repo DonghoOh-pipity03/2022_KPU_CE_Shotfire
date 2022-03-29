@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
    #region 전역 동작 변수
    public int curLivingPlayer;  // 현재 게임의 살아있는 플레이어 수
-   private int[] curPlayerCount = new int[4];   // 플레이어 ID 풀: 0-없음, 1-있음, 0번 ID-ID발급 거부
+   public GameObject[] players = new GameObject[4];   // 플레이어 ID 풀, 플레이어의 gameobject로 관리
+   bool ispPlaying;  // 게임이 진행 중인지 여부
    #endregion
 
     //싱글톤
@@ -20,14 +21,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update() 
+    {
+        ObserveDefeatGame();
+    }
+
     // 플레이어 ID부여
-    public int GetID()
+    public int GetID(GameObject _player)
     {   
         for(int i=0; i < 4 ; i++)
         {
-            if(curPlayerCount[i] == 0)
+            if(players[i] == null)
             {
-                curPlayerCount[i] = 1;
+                players[i] = _player;
                 curLivingPlayer++;
                 return i+1 ;
             }
@@ -40,7 +46,33 @@ public class GameManager : MonoBehaviour
     public void ReturnID(int _ID)
     {
         if(_ID == 0 ) return;
-        curPlayerCount[_ID-1] = 0;
+        players[_ID-1] = null;
         curLivingPlayer--;
+    }
+
+    // 게임 시작
+    public void StartGame()
+    {
+        ispPlaying = true;
+    }
+
+    // 게임 종료
+    public void EndGame(bool _isVictory)
+    {
+        // UI 처리
+        GameUIManager.Instance.SetActiveReport(true);
+        GameUIManager.Instance.SetActivePlayer(false);
+        GameUIManager.Instance.SetMouseLock(false);
+
+        // 오브젝트 처리
+        PhotonInit.PhotonInit.Instance.end_game();
+
+        ispPlaying = false;
+    }
+
+    // 게임 패배 감지
+    private void ObserveDefeatGame()
+    {
+        if(curLivingPlayer <= 0 && ispPlaying) EndGame(false);
     }
 }

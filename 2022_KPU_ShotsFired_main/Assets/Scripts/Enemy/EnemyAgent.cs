@@ -293,5 +293,13 @@ class EnemyAgent : LivingEntity
         attackerTargetWeight = enemyData.AttackerTargetWeight;
         moveSpeed = enemyData.MoveSpeed;
     }
+
+    // 경계(이동 또는 전투)상태가 되며, 게임 매니저로 부터 플레이어의 정보를 가져온다.
+    public void SetAlert()
+    {
+        players = GameManager.Instance.players;
+
+        curState = AIState.move;
+    }
     #endregion
 }

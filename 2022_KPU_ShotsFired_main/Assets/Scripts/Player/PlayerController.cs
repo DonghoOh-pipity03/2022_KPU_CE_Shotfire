@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable() 
     {
-        ID = GameManager.Instance.GetID();
+        ID = GameManager.Instance.GetID(this.gameObject);
     }
 
     private void OnDisable() 

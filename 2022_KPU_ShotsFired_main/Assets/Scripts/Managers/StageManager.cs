@@ -55,11 +55,7 @@ public class StageManager : MonoBehaviour
             }
             else    // 마지막 스테이지일 때
             {
-                GameUIManager.Instance.SetActiveReport(true);
-                GameUIManager.Instance.SetActivePlayer(false);
-                GameUIManager.Instance.SetMouseLock(false);
-
-                PhotonInit.PhotonInit.Instance.end_game();
+               GameManager.Instance.EndGame(true);
 
                 if (prevSceneName != "") StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName));
                 

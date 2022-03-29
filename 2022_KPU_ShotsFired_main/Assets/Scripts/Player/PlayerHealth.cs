@@ -60,7 +60,8 @@ class PlayerHealth : LivingEntity
             UpdateUI();
             curHealth = downMaxHealth;
             
-            playerController.ableControlMove = false;
+            playerController.ableControlMove = false;   // 이동 불능
+            GameManager.Instance.curLivingPlayer--; // 생존 플레이어 수 감소
         }
         else if( state == EntityState.down) 
         {
