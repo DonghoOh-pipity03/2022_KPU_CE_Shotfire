@@ -15,6 +15,7 @@ MonoBehaviour:
   weaponName: Prototype AI Gun
   havingFireMode: 00000000
   fireRPM: 500
+  ballPerOneShot: 1
   maxSpread: 10
   recoilPerShot: 10
   recoilRecover: 1
@@ -25,3 +26,5 @@ MonoBehaviour:
   magCappacity: 30
   initMagCount: 10
   reloadTime: 4
+  useChamber: 1
+  useMag: 1
