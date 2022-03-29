@@ -43,6 +43,7 @@ MonoBehaviour:
   - log
   - game_start
   - game_end
+  - update_lobby
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

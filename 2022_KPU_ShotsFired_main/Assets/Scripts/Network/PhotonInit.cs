@@ -106,8 +106,7 @@ namespace PhotonInit
 
         List<RoomInfo> myList = new List<RoomInfo>();
         int currentPage = 1, maxPage, multiple;
-        
-        
+
         #endregion
 
 
@@ -178,6 +177,40 @@ namespace PhotonInit
             else PhotonNetwork.JoinRoom(myList[multiple + num].Name);
             MyListRenewal();
         }
+
+        public void update_room()
+        {
+            int cnt = 0;
+            foreach(GameObject playerTemp in playerTemps)
+            {
+                if(playerTemp == null)
+                {
+                    //Debug.LogFormat("Continue");
+                    continue;
+                }
+                Debug.LogFormat("Destory");
+                PhotonNetwork.Destroy(playerTemp);
+            }
+            if(PhotonNetwork.MasterClient.GetNext() == PhotonNetwork.LocalPlayer)
+            {
+                //Debug.LogFormat("Cnt = 1");
+                cnt = 1;
+            }
+            if(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()) == PhotonNetwork.LocalPlayer)
+            {
+                //Debug.LogFormat("Cnt = 2");
+                cnt = 2;
+            }
+            if(PhotonNetwork.IsMasterClient)
+            {
+                //Debug.LogFormat("Cnt = 0");
+                cnt = 0;
+            }
+            Debug.LogFormat("update_lobby");
+            Debug.LogFormat("Cnt : {0}", cnt);
+            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[cnt],Quaternion.identity));
+        }
+
         public void start_game()
         {
             if(PhotonNetwork.IsMasterClient)
@@ -193,6 +226,7 @@ namespace PhotonInit
                 base.photonView.RPC("game_end",RpcTarget.All);
             }
         }
+
 
         #endregion
 
@@ -238,8 +272,7 @@ namespace PhotonInit
 
         public override void OnCreatedRoom()
         {
-            // 자기 자신의 캐릭터 생성 
-            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[0],Quaternion.identity));
+            // 자기 자신의 캐릭터 생성
             Debug.LogFormat("{0} create room {1}", PhotonNetwork.NickName, roomname.text);
         }
 
@@ -248,7 +281,8 @@ namespace PhotonInit
             UI_delete();
             UI_delete_map();
             UI_Select(Lobby_UI, Lobby_Map);
-            Lobby_roomName.text = "Room info :"+roomname.text;
+            Lobby_roomName.text = "Room info : "+ PhotonNetwork.CurrentRoom.Name;
+            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[PhotonNetwork.CurrentRoom.PlayerCount-1],Quaternion.identity));
         }
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
@@ -258,9 +292,6 @@ namespace PhotonInit
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("Player entered {0}", other.NickName);
-            // PV.RPC("log",RpcTarget.All);
-            // 들어온 캐릭터 별로 생성 
-            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[1],Quaternion.identity));
             if(PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("{0} is master", PhotonNetwork.NickName);
@@ -269,12 +300,7 @@ namespace PhotonInit
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("Player Left {0}", other.NickName);
-            
-            if(PhotonNetwork.IsMasterClient)
-            {
-                // PV.RPC("exitRoom", RpcTarget.All);
-                // 오류 해결 
-            }
+            update_room();
         }
         #endregion
 
