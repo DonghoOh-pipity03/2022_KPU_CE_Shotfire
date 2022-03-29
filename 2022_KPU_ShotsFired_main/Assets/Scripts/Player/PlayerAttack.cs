@@ -78,7 +78,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
         
         isZoomMode = playerInput.zoom;
 
-        if(playerInput.fire) weaponArray[curWeapon].Fire();
+        if(playerInput.fire) weaponArray[curWeapon].Fire(0);
         else weaponArray[curWeapon].Detached();
         
         if(playerInput.reload) 

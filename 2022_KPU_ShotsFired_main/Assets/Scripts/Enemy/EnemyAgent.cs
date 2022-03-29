@@ -16,9 +16,11 @@ class EnemyAgent : LivingEntity
     #region 전역 변수
     [SerializeField] private EnemyData enemyData;   // 적 AI SO
     [SerializeField] private Transform eyeTransform;    // 눈의 위치 정보
+    [SerializeField] Weapon waepon; // AI가 사용하는 무기
     [SerializeField] private LayerMask attackTarget;   // 공격 대상의 레이어
     [SerializeField] private TextMeshProUGUI sign;  // 디버그용 머리 위 텍스트
     [SerializeField] private bool useSign;  // 디버그용 텍스트 사용 여부
+    [SerializeField] bool useAttack = true;   // 개발용, 공격을 하는지 여부
     private string enemyName;   // AI의 이름
     // 시야 파라미터
     private float eyeDistance; // 시야 거리
@@ -28,8 +30,12 @@ class EnemyAgent : LivingEntity
     private float melleeDistance; // 근접공격을 시작하는 거리
     private float distanceTargetWeight;    // 공격 타겟 선정을 위한 거리별 가중치
     private float attackerTargetWeight;    // 공격 타겟 선정을 위한 마지막 공격자 가중치
+    [SerializeField] float attackDelay; // 공격 주기
+    [SerializeField] int minAttackCount;   // 최소 공격 횟수
+    [SerializeField] int maxAttackCount;   // 최대 공격 횟수
     // 이동 파라미터
     private float moveSpeed;   // 이동 속도
+    [SerializeField]private float turnSpeed;    // 회전 속도
     #endregion
     #region 전역 동작변수
     private AIState curState;  // AI의 경계상태
@@ -42,6 +48,8 @@ class EnemyAgent : LivingEntity
     private Ray ray;    // 플레이어 탐색용 레이
     RaycastHit hit; // 레이의 충돌 정보
     int rayMask;    // 레이마스크
+    float turnSmoothVelocity;   // 회전에 사용하는 변수
+    float lastAttackTime;   // 마지막 공격 시간
     #endregion
     #region 콜백함수
     private void Awake()
@@ -76,6 +84,18 @@ class EnemyAgent : LivingEntity
         if (curState != AIState.wait)
         {
             AIStateBT();
+
+            // engage라면 타겟을 향해 회전
+            if(curState == AIState.engage)
+            {
+                var lookRotation = Quaternion.LookRotation(players[target].transform.position - transform.position, Vector3.up);
+                var targetAngleY = lookRotation.eulerAngles.y;
+
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngleY, 
+                                        ref turnSmoothVelocity, turnSpeed);
+            }
+
+
             AIAttackBT();
         }
     }
@@ -234,7 +254,7 @@ class EnemyAgent : LivingEntity
         // 회전
 
         // 공격 방법 선정 & 공격
-        if (playerDistance[target] > melleeDistance) MelleeAttack();    //근접공격
+        if (playerDistance[target] < melleeDistance) MelleeAttack();    //근접공격
         else ShotAttack();  // 원거리 공격
     }
 
@@ -245,7 +265,17 @@ class EnemyAgent : LivingEntity
 
     private void ShotAttack()
     {
+        // 시야내에 타겟이 있으며, 총기방향과 타겟방향의 차이가 허용 각도 내에 있으면, 조준을 타겟의 에임 포인트로 이동
+        // 그렇지 않으면, 기본 위치로
 
+        // 발사주기가 되었으면, 발사횟수를 랜덤으로 결정 후 발사
+        if( Time.time > lastAttackTime + attackDelay)
+        {
+            int fireCount = UnityEngine.Random.Range(minAttackCount, maxAttackCount + 1);
+            if(useAttack) waepon.Fire(fireCount);
+            lastAttackTime = Time.time;
+        }
+        // 그렇지 않으면, 리턴
     }
 
     private void SettingData()

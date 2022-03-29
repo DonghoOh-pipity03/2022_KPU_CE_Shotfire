@@ -14,6 +14,6 @@ public class ShotMachine : MonoBehaviour
     }
 
     private void Update() {
-        if(shot) weapon.Fire();
+        if(shot) weapon.Fire(0);
     }
 }
