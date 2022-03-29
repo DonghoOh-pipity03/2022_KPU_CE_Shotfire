@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6302268539898706944
+--- !u!1 &2429674572036117135
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2829136738596489316}
-  - component: {fileID: 3684997803401396130}
-  - component: {fileID: 5931226569941753638}
-  - component: {fileID: 4746269843017608304}
-  - component: {fileID: 3228379026309742222}
-  - component: {fileID: 3953179845833548594}
-  m_Layer: 9
-  m_Name: Prototpye Bullet_5.56mm
+  - component: {fileID: 5430049832875088943}
+  - component: {fileID: 3970134108334281961}
+  - component: {fileID: 5001908022739510654}
+  - component: {fileID: 2019170111213067761}
+  - component: {fileID: 3768384580321215853}
+  - component: {fileID: 4458132807848088928}
+  m_Layer: 0
+  m_Name: proto Bullet_45 ACP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2829136738596489316
+--- !u!4 &5430049832875088943
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6302268539898706944}
+  m_GameObject: {fileID: 2429674572036117135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.056, y: 0.859, z: 0.153}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 2.871, y: 1.97, z: 0.461}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3684997803401396130
+--- !u!33 &3970134108334281961
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6302268539898706944}
+  m_GameObject: {fileID: 2429674572036117135}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5931226569941753638
+--- !u!23 &5001908022739510654
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6302268539898706944}
+  m_GameObject: {fileID: 2429674572036117135}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,45 +86,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4746269843017608304
+--- !u!135 &2019170111213067761
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6302268539898706944}
+  m_GameObject: {fileID: 2429674572036117135}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3228379026309742222
+--- !u!114 &3768384580321215853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6302268539898706944}
+  m_GameObject: {fileID: 2429674572036117135}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71b2a112f87bbf643bf575964c777d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletData: {fileID: 11400000, guid: c087d756c73535d409bed782a3ab90dd, type: 2}
+  bulletData: {fileID: 11400000, guid: 71cb7f3f5b4a04440882ef1f77f6feda, type: 2}
   bulletName: 
   bulletSpeed: 0
   bulletDamage: 0
   bulletSuppress: 0
   lifeTime: 0
   gravityMultiple: 0
---- !u!54 &3953179845833548594
+--- !u!54 &4458132807848088928
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6302268539898706944}
+  m_GameObject: {fileID: 2429674572036117135}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -132,5 +132,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 1

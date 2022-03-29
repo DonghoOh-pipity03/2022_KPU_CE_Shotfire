@@ -117,10 +117,12 @@ public class Weapon : MonoBehaviourPunCallbacks
 #region 함수
     #region 사격
     // 1티어 사격 메소드
-    public void Fire()
+    // 발사횟수를 입력받는다: 0_플레이어용, 총기세팅값을 따른다. , 0 이상: AI용
+    public void Fire(int _fireCount)
     {      
         if(state != State.ready) return;
 
+        if(_fireCount == 0){
         switch( havingFireMode[curFireMode] ){
             case FireMode.automatic: 
             state = State.shooting;
@@ -146,6 +148,12 @@ public class Weapon : MonoBehaviourPunCallbacks
             break;
         }
         isTriggered = true;
+        }
+        else
+        {
+            state = State.shooting;
+            StartCoroutine( Shots(_fireCount) );
+        }
     }
     
     // 2티어 사격 메소드: 사격 통제 장치

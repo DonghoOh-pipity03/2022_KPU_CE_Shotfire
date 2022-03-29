@@ -26,7 +26,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
     // 개발용
    private void Update() {  
-        if(Input.GetButton("Fire1")) weaponArray[curWeapon].Fire();
+        if(Input.GetButton("Fire1")) weaponArray[curWeapon].Fire(0);
         else weaponArray[curWeapon].Detached();
         
         if(Input.GetButtonDown("Reload")) weaponArray[curWeapon].Reload();
