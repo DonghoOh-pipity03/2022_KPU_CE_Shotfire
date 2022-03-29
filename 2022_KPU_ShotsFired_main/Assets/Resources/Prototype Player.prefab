@@ -948,7 +948,7 @@ MonoBehaviour:
   maxSuppress: 100
   unsuppressAmount: 7
   state: 0
-  restoreStartTime: 5
+  restoreStartTime: 2
   autoRestoreAmount: 10
   downMaxHealth: 50
 --- !u!114 &4168991318271931823
@@ -972,7 +972,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 706556014673934}
   IsMine: 1
-  sceneViewId: 1
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &706556014673934

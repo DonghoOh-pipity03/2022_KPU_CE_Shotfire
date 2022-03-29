@@ -17,9 +17,13 @@ public class AIManager : MonoBehaviourPunCallbacks
     public override void OnEnable() 
     {
         if(isUsed) return;
-        isUsed = true;
         stageManager = transform.root.Find("SafeRoom Trigger").GetComponent<StageManager>();    
         RespawnAI();
+    }
+    
+    public override void OnDisable() 
+    {
+        isUsed = true;
     }
 
     private void Update() 
@@ -40,6 +44,7 @@ public class AIManager : MonoBehaviourPunCallbacks
             {
                 var obj = PhotonNetwork.Instantiate(enemies[i].name , transform.position, transform.rotation);
                 SceneManager.MoveGameObjectToScene(obj, gameObject.scene);
+                obj.GetComponent<EnemyAgent>().SetAlert();
                 stageManager.AddAI(obj);
             }
         }
