@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: MK-23
   havingFireMode: 03000000
-  fireRPM: 300
+  fireRPM: 400
+  ballPerOneShot: 1
   maxSpread: 5
   recoilPerShot: 1
   recoilRecover: 1
@@ -25,3 +26,5 @@ MonoBehaviour:
   magCappacity: 12
   initMagCount: 5
   reloadTime: 1.5
+  useChamber: 1
+  useMag: 1

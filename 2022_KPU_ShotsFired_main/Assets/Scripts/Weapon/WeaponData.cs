@@ -17,6 +17,8 @@ public class WeaponData : ScriptableObject
     public FireMode[] HavingFireMode => havingFireMode;
     [SerializeField] float fireRPM;   // 사격 RPM
     public float FireRPM => fireRPM;
+    [SerializeField] int ballPerOneShot;    // 1회 발사당 샷건 발사 개수, 일반 총기는 1로 지정
+    public int BallPerOneShot => ballPerOneShot;
     [Header("명중률")]
     [SerializeField] float maxSpread;   // 최대 스프레드
     public float MaxSpread => maxSpread;
@@ -41,6 +43,10 @@ public class WeaponData : ScriptableObject
     public int InitMagCount => initMagCount;
     [SerializeField] float reloadTime; // 재장전 시간
     public float ReloadTime => reloadTime;
+    [SerializeField] bool useChamber;   // 재장전 시, 약실에 1발 남는 디테일을 구현하는지 여부
+    public bool UseChamber => useChamber;
+    [SerializeField] bool useMag = true;    // 탄창방식의 재장전을 사용하는지, 샷건의 경우 false
+    public bool UseMag => useMag;
 
         // 총격 소리
         // 총격 이펙트

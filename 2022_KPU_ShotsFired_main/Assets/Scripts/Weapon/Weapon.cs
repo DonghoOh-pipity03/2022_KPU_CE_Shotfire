@@ -20,6 +20,8 @@ public class Weapon : MonoBehaviourPunCallbacks
     FireMode[] havingFireMode;   // 해당 무기가 가지는 발사모드
     float fireRPM;  // 발사 속도(1rpm = 1round per 1minute)(실제스펙)
     float fireInterval => (60 / fireRPM); // 발사 속도에 따른 발사 간격
+    bool useChamber;    // 재장전 시, 약실에 1발 남는 디테일을 구현하는지 여부
+    int ballPerOneShot; // 1회 발사당 나가는 총알 구슬 수(샷건용)(일반 총은 1)(1이 아니면 줌상태에서도 퍼져나간다.)
     // 총알
     int magCappacity = 5; // 탄창 용량
     [Header("명중률")]
@@ -52,11 +54,16 @@ public class Weapon : MonoBehaviourPunCallbacks
     public int curRemainAmmo;    // 현재 탄창에 남은 총알 수
     int curRemainMag = 5;   // 현재 남은 탄창 수
     float reloadTime = 3;  // 재장전 시간
+    bool useMag;    // 탄창식 재장전 방법을 사용하는지 여부, 샷건의 경우 false
+    Coroutine reloadCoroutine;    // 재장전시 사용되는 코루틴 변수
+    bool isRunningReloadCoroutine;  // 위의 코루틴이 동작중인지 여부
+    Coroutine shotCoroutine;    // 사격시 사용되는 코루틴 변수
     #endregion
 
 #region 콜백 함수
     public override void OnEnable() {
         base.OnEnable();
+        isRunningReloadCoroutine = false;
         // 재장전 중에 무기를 집어넣었다가 다시 꺼낼 때, 재장전 중이였다면 자동 재장전을 시도한다.
         if( state == State.reloading) Reload(); 
         
@@ -93,13 +100,13 @@ public class Weapon : MonoBehaviourPunCallbacks
             {
                 Destroy(bullet.gameObject);
             },
-            maxSize: magCappacity
+            maxSize: (magCappacity * ballPerOneShot)
         );
         #endregion
     }
 
     private void Update() 
-    {
+    {   
             if(!useUI || !photonView.IsMine) return;    // 네트워크 통제 영역
             
             if(isHipFire) GameUIManager.Instance.UpdateAim( Mathf.Clamp( (curSpread -1.5f)/1.5f , 0, 1));
@@ -119,32 +126,45 @@ public class Weapon : MonoBehaviourPunCallbacks
     // 1티어 사격 메소드
     // 발사횟수를 입력받는다: 0_플레이어용, 총기세팅값을 따른다. , 0 이상: AI용
     public void Fire(int _fireCount)
-    {      
-        if(state != State.ready) return;
+    {    
+        // 발사가 가능한지 검사
+        if(useMag && state != State.ready) return;  // 탄창식 장전방식을 사용하고, 발사준비가 안되었을 때 -> 리턴
+        else if( !useMag )  // 샷건식 장전방식 사용할 경우
+        {   // 잔탄이 없거나, 사격중이거나, 재장전중이면서 잔탄이 없는 경우
+            if((state == State.empty || state == State.shooting) || (state == State.reloading && curRemainAmmo ==0 ))
+            return;
+        }
+
+        // 샷건식 장전방식에, 재장전 중이라면, 재장전 코루틴 중지
+        if(!useMag && state == State.reloading)
+        {
+            if( reloadCoroutine != null ) StopCoroutine(reloadCoroutine);
+            isRunningReloadCoroutine = false;
+        }
 
         if(_fireCount == 0){
         switch( havingFireMode[curFireMode] ){
             case FireMode.automatic: 
             state = State.shooting;
-            StartCoroutine( Shots(1) );
+            shotCoroutine = StartCoroutine( Shots(1) );
             break;
 
             case FireMode.burst: 
             if(isTriggered == true) return;
             state = State.shooting;
-            StartCoroutine( Shots(3) );
+            shotCoroutine = StartCoroutine( Shots(3) );
             break;
 
             case FireMode.twice: 
             if(isTriggered == true) return;
             state = State.shooting;
-            StartCoroutine( Shots(2) );
+            shotCoroutine = StartCoroutine( Shots(2) );
             break;
             
             case FireMode.single: 
             if(isTriggered == true) return;
             state = State.shooting;
-            StartCoroutine( Shots(1) );
+            shotCoroutine = StartCoroutine( Shots(1) );
             break;
         }
         isTriggered = true;
@@ -152,26 +172,35 @@ public class Weapon : MonoBehaviourPunCallbacks
         else
         {
             state = State.shooting;
-            StartCoroutine( Shots(_fireCount) );
+            shotCoroutine = StartCoroutine( Shots(_fireCount) );
         }
     }
     
     // 2티어 사격 메소드: 사격 통제 장치
     IEnumerator Shots(int _remainShotCount)
-    {   
+    {  
+        // 재장전 중일 경우
+        if(isRunningReloadCoroutine == true )
+        {
+            yield break;
+        }
+
         // 자동사격이 끝났거나, 총알이 없는 경우
         if( _remainShotCount <= 0 || curRemainAmmo <= 0) 
         {
             AmmoCheck();
             yield break;
         }
-        
+
+        // 재장전이 진행중인 경우
+        //if(reloadCoroutine != null && shotCoroutine != null) StopCoroutine(shotCoroutine);
+
         if(Time.time >= lastFireTime + fireInterval)
         {
             Shot();
 
             yield return new WaitForSeconds(fireInterval);
-            StartCoroutine( Shots(--_remainShotCount) );
+            shotCoroutine = StartCoroutine( Shots(--_remainShotCount) );
         }
     }
 
@@ -180,32 +209,33 @@ public class Weapon : MonoBehaviourPunCallbacks
         curRemainAmmo--;
         UpdateUI();
 
-        fireDirection = transform.eulerAngles;
-        curRecoilX = Random.Range(recoilHorizon.x, recoilHorizon.y);
-        curRecoilY = Random.Range(recoilVertical.x, recoilVertical.y);
-        curRecoilZ = Random.Range(recoilZ.x, recoilZ.y);
+        for(int i = 0 ; i < ballPerOneShot; i++)    // 산탄총 대응용
+        {
+            fireDirection = transform.eulerAngles;
+            curRecoilX = Random.Range(recoilHorizon.x, recoilHorizon.y);
+            curRecoilY = Random.Range(recoilVertical.x, recoilVertical.y);
+            curRecoilZ = Random.Range(recoilZ.x, recoilZ.y);
 
-        if(isHipFire)   // idle 조준 상태일 경우, 화면 반동과 랜더스프레드 적용
-        {   
-            // 화면 반동
-            if(playerAttack != null && useRecoilInIdle){
-                playerAttack.FireRecoil( new Vector3(-1 * curRecoilY, curRecoilX, curRecoilZ) * recoilMultipleInIdle);
+            if(isHipFire || ballPerOneShot != 1)   // idle 조준상태 또는 샷건일 경우, 화면 반동과 랜더스프레드 적용
+            {   
+                // 화면 반동
+                if(playerAttack != null && useRecoilInIdle){
+                    playerAttack.FireRecoil( new Vector3(-1 * Mathf.Abs(curRecoilY), curRecoilX, curRecoilZ) * recoilMultipleInIdle);
+                }
+
+                // 랜덤 스프레드
+                fireDirection += new Vector3(curRecoilY, curRecoilX, 0) * curSpread;
+            }
+            else    // zoom 조준 상태일 경우_플레이어만 가능한 사격 방법, 화면 반동 적용
+            {
+                playerAttack.FireRecoil( new Vector3(-1 * Mathf.Abs(curRecoilY), curRecoilX, curRecoilZ) );
             }
 
-            // 랜덤 스프레드
-            //fireDirection = Quaternion.AngleAxis(curRecoilY * curSpread, Vector3.right) * fireDirection;
-            //fireDirection = Quaternion.AngleAxis(curRecoilX * curSpread, Vector3.up) * fireDirection;
-            fireDirection += new Vector3(curRecoilY, curRecoilX, 0) * curSpread;
-        }
-        else    // zoom 조준 상태일 경우_플레이어만 가능한 사격 방법, 화면 반동 적용
-        {
-            playerAttack.FireRecoil( new Vector3(-1 * curRecoilY, curRecoilX, curRecoilZ) );
-        }
+            curSpread += recoilPerShot;
+            if(curSpread > maxSpread) curSpread = maxSpread;
 
-        curSpread += recoilPerShot;
-        if(curSpread > maxSpread) curSpread = maxSpread;
-
-        var bullet = bulletPool.Get();
+            var bullet = bulletPool.Get();
+        }
 
         lastFireTime = Time.time;
     }
@@ -214,11 +244,11 @@ public class Weapon : MonoBehaviourPunCallbacks
     public void Detached() =>  isTriggered = false;
     #endregion
     #region 총알
-    // 총알 수 확인 및 총기상태 변경
+    // 총알 수 확인 및 총기상태 변경, 총기 발사가 끝난 후 호출된다.
     private void AmmoCheck()
-    {
+    {   
         if(curRemainAmmo > 0) state = State.ready;
-        else 
+        else if(state == State.shooting)
         {
             state = State.empty;
             if(autoReload) Reload();
@@ -231,24 +261,39 @@ public class Weapon : MonoBehaviourPunCallbacks
     // 재장전 시도
     public void Reload()
     {
-        if(curRemainMag <= 0) return;
+        if(isRunningReloadCoroutine == true) return;    // 이미 재장전 시쿼스라면 리턴
+        //if(state == State.reloading) return;    // 이미 재장전 시퀀스라면 리턴
 
-        StartCoroutine( Reloadging() );
+        if(curRemainMag <= 0) return;   // 남은 탄창 수 검사
+        if(curRemainAmmo >= (useChamber ? magCappacity + 1 : magCappacity )) return;    // 재장전이 필요없는지 검사 (최대 탄이 재장전된 상태)
+
+        state = State.reloading;
+        reloadCoroutine = StartCoroutine( Reloadging() );
     }
 
     // 실제 재장전
     IEnumerator Reloadging()
     {
-        state = State.reloading;
-        curRemainAmmo = 0;
+        isRunningReloadCoroutine = true;
+        // 탄창분리 시퀀스
+        if(useMag && useChamber && curRemainAmmo >= 1) curRemainAmmo = 1;
+        else if(useMag) curRemainAmmo = 0;
+        UpdateUI();
 
+        //대기
         yield return new WaitForSeconds( reloadTime );
 
-        curRemainAmmo = magCappacity;
+        if(useMag) curRemainAmmo += magCappacity;
+        else curRemainAmmo++;
+        
         curRemainMag--;
         state = State.ready;
 
         UpdateUI();
+        isRunningReloadCoroutine = false;
+
+        // 샷건식 재장전의 경우, 계속 재장전 시도
+        if( !useMag ) Reload();
     }
     #endregion
 
@@ -260,6 +305,9 @@ public class Weapon : MonoBehaviourPunCallbacks
         magCappacity = weaponData.MagCappacity;
         curRemainMag = weaponData.InitMagCount;
         reloadTime = weaponData.ReloadTime;
+        useChamber = weaponData.UseChamber;
+        useMag = weaponData.UseMag;
+        ballPerOneShot = weaponData.BallPerOneShot;
         // 명중률
         maxSpread = weaponData.MaxSpread;
         recoilPerShot = weaponData.RecoilPerShot;
