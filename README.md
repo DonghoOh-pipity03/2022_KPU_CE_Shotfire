@@ -85,6 +85,28 @@
 - TEST: 테스트 코트, 리펙토링 테스트 코드 추가
 - CHORE: 빌드 업무 수정, 패키지 매니저 수정 
 
+## 첨부파일
+
+> [요약계획서.pdf](https://github.com/DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369526/default.pdf)
+
+> [수행보고서 4-4 (오동호, 강성준, 이원찬).pdf](https://github.com/DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369527/4-4.pdf)
+
+> [게임 기획서 1.00.00.pdf](https://github.com/DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369529/1.00.00.pdf)
+
+> [추가 게임기획서 0.02.00.pdf](https:/~~/github.com/~~DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369535/0.02.00.pdf)
+
+> [상세설계 1.00.00.pdf](https://github.com/DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369530/1.00.00.pdf)
+
+> [UI 기획서_1.01.00.pdf](https://github.com/DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369539/UI._1.01.00.pdf)
+
+> [시스템_건플레이_1.01.00.xls](https://github.com/DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369553/_._1.01.00.xls)
+
+> [시스템_스테이지_1.01.00.xls](https://github.com/DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369559/_._1.01.00.xls)
+
+> [시스템_플레이어블 캐릭터_1.03.00.xls](https://github.com/DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369562/_._1.03.00.xls)
+
+> [컨텐츠_스킬_0.02.00.xls](https://github.com/DonghoOh-pipity03/2022_KPU_CE_Shotfire/files/8369566/_._0.02.00.xls)
+
 ## 팀원 구성
 
 | 성함  | 이메일                                                   | 학교이메일                                                 |
