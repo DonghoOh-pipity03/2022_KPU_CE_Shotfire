@@ -47,6 +47,8 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     Vector3 targetRotation;
     // 무기
     int curWeapon = 0;   // 현재 들고 있는 무기의 배열 번호
+    bool isInterActionning; // 상호작용 중인지
+    float lastInterActionBeginTime;  // 마지막 상호작용 시작 시간
     #endregion
 #region 콜백함수
     private void Start()
@@ -164,7 +166,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     {   
         targetRotation += _recoilDir;
     }
-#endregion
+    #endregion
     #region 무기
     private void ChangeWeaponCommand()
     {
@@ -180,6 +182,48 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
         weaponArray[curWeapon].gameObject.SetActive(true);
 
         weaponArray[curWeapon].UpdateUI();
+    }
+    // 상호작용 처리
+    private void OnTriggerStay(Collider other) 
+    {
+        if(other.tag == "InterAction" && other.transform.root.gameObject != this.gameObject)
+        {
+            var interactionAgent = other.GetComponent<InterActionAgent>();
+            if(interactionAgent.interActionComplete == false)
+            {
+                if(photonView.IsMine) GameUIManager.Instance.SetActiveInterAction(true);
+
+                if(playerInput.interaction == true)
+                {
+                    // 시작
+                    if(isInterActionning == false)
+                    {
+                        isInterActionning = true;
+                        lastInterActionBeginTime = Time.time;
+                    }
+                    // 진행중
+                    else
+                    {   
+                        if(Time.time > lastInterActionBeginTime + interactionAgent.interActionTime)
+                        {
+                            interactionAgent.interActionComplete = true;
+                            if(photonView.IsMine) GameUIManager.Instance.SetActiveInterAction(false);
+                        }
+                    }
+                }
+                else isInterActionning = false;
+            }
+            else if(photonView.IsMine) GameUIManager.Instance.SetActiveInterAction(false);
+        }
+    }
+    // 상호작용 처리
+    private void OnTriggerExit(Collider other) 
+    {
+        if(other.tag == "InterAction")
+        {
+            isInterActionning = false;
+           if(photonView.IsMine) GameUIManager.Instance.SetActiveInterAction(false);
+        }
     }
     #endregion
 #endregion

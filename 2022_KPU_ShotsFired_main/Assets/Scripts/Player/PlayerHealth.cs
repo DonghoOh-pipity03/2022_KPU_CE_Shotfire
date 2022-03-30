@@ -4,6 +4,8 @@ using UnityEngine;
 class PlayerHealth : LivingEntity
 {
     private PlayerController playerController;
+    [SerializeField] InterActionAgent interActionAgent;
+    [SerializeField] GameObject healingInterActionCollider; // 힐링용 콜라이더가 있는 게임오브젝트
     #region 전역변수
     [Header("체력 자동회복 파라미터")]
     [SerializeField] private float restoreStartTime;    // 마지막 피격 후 자동 회복까지 걸리는 시간
@@ -29,6 +31,7 @@ class PlayerHealth : LivingEntity
     private void FixedUpdate() 
     {
         AutoResore();
+        Revive();
     }
     #endregion
     #region 함수
@@ -47,27 +50,49 @@ class PlayerHealth : LivingEntity
 
         if( !photonView.IsMine ) return;    // 네트워크 통제 구역
         
-        if(state == EntityState.alive) UpdateUI();
+        //if(state == EntityState.alive)
+        UpdateUI();
         GameUIManager.Instance.SetActviePlayerDamaged(true);
     }
 
     protected override void Die()
-    {
+    {   
+        // 생존 -> 다운
         if(state == EntityState.alive)   
         {
             base.state = EntityState.down;
             
-            UpdateUI();
             curHealth = downMaxHealth;
+            UpdateUI();
             
             playerController.ableControlMove = false;   // 이동 불능
+            playerController.ableControlInterAction = false;    // 상호작용 불능
             GameManager.Instance.curLivingPlayer--; // 생존 플레이어 수 감소
+
+            healingInterActionCollider.SetActive(true);
         }
+        // 다운 -> 죽음
         else if( state == EntityState.down) 
         {
             base.Die();
 
             playerController.ableControlAttack = false;
+        }
+    }
+
+    // 다운 -> 생존
+    private void Revive()
+    {
+        if(state == EntityState.down && interActionAgent.interActionComplete == true)
+        {
+            state = EntityState.alive;
+            curHealth = maxHealth;
+
+            playerController.ableControlMove = true;
+            playerController.ableControlInterAction = true;
+
+            interActionAgent.interActionComplete = false;
+            healingInterActionCollider.SetActive(false);
         }
     }
 
@@ -97,7 +122,7 @@ class PlayerHealth : LivingEntity
     private void UpdateUI()
     {   
         if( !photonView.IsMine ) return;    // 네트워크 통제 구역
-        GameUIManager.Instance.UpdatePlayerHealth(( (int)curHealth), (int)maxHealth);
+        GameUIManager.Instance.UpdatePlayerHealth( (int)curHealth, (int)maxHealth);
     }
     #endregion 
 }
