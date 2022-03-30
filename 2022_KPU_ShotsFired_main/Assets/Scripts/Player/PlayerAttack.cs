@@ -2,7 +2,9 @@ using UnityEngine;
 using Cinemachine;
 using Photon.Pun;
 using Photon.Realtime;
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 #region 필요한 컴포넌트
 [RequireComponent(typeof(PlayerInput))]
@@ -18,6 +20,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     [SerializeField] float m_screenYSpeed = 1f; // Y축 화면 이동속도
     [SerializeField] float m_screenNormalSpeed = 1f;    // 평상시 화면 이동속도 계수
     [SerializeField] float m_screenZoomSpeed = 0.5f;    // 줌화면 이동속도 계수
+    [SerializeField] float cameraPoleSpeed; // 카메라 콜라이더에 의한 앞뒤 움직임의 부드러움
     [Header("화면 최대 각도")]
     [SerializeField] float m_minScreenAngle = 80f;  // 화면 최대 아래 각도
     [SerializeField] float m_maxScreenAngle = 80f;  //화면 최대 위 각도
@@ -29,6 +32,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     Vector3 curCamHolderLocalPosition = Vector3.zero;   // 현재 카메라 홀더의 로컬 위치
     [SerializeField] float m_idleCamHolderHeight = 1.8f;    // 평소 상태 카메라 높이
     [SerializeField] float m_zoomCamHolderHeught = 1.55f;   // 줌 상태 카메라 높이
+    [SerializeField] LayerMask cameraCollider;  // 카메라 콜라이더가 감지할 레이어
     [Header("무기")] 
     [SerializeField] Weapon[] weaponArray = new Weapon[2];   // 1~4번 슬릇에 사용할 무기 배열
     #endregion
@@ -39,6 +43,9 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     GameObject zoomVirtualCam;
     Transform cameraHolder; // 카메라 거치대 자리(1티어), 입력에 따른 화면 회전 담당
     Transform recoil;  // 카메라 거치대의 자식(2티어), 사격에 의한 반동 담당
+    Transform cameraPole;   // 카메라 거치대의 자식(3티어), 캐릭터와 카메라 간의 거리 담당
+    RaycastHit hit; // 카메라 콜라이더용
+    Vector3 tarCameraPolePosition;  // 3티어 카메라 거치대의 목표 로컬위치
     // 화면
     float curScreenSpeed;   // 현재 화면 회전 속도
     bool isZoomMode = false;    // 줌 상태 여부
@@ -57,10 +64,11 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
 
         cameraHolder = transform.Find("Camera Holder");
         recoil = cameraHolder.GetChild(0);
+        cameraPole = recoil.GetChild(0);
         idleVirtualCam = GameObject.Find("Idle Virtual Camera");
-        idleVirtualCam.GetComponent<CinemachineVirtualCamera>().Follow = recoil.Find("idle pos").transform;
+        idleVirtualCam.GetComponent<CinemachineVirtualCamera>().Follow = cameraPole.Find("idle pos").transform;;
         zoomVirtualCam = GameObject.Find("Zoom Virtual Camera");
-        zoomVirtualCam.GetComponent<CinemachineVirtualCamera>().Follow = recoil.Find("zoom pos").transform;
+        zoomVirtualCam.GetComponent<CinemachineVirtualCamera>().Follow = cameraPole.Find("zoom pos").transform;;
 
         // 하이어라키 상의 무기를 배열에 세팅
         foreach(Weapon weapon in weaponArray)
@@ -105,6 +113,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
         RotateScreen();
         SetScreenMode(); 
         RecoilScreen();
+        CameraCollider();
     }
 #endregion
 #region 함수
@@ -165,6 +174,21 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     public void FireRecoil(Vector3 _recoilDir)
     {   
         targetRotation += _recoilDir;
+    }
+
+    // 카메라 콜라이더
+    private void CameraCollider()
+    {   Debug.DrawRay(recoil.position, cameraPole.forward * -1, Color.red, 1f);
+        if(Physics.SphereCast(recoil.position, 0.5f, cameraPole.forward * -1, out hit, 1.25f, cameraCollider, QueryTriggerInteraction.Ignore))
+        {
+            tarCameraPolePosition = new Vector3(0,0, -1 * hit.distance + 0.25f);
+        }
+        else
+        {
+            tarCameraPolePosition = new Vector3(0, 0, -1.25f);
+        }
+        
+        cameraPole.localPosition = Vector3.Lerp(cameraPole.localPosition, tarCameraPolePosition, cameraPoleSpeed * Time.deltaTime);
     }
     #endregion
     #region 무기
