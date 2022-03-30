@@ -91,6 +91,7 @@ MonoBehaviour:
   aimAnimator: {fileID: 0}
   remainAmmo: {fileID: 0}
   remainMag: {fileID: 0}
+  InterAction: {fileID: 0}
 --- !u!114 &4401816778765267647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +120,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curLivingPlayer: 0
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &7200989256206361276
 MonoBehaviour:
   m_ObjectHideFlags: 0

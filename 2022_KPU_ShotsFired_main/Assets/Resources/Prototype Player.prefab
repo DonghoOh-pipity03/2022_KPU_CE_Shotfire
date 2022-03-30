@@ -467,6 +467,66 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1627252006533893737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5461935251112476330}
+  - component: {fileID: 2584056423297365620}
+  - component: {fileID: 7520776423770489472}
+  m_Layer: 8
+  m_Name: Healing Collider
+  m_TagString: InterAction
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5461935251112476330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627252006533893737}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5596406285412985364}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2584056423297365620
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627252006533893737}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7520776423770489472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627252006533893737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00920d1bf5c702c40a7512968fd3ee13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interActionTime: 5
+  interActionComplete: 0
 --- !u!1 &2991376680885798449
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +718,7 @@ Transform:
   - {fileID: 8400871387935711933}
   - {fileID: 2708942857586226698}
   - {fileID: 1035576072}
+  - {fileID: 5461935251112476330}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -887,6 +948,8 @@ MonoBehaviour:
   maxSuppress: 100
   unsuppressAmount: 7
   state: 0
+  interActionAgent: {fileID: 7520776423770489472}
+  healingInterActionCollider: {fileID: 1627252006533893737}
   restoreStartTime: 2
   autoRestoreAmount: 10
   downMaxHealth: 50

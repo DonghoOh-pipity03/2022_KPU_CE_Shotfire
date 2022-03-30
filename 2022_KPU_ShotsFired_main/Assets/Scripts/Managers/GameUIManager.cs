@@ -26,6 +26,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private Animator aimAnimator;  // 에임 애니메이터
     [SerializeField] private TextMeshProUGUI remainAmmo;   // 플레이어_남은 탄환
     [SerializeField] private TextMeshProUGUI remainMag;    // 플레이어_남은 탄창
+    [SerializeField] GameObject InterAction;    // 플레이어_상호작용 오브젝트
 #endregion
     //싱글톤
     private static GameUIManager instance;
@@ -98,6 +99,9 @@ public class GameUIManager : MonoBehaviour
     {   
         remainMag.text = _remainMag.ToString();
     }
+
+    public void SetActiveInterAction(bool _active) => InterAction.SetActive(_active);
+
     #endregion
     /*
     작업예정

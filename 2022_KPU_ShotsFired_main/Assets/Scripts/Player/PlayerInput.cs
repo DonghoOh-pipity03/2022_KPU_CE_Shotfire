@@ -97,7 +97,8 @@ public class PlayerInput : MonoBehaviourPunCallbacks
         
         //기타
         mouseWheel = Input.GetAxis("Mouse ScrollWheel");
-        interaction = Input.GetButton("Interaction");
+        if(playerController.ableControlInterAction == true) interaction = Input.GetButton("Interaction");
+        else interaction = false;
         }
 
     private bool DetectSprint() // UNITY_STANDALONE 전용_다른 장치는 별도 구현 필요
