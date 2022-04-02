@@ -215,8 +215,11 @@ namespace PhotonInit
         }
         public void send_msg()
         {
-            base.photonView.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
-            ChatInput.text = "";
+            if(ChatInput.text != "")
+            {
+                base.photonView.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
+                ChatInput.text = "";
+            }
         }   
         public void start_game()
         {
