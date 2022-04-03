@@ -103,9 +103,12 @@ namespace PhotonInit
         public Button[] CellBtn;
         public Button PreviousBtn;
         public Button NextBtn;
-
         List<RoomInfo> myList = new List<RoomInfo>();
         int currentPage = 1, maxPage, multiple;
+
+        [Header("LobbyPanel")]
+        public TextMeshProUGUI[] ChatText;
+        public TMP_InputField ChatInput;
 
         #endregion
 
@@ -210,7 +213,14 @@ namespace PhotonInit
             Debug.LogFormat("Cnt : {0}", cnt);
             playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[cnt],Quaternion.identity));
         }
-
+        public void send_msg()
+        {
+            if(ChatInput.text != "")
+            {
+                base.photonView.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
+                ChatInput.text = "";
+            }
+        }   
         public void start_game()
         {
             if(PhotonNetwork.IsMasterClient)
@@ -282,6 +292,8 @@ namespace PhotonInit
             UI_delete_map();
             UI_Select(Lobby_UI, Lobby_Map);
             Lobby_roomName.text = "Room info : "+ PhotonNetwork.CurrentRoom.Name;
+            ChatInput.text = "";
+            for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
             playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[PhotonNetwork.CurrentRoom.PlayerCount-1],Quaternion.identity));
         }
         public override void OnJoinRoomFailed(short returnCode, string message)
@@ -291,7 +303,8 @@ namespace PhotonInit
 
         public override void OnPlayerEnteredRoom(Player other)
         {
-            Debug.LogFormat("Player entered {0}", other.NickName);
+            Debug.LogFormat("Player Entered {0}", other.NickName);
+            ChatRPC("<color=yellow>Player Entered " + other.NickName + "</color>");
             if(PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("{0} is master", PhotonNetwork.NickName);
@@ -300,11 +313,29 @@ namespace PhotonInit
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("Player Left {0}", other.NickName);
+            ChatRPC("<color=yellow>Player Left " + other.NickName + "</color>");
             update_room();
         }
         #endregion
 
         #region PunRPC
+        [PunRPC] // RPC는 플레이어가 속해있는 방 모든 인원에게 전달한다
+        void ChatRPC(string msg)
+        {
+            bool isInput = false;
+            for (int i = ChatText.Length; i < 0; i--)
+                if (ChatText[i].text == "")
+                {
+                    isInput = true;
+                    ChatText[i].text = msg;
+                    break;
+                }
+            if (!isInput) // 꽉차면 한칸씩 위로 올림
+            {
+                for (int i = 1; i < ChatText.Length; i++) ChatText[i - 1].text = ChatText[i].text;
+                ChatText[ChatText.Length - 1].text = msg;
+            }
+        }
         [PunRPC]
         void game_start()
         {
