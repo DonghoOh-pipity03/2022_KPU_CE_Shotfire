@@ -58,9 +58,9 @@ class PlayerHealth : LivingEntity
     protected override void Die()
     {   
         // 생존 -> 다운
-        if(state == EntityState.alive)   
+        if(entityState == EntityState.alive)   
         {
-            base.state = EntityState.down;
+            base.entityState = EntityState.down;
             
             curHealth = downMaxHealth;
             UpdateUI();
@@ -72,7 +72,7 @@ class PlayerHealth : LivingEntity
             healingInterActionCollider.SetActive(true);
         }
         // 다운 -> 죽음
-        else if( state == EntityState.down) 
+        else if( entityState == EntityState.down) 
         {
             base.Die();
 
@@ -83,9 +83,9 @@ class PlayerHealth : LivingEntity
     // 다운 -> 생존
     private void Revive()
     {
-        if(state == EntityState.down && interActionAgent.interActionComplete == true)
+        if(entityState == EntityState.down && interActionAgent.interActionComplete == true)
         {
-            state = EntityState.alive;
+            entityState = EntityState.alive;
             curHealth = maxHealth;
 
             playerController.ableControlMove = true;
@@ -100,7 +100,7 @@ class PlayerHealth : LivingEntity
     private void AutoResore()
     {   
         // 회복 가능 조건일 때
-        if( curHealth < maxHealth && Time.time >= lastHitTime + restoreStartTime && state == EntityState.alive)
+        if( curHealth < maxHealth && Time.time >= lastHitTime + restoreStartTime && entityState == EntityState.alive)
         {   
             if(!isRestoring)    // 회복 시작 타이밍일 때
             {

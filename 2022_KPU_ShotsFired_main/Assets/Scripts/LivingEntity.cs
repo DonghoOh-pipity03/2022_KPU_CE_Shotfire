@@ -17,25 +17,25 @@ abstract class LivingEntity : MonoBehaviourPunCallbacks
     #region 전역 동작 변수
     protected float curHealth;    // 현재 체력
     protected float curSuppress;    // 현재 제압량
-    [HideInInspector] public EntityState state;   // 생명체의 상태
+    [HideInInspector] public EntityState entityState;   // 생명체의 상태
     #endregion
     #region 콜백함수
     public override void OnEnable() 
     {   
         base.OnEnable();
-        state = EntityState.alive;
+        entityState = EntityState.alive;
         curHealth = maxHealth;   
     }
 
     protected virtual void Update() 
     {
-        if(state != EntityState.dead) UnSuppress();
+        if(entityState != EntityState.dead) UnSuppress();
     }
     #endregion
     #region 함수
     public virtual void TakeDamage(DamageMessage _damageMessage, HitParts _hitPart)
     {
-        if(state == EntityState.dead) return;
+        if(entityState == EntityState.dead) return;
 
         curHealth -= _damageMessage.damageAmount * hitMultiple[(int)_hitPart];
 
@@ -47,14 +47,14 @@ abstract class LivingEntity : MonoBehaviourPunCallbacks
     }
     public virtual void RestoreHealth(float _restoreAmount)
     {
-        if(state == EntityState.dead) return;
+        if(entityState == EntityState.dead) return;
 
         curHealth += _restoreAmount;
         if(curHealth > maxHealth) curHealth = maxHealth;
     }
 
     protected virtual void Die() {
-        state = EntityState.dead;
+        entityState = EntityState.dead;
     }
 
     public virtual void TakeSuppress(float _suppressAmount)

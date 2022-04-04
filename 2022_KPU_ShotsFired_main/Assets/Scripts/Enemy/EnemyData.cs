@@ -25,6 +25,12 @@ public class EnemyData : ScriptableObject
     public float FieldOfView => fieldOfView;
 
     [Header("공격 파라미터")]
+    [SerializeField] float attackDelay; // 공격 주기
+    public float AttackDelay => attackDelay;
+    [SerializeField] int minAttackCount;   // 최소 공격 횟수
+    public int MinAttackCount => minAttackCount;
+    [SerializeField] int maxAttackCount;   // 최대 공격 횟수
+    public int MaxAttackCount => maxAttackCount;
     [SerializeField] float engageDistance;  // 교전을 위한 이동 정지거리
     public float EngageDistance => engageDistance;
     [SerializeField] float melleeDistance; // 근접공격을 시작하는 거리
@@ -33,8 +39,12 @@ public class EnemyData : ScriptableObject
     public float DistanceTargetWeight => distanceTargetWeight;
     [SerializeField] float attackerTargetWeight;    // 공격 타겟 선정을 위한 마지막 공격자 가중치
     public float AttackerTargetWeight => attackerTargetWeight;
+    [SerializeField] float downTargetWeight;    // 공격 타겟 선정을 위한 다운상태의 플레이어 가중치
+    public float DownTargetWeight => downTargetWeight;
 
     [Header("이동 파라미터")]
     [SerializeField] float moveSpeed;   // 이동 속도
     public float MoveSpeed => moveSpeed;
+    [SerializeField] private float turnSpeed;    // 회전 속도
+    public float TurnSpeed => turnSpeed;
 }

@@ -984,7 +984,7 @@ MonoBehaviour:
   - 0.8
   maxSuppress: 100
   unsuppressAmount: 7
-  state: 0
+  entityState: 0
   interActionAgent: {fileID: 7520776423770489472}
   healingInterActionCollider: {fileID: 1627252006533893737}
   restoreStartTime: 2
