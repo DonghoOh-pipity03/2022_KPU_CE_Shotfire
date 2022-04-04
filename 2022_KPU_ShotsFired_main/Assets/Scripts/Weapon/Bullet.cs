@@ -7,12 +7,6 @@ public class Bullet : MonoBehaviour
     private Rigidbody m_rigidbody;
     [SerializeField] private BulletData bulletData;
     #region 전역 변수
-    string bulletName; // 총알 이름
-    float bulletSpeed;   // 총알 속도
-    float bulletDamage;    // 총알 데미지
-    float bulletSuppress;  // 제압량
-    float lifeTime; // 생명주기
-    float gravityMultiple;// 중력 계수
     #endregion
     #region 전역 동작 변수
     GameObject topLevelParent;  // 총알 주인
@@ -22,7 +16,6 @@ public class Bullet : MonoBehaviour
 
    private void Awake() {
         m_rigidbody = GetComponent<Rigidbody>();
-        SettingData();
     }
 
     private void OnEnable() {
@@ -30,7 +23,7 @@ public class Bullet : MonoBehaviour
     }
  
     private void FixedUpdate() {
-        if( Time.time > enabledTime + lifeTime) poolToReturn.Release(this);
+        if( Time.time > enabledTime + bulletData.LifeTime) poolToReturn.Release(this);
     }
 
     // 오브젝트 풀에서 생성되었을 때    
@@ -39,7 +32,7 @@ public class Bullet : MonoBehaviour
         topLevelParent = _topLevelParent;
         transform.position = _firePosition;
         transform.rotation = Quaternion.Euler(_direction);
-        m_rigidbody.velocity = transform.forward * bulletSpeed + Physics.gravity * gravityMultiple;
+        m_rigidbody.velocity = transform.forward * bulletData.Speed + Physics.gravity * bulletData.GravityMultiple;
     }
 
     private void OnTriggerEnter(Collider other) 
@@ -48,7 +41,7 @@ public class Bullet : MonoBehaviour
         var target1 = other.GetComponent<SuppressPoint>();
         if( target1 != null) 
         {   
-            if(other.transform.root.tag != topLevelParent.tag) target1.ApplySuppress(bulletSuppress);
+            if(other.transform.root.tag != topLevelParent.tag) target1.ApplySuppress(bulletData.Suppress);
         }
     }
     private void OnCollisionEnter(Collision other) 
@@ -64,8 +57,8 @@ public class Bullet : MonoBehaviour
                 damageMessage.attacker = topLevelParent;
                 damageMessage.ID = Random.Range(0, 2147483647); // 사용안함_원래는 관통시스템 사용시 중복 공격 방지용이였던 것
                 damageMessage.damageKind = DamageKind.bullet;
-                damageMessage.damageAmount = bulletDamage;
-                damageMessage.suppressAmount = bulletSuppress;
+                damageMessage.damageAmount = bulletData.Damage;
+                damageMessage.suppressAmount = bulletData.Suppress;
                 damageMessage.hitPoint = other.contacts[0].point;
                 damageMessage.hitNormal =  other.contacts[0].normal;
 
@@ -74,16 +67,5 @@ public class Bullet : MonoBehaviour
         }
         // 레벨디자인에 맞았을 때와 공격한 후
         poolToReturn.Release(this);
-    }
-
-    // 총알 정보를 SO에서 초기화
-    private void SettingData()
-    {
-        bulletSpeed = bulletData.Speed;
-        bulletDamage = bulletData.Damage;
-        bulletSuppress = bulletData.Suppress;
-        lifeTime = bulletData.LifeTime;
-        bulletName = bulletData.BulletName;
-        gravityMultiple = bulletData.GravityMultiple;
     }
 }

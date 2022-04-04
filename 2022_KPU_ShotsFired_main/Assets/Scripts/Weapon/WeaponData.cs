@@ -20,8 +20,10 @@ public class WeaponData : ScriptableObject
     [SerializeField] int ballPerOneShot;    // 1회 발사당 샷건 발사 개수, 일반 총기는 1로 지정
     public int BallPerOneShot => ballPerOneShot;
     [Header("명중률")]
-    [SerializeField] float maxSpread;   // 최대 스프레드
+    [SerializeField] float maxSpread;   // 총기의 최대 스프레드
     public float MaxSpread => maxSpread;
+    [SerializeField] float minSpread;   // 총기의 최대 스프레드
+    public float MinSpread => minSpread;
     [SerializeField]  float recoilPerShot;   // 1회 사격 당 반동
     public float RecoilPerShot => recoilPerShot;
     [SerializeField]  float recoilRecover;   // 반동 회복 속도

@@ -23,8 +23,13 @@ MonoBehaviour:
   - 0.8
   eyeDistance: 5
   fieldOfView: 120
+  attackDelay: 5
+  minAttackCount: 2
+  maxAttackCount: 3
   engageDistance: 4
   melleeDistance: 1
   distanceTargetWeight: 1
   attackerTargetWeight: 10
+  downTargetWeight: 0.5
   moveSpeed: 3
+  turnSpeed: 0.5

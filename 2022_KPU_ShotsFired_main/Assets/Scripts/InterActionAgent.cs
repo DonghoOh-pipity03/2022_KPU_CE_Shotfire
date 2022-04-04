@@ -8,7 +8,7 @@ using UnityEngine;
 public class InterActionAgent : MonoBehaviour
 {
     // 전역 변수
-    [SerializeField] public float interActionTime; // 상호작용을 완료하는데 걸리는 시간
+    public float interActionTime; // 상호작용을 완료하는데 걸리는 시간
     // 전역 동작 변수
     public bool interActionComplete;   // 상호작용을 완료했는지 여부
 }

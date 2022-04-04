@@ -17,8 +17,9 @@ MonoBehaviour:
   fireRPM: 450
   ballPerOneShot: 30
   maxSpread: 10
+  minSpread: 3
   recoilPerShot: 5
-  recoilRecover: 1
+  recoilRecover: 8
   recoilHorizontal: {x: -1, y: 1}
   recoilVertical: {x: -1, y: 1}
   recoilZ: {x: 0, y: 0.1}
