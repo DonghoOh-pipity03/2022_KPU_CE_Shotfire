@@ -16282,7 +16282,7 @@ MonoBehaviour:
   renderSettingsHackEmissiveBoost: 1
   renderSettingsHackIndirectBoost: 1
   renderSettingsTempPath: 
-  renderSettingsOutPath: BakeryLightmaps
+  renderSettingsOutPath: External_Asset/BakeryLightmaps
   renderSettingsUseScenePath: 0
   renderSettingsHackAOIntensity: 1
   renderSettingsHackAOSamples: 8
