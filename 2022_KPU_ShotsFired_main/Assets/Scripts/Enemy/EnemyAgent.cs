@@ -270,6 +270,7 @@ class EnemyAgent : LivingEntity
         for (int i = 0; i < 4; i++)
         {
             if (players[i] == null) continue;
+            if( playerState[i] == null) playerState[i] = players[i].GetComponent<LivingEntity>();
 
             playerDistance[i] = (players[i].transform.position - transform.position).magnitude; // 거리 계산
 
