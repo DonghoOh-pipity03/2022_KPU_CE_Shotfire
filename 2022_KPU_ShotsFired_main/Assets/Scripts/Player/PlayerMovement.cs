@@ -10,8 +10,9 @@ using Photon.Realtime;
 
 public class PlayerMovement : MonoBehaviourPunCallbacks
 {
-    private CharacterController charController;
-    private PlayerInput playerInput;
+    Animator animator;
+    CharacterController charController;
+    PlayerInput playerInput;
 
     #region 전역 변수
     [Header("기본 이동")]
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [Header("앉기")]
     [SerializeField] float m_CrouchSpeed;   // 앉기 중 이동 속도
     [SerializeField] float m_CrouchHeightRatio;  // 앉기 중 키 비율
+    [SerializeField] LayerMask crunchLayer; // 앉기에서 서기로 변환할 때, 감지에 사용할 레이어
     #endregion
 
     #region 전역 동작 변수
@@ -53,11 +55,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private bool isDodge = false;   // 회피 상태 여부
     private float lastDodgeTime = 0;    //마지막 회피 입력시간
     // 앉기
-    private bool isCrouch = false;  // 앉기 상태 여부
+    public bool isCrouch = false;  // 앉기 상태 여부
     #endregion
 #region 콜백함수
     private void Start()
     {
+        animator = GetComponent<Animator>();
         charController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
     }
@@ -75,6 +78,9 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         Move();
     }
 
+    private void Update() {
+        if(animator != null) UpdateAnimation();
+    }
 #endregion
 #region 함수
     private void Move()
@@ -158,18 +164,21 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     }
 
     private void Crouch() {
-        if (playerInput.crouch && !isCrouch)
+        // 앉기 시작 타이밍
+        if (playerInput.crouch && !isCrouch)    
         {
             isCrouch = true;
             charController.height *= m_CrouchHeightRatio;
             charController.center *= m_CrouchHeightRatio;
         }
+        // 앉기 해제 타이밍
         else if(!playerInput.crouch &&isCrouch)
         {
             Ray crouchRay = new Ray(transform.position + Vector3.up * charController.radius, Vector3.up);
             float crouchRayLength = (charController.height / m_CrouchHeightRatio) - charController.radius;
-            if (Physics.SphereCast(crouchRay, charController.radius, crouchRayLength, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+            if (Physics.SphereCast(crouchRay, charController.radius, crouchRayLength, crunchLayer, QueryTriggerInteraction.Ignore))
             {
+                Debug.Log("못 일어난다");
                 return; // 설 수 없는 곳 감지시 true유지
             }
             else
@@ -179,6 +188,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
                 isCrouch = false;
             }
         }
+    }
+
+    void UpdateAnimation(){
+        animator.SetFloat("MoveHorizontal", playerInput.move.x * (playerInput.sprint ? 2 : 1), 0.05f, Time.deltaTime);
+        animator.SetFloat("MoveVertical", playerInput.move.y  * (playerInput.sprint ? 2 : 1), 0.05f, Time.deltaTime);
+        animator.SetBool("Crouch", isCrouch);
     }
 #endregion
 }

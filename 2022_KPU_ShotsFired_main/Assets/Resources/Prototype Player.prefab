@@ -910,6 +910,10 @@ MonoBehaviour:
   m_dodgeTime: 0.1
   m_CrouchSpeed: 2.5
   m_CrouchHeightRatio: 0.5
+  crunchLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isCrouch: 0
 --- !u!114 &5596406285412985365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,10 +941,18 @@ MonoBehaviour:
   cameraCollider:
     serializedVersion: 2
     m_Bits: 128
+  cameraHeightSmooth: 0.1
   weaponArray:
   - {fileID: 5596406286887223228}
   - {fileID: 9132649899341931792}
   - {fileID: 5596406286047243064}
+  crouchIdleCameraHolderHeight: 1.35
+  crouchZoomCameraHolderHeight: 1.1
+  maxGunRayDistance: 100
+  aimPointSmooth: 0.1
+  aimLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &5596406285412985386
 MonoBehaviour:
   m_ObjectHideFlags: 0

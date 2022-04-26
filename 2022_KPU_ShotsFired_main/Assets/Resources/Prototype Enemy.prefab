@@ -584,7 +584,7 @@ MonoBehaviour:
   - 0.8
   maxSuppress: 100
   unsuppressAmount: 7
-  state: 0
+  entityState: 0
   enemyData: {fileID: 11400000, guid: 8d2879801402c8c42b2cce075d91adac, type: 2}
   eyeTransform: {fileID: 3521314283167520451}
   waepon: {fileID: 3521314284300231723}
@@ -594,10 +594,6 @@ MonoBehaviour:
   sign: {fileID: 1083824285}
   useSign: 1
   useAttack: 1
-  attackDelay: 5
-  minAttackCount: 2
-  maxAttackCount: 3
-  turnSpeed: 0.5
 --- !u!195 &310196889
 NavMeshAgent:
   m_ObjectHideFlags: 0

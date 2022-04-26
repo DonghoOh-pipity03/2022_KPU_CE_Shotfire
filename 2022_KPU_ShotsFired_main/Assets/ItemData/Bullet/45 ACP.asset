@@ -15,6 +15,6 @@ MonoBehaviour:
   bulletName: 45 ACP
   damage: 35
   suppress: 5
-  speed: 200
+  speed: 100
   lifeTime: 4
   gravityMultiple: 0.25

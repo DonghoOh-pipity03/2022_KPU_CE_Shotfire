@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4490194792182515555
 Transform:
   m_ObjectHideFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4490194792182515554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.313, y: 0.981, z: 0.315}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4490194793066521687}
@@ -101,14 +101,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4901441535407918277, guid: 4b09af1e8a5ec9242906814ff6fa1655, type: 3}
   muzzlePosition: {fileID: 4490194793066521687}
   useUI: 1
+  autoReload: 1
   useRecoilInIdle: 1
-  maxSpread: 0
-  recoilPerShot: 0
-  recoilRecover: 0
-  recoilHorizon: {x: 0, y: 0}
-  recoilVertical: {x: 0, y: 0}
-  recoilZ: {x: 0, y: 0}
-  recoilMultipleInIdle: 1
   state: 0
   curRemainAmmo: 0
 --- !u!1 &4490194793066521686

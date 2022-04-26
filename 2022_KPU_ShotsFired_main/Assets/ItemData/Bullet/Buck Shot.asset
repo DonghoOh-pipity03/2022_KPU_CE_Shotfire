@@ -15,6 +15,6 @@ MonoBehaviour:
   bulletName: Buck Shot
   damage: 10
   suppress: 2
-  speed: 300
+  speed: 150
   lifeTime: 1
   gravityMultiple: 0.2

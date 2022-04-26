@@ -75,7 +75,7 @@ public class Weapon : MonoBehaviourPunCallbacks
             actionOnGet: (bullet) =>   // 풀에서 오브젝트를 꺼낼 때
             {
                 bullet.gameObject.SetActive(true);
-                bullet.Reset(weaponUser, transform.position, fireDirection);
+                bullet.Reset(weaponUser, muzzlePosition.position, fireDirection);
             },
             actionOnRelease: (bullet) =>   // 오브젝트를 다시 풀에 넣을 때
             {
@@ -94,7 +94,7 @@ public class Weapon : MonoBehaviourPunCallbacks
     {
         if (photonView == null || !photonView.IsMine) return;    // 네트워크 통제 영역
 
-        if (isHipFire) GameUIManager.Instance.UpdateAim(Mathf.Clamp((curSpread - weaponData.MinSpread) / MaxSpread, 0, 1));
+        if (useUI && isHipFire) GameUIManager.Instance.UpdateAim(Mathf.Clamp((curSpread - weaponData.MinSpread) / MaxSpread, 0, 1));
     }
 
     private void FixedUpdate()
@@ -197,7 +197,7 @@ public class Weapon : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < weaponData.BallPerOneShot; i++)    // 산탄총 대응용
         {
-            fireDirection = transform.eulerAngles;
+            fireDirection = muzzlePosition.eulerAngles;
             curRecoilX = Random.Range(weaponData.RecoilHorizontal.x, weaponData.RecoilHorizontal.y);
             curRecoilY = Random.Range(weaponData.RecoilVertical.x, weaponData.RecoilVertical.y);
             curRecoilZ = Random.Range(weaponData.RecoilZ.x, weaponData.RecoilZ.y);
