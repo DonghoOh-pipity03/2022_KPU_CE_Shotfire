@@ -13,6 +13,7 @@ using UnityEditor;
 public class PlayerAttack : MonoBehaviourPunCallbacks
 {
     PlayerInput playerInput;
+    PlayerMovement playerMovement;
 
     #region 전역 변수
     [Header("화면 이동 속도")]
@@ -29,12 +30,21 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     [SerializeField] float returnIdleSpeed; // 기본 반동 회복 속도 -> 클수록 빨리 반동에서 회복됨
     [SerializeField] float returnFireSpeed; // 사격중 반동 회복 속도 -> 클수록 빨리 반동에서 회복됨
     [Header("카메라")] 
-    Vector3 curCamHolderLocalPosition = Vector3.zero;   // 현재 카메라 홀더의 로컬 위치
+    Vector3 tarCamHolderLocalPosition = Vector3.zero;   // 목표 카메라 홀더의 로컬 위치_y값만 사용하는 홀더
     [SerializeField] float m_idleCamHolderHeight = 1.8f;    // 평소 상태 카메라 높이
     [SerializeField] float m_zoomCamHolderHeught = 1.55f;   // 줌 상태 카메라 높이
     [SerializeField] LayerMask cameraCollider;  // 카메라 콜라이더가 감지할 레이어
+    [SerializeField] float cameraHeightSmooth = 0.1f;   // 카메라의 높이를 변환할 때, 변환 속도
     [Header("무기")] 
     [SerializeField] Weapon[] weaponArray = new Weapon[2];   // 1~4번 슬릇에 사용할 무기 배열
+    [Header("캐릭터 행동")]
+    [SerializeField] float crouchIdleCameraHolderHeight = 1.35f;  // 캐릭터가 앉을 때, 평소 상태 카메라의 높이
+    [SerializeField] float crouchZoomCameraHolderHeight = 1.1f;  // 캐릭터가 앉을 때, 줌 상태 카메라의 높이
+    [Header("조준")]
+    [SerializeField] float maxGunRayDistance = 100; // 조준점에 사용할 레이캐스트의 최대 거리
+    [SerializeField] float minAimDistance = 1.5f;   // 조준점 레이캐스트의 최소 유효거리
+    [SerializeField] float aimPointSmooth = 0.1f;   // 조준점 위치 변경시 변경에 걸리는 시간
+    [SerializeField] LayerMask aimLayer;    // 조준 감지에 사용할 레이어마스크
     #endregion
 
     #region 전역 동작 변수
@@ -44,6 +54,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     Transform cameraHolder; // 카메라 거치대 자리(1티어), 입력에 따른 화면 회전 담당
     Transform recoil;  // 카메라 거치대의 자식(2티어), 사격에 의한 반동 담당
     Transform cameraPole;   // 카메라 거치대의 자식(3티어), 캐릭터와 카메라 간의 거리 담당
+    Camera mainCamera;  // 메인 카메라
     RaycastHit hit; // 카메라 콜라이더용
     Vector3 tarCameraPolePosition;  // 3티어 카메라 거치대의 목표 로컬위치
     // 화면
@@ -56,19 +67,31 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     int curWeapon = 0;   // 현재 들고 있는 무기의 배열 번호
     bool isInterActionning; // 상호작용 중인지
     float lastInterActionBeginTime;  // 마지막 상호작용 시작 시간
+    // 조준
+    Transform aimTarget;    // 캐릭터가 조준하는 실제위치
+    Vector3 tarAimPoint;    // 캐릭터가 조준하는 목표위치
+    RaycastHit aimHit; // 화면 가운데에 레이를 쏴서 검출되는 정보
+    Ray ray;    // 화면 가운데에 쏠 레이
+    Vector3 screenCenter;   // 화면 가운데 지점 픽셀정보
     #endregion
 #region 콜백함수
     private void Start()
     {
         if(!photonView.IsMine) return ; // 이하 네트워크 통제 구역
 
+        playerMovement = GetComponent<PlayerMovement>();
+
+        aimTarget = transform.Find("AimPoint");
+
         cameraHolder = transform.Find("Camera Holder");
         recoil = cameraHolder.GetChild(0);
         cameraPole = recoil.GetChild(0);
         idleVirtualCam = GameObject.Find("Idle Virtual Camera");
-        idleVirtualCam.GetComponent<CinemachineVirtualCamera>().Follow = cameraPole.Find("idle pos").transform;;
+        idleVirtualCam.GetComponent<CinemachineVirtualCamera>().Follow = cameraPole.Find("idle pos").transform;
         zoomVirtualCam = GameObject.Find("Zoom Virtual Camera");
-        zoomVirtualCam.GetComponent<CinemachineVirtualCamera>().Follow = cameraPole.Find("zoom pos").transform;;
+        zoomVirtualCam.GetComponent<CinemachineVirtualCamera>().Follow = cameraPole.Find("zoom pos").transform;
+
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         // 하이어라키 상의 무기를 배열에 세팅
         foreach(Weapon weapon in weaponArray)
@@ -78,14 +101,16 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
         weaponArray[curWeapon].gameObject.SetActive(true);
 
         curScreenSpeed = m_screenNormalSpeed;
-        curCamHolderLocalPosition.y = m_idleCamHolderHeight;
-        cameraHolder.localPosition = curCamHolderLocalPosition;
+        tarCamHolderLocalPosition.y = m_idleCamHolderHeight;
+        cameraHolder.localPosition = tarCamHolderLocalPosition;
         playerInput = GetComponent<PlayerInput>(); 
     }
     private void Update()
     {
         if(!photonView.IsMine) return ; // 이하 네트워크 통제 구역
         
+        screenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+
         isZoomMode = playerInput.zoom;
 
         if(playerInput.fire) weaponArray[curWeapon].Fire(0);
@@ -110,8 +135,9 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     private void FixedUpdate() 
     {
         if(!photonView.IsMine) return ; // 이하 네트워크 통제 구역
+        if(aimTarget != null) Aim();
         RotateScreen();
-        SetScreenMode(); 
+        SetScreenHeight(); 
         RecoilScreen();
         CameraCollider();
     }
@@ -141,24 +167,29 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
         cameraHolder.localEulerAngles = angles;
     }
 
-    // 줌인/아웃 처리: 화면 모드에 따라 속도, 높이, 위치를 설정한다.
-    private void SetScreenMode()
+    // 카메라 높이 처리: 화면 모드와 캐릭터 앉기여부에 따라 속도, 높이, 위치를 설정한다.
+    private void SetScreenHeight()
     {
         idleVirtualCam.SetActive(!isZoomMode);  // 가상카메라 On/Off
 
-        // 화면 회전 속도, 카메라 홀더 높이 조절
-        if (!isZoomMode)    // idle 상태
+        // 카메라 속도 처리
+        if (!isZoomMode) { curScreenSpeed = m_screenNormalSpeed; }
+        else { curScreenSpeed = m_screenZoomSpeed; }
+
+        // 카메라 높이 세팅_앉기, 기본사격, 줌사격
+        if(playerMovement.isCrouch) // 앉기 상태
         {
-            curScreenSpeed = m_screenNormalSpeed;
-            curCamHolderLocalPosition.y = m_idleCamHolderHeight;
+            if(!isZoomMode) tarCamHolderLocalPosition.y = crouchIdleCameraHolderHeight;
+            else tarCamHolderLocalPosition.y = crouchZoomCameraHolderHeight;
         }
-        else    // zoom 상태
+        else    // 서있는 상태
         {
-           curScreenSpeed = m_screenZoomSpeed;
-            curCamHolderLocalPosition.y = m_zoomCamHolderHeught;
+            if(!isZoomMode) tarCamHolderLocalPosition.y = m_idleCamHolderHeight;
+            else tarCamHolderLocalPosition.y = m_zoomCamHolderHeught;
         }
-        cameraHolder.localPosition = curCamHolderLocalPosition;
         
+        tarCamHolderLocalPosition.y = Mathf.Lerp(cameraHolder.localPosition.y, tarCamHolderLocalPosition.y, cameraHeightSmooth);
+        cameraHolder.localPosition = tarCamHolderLocalPosition;
     }
     // 무기 반동 처리
     // 출처: https://www.youtube.com/watch?v=geieixA4Mqc
@@ -189,6 +220,19 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
         }
         
         cameraPole.localPosition = Vector3.Lerp(cameraPole.localPosition, tarCameraPolePosition, cameraPoleSpeed * Time.deltaTime);
+    }
+
+    // 카메라 가운데 지점을 조준점으로 설정한다.
+    void Aim(){
+        ray = mainCamera.ScreenPointToRay(screenCenter);
+        
+        if (Physics.Raycast(ray, out hit, maxGunRayDistance, aimLayer)) {
+            if(hit.distance > minAimDistance) tarAimPoint = hit.point;
+            else tarAimPoint = mainCamera.transform.position + mainCamera.transform.forward * maxGunRayDistance;
+        }
+        else tarAimPoint = mainCamera.transform.position + mainCamera.transform.forward * maxGunRayDistance;
+        
+        aimTarget.position = Vector3.Slerp(aimTarget.position, tarAimPoint, aimPointSmooth);
     }
     #endregion
     #region 무기
