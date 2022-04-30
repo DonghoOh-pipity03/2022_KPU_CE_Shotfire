@@ -724,6 +724,7 @@ GameObject:
   - component: {fileID: 5596406285412985386}
   - component: {fileID: 5596406285412985385}
   - component: {fileID: 4168991318271931823}
+  - component: {fileID: 7934664125931740186}
   - component: {fileID: 706556014673934}
   m_Layer: 8
   m_Name: Prototype Player
@@ -949,6 +950,7 @@ MonoBehaviour:
   crouchIdleCameraHolderHeight: 1.35
   crouchZoomCameraHolderHeight: 1.1
   maxGunRayDistance: 100
+  minAimDistance: 1.5
   aimPointSmooth: 0.1
   aimLayer:
     serializedVersion: 2
@@ -1026,6 +1028,19 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7934664125931740186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5596406285412985361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7974c67d4a190c4ebf36e44343756c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  room_nickname: {fileID: 1498954955}
 --- !u!114 &706556014673934
 MonoBehaviour:
   m_ObjectHideFlags: 0
