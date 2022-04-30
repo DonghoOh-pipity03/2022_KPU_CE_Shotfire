@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0810a3f69081b9744b9c6fc8a2f72a44, type: 3}
-  m_Name: MK-23
+  m_Name: C-22
   m_EditorClassIdentifier: 
-  weaponName: MK-23
+  weaponName: C-22
   havingFireMode: 03000000
   fireRPM: 400
   ballPerOneShot: 1
   maxSpread: 5
+  minSpread: 0
   recoilPerShot: 1
   recoilRecover: 1
   recoilHorizontal: {x: -1, y: 2}

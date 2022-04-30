@@ -31,8 +31,10 @@ public class EnemyData : ScriptableObject
     public int MinAttackCount => minAttackCount;
     [SerializeField] int maxAttackCount;   // 최대 공격 횟수
     public int MaxAttackCount => maxAttackCount;
-    [SerializeField] float engageDistance;  // 교전을 위한 이동 정지거리
-    public float EngageDistance => engageDistance;
+    [SerializeField] float minEngageDistance;  // 교전을 위한 최소 이동 정지거리
+    public float MinEngageDistance => minEngageDistance;
+    [SerializeField] float maxEngageDistance;  // 교전을 위한 최대 이동 정지거리
+    public float MaxEngageDistance => maxEngageDistance;
     [SerializeField] float melleeDistance; // 근접공격을 시작하는 거리
     public float MelleeDistance => melleeDistance;
     [SerializeField] float distanceTargetWeight;    // 공격 타겟 선정을 위한 거리별 가중치

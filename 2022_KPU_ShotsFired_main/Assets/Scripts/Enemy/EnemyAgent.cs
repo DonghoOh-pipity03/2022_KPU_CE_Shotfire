@@ -13,10 +13,16 @@ public enum AIState { dead, wait, move, engage }    // AI가 가질 수 있는 �
 class EnemyAgent : LivingEntity
 {
     private NavMeshAgent agent; // 경로 AI 에이전트
+    Animator animator;
     #region 전역 변수
     [SerializeField] EnemyData enemyData;   // 적 AI SO
     [SerializeField] Transform eyeTransform;    // 눈의 위치 정보
     [SerializeField] Weapon waepon; // AI가 사용하는 무기
+    [SerializeField] bool useRagDoll = false;   // 래그돌 사용여부
+    [SerializeField] GameObject animModel;  // 애니메이션을 사용하는 모델
+    [SerializeField] GameObject animMeshRoot;    // 애니메이션용 메쉬루트
+    [SerializeField] GameObject ragdollModel;   // 래그돌을 사용하는 모델
+    [SerializeField] GameObject ragdollMeshRoot;    // 래그돌용 메쉬루트
     [Header("이하 디버그용")]
     [SerializeField] LayerMask attackTarget;   // 공격 대상의 레이어
 
@@ -39,14 +45,18 @@ class EnemyAgent : LivingEntity
     int rayMask;    // 레이마스크
     float turnSmoothVelocity;   // 회전에 사용하는 변수
     float lastAttackTime;   // 마지막 공격 시간
+    float engageDistance;   // 교전 시작거리
     #endregion
     #region 콜백함수
     private void Awake()
     {
         SettingData();
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = enemyData.EngageDistance;
+        agent.baseOffset = -0.075f;
+        agent.stoppingDistance = enemyData.MelleeDistance;
         agent.speed = enemyData.MoveSpeed;
+        
+        engageDistance = UnityEngine.Random.Range(enemyData.MinEngageDistance, enemyData.MaxEngageDistance);
 
         rayMask = 1 << LayerMask.NameToLayer("Suppress");
         rayMask = ~rayMask;
@@ -58,11 +68,17 @@ class EnemyAgent : LivingEntity
         ChangeState(AIState.wait);
     }
 
+    private void Start() {
+        animator = GetComponent<Animator>();
+    }
+
     protected override void Update()
     {
         base.Update();
 
         if (useSign) sign.text = entityState.ToString() + "\n" + aiState.ToString();
+
+        if(animator != null) animator.SetFloat("MoveVertical", agent.velocity.magnitude / agent.speed);
     }
     #endregion
     #region 함수
@@ -86,7 +102,7 @@ class EnemyAgent : LivingEntity
     // 상태를 변경한다.
     private void ChangeState(AIState _state)
     {
-        if(AICroutine != null) StopCoroutine(aiState.ToString());
+        if(AICroutine != null) StopCoroutine(AICroutine);//aiState.ToString());
         aiState = _state;
         AICroutine = StartCoroutine(aiState.ToString());
     }
@@ -104,6 +120,7 @@ class EnemyAgent : LivingEntity
             {
                 if (players[i] != null)
                 {
+                    if(animator != null) animator.SetBool("Engage", true);
                     return AIState.move;
                 }
             }
@@ -116,7 +133,7 @@ class EnemyAgent : LivingEntity
             // 시야 내에 있고 교전거리 내에 있을 때: 전투
             for (int i = 0; i < 4; i++)
             {
-                if (isPlayerOnSight[i] == 1 && playerDistance[i] < enemyData.EngageDistance)
+                if (isPlayerOnSight[i] == 1 && playerDistance[i] < engageDistance)
                 {
                     return AIState.engage;
                 }
@@ -131,6 +148,19 @@ class EnemyAgent : LivingEntity
     {
         // 시작시 코드
         agent.enabled = false;
+
+        if(animator == null) yield break;
+        animator.SetBool("DeathBack", true);
+
+        if(!useRagDoll) yield break;    // 이하 레그돌 영역
+        var ragdollTime = UnityEngine.Random.Range(0f,.75f);
+        yield return new WaitForSeconds(ragdollTime);
+        CopyCharacterTransformToRagdoll(animModel.transform, ragdollModel.transform);
+        Destroy(animMeshRoot);
+        Destroy(animModel);
+        ragdollModel.SetActive(true);
+        ragdollMeshRoot.SetActive(true);
+
         // 수행중 코드
         yield break;
     }
@@ -339,6 +369,17 @@ class EnemyAgent : LivingEntity
             if(players[i] != null) playerState[i] = players[i].GetComponent<LivingEntity>();
         }
         ChangeState(AIState.move);
+    }
+
+    // 출처: https://www.youtube.com/watch?v=cTHceZpwGt4
+    private void CopyCharacterTransformToRagdoll(Transform from, Transform to){
+        for(int i = 0 ;  i < from.childCount; i++){
+            if(from.childCount != 0){
+                CopyCharacterTransformToRagdoll(from.GetChild(i), to.GetChild(i));
+            } 
+            to.GetChild(i).localPosition = from.GetChild(i).localPosition;
+            to.GetChild(i).localRotation = from.GetChild(i).localRotation;
+        }
     }
 #endregion
     #endregion
