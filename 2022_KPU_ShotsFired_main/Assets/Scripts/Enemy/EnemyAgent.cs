@@ -13,16 +13,18 @@ public enum AIState { dead, wait, move, engage }    // AI가 가질 수 있는 �
 class EnemyAgent : LivingEntity
 {
     private NavMeshAgent agent; // 경로 AI 에이전트
+    LineRenderer lineRenderer;
     Animator animator;
     #region 전역 변수
     [SerializeField] EnemyData enemyData;   // 적 AI SO
     [SerializeField] Transform eyeTransform;    // 눈의 위치 정보
-    [SerializeField] Weapon waepon; // AI가 사용하는 무기
+    [SerializeField] Weapon weapon; // AI가 사용하는 무기
     [SerializeField] bool useRagDoll = false;   // 래그돌 사용여부
     [SerializeField] GameObject animModel;  // 애니메이션을 사용하는 모델
     [SerializeField] GameObject animMeshRoot;    // 애니메이션용 메쉬루트
     [SerializeField] GameObject ragdollModel;   // 래그돌을 사용하는 모델
     [SerializeField] GameObject ragdollMeshRoot;    // 래그돌용 메쉬루트
+    [SerializeField] GameObject minimapHolder;  // 미니맵용 UI
     [Header("이하 디버그용")]
     [SerializeField] LayerMask attackTarget;   // 공격 대상의 레이어
 
@@ -64,12 +66,9 @@ class EnemyAgent : LivingEntity
     public override void OnEnable()
     {
         base.OnEnable();
-
-        ChangeState(AIState.wait);
-    }
-
-    private void Start() {
+        lineRenderer = GetComponent<LineRenderer>();
         animator = GetComponent<Animator>();
+        ChangeState(AIState.wait);
     }
 
     protected override void Update()
@@ -79,6 +78,18 @@ class EnemyAgent : LivingEntity
         if (useSign) sign.text = entityState.ToString() + "\n" + aiState.ToString();
 
         if(animator != null) animator.SetFloat("MoveVertical", agent.velocity.magnitude / agent.speed);
+
+        if( entityState != EntityState.dead){
+            lineRenderer.SetPosition(0, weapon.muzzlePosition.position);
+            ray.origin = weapon.muzzlePosition.position;
+            ray.direction = weapon.muzzlePosition.forward;
+            if( Physics.Raycast(ray, out hit, enemyData.EyeDistance, rayMask)){
+                lineRenderer.SetPosition(1, hit.point);
+            }
+            else{
+                lineRenderer.SetPosition(1, weapon.muzzlePosition.position + weapon.muzzlePosition.forward * enemyData.EyeDistance);
+            }
+        }
     }
     #endregion
     #region 함수
@@ -121,6 +132,7 @@ class EnemyAgent : LivingEntity
                 if (players[i] != null)
                 {
                     if(animator != null) animator.SetBool("Engage", true);
+                    if(lineRenderer != null) lineRenderer.enabled = true;
                     return AIState.move;
                 }
             }
@@ -129,7 +141,7 @@ class EnemyAgent : LivingEntity
         }
         // 이동 <-> 전투
         else
-        {
+        {   
             // 시야 내에 있고 교전거리 내에 있을 때: 전투
             for (int i = 0; i < 4; i++)
             {
@@ -151,6 +163,9 @@ class EnemyAgent : LivingEntity
 
         if(animator == null) yield break;
         animator.SetBool("DeathBack", true);
+
+        if(lineRenderer != null) lineRenderer.enabled = false;
+        if(minimapHolder != null) minimapHolder.SetActive(false);
 
         if(!useRagDoll) yield break;    // 이하 레그돌 영역
         var ragdollTime = UnityEngine.Random.Range(0f,.75f);
@@ -215,7 +230,7 @@ class EnemyAgent : LivingEntity
             if(aiState != newState) ChangeState(newState);
 
             Attack();
-            yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 #endregion
@@ -276,7 +291,6 @@ class EnemyAgent : LivingEntity
     // 방향을 입력 받아, 레이를 쏜다.
     private void ShotRay(Vector3 _dir)
     {
-        //ray = new Ray();
         ray.origin = eyeTransform.position;
         ray.direction = _dir;
         Physics.Raycast(ray, out hit, enemyData.EyeDistance, rayMask);
@@ -346,7 +360,7 @@ class EnemyAgent : LivingEntity
         if (Time.time > lastAttackTime + enemyData.AttackDelay)
         {
             int fireCount = UnityEngine.Random.Range(enemyData.MinAttackCount, enemyData.MaxAttackCount + 1);
-            if (useAttack) waepon.Fire(fireCount);
+            if (useAttack) weapon.Fire(fireCount);
             lastAttackTime = Time.time;
         }
         // 그렇지 않으면, 리턴
@@ -368,7 +382,8 @@ class EnemyAgent : LivingEntity
         {
             if(players[i] != null) playerState[i] = players[i].GetComponent<LivingEntity>();
         }
-        ChangeState(AIState.move);
+        ChangeState(Transition());
+
     }
 
     // 출처: https://www.youtube.com/watch?v=cTHceZpwGt4
