@@ -232,7 +232,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
         }
         else tarAimPoint = mainCamera.transform.position + mainCamera.transform.forward * maxGunRayDistance;
         
-        aimTarget.position = Vector3.Slerp(aimTarget.position, tarAimPoint, aimPointSmooth);
+        aimTarget.position = Vector3.Lerp(aimTarget.position, tarAimPoint, aimPointSmooth);
     }
     #endregion
     #region 무기

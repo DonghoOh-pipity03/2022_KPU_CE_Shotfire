@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0810a3f69081b9744b9c6fc8a2f72a44, type: 3}
-  m_Name: M1014
+  m_Name: AI_AK-74U
   m_EditorClassIdentifier: 
-  weaponName: m1014
-  havingFireMode: 03000000
-  fireRPM: 450
-  ballPerOneShot: 30
-  maxSpread: 10
-  minSpread: 3
-  recoilPerShot: 5
-  recoilRecover: 8
-  recoilHorizontal: {x: -1, y: 1}
-  recoilVertical: {x: -1, y: 1}
-  recoilZ: {x: 0, y: 0.1}
-  recoilMultipleInIdle: 0.75
-  magCappacity: 7
-  initMagCount: 35
-  reloadTime: 0.75
+  weaponName: Prototype AI Gun
+  havingFireMode: 00000000
+  fireRPM: 650
+  ballPerOneShot: 1
+  maxSpread: 5
+  minSpread: 1
+  recoilPerShot: 2.5
+  recoilRecover: 1
+  recoilHorizontal: {x: -0.5, y: 0.5}
+  recoilVertical: {x: 0.5, y: 0.5}
+  recoilZ: {x: 0.5, y: 0.5}
+  recoilMultipleInIdle: 1
+  magCappacity: 30
+  initMagCount: 100
+  reloadTime: 10
   useChamber: 1
-  useMag: 0
+  useMag: 1

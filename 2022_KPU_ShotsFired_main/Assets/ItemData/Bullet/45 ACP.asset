@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1327ebb079b0530418ee6c4e6edd4e2c, type: 3}
   m_Name: 45 ACP
   m_EditorClassIdentifier: 
-  bulletName: 45 ACP
-  damage: 35
+  bulletName: 9mm
+  damage: 20
   suppress: 5
   speed: 100
   lifeTime: 4

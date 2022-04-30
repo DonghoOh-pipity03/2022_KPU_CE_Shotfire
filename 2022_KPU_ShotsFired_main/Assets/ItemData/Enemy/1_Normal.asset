@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c685f082b9edc414881a550e353c5823, type: 3}
-  m_Name: Prototype Enemy
+  m_Name: 1_Normal
   m_EditorClassIdentifier: 
   enemyName: Prototype Enemy
   maxHealth: 100
   maxSuppress: 100
   unsuppressAmount: 5
   hitMultiple:
-  - 2
+  - 2.5
   - 1
   - 0.8
   - 0.8
-  eyeDistance: 5
+  eyeDistance: 20
   fieldOfView: 120
   attackDelay: 5
-  minAttackCount: 2
-  maxAttackCount: 3
-  minEngageDistance: 3
-  maxEngageDistance: 4
+  minAttackCount: 3
+  maxAttackCount: 5
+  minEngageDistance: 10
+  maxEngageDistance: 15
   melleeDistance: 1
   distanceTargetWeight: 1
   attackerTargetWeight: 10
