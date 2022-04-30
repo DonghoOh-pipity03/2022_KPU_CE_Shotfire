@@ -588,11 +588,6 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 8d2879801402c8c42b2cce075d91adac, type: 2}
   eyeTransform: {fileID: 3521314283167520451}
   waepon: {fileID: 3521314284300231723}
-  useRagDoll: 0
-  animModel: {fileID: 0}
-  animMeshRoot: {fileID: 0}
-  ragdollModel: {fileID: 0}
-  ragdollMeshRoot: {fileID: 0}
   attackTarget:
     serializedVersion: 2
     m_Bits: 256
