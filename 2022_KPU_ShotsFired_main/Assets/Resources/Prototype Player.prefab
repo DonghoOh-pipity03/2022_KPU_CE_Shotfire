@@ -949,6 +949,7 @@ MonoBehaviour:
   crouchIdleCameraHolderHeight: 1.35
   crouchZoomCameraHolderHeight: 1.1
   maxGunRayDistance: 100
+  minAimDistance: 1.5
   aimPointSmooth: 0.1
   aimLayer:
     serializedVersion: 2
