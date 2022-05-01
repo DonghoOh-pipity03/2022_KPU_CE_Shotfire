@@ -14,16 +14,26 @@ public class StageManager : MonoBehaviour
     [Header("마지막 스테이지 전용 세팅")]
 
     [SerializeField] bool useForLastStage;  // 게임이 최종적으로 끝나는 스테이지에서 사용할 것인지
+    [Header("적 정보")]
+    [SerializeField] List<GameObject> enemies;   // 해당 스테이지에 생성되어있는 적들의 게임오브젝트 리스트
     #endregion
     #region 전역 동작 변수
     private int curPlayerCountInRoom;   // 현재 세이프룸 인원
     private bool startedNextScene = false;  // 다음 씬의 로드가 시작되었는지 여부
-    List<GameObject> enemies;   // 해당 스테이지에 생존 중인 적들의 게임오브젝트 리스트
+    List<bool> aliveEnemy; // enemies 적들 중 생사여부
+    public int aliveEnemyCount;    // 살아있는 적들 수
     #endregion
 
+    private void OnEnable() {
+        aliveEnemy = new List<bool>( new bool[enemies.Count]);
+        for(int i = 0 ; i < aliveEnemy.Count; i++){
+            aliveEnemy[i] = true;
+        }
+        aliveEnemyCount = aliveEnemy.Count;
+    }
     private void Start() 
     {
-        enemies = new List<GameObject>();
+        //enemies = new List<GameObject>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -67,6 +77,8 @@ public class StageManager : MonoBehaviour
     public void AddAI(GameObject _AI)
     {
         enemies.Add(_AI);
+        aliveEnemy.Add(true);
+        aliveEnemyCount++;
     }
 
     public void DeleteAllAI()
@@ -75,5 +87,17 @@ public class StageManager : MonoBehaviour
         {
             if( i != null) Destroy(i, 0);
         }
+    }
+
+    public int GetAliveEnemyCount(){ 
+        
+        aliveEnemyCount=0;
+
+        for(int i = 0; i < aliveEnemy.Count; i++ ){
+            aliveEnemy[i] = enemies[i].GetComponent<EnemyAgent>().entityState == EntityState.dead ? false : true;
+            if(aliveEnemy[i] == true) aliveEnemyCount++;
+        }
+
+        return aliveEnemyCount;
     }
 }

@@ -17,11 +17,11 @@ MonoBehaviour:
   maxSuppress: 100
   unsuppressAmount: 5
   hitMultiple:
-  - 2.5
+  - 4
   - 1
   - 0.8
   - 0.8
-  eyeDistance: 20
+  eyeDistance: 25
   fieldOfView: 120
   attackDelay: 5
   minAttackCount: 3

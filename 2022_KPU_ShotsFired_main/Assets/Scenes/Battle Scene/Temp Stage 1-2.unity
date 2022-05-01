@@ -1111,10 +1111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86762d0cee320d24fb10e6674d09d72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageManager: {fileID: 0}
   enemies:
   - {fileID: 3521314284274100851, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
   respawnAmount: 02000000
   respawnTime: 5
+  maxEnemyCount: 6
+  developMode: 0
 --- !u!43 &1434064789
 Mesh:
   m_ObjectHideFlags: 0
@@ -2974,6 +2977,8 @@ MonoBehaviour:
   nextSceneName: Temp Stage 1-3
   prevSceneName: Temp Stage 1-1
   useForLastStage: 0
+  enemies: []
+  aliveEnemyCount: 0
 --- !u!65 &7412217132251414240
 BoxCollider:
   m_ObjectHideFlags: 0

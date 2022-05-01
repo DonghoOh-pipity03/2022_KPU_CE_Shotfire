@@ -25,7 +25,7 @@ MonoBehaviour:
   recoilZ: {x: 0, y: 0.1}
   recoilMultipleInIdle: 0.75
   magCappacity: 7
-  initMagCount: 35
+  initMagCount: 70
   reloadTime: 0.75
   useChamber: 1
   useMag: 0

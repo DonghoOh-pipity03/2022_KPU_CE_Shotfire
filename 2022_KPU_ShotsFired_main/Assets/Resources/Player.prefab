@@ -6585,7 +6585,7 @@ MonoBehaviour:
       m_Item7:
         transform: {fileID: 0}
         weight: 0
-    m_Offset: {x: 0, y: -1.46, z: 9.39}
+    m_Offset: {x: 0, y: -1.2, z: 9.2}
     m_MinLimit: -180
     m_MaxLimit: 180
     m_AimAxis: 1
@@ -7135,6 +7135,9 @@ MonoBehaviour:
   aimLayer:
     serializedVersion: 2
     m_Bits: 1152
+  laserLayer:
+    serializedVersion: 2
+    m_Bits: 17792
   laserPointer: {fileID: 2819182292847421807}
 --- !u!114 &7314911190920377185
 MonoBehaviour:
