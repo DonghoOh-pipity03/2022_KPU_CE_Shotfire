@@ -15,6 +15,6 @@ MonoBehaviour:
   bulletName: 9mm
   damage: 20
   suppress: 5
-  speed: 200
+  speed: 300
   lifeTime: 4
   gravityMultiple: 0.25

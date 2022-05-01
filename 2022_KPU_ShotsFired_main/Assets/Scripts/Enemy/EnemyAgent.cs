@@ -79,7 +79,7 @@ class EnemyAgent : LivingEntity
 
         if(animator != null) animator.SetFloat("MoveVertical", agent.velocity.magnitude / agent.speed);
 
-        if( entityState != EntityState.dead){
+        if( entityState != EntityState.dead && lineRenderer != null){
             lineRenderer.SetPosition(0, weapon.muzzlePosition.position);
             ray.origin = weapon.muzzlePosition.position;
             ray.direction = weapon.muzzlePosition.forward;

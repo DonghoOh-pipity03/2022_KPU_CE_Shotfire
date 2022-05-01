@@ -596,6 +596,8 @@ MonoBehaviour:
   nextSceneName: 
   prevSceneName: Temp Stage 1-3
   useForLastStage: 1
+  enemies: []
+  aliveEnemyCount: 6
 --- !u!65 &1390485643
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1329,6 +1331,8 @@ MonoBehaviour:
   nextSceneName: 
   prevSceneName: Temp Stage 1-2
   useForLastStage: 0
+  enemies: []
+  aliveEnemyCount: 0
 --- !u!114 &2179764444756516067
 MonoBehaviour:
   m_ObjectHideFlags: 0

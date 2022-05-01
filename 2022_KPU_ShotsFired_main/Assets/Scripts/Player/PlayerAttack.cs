@@ -45,6 +45,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     [SerializeField] float minAimDistance = 1.5f;   // 조준점 레이캐스트의 최소 유효거리
     [SerializeField] float aimPointSmooth = 0.1f;   // 조준점 위치 변경시 변경에 걸리는 시간
     [SerializeField] LayerMask aimLayer;    // 조준 감지에 사용할 레이어마스크
+    [SerializeField] LayerMask laserLayer;    // 레이저 조준에 사용할 레이어마스크
     [SerializeField] Transform laserPointer;    // 레이저 포인터의 끝부분
     #endregion
 
@@ -109,10 +110,11 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
+        if(lineRenderer != null){
         lineRenderer.SetPosition(0, weaponArray[curWeapon].muzzlePosition.position);
         ray.origin = weaponArray[curWeapon].muzzlePosition.position;
         ray.direction = weaponArray[curWeapon].muzzlePosition.forward;
-        if( Physics.Raycast(ray, out hit, maxGunRayDistance, aimLayer)){
+        if( Physics.Raycast(ray, out hit, maxGunRayDistance, laserLayer)){
             lineRenderer.SetPosition(1, hit.point);
             laserPointer.position = hit.point + weaponArray[curWeapon].muzzlePosition.forward * -0.01f;
         }
@@ -121,7 +123,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
             laserPointer.position = weaponArray[curWeapon].muzzlePosition.position + weaponArray[curWeapon].muzzlePosition.forward * maxGunRayDistance
                                     + weaponArray[curWeapon].muzzlePosition.forward * -0.01f;;
         }
-
+        }
 
         if(!photonView.IsMine) return ; // 이하 네트워크 통제 구역
         

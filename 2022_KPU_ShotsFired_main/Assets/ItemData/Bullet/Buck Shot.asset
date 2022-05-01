@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Buck Shot
   m_EditorClassIdentifier: 
   bulletName: Buck Shot
-  damage: 10
+  damage: 7
   suppress: 2
-  speed: 300
+  speed: 450
   lifeTime: 1
   gravityMultiple: 0.2

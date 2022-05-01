@@ -11,7 +11,8 @@ public class AIManager : MonoBehaviourPunCallbacks
     [SerializeField] GameObject[] enemies;  // 소한될 적 프리팹 배열
     [SerializeField] int[] respawnAmount;   // 리스폰 양 배열
     [SerializeField] float respawnTime; // 리스폰 주기
-    public bool developMode = false;    // 개발모드여부
+    [SerializeField] int maxEnemyCount; // 이 숫자 이상으로 적이 스테이지 내에 생존해 있다면, 리스폰시키지 않는다.
+    [SerializeField] bool developMode = false;    // 개발모드여부
     float lastRespawnTime;  // 마지막 리스폰 시간
     bool isUsed;    // 활성화 되었었는지 여부
     
@@ -34,7 +35,9 @@ public class AIManager : MonoBehaviourPunCallbacks
     }
 
     private void RespawnAI()
-    {
+    {   
+        if(stageManager.GetAliveEnemyCount() >= maxEnemyCount) return;
+
         // 개발모드
         if(developMode){
             lastRespawnTime = Time.time;

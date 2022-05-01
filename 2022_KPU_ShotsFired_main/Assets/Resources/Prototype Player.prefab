@@ -955,6 +955,10 @@ MonoBehaviour:
   aimLayer:
     serializedVersion: 2
     m_Bits: 0
+  laserLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  laserPointer: {fileID: 0}
 --- !u!114 &5596406285412985386
 MonoBehaviour:
   m_ObjectHideFlags: 0
