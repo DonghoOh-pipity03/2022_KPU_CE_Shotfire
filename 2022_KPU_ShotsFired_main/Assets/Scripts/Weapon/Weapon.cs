@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviourPunCallbacks
     PlayerAttack playerAttack;
     [SerializeField] WeaponData weaponData; // 총기 SO
     [SerializeField] Bullet bulletPrefab;  // 총알 프리팹
-    [SerializeField] Transform muzzlePosition; // 총구 위치
+    public Transform muzzlePosition; // 총구 위치
 
     #region 전역 변수
     [Header("이하 디버그용")]
