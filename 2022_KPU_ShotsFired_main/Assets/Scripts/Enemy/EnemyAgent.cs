@@ -25,6 +25,8 @@ class EnemyAgent : LivingEntity
     [SerializeField] GameObject ragdollModel;   // 래그돌을 사용하는 모델
     [SerializeField] GameObject ragdollMeshRoot;    // 래그돌용 메쉬루트
     [SerializeField] GameObject minimapHolder;  // 미니맵용 UI
+    [SerializeField] LayerMask sightLayer;  // 시야용 레이어
+    [SerializeField] LayerMask laserLayer;  // 레이저용 레이어
     [Header("이하 디버그용")]
     [SerializeField] LayerMask attackTarget;   // 공격 대상의 레이어
 
@@ -69,8 +71,12 @@ class EnemyAgent : LivingEntity
         lineRenderer = GetComponent<LineRenderer>();
         animator = GetComponent<Animator>();
         ChangeState(AIState.wait);
+        Application.onBeforeRender += DrawLaser;
     }
-
+    public override void OnDisable() {
+        base.OnDisable();
+        Application.onBeforeRender -= DrawLaser;
+    }
     protected override void Update()
     {
         base.Update();
@@ -78,18 +84,9 @@ class EnemyAgent : LivingEntity
         if (useSign) sign.text = entityState.ToString() + "\n" + aiState.ToString();
 
         if(animator != null) animator.SetFloat("MoveVertical", agent.velocity.magnitude / agent.speed);
-
-        if( entityState != EntityState.dead && lineRenderer != null){
-            lineRenderer.SetPosition(0, weapon.muzzlePosition.position);
-            ray.origin = weapon.muzzlePosition.position;
-            ray.direction = weapon.muzzlePosition.forward;
-            if( Physics.Raycast(ray, out hit, enemyData.EyeDistance, rayMask)){
-                lineRenderer.SetPosition(1, hit.point);
-            }
-            else{
-                lineRenderer.SetPosition(1, weapon.muzzlePosition.position + weapon.muzzlePosition.forward * enemyData.EyeDistance);
-            }
-        }
+    }
+    private void LateUpdate() {
+        DrawLaser();
     }
     #endregion
     #region 함수
@@ -293,7 +290,7 @@ class EnemyAgent : LivingEntity
     {
         ray.origin = eyeTransform.position;
         ray.direction = _dir;
-        Physics.Raycast(ray, out hit, enemyData.EyeDistance, rayMask);
+        Physics.Raycast(ray, out hit, enemyData.EyeDistance, sightLayer);
     }
 
 #if UNITY_EDITOR
@@ -394,6 +391,20 @@ class EnemyAgent : LivingEntity
             } 
             to.GetChild(i).localPosition = from.GetChild(i).localPosition;
             to.GetChild(i).localRotation = from.GetChild(i).localRotation;
+        }
+    }
+
+    void DrawLaser(){
+        if( entityState != EntityState.dead && lineRenderer != null){
+            lineRenderer.SetPosition(0, weapon.muzzlePosition.position);
+            ray.origin = weapon.muzzlePosition.position;
+            ray.direction = weapon.muzzlePosition.forward;
+            if( Physics.Raycast(ray, out hit, enemyData.EyeDistance, laserLayer)){
+                lineRenderer.SetPosition(1, hit.point);
+            }
+            else{
+                lineRenderer.SetPosition(1, weapon.muzzlePosition.position + weapon.muzzlePosition.forward * enemyData.EyeDistance);
+            }
         }
     }
 #endregion

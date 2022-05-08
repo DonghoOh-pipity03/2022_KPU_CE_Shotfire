@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 35
     OrthographicSize: 10
-    NearClipPlane: 0.1
+    NearClipPlane: 0.001
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
@@ -339,7 +339,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 12
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0

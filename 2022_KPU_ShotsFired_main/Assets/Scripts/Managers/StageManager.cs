@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
     [Tooltip("사용을 원하지 않으면 공백으로 두기")]
     [SerializeField] private string nextSceneName;  // 다음 스테이지 씬 이름
     [SerializeField] private string prevSceneName;  // 이전 스테이지 씬 이름
+    [SerializeField] Door door; // 이전 스테이지로의 방향을 막는 문 오브젝트
     [Header("마지막 스테이지 전용 세팅")]
 
     [SerializeField] bool useForLastStage;  // 게임이 최종적으로 끝나는 스테이지에서 사용할 것인지
@@ -30,6 +31,8 @@ public class StageManager : MonoBehaviour
             aliveEnemy[i] = true;
         }
         aliveEnemyCount = aliveEnemy.Count;
+        var doorObject = this.transform.root.Find("Door");
+        if(doorObject != null) door = doorObject.GetComponent<Door>();
     }
     private void Start() 
     {
@@ -58,6 +61,7 @@ public class StageManager : MonoBehaviour
         {
             if (!useForLastStage)    // 일반 스테이지일 때
             {
+                if(door != null) door.SetDoor();
                 if (nextSceneName != "") StartCoroutine(GameSceneManager.Instance.AddSceneWithAsync(nextSceneName));    // 다음 씬로딩
                 if (prevSceneName != "") GameObject.Find(prevSceneName).transform.Find("SafeRoom Trigger").GetComponent<StageManager>().DeleteAllAI(); // 이전 씬의 AI 삭제
                 if (prevSceneName != "") StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName)); // 이전 씬삭제

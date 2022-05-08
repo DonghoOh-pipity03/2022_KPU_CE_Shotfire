@@ -77,6 +77,14 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     Vector3 screenCenter;   // 화면 가운데 지점 픽셀정보
     #endregion
 #region 콜백함수
+public override void OnEnable() {
+    base.OnEnable();
+    Application.onBeforeRender += DrawLaser;
+}
+public override void OnDisable() {
+    base.OnDisable();
+    Application.onBeforeRender -= DrawLaser;
+}
     private void Start()
     {
         if(!photonView.IsMine) return ; // 이하 네트워크 통제 구역
@@ -108,23 +116,9 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
         cameraHolder.localPosition = tarCamHolderLocalPosition;
         playerInput = GetComponent<PlayerInput>(); 
     }
+
     private void Update()
     {
-        if(lineRenderer != null){
-        lineRenderer.SetPosition(0, weaponArray[curWeapon].muzzlePosition.position);
-        ray.origin = weaponArray[curWeapon].muzzlePosition.position;
-        ray.direction = weaponArray[curWeapon].muzzlePosition.forward;
-        if( Physics.Raycast(ray, out hit, maxGunRayDistance, laserLayer)){
-            lineRenderer.SetPosition(1, hit.point);
-            laserPointer.position = hit.point + weaponArray[curWeapon].muzzlePosition.forward * -0.01f;
-        }
-        else{
-            lineRenderer.SetPosition(1, weaponArray[curWeapon].muzzlePosition.position + weaponArray[curWeapon].muzzlePosition.forward * maxGunRayDistance);
-            laserPointer.position = weaponArray[curWeapon].muzzlePosition.position + weaponArray[curWeapon].muzzlePosition.forward * maxGunRayDistance
-                                    + weaponArray[curWeapon].muzzlePosition.forward * -0.01f;;
-        }
-        }
-
         if(!photonView.IsMine) return ; // 이하 네트워크 통제 구역
         
         screenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
@@ -150,14 +144,18 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
 
         ChangeWeaponCommand();
     }
+
+    private void LateUpdate() {
+        DrawLaser();
+    }
     private void FixedUpdate() 
     {
         if(!photonView.IsMine) return ; // 이하 네트워크 통제 구역
-        if(aimTarget != null) Aim();
         RotateScreen();
         SetScreenHeight(); 
         RecoilScreen();
         CameraCollider();
+        if(aimTarget != null) Aim();
     }
 #endregion
 #region 함수
@@ -227,8 +225,8 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
 
     // 카메라 콜라이더
     private void CameraCollider()
-    {   Debug.DrawRay(recoil.position, cameraPole.forward * -1, Color.red, 1f);
-        if(Physics.SphereCast(recoil.position, 0.5f, cameraPole.forward * -1, out hit, 1.25f, cameraCollider, QueryTriggerInteraction.Ignore))
+    {   Debug.DrawRay(recoil.position, cameraPole.forward * -1.5f, Color.red, 1f);
+        if(Physics.SphereCast(recoil.position, 0.15f, cameraPole.forward * -1, out hit, 1.25f, cameraCollider, QueryTriggerInteraction.Ignore))
         {
             tarCameraPolePosition = new Vector3(0,0, -1 * hit.distance + 0.25f);
         }
@@ -310,6 +308,23 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
             isInterActionning = false;
            if(photonView.IsMine) GameUIManager.Instance.SetActiveInterAction(false);
         }
+    }
+    // 레이더 그리기
+    private void DrawLaser(){
+        if(lineRenderer != null){
+        lineRenderer.SetPosition(0, weaponArray[curWeapon].muzzlePosition.position);
+        ray.origin = weaponArray[curWeapon].muzzlePosition.position;
+        ray.direction = weaponArray[curWeapon].muzzlePosition.forward;
+        if( Physics.Raycast(ray, out hit, maxGunRayDistance, laserLayer)){
+            lineRenderer.SetPosition(1, hit.point);
+            laserPointer.position = hit.point + weaponArray[curWeapon].muzzlePosition.forward * -0.01f;
+        }
+        else{
+            lineRenderer.SetPosition(1, weaponArray[curWeapon].muzzlePosition.position + weaponArray[curWeapon].muzzlePosition.forward * maxGunRayDistance);
+            laserPointer.position = weaponArray[curWeapon].muzzlePosition.position + weaponArray[curWeapon].muzzlePosition.forward * maxGunRayDistance
+                                    + weaponArray[curWeapon].muzzlePosition.forward * -0.01f;;
+        }
+        }   
     }
     #endregion
 #endregion

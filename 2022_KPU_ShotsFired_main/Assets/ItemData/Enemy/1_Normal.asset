@@ -17,7 +17,7 @@ MonoBehaviour:
   maxSuppress: 100
   unsuppressAmount: 5
   hitMultiple:
-  - 4
+  - 2.5
   - 1
   - 0.8
   - 0.8
