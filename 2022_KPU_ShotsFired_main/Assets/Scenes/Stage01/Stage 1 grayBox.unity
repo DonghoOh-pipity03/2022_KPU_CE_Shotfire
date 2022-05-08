@@ -184,8 +184,8 @@ MonoBehaviour:
   renderSettingsHackEmissiveBoost: 1
   renderSettingsHackIndirectBoost: 1
   renderSettingsTempPath: 
-  renderSettingsOutPath: Scenes/Stage01/Stage 1-1
-  renderSettingsUseScenePath: 1
+  renderSettingsOutPath: BakeryLightmaps
+  renderSettingsUseScenePath: 0
   renderSettingsHackAOIntensity: 0
   renderSettingsHackAOSamples: 16
   renderSettingsHackAORadius: 1
@@ -227,20 +227,20 @@ MonoBehaviour:
   renderSettingsRTPVSceneView: 0
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
-  lastBakeTime: 18
+  lastBakeTime: 149
   enlightenWarningShown: 0
   enlightenWarningShown2: 0
   lightUIDs: 
   lights: []
   implicitGroups:
-  - {fileID: 1773922151}
-  - {fileID: 1773922151}
-  - {fileID: 1773922151}
-  - {fileID: 1773922151}
-  - {fileID: 1773922151}
-  - {fileID: 1773922151}
-  - {fileID: 1773922151}
-  - {fileID: 1773922151}
+  - {fileID: 910549648}
+  - {fileID: 910549648}
+  - {fileID: 910549648}
+  - {fileID: 910549648}
+  - {fileID: 910549648}
+  - {fileID: 910549648}
+  - {fileID: 910549648}
+  - {fileID: 910549648}
   implicitGroupedObjects:
   - {fileID: 411208378}
   - {fileID: 450404376}
@@ -287,11 +287,11 @@ MonoBehaviour:
     padding: 220000004800000056000000
     unwrapper: 000000000000000000000000
   maps:
-  - {fileID: 2800000, guid: 4f3fa38f245912640bdf9ddca2338394, type: 3}
-  - {fileID: 2800000, guid: 307159bcee63360458eee45c3ef5353e, type: 3}
-  - {fileID: 2800000, guid: d215cc4c0e505ed408e9359e9e8b89de, type: 3}
-  - {fileID: 2800000, guid: 494d66f4b6d0ec04fa5d9e9bf1ac9987, type: 3}
-  - {fileID: 2800000, guid: bc0667353f1b67940b703ee87c2cb976, type: 3}
+  - {fileID: 2800000, guid: cdbb7419df8d4e540b47ac08d7eec529, type: 3}
+  - {fileID: 2800000, guid: 76c2e7b7e79a9354e97bed1f32d64667, type: 3}
+  - {fileID: 2800000, guid: a9f35c450c58384408e432088a826802, type: 3}
+  - {fileID: 2800000, guid: e26d4dbe9ceea9a4ca894e0cbc23f3bd, type: 3}
+  - {fileID: 2800000, guid: f31fc744b1bbd5b46a019ec078ff822e, type: 3}
   masks: []
   dirMaps: []
   rnmMaps0: []
@@ -343,12 +343,11 @@ MonoBehaviour:
   sectors:
   - name: $G
     maps:
-    - {fileID: 2800000, guid: 94cce9abeaa555843a736cd338faa3b2, type: 3}
-    - {fileID: 2800000, guid: 8e744691223750d4c96951248d36904d, type: 3}
-    - {fileID: 2800000, guid: cdc4949e48aa64949a9b9f5a533e5a4b, type: 3}
-    - {fileID: 2800000, guid: 6ad3e5437ef05474e99ff80e7ab00992, type: 3}
-    - {fileID: 2800000, guid: a102dfd819ccf2844a5319ac2659c501, type: 3}
-    - {fileID: 2800000, guid: 4f5390686d5de8d4fb4f52aa280ccdfb, type: 3}
+    - {fileID: 2800000, guid: 4f3fa38f245912640bdf9ddca2338394, type: 3}
+    - {fileID: 2800000, guid: 307159bcee63360458eee45c3ef5353e, type: 3}
+    - {fileID: 2800000, guid: d215cc4c0e505ed408e9359e9e8b89de, type: 3}
+    - {fileID: 2800000, guid: 494d66f4b6d0ec04fa5d9e9bf1ac9987, type: 3}
+    - {fileID: 2800000, guid: bc0667353f1b67940b703ee87c2cb976, type: 3}
     masks: []
     dirMaps: []
     rnmMaps0: []
@@ -365,17 +364,17 @@ MonoBehaviour:
     - {fileID: 1957525795}
     - {fileID: 1969865603}
     bakedRenderersTerrain: []
-    bakedIDs: 0100000000000000000000000000000000000000000000000000000001000000
+    bakedIDs: 0100000001000000010000000100000001000000010000000100000001000000
     bakedIDsTerrain: 
     bakedScaleOffset:
-    - {x: 0.52372503, y: 1.0310668, z: -0.010474502, w: -0.020621339}
-    - {x: 0.20643345, y: 0.2083301, z: 0.7986258, w: -0.004166602}
-    - {x: 0.2062749, y: 0.2073952, z: 0.7907589, w: 0.79230356}
-    - {x: 0.31368303, y: 0.31374043, z: -0.001272225, w: 0.795179}
-    - {x: 0.20627496, y: 0.2073952, z: 0.59007025, w: 0.79230356}
-    - {x: 0.8094688, y: 0.81069934, z: 0, w: 0}
-    - {x: 0.28196782, y: 0.283354, z: 0.31169456, w: 0.7953022}
-    - {x: 0.52372503, y: 1.0310668, z: 0.49105453, w: -0.020621339}
+    - {x: 0.1847494, y: 0.18479225, z: 0.5898888, w: 0.17880896}
+    - {x: 0.15040085, y: 0.15033743, z: 0.7686036, w: 0.2931353}
+    - {x: 0.14995524, y: 0.14992476, z: 0.5905847, w: 0.3609176}
+    - {x: 0.2289889, y: 0.22782129, z: 0.7706828, w: 0.00016949573}
+    - {x: 0.14995524, y: 0.14992476, z: 0.7686125, w: 0.14808787}
+    - {x: 0.5963369, y: 0.5963159, z: 0.0010934857, w: 0.0010934857}
+    - {x: 0.20656332, y: 0.20539571, z: 0.7707738, w: 0.43726975}
+    - {x: 0.18474942, y: 0.18479227, z: 0.5898888, w: -0.0026023597}
     bakedScaleOffsetTerrain: []
     bakedVertexColorMesh:
     - {fileID: 0}
@@ -4448,7 +4447,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1942020
+  m_Name: pb_Mesh2495154
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4612,7 +4611,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1942056
+  m_Name: pb_Mesh2495190
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4776,7 +4775,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1942118
+  m_Name: pb_Mesh2495252
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8213,6 +8212,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &910549648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Stage 1 grayBox_LMA1
+  m_EditorClassIdentifier: 
+  resolution: 4096
+  bitmask: 1
+  id: 1
+  sortingID: 1
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Stage 1 grayBox
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &1081368282 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8645399857377353335, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
@@ -15080,54 +15120,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a20debef9fa2ba499fad30abd6addb5, type: 3}
---- !u!114 &1773922151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: Stage 1 grayBox_LMA1
-  m_EditorClassIdentifier: 
-  resolution: 4096
-  bitmask: 1
-  id: 1
-  sortingID: 1
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: Stage 1 grayBox
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!43 &1787894917
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1942214
+  m_Name: pb_Mesh2495348
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15390,7 +15389,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1942034
+  m_Name: pb_Mesh2495168
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17596,7 +17595,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1942170
+  m_Name: pb_Mesh2495304
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
