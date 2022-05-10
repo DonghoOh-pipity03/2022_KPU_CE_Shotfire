@@ -15,6 +15,7 @@ class EnemyAgent : LivingEntity
     private NavMeshAgent agent; // 경로 AI 에이전트
     LineRenderer lineRenderer;
     Animator animator;
+    public StageManager stageManager;
     #region 전역 변수
     [SerializeField] EnemyData enemyData;   // 적 AI SO
     [SerializeField] Transform eyeTransform;    // 눈의 위치 정보
@@ -35,7 +36,7 @@ class EnemyAgent : LivingEntity
     [SerializeField] bool useAttack = true;   // 개발용, 공격을 하는지 여부
     #endregion
     #region 전역 동작변수
-    private AIState aiState;  // AI의 경계상태
+    [HideInInspector] public AIState aiState;  // AI의 경계상태
     Coroutine AICroutine;   // AI FSM의 행동을 실행하는 코루틴
     int[] isPlayerOnSight = new int[4]; // 플레이어가 시야 내에 보이는지 여부
     GameObject[] players = new GameObject[4];   // 플레이어들의 게임 오브젝트 정보
@@ -157,6 +158,7 @@ class EnemyAgent : LivingEntity
     {
         // 시작시 코드
         agent.enabled = false;
+        if(stageManager != null) stageManager.GetAliveEnemyCount();
 
         if(animator == null) yield break;
         animator.SetBool("DeathBack", true);

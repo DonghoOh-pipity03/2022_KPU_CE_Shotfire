@@ -66,6 +66,7 @@ public class AIManager : MonoBehaviourPunCallbacks
                 var obj = PhotonNetwork.Instantiate(enemies[i].name , transform.position, transform.rotation);
                 SceneManager.MoveGameObjectToScene(obj, gameObject.scene);
                 obj.GetComponent<EnemyAgent>().SetAlert();
+                obj.GetComponent<EnemyAgent>().stageManager = stageManager;
                 stageManager.AddAI(obj);
             }
         }
