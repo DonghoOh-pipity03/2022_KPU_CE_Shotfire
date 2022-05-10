@@ -45,6 +45,7 @@ MonoBehaviour:
   - game_end
   - update_lobby
   - ChatRPC
+  - ready_count
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
