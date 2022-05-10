@@ -33,6 +33,10 @@ namespace PhotonInit
             Lobby_position.Add(new Vector3(50.5f, 1.5f, 0.5f));
             Lobby_position.Add(new Vector3(52.0f, 1.5f, 0.5f));
             Lobby_position.Add(new Vector3(53.5f, 1.5f, 0.5f));
+            Lobby_position.Add(new Vector3(49.0f, 1.0f, 0.5f));
+            Lobby_position.Add(new Vector3(50.5f, 1.0f, 0.5f));
+            Lobby_position.Add(new Vector3(52.0f, 1.0f, 0.5f));
+            Lobby_position.Add(new Vector3(53.5f, 1.0f, 0.5f));
             UI_delete_map();
             UI_delete();
             UI_Select(MainHome_UI,MainHome_Map);
@@ -47,6 +51,9 @@ namespace PhotonInit
         private List<GameObject> playerTemps = new List<GameObject>();
         private List<GameObject> playerProtypes = new List<GameObject>();
         private bool isConnecting;
+        private List<GameObject> Readys = new List<GameObject>();
+        private bool isReady = false;
+        private int readycnt = 0;
 
 
         #endregion
@@ -133,6 +140,7 @@ namespace PhotonInit
 
         public void JoinRoom()
         {
+            readycnt = 0;
             if(string.IsNullOrEmpty(roomname.text))
             {
                 return ;
@@ -142,6 +150,7 @@ namespace PhotonInit
         }
         public void createRoom()
         {
+            readycnt = 0;
             if(string.IsNullOrEmpty(roomname.text))
             {
                 return ;
@@ -153,7 +162,14 @@ namespace PhotonInit
         public void escRoom()
         {
             if(PhotonNetwork.IsConnected)
+            {
+                /*if(isReady == true)
+                {
+                    isReady = false;
+                    base.photonView.RPC("ready_count", RpcTarget.AllBuffered, isReady);
+                }*/
                 PhotonNetwork.LeaveRoom();
+            }
         }
         public void MyListRenewal()
         {
@@ -213,6 +229,91 @@ namespace PhotonInit
             Debug.LogFormat("Cnt : {0}", cnt);
             playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[cnt],Quaternion.identity));
         }
+        public void update_ready()
+        {
+            int cnt = 4;
+            foreach(GameObject Ready in Readys)
+            {
+                if(Ready == null)
+                {
+                    //Debug.LogFormat("Continue");
+                    continue;
+                }
+                PhotonNetwork.Destroy(Ready);
+            }
+            if(PhotonNetwork.IsMasterClient)
+            {
+                if(isReady == false)
+                {
+                    isReady = true;
+                    base.photonView.RPC("ready_count", RpcTarget.AllBuffered, isReady);
+                    cnt = 4;
+                    Readys.Add(PhotonNetwork.Instantiate("Ready", Lobby_position[cnt],Quaternion.identity));
+                }
+                else
+                {
+                    isReady = false;
+                    base.photonView.RPC("ready_count", RpcTarget.AllBuffered, isReady);
+                }
+            }
+            else if(PhotonNetwork.MasterClient.GetNext() == PhotonNetwork.LocalPlayer)
+            {
+                if(isReady == false)
+                {
+                    isReady = true;
+                    base.photonView.RPC("ready_count", RpcTarget.AllBuffered, isReady);
+                    cnt = 5;
+                    Readys.Add(PhotonNetwork.Instantiate("Ready", Lobby_position[cnt],Quaternion.identity));
+                }
+                else
+                {
+                    isReady = false;
+                    base.photonView.RPC("ready_count", RpcTarget.AllBuffered, isReady);
+                }
+            }
+            else if(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()) == PhotonNetwork.LocalPlayer)
+            {
+                if(isReady == false)
+                {
+                    isReady = true;
+                    base.photonView.RPC("ready_count", RpcTarget.AllBuffered, isReady);
+                    cnt = 6;
+                    Readys.Add(PhotonNetwork.Instantiate("Ready", Lobby_position[cnt],Quaternion.identity));
+                }
+                else
+                {
+                    isReady = false;
+                    base.photonView.RPC("ready_count", RpcTarget.AllBuffered, isReady);
+                }
+            }
+            else if(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext())) == PhotonNetwork.LocalPlayer)
+            {
+                if(isReady == false)
+                {
+                    isReady = true;
+                    base.photonView.RPC("ready_count", RpcTarget.AllBuffered, isReady);
+                    cnt = 7;
+                    Readys.Add(PhotonNetwork.Instantiate("Ready", Lobby_position[cnt],Quaternion.identity));
+                }
+                else
+                {
+                    isReady = false;
+                    base.photonView.RPC("ready_count", RpcTarget.AllBuffered, isReady);
+                }
+            }
+        }
+        public void cancel_ready()
+        {
+            foreach(GameObject Ready in Readys)
+            {
+                if(Ready == null)
+                {
+                    //Debug.LogFormat("Continue");
+                    continue;
+                }
+                PhotonNetwork.Destroy(Ready);
+            }
+        }
         public void send_msg()
         {
             if(ChatInput.text != "")
@@ -223,10 +324,15 @@ namespace PhotonInit
         }   
         public void start_game()
         {
+            update_ready();
             if(PhotonNetwork.IsMasterClient)
             {
-                base.photonView.RPC("game_start",RpcTarget.All);
+                if(readycnt == PhotonNetwork.CurrentRoom.PlayerCount)
+                {
+                    base.photonView.RPC("game_start",RpcTarget.All);
+                }
             }
+            
         }
         public void end_game()
         {
@@ -291,6 +397,7 @@ namespace PhotonInit
             UI_delete();
             UI_delete_map();
             UI_Select(Lobby_UI, Lobby_Map);
+            isReady = false;
             Lobby_roomName.text = "Room info : "+ PhotonNetwork.CurrentRoom.Name;
             ChatInput.text = "";
             for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
@@ -313,6 +420,9 @@ namespace PhotonInit
         public override void OnPlayerLeftRoom(Player other)
         {
             Debug.LogFormat("Player Left {0}", other.NickName);
+            isReady = false;
+            cancel_ready();
+            readycnt = 0;
             ChatRPC("<color=yellow>Player Left " + other.NickName + "</color>");
             update_room();
         }
@@ -337,6 +447,24 @@ namespace PhotonInit
             }
         }
         [PunRPC]
+        void ready_count(bool isReadyCheck)
+        {
+            if(isReadyCheck == true)
+            {
+                readycnt++;
+                Debug.Log("레디 카운트 : " + readycnt);
+            }
+            else if(isReadyCheck == false)
+            {
+                readycnt--;
+                Debug.Log("레디 카운트 : " + readycnt);
+            }
+            else
+            {
+                //작업 없음
+            }
+        }
+        [PunRPC]
         void game_start()
         {
             UI_delete();
@@ -346,6 +474,11 @@ namespace PhotonInit
             SceneManager.LoadScene("Temp Stage 1-1", LoadSceneMode.Additive);
             foreach(GameObject playerTemp in playerTemps)
             {
+                if(playerTemp == null)
+                {
+                    //Debug.LogFormat("Continue");
+                    continue;
+                }
                 PhotonNetwork.Destroy(playerTemp);
             }
             Vector3 pos = new Vector3(Random.Range(99.3f,100.3f),Random.Range(-0.3f,0.3f),1.0f);
