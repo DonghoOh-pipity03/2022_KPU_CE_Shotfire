@@ -157,6 +157,12 @@ MonoBehaviour:
   ragdollModel: {fileID: 979377291861922425}
   ragdollMeshRoot: {fileID: 979377291059957060}
   minimapHolder: {fileID: 5455167038978632000}
+  sightLayer:
+    serializedVersion: 2
+    m_Bits: 384
+  laserLayer:
+    serializedVersion: 2
+    m_Bits: 384
   attackTarget:
     serializedVersion: 2
     m_Bits: 256
@@ -271,7 +277,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.01
+    widthMultiplier: 0.005
     widthCurve:
       serializedVersion: 2
       m_Curve:

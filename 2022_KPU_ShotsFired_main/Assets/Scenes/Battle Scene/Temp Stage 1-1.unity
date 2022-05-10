@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37602
+  m_Name: pb_Mesh8246158
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -293,7 +293,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37626
+  m_Name: pb_Mesh8246182
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -451,13 +451,48 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &483450705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483450706}
+  m_Layer: 7
+  m_Name: Temp Stage 1-1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &483450706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483450705}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 923308457}
+  - {fileID: 1470189010}
+  - {fileID: 1544152044}
+  - {fileID: 1011040609}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &590284551
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37636
+  m_Name: pb_Mesh8246192
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -624,12 +659,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 923308457}
-  m_Layer: 0
-  m_Name: Temp Stage 1-1
+  - component: {fileID: 923308459}
+  - component: {fileID: 923308458}
+  m_Layer: 7
+  m_Name: SafeRoom Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &923308457
 Transform:
@@ -638,18 +675,45 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923308456}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2533387560381290480}
-  - {fileID: 1470189010}
-  - {fileID: 1544152044}
-  - {fileID: 1011040609}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 483450706}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &923308458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923308456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c804aeecfb56c0145b9cf69695fc012e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneName: Temp Stage 1-2
+  prevSceneName: 
+  useForLastStage: 0
+  enemies:
+  - {fileID: 926493530}
+  aliveEnemyCount: 0
+--- !u!65 &923308459
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923308456}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 7, z: 10}
+  m_Center: {x: 0, y: 3.5, z: 0}
 --- !u!1001 &926493529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -707,10 +771,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4991001191893788907, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
       propertyPath: sceneViewId
-      value: 2
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
+--- !u!1 &926493530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3521314284274100851, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
+  m_PrefabInstance: {fileID: 926493529}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &945146336
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,12 +1000,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011040608}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 923308457}
+  m_Father: {fileID: 483450706}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1011040610
@@ -951,7 +1020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86762d0cee320d24fb10e6674d09d72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 923308458}
   enemies:
   - {fileID: 3521314284274100851, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
   respawnAmount: 02000000
@@ -983,12 +1052,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470189009}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 15.5}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 923308457}
+  m_Father: {fileID: 483450706}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1470189011
@@ -1024,7 +1093,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37588
+  m_Name: pb_Mesh8246144
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1207,12 +1276,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544152043}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 25.5}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 923308457}
+  m_Father: {fileID: 483450706}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1544152045
@@ -2586,52 +2655,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!4 &2533387560381290480
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533387560381290495}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 923308457}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2533387560381290481
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533387560381290495}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 7, z: 10}
-  m_Center: {x: 0, y: 3.5, z: 0}
---- !u!1 &2533387560381290495
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2533387560381290480}
-  - component: {fileID: 2533387560381290481}
-  - component: {fileID: 6481802423610442944}
-  m_Layer: 7
-  m_Name: SafeRoom Trigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
 --- !u!114 &2533387560619482256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3886,20 +3909,3 @@ Transform:
   m_Father: {fileID: 2533387559360196253}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6481802423610442944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533387560381290495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c804aeecfb56c0145b9cf69695fc012e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: Temp Stage 1-2
-  prevSceneName: 
-  useForLastStage: 0
-  enemies: []
-  aliveEnemyCount: 0

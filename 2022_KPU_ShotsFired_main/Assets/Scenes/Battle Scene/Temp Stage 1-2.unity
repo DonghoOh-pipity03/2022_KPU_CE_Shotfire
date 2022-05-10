@@ -325,7 +325,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37756
+  m_Name: pb_Mesh8246436
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -483,13 +483,48 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &483450705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483450706}
+  m_Layer: 7
+  m_Name: Temp Stage 1-2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &483450706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483450705}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 100, y: -0.00000044703484, z: 60}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 596324755}
+  - {fileID: 1015055360}
+  - {fileID: 1705645586}
+  - {fileID: 1271956742}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &584886745
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37834
+  m_Name: pb_Mesh8246514
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -647,6 +682,70 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &596324752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 596324755}
+  - component: {fileID: 596324754}
+  - component: {fileID: 596324753}
+  m_Layer: 7
+  m_Name: SafeRoom Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!114 &596324753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596324752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c804aeecfb56c0145b9cf69695fc012e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneName: Temp Stage 1-3
+  prevSceneName: Temp Stage 1-1
+  useForLastStage: 0
+  enemies:
+  - {fileID: 1691003672}
+  aliveEnemyCount: 0
+--- !u!65 &596324754
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596324752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 7, z: 10}
+  m_Center: {x: 0, y: 3.5, z: 0}
+--- !u!4 &596324755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596324752}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 483450706}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &771926261
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +850,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37808
+  m_Name: pb_Mesh8246488
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -939,7 +1038,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2930723714414388611}
+  m_Father: {fileID: 483450706}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1015055361
@@ -1096,7 +1195,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2930723714414388611}
+  m_Father: {fileID: 483450706}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1271956743
@@ -1111,7 +1210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86762d0cee320d24fb10e6674d09d72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 596324753}
   enemies:
   - {fileID: 3521314284274100851, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
   respawnAmount: 02000000
@@ -1124,7 +1223,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37806
+  m_Name: pb_Mesh8246486
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1339,10 +1438,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4991001191893788907, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
       propertyPath: sceneViewId
-      value: 3
+      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
+--- !u!1 &1691003672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3521314284274100851, guid: 37b568bc1e5d3624b924d7c7eedf272c, type: 3}
+  m_PrefabInstance: {fileID: 1691003671}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1705645585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,7 +1477,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2930723714414388611}
+  m_Father: {fileID: 483450706}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1705645587
@@ -1767,25 +1871,6 @@ MonoBehaviour:
     RefIds:
     - rid: 9129285810460557317
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
---- !u!4 &2930723714414388611
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9062559387867753124}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 100, y: -0.00000044703484, z: 60}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3579464855690237899}
-  - {fileID: 1015055360}
-  - {fileID: 1705645586}
-  - {fileID: 1271956742}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &3111600257218180522
 Transform:
   m_ObjectHideFlags: 0
@@ -1815,21 +1900,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1938264019313507091}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &3579464855690237899
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7518598686368655773}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2930723714414388611}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &3619493397273688022
 MeshCollider:
@@ -2962,54 +3032,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!114 &7407475817973484429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7518598686368655773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c804aeecfb56c0145b9cf69695fc012e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: Temp Stage 1-3
-  prevSceneName: Temp Stage 1-1
-  useForLastStage: 0
-  enemies: []
-  aliveEnemyCount: 0
---- !u!65 &7412217132251414240
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7518598686368655773}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 7, z: 10}
-  m_Center: {x: 0, y: 3.5, z: 0}
---- !u!1 &7518598686368655773
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3579464855690237899}
-  - component: {fileID: 7412217132251414240}
-  - component: {fileID: 7407475817973484429}
-  m_Layer: 7
-  m_Name: SafeRoom Trigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
 --- !u!4 &7556822349407500475
 Transform:
   m_ObjectHideFlags: 0
@@ -3435,22 +3457,6 @@ MonoBehaviour:
       data:
         m_DoorHeight: 4.65
         m_LegWidth: 3.26
---- !u!1 &9062559387867753124
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2930723714414388611}
-  m_Layer: 7
-  m_Name: Temp Stage 1-2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
 --- !u!1 &9076969530103777920
 GameObject:
   m_ObjectHideFlags: 0

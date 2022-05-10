@@ -594,6 +594,12 @@ MonoBehaviour:
   ragdollModel: {fileID: 0}
   ragdollMeshRoot: {fileID: 0}
   minimapHolder: {fileID: 0}
+  sightLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  laserLayer:
+    serializedVersion: 2
+    m_Bits: 0
   attackTarget:
     serializedVersion: 2
     m_Bits: 256

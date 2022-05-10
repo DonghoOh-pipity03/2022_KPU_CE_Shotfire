@@ -16,16 +16,16 @@ public class PlayerInput : MonoBehaviourPunCallbacks
     [HideInInspector] public bool dodge;
     [HideInInspector] public bool crouch { get; private set; }
     [HideInInspector] public bool fire { get; private set; }
-    [HideInInspector]  public bool zoom { get; private set; }
+    [HideInInspector] public bool zoom { get; private set; }
     [HideInInspector] public float mouseWheel { get; private set; }
     [HideInInspector] public bool interaction { get; private set; }
     [HideInInspector] public bool reload;
-    [HideInInspector]  public bool melee;
+    [HideInInspector] public bool melee;
     [HideInInspector] public bool frag;
     [HideInInspector] public bool fireMode;
     [HideInInspector] public bool weapon1;
     [HideInInspector] public bool weapon2;
-    [HideInInspector]  public bool weapon3;
+    [HideInInspector] public bool weapon3;
     [HideInInspector] public bool weapon4;
     #endregion
     #region 전역 동작 변수
@@ -33,27 +33,27 @@ public class PlayerInput : MonoBehaviourPunCallbacks
     private float m_curSprintInputTime = 0f;    // 현재 질주 키 입력 시간: 나중에 '마지막 질주 키 입력시간'으로 복사됨
     #endregion
 
-    private void Start() 
+    private void Start()
     {
         playerController = GetComponent<PlayerController>();
     }
     private void Update()
     {
-        if(!photonView.IsMine) return ; // 네트워크 통제 구역
+        if (!photonView.IsMine) return; // 네트워크 통제 구역
         DetectInput();
         //SelfDebug();
     }
 
-    private void DetectInput() 
+    private void DetectInput()
     {
         // 이동 관련
-        if(playerController.ableControlMove)
+        if (playerController.ableControlMove)
         {
-        move = (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized;
-        if( Input.GetButtonDown("Jump")) jump = true;
-        sprint = DetectSprint();
-        if( Input.GetButtonDown("Dodge")) dodge = true;
-        crouch = Input.GetButton("Crunch");
+            move = (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))).normalized;
+            if (Input.GetButtonDown("Jump")) jump = true;
+            sprint = DetectSprint();
+            if (Input.GetButtonDown("Dodge")) dodge = true;
+            crouch = Input.GetButton("Crunch");
         }
         else
         {
@@ -63,20 +63,21 @@ public class PlayerInput : MonoBehaviourPunCallbacks
             dodge = false;
             crouch = false;
         }
-
         // 공격 관련
-        if(playerController.ableControlAttack)
-        {
-        fire = Input.GetButton("Fire1");
-        zoom = Input.GetButton("Fire2");
-        if( Input.GetButtonDown("Reload")) reload = true;
-        if( Input.GetButtonDown("Melee")) melee = true;
-        if( Input.GetButtonDown("Frag")) frag = true;
-        if( Input.GetButtonDown("Firemode")) fireMode = true;
-        if( Input.GetButtonDown("Weapon1")) weapon1 = true;
-        if( Input.GetButtonDown("Weapon2")) weapon2 = true;
-        if( Input.GetButtonDown("Weapon3")) weapon3 = true;
-        if( Input.GetButtonDown("Weapon4")) weapon4 = true;
+        if (playerController.ableControlAttack)
+        {   
+            if(Input.GetButtonUp("Fire1")) fire = false;
+            else fire = Input.GetButton("Fire1");
+            //Debug.Log(Input.GetButton("Fire1"));
+            zoom = Input.GetButton("Fire2");
+            if (Input.GetButtonDown("Reload")) reload = true;
+            if (Input.GetButtonDown("Melee")) melee = true;
+            if (Input.GetButtonDown("Frag")) frag = true;
+            if (Input.GetButtonDown("Firemode")) fireMode = true;
+            if (Input.GetButtonDown("Weapon1")) weapon1 = true;
+            if (Input.GetButtonDown("Weapon2")) weapon2 = true;
+            if (Input.GetButtonDown("Weapon3")) weapon3 = true;
+            if (Input.GetButtonDown("Weapon4")) weapon4 = true;
         }
         else
         {
@@ -94,12 +95,12 @@ public class PlayerInput : MonoBehaviourPunCallbacks
 
         // 화면 관련
         look = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        
+
         //기타
         mouseWheel = Input.GetAxis("Mouse ScrollWheel");
-        if(playerController.ableControlInterAction == true) interaction = Input.GetButton("Interaction");
+        if (playerController.ableControlInterAction == true) interaction = Input.GetButton("Interaction");
         else interaction = false;
-        }
+    }
 
     private bool DetectSprint() // UNITY_STANDALONE 전용_다른 장치는 별도 구현 필요
     {
@@ -107,14 +108,14 @@ public class PlayerInput : MonoBehaviourPunCallbacks
         if (sprint == true) return true;
 
         // 달리기 조건 감지
-        if(m_curSprintInputTime!=Mathf.Infinity) m_lastSprintInputTime = m_curSprintInputTime;
+        if (m_curSprintInputTime != Mathf.Infinity) m_lastSprintInputTime = m_curSprintInputTime;
         m_curSprintInputTime = Mathf.Infinity;
         if (Input.GetKeyDown(KeyCode.W)) m_curSprintInputTime = Time.time;
         if (m_curSprintInputTime <= m_lastSprintInputTime + m_sprintInvokeTime) return true;
         else return false;
     }
 
-    void SelfDebug() 
+    void SelfDebug()
     {
         if (jump) Debug.Log("jump");
         if (dodge) Debug.Log("dodge");
