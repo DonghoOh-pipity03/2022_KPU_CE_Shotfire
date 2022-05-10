@@ -227,20 +227,20 @@ MonoBehaviour:
   renderSettingsRTPVSceneView: 0
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
-  lastBakeTime: 149
+  lastBakeTime: 108
   enlightenWarningShown: 0
   enlightenWarningShown2: 0
   lightUIDs: 
   lights: []
   implicitGroups:
-  - {fileID: 910549648}
-  - {fileID: 910549648}
-  - {fileID: 910549648}
-  - {fileID: 910549648}
-  - {fileID: 910549648}
-  - {fileID: 910549648}
-  - {fileID: 910549648}
-  - {fileID: 910549648}
+  - {fileID: 910484160}
+  - {fileID: 910484160}
+  - {fileID: 910484160}
+  - {fileID: 910484160}
+  - {fileID: 910484160}
+  - {fileID: 910484160}
+  - {fileID: 910484160}
+  - {fileID: 910484160}
   implicitGroupedObjects:
   - {fileID: 411208378}
   - {fileID: 450404376}
@@ -251,14 +251,14 @@ MonoBehaviour:
   - {fileID: 1957525793}
   - {fileID: 1969865600}
   bounds:
-  - m_Center: {x: -14.410999, y: 3.3275, z: 34.95}
-    m_Extent: {x: 26.488998, y: 3.8275003, z: 37.95}
-  - m_Center: {x: 0.20786285, y: 11.034705, z: 64.991135}
-    m_Extent: {x: 39.82601, y: 11.034606, z: 28.014938}
-  - m_Center: {x: -11.264999, y: 3.568263, z: 68}
-    m_Extent: {x: 31.264992, y: 3.5867376, z: 14}
   - m_Center: {x: -17.499996, y: 11.3275, z: 34.95}
     m_Extent: {x: 23.400002, y: 3.8275003, z: 37.95}
+  - m_Center: {x: 0.20786285, y: 11.034705, z: 64.991135}
+    m_Extent: {x: 39.82601, y: 11.034606, z: 28.014938}
+  - m_Center: {x: -14.410999, y: 3.3275, z: 34.95}
+    m_Extent: {x: 26.488998, y: 3.8275003, z: 37.95}
+  - m_Center: {x: -11.264999, y: 3.568263, z: 68}
+    m_Extent: {x: 31.264992, y: 3.5867376, z: 14}
   - m_Center: {x: -7.569994, y: 11.568263, z: 67.203156}
     m_Extent: {x: 34.96, y: 3.5867376, z: 14.796841}
   hasEmissive: 0101010101
@@ -290,7 +290,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: cdbb7419df8d4e540b47ac08d7eec529, type: 3}
   - {fileID: 2800000, guid: 76c2e7b7e79a9354e97bed1f32d64667, type: 3}
   - {fileID: 2800000, guid: a9f35c450c58384408e432088a826802, type: 3}
-  - {fileID: 2800000, guid: e26d4dbe9ceea9a4ca894e0cbc23f3bd, type: 3}
+  - {fileID: 2800000, guid: e10f2271950e870448f077e463f56328, type: 3}
   - {fileID: 2800000, guid: f31fc744b1bbd5b46a019ec078ff822e, type: 3}
   masks: []
   dirMaps: []
@@ -343,11 +343,11 @@ MonoBehaviour:
   sectors:
   - name: $G
     maps:
-    - {fileID: 2800000, guid: 4f3fa38f245912640bdf9ddca2338394, type: 3}
-    - {fileID: 2800000, guid: 307159bcee63360458eee45c3ef5353e, type: 3}
-    - {fileID: 2800000, guid: d215cc4c0e505ed408e9359e9e8b89de, type: 3}
-    - {fileID: 2800000, guid: 494d66f4b6d0ec04fa5d9e9bf1ac9987, type: 3}
-    - {fileID: 2800000, guid: bc0667353f1b67940b703ee87c2cb976, type: 3}
+    - {fileID: 2800000, guid: cdbb7419df8d4e540b47ac08d7eec529, type: 3}
+    - {fileID: 2800000, guid: 76c2e7b7e79a9354e97bed1f32d64667, type: 3}
+    - {fileID: 2800000, guid: a9f35c450c58384408e432088a826802, type: 3}
+    - {fileID: 2800000, guid: e26d4dbe9ceea9a4ca894e0cbc23f3bd, type: 3}
+    - {fileID: 2800000, guid: f31fc744b1bbd5b46a019ec078ff822e, type: 3}
     masks: []
     dirMaps: []
     rnmMaps0: []
@@ -8212,7 +8212,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &910549648
+--- !u!114 &910484160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
