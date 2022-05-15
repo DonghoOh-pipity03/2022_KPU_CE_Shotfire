@@ -585,6 +585,7 @@ MonoBehaviour:
   maxSuppress: 100
   unsuppressAmount: 7
   entityState: 0
+  stageManager: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 8d2879801402c8c42b2cce075d91adac, type: 2}
   eyeTransform: {fileID: 3521314283167520451}
   weapon: {fileID: 3521314284300231723}
@@ -606,6 +607,7 @@ MonoBehaviour:
   sign: {fileID: 1083824285}
   useSign: 1
   useAttack: 1
+  aiState: 0
 --- !u!195 &310196889
 NavMeshAgent:
   m_ObjectHideFlags: 0
