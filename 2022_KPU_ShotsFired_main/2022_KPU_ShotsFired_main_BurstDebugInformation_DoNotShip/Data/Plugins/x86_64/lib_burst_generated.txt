@@ -144,6 +144,7 @@ Library: lib_burst_generated
 --output=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Plugins\x86_64\lib_burst_generated
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\BakeryRuntimeAssembly.dll
+--root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\MeshBakerCore.dll
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
@@ -329,6 +330,7 @@ Library: lib_burst_generated
 --output=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Plugins\x86_64\lib_burst_generated
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\BakeryRuntimeAssembly.dll
+--root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\MeshBakerCore.dll
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
 --root-assembly=C:\Users\getch\Desktop\졸작\2022_KPU_CE_Shotfire\2022_KPU_ShotsFired_main\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
