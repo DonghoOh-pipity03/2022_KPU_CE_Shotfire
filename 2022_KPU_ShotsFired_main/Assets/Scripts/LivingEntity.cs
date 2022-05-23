@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+
 public enum EntityState{ alive, down, dead }   // 생명체의 상태
 abstract class LivingEntity : MonoBehaviourPunCallbacks
 {
@@ -37,7 +38,11 @@ abstract class LivingEntity : MonoBehaviourPunCallbacks
     {
         if(entityState == EntityState.dead) return;
 
+        
         curHealth -= _damageMessage.damageAmount * hitMultiple[(int)_hitPart];
+
+        // Debug.Log(photonView);
+        
 
         if(curHealth <= 0) 
         {
@@ -69,4 +74,5 @@ abstract class LivingEntity : MonoBehaviourPunCallbacks
         else if(curSuppress < 0) curSuppress =0;
     }
     #endregion
+
 }

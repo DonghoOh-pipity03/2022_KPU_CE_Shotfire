@@ -329,6 +329,8 @@ namespace PhotonInit
                 if(readycnt == PhotonNetwork.CurrentRoom.PlayerCount)
                 {
                     base.photonView.RPC("game_start",RpcTarget.All);
+                    PhotonNetwork.IsMessageQueueRunning = false;
+                    PhotonNetwork.IsMessageQueueRunning = true;
                 }
             }
             update_ready();
@@ -475,7 +477,7 @@ namespace PhotonInit
                 PhotonNetwork.CurrentRoom.IsOpen = false;
                 PhotonNetwork.CurrentRoom.IsVisible = false;
             }
-            SceneManager.LoadScene("Temp Stage 1-1", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Stage 1-1", LoadSceneMode.Additive);
             foreach(GameObject playerTemp in playerTemps)
             {
                 if(playerTemp == null)
@@ -485,7 +487,7 @@ namespace PhotonInit
                 }
                 PhotonNetwork.Destroy(playerTemp);
             }
-            Vector3 pos = new Vector3(Random.Range(99.3f,100.3f),Random.Range(-0.3f,0.3f),1.0f);
+            Vector3 pos = new Vector3(Random.Range(-20.0f,-10.0f),0.5f,Random.Range(6.0f,-1.0f));
             playerProtypes.Add(PhotonNetwork.Instantiate("Player", pos,Quaternion.identity));
             // 추후 수정 필요 
         }
