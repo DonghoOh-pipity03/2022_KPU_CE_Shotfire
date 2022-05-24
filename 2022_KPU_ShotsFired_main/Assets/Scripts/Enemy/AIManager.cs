@@ -32,6 +32,7 @@ public class AIManager : MonoBehaviourPunCallbacks
     {
         if(isUsed) return;
         if(Time.time > lastRespawnTime + respawnTime) RespawnAI();
+
     }
 
     private void RespawnAI()
@@ -46,6 +47,7 @@ public class AIManager : MonoBehaviourPunCallbacks
             for(int j = 0 ; j < respawnAmount[i] ; j++)
             {
                 var obj = Instantiate(enemies[i] , transform.position, transform.rotation);
+                Debug.Log(gameObject.scene);
                 SceneManager.MoveGameObjectToScene(obj, gameObject.scene);
                 obj.GetComponent<EnemyAgent>().SetAlert();
                 stageManager.AddAI(obj);
