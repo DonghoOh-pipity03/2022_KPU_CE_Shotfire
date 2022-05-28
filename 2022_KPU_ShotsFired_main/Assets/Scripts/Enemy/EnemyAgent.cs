@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using Photon.Pun;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -51,6 +52,7 @@ class EnemyAgent : LivingEntity
     float turnSmoothVelocity;   // 회전에 사용하는 변수
     float lastAttackTime;   // 마지막 공격 시간
     float engageDistance;   // 교전 시작거리
+    bool dead_sync = false; //AI 사망 판정
     #endregion
     #region 콜백함수
     private void Awake()
@@ -82,6 +84,19 @@ class EnemyAgent : LivingEntity
     {
         base.Update();
 
+        // Debug.Log(photonView);
+        
+        // Debug.Log(this.curHealth);
+        
+        if (this.dead_sync == false)
+        {
+            if (this.entityState == EntityState.dead)
+            {                
+                base.photonView.RPC("EnemyDead",RpcTarget.All);
+                PhotonNetwork.IsMessageQueueRunning = false;
+                PhotonNetwork.IsMessageQueueRunning = true;
+            }
+        }
         if (useSign) sign.text = entityState.ToString() + "\n" + aiState.ToString();
 
         if(animator != null) animator.SetFloat("MoveVertical", agent.velocity.magnitude / agent.speed);
@@ -96,6 +111,9 @@ class EnemyAgent : LivingEntity
     {
         base.TakeDamage(_damageMessage, _hitPart);
 
+        base.photonView.RPC("GetDamge",RpcTarget.All,this.curHealth);
+        PhotonNetwork.IsMessageQueueRunning = false;
+        PhotonNetwork.IsMessageQueueRunning = true;
         // 마지막 공격자를 저장
         var player = _damageMessage.attacker.GetComponent<PlayerController>();
         if (player != null)
@@ -411,4 +429,18 @@ class EnemyAgent : LivingEntity
     }
 #endregion
     #endregion
+
+    [PunRPC]
+    void EnemyDead()
+    {
+        this.entityState = EntityState.dead;
+        this.dead_sync = true;
+        // PhotonNetwork.Destroy(this.gameObject);
+    }
+
+    [PunRPC]
+    void GetDamge(float hp)
+    {
+        this.curHealth = hp;
+    }
 }

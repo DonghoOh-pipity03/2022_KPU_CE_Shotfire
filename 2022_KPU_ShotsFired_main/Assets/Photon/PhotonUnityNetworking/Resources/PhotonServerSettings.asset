@@ -46,6 +46,9 @@ MonoBehaviour:
   - update_lobby
   - ChatRPC
   - ready_count
+  - Photon_Damege
+  - EnemyDead
+  - GetDamge
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -324,15 +324,16 @@ namespace PhotonInit
         }   
         public void start_game()
         {
-            update_ready();
             if(PhotonNetwork.IsMasterClient)
             {
                 if(readycnt == PhotonNetwork.CurrentRoom.PlayerCount)
                 {
                     base.photonView.RPC("game_start",RpcTarget.All);
+                    PhotonNetwork.IsMessageQueueRunning = false;
+                    PhotonNetwork.IsMessageQueueRunning = true;
                 }
             }
-            
+            update_ready();
         }
         public void end_game()
         {
@@ -471,7 +472,12 @@ namespace PhotonInit
             UI_delete_map();
             UI_Select(Player_UI);
             // PhotonNetwork.Destroy();
-            SceneManager.LoadScene("Temp Stage 1-1", LoadSceneMode.Additive);
+            if(PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                PhotonNetwork.CurrentRoom.IsVisible = false;
+            }
+            SceneManager.LoadScene("Stage 1-1", LoadSceneMode.Additive);
             foreach(GameObject playerTemp in playerTemps)
             {
                 if(playerTemp == null)
@@ -481,8 +487,8 @@ namespace PhotonInit
                 }
                 PhotonNetwork.Destroy(playerTemp);
             }
-            Vector3 pos = new Vector3(Random.Range(99.3f,100.3f),Random.Range(-0.3f,0.3f),1.0f);
-            playerProtypes.Add(PhotonNetwork.Instantiate("Prototype Player", pos,Quaternion.identity));
+            Vector3 pos = new Vector3(Random.Range(-20.0f,-10.0f),0.5f,Random.Range(6.0f,-1.0f));
+            playerProtypes.Add(PhotonNetwork.Instantiate("Player", pos,Quaternion.identity));
             // 추후 수정 필요 
         }
         [PunRPC]

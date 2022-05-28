@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 
 
 public class StageManager : MonoBehaviour
@@ -85,7 +85,7 @@ public class StageManager : MonoBehaviour
     {
         foreach( var i in enemies)
         {
-            if( i != null) Destroy(i, 0);
+            if( i != null) PhotonNetwork.Destroy(i);
         }
     }
 
