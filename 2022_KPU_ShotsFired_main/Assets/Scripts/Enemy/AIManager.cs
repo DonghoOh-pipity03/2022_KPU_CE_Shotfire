@@ -50,6 +50,7 @@ public class AIManager : MonoBehaviourPunCallbacks
                 Debug.Log(gameObject.scene);
                 SceneManager.MoveGameObjectToScene(obj, gameObject.scene);
                 obj.GetComponent<EnemyAgent>().SetAlert();
+                obj.GetComponent<EnemyAgent>().stageManager = stageManager;
                 stageManager.AddAI(obj);
             }
         }

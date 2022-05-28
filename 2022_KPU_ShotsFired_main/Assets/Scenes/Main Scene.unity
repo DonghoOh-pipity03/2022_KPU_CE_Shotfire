@@ -2606,6 +2606,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 7156481168791766946, guid: c2c8928868fff1c4d873486bfc160dbc, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7156481168791766949, guid: c2c8928868fff1c4d873486bfc160dbc, type: 3}
       propertyPath: m_RootOrder
       value: 3

@@ -176,7 +176,7 @@ class EnemyAgent : LivingEntity
     {
         // 시작시 코드
         agent.enabled = false;
-        if(stageManager != null) stageManager.GetAliveEnemyCount();
+        if(stageManager != null && stageManager.isActiveAndEnabled) stageManager.GetAliveEnemyCount();
 
         if(animator == null) yield break;
         animator.SetBool("DeathBack", true);
