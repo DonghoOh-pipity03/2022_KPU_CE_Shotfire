@@ -48,6 +48,7 @@ public class AIManager : MonoBehaviourPunCallbacks
                 var obj = Instantiate(enemies[i] , transform.position, transform.rotation);
                 SceneManager.MoveGameObjectToScene(obj, gameObject.scene);
                 obj.GetComponent<EnemyAgent>().SetAlert();
+                obj.GetComponent<EnemyAgent>().stageManager = stageManager;
                 stageManager.AddAI(obj);
             }
         }

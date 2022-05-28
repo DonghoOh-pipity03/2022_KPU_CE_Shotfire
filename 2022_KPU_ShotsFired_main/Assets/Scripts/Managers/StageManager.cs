@@ -34,10 +34,6 @@ public class StageManager : MonoBehaviour
         var doorObject = this.transform.root.Find("Door");
         if(doorObject != null) door = doorObject.GetComponent<Door>();
     }
-    private void Start() 
-    {
-        //enemies = new List<GameObject>();
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player") curPlayerCountInRoom++;
