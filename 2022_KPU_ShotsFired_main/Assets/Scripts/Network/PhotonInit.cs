@@ -117,6 +117,14 @@ namespace PhotonInit
         public TextMeshProUGUI[] ChatText;
         public TMP_InputField ChatInput;
 
+        [Header("멀티 플레이어 관리")]
+        [SerializeField] public GameObject player1NameBackground;  // 플레이어_체력 GUI 배경
+        [SerializeField] public TextMeshProUGUI player1Name;  // 플레이어_체력 텍스트
+        [SerializeField] public GameObject player2NameBackground;  // 플레이어_체력 GUI 배경
+        [SerializeField] public TextMeshProUGUI player2Name;  // 플레이어_체력 텍스트
+        [SerializeField] public GameObject player3NameBackground;  // 플레이어_체력 GUI 배경
+        [SerializeField] public TextMeshProUGUI player3Name;  // 플레이어_체력 텍스트
+
         #endregion
 
 
@@ -489,6 +497,102 @@ namespace PhotonInit
             }
             Vector3 pos = new Vector3(Random.Range(-20.0f,-10.0f),0.5f,Random.Range(6.0f,-1.0f));
             playerProtypes.Add(PhotonNetwork.Instantiate("Player", pos,Quaternion.identity));
+
+            Debug.LogFormat("플레이어 수 : " + PhotonNetwork.CurrentRoom.PlayerCount);
+            if(PhotonNetwork.IsMasterClient)
+            {
+                if(PhotonNetwork.CurrentRoom.PlayerCount == 1)
+                {
+                    player1NameBackground.SetActive(false);
+                    player2NameBackground.SetActive(false);
+                    player3NameBackground.SetActive(false);
+                }
+                else if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.GetNext().NickName;
+                    player2NameBackground.SetActive(false);
+                    player3NameBackground.SetActive(false);
+                }
+                else if(PhotonNetwork.CurrentRoom.PlayerCount == 3)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.GetNext().NickName;
+                    player2Name.text = PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()).NickName;
+                    player3NameBackground.SetActive(false);
+                }
+                else if(PhotonNetwork.CurrentRoom.PlayerCount == 4)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.GetNext().NickName;
+                    player2Name.text = PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()).NickName;
+                    player3Name.text = PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext())).NickName;
+                }
+            }
+            if(PhotonNetwork.MasterClient.GetNext() == PhotonNetwork.LocalPlayer)
+            {
+                //cnt = 1;
+                if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.NickName;
+                    player2NameBackground.SetActive(false);
+                    player3NameBackground.SetActive(false);
+                }
+                else if(PhotonNetwork.CurrentRoom.PlayerCount == 3)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.NickName;
+                    player2Name.text = PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()).NickName;
+                    player3NameBackground.SetActive(false);
+                }
+                else if(PhotonNetwork.CurrentRoom.PlayerCount == 4)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.NickName;
+                    player2Name.text = PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()).NickName;
+                    player3Name.text = PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext())).NickName;
+                }
+                
+            }
+            if(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()) == PhotonNetwork.LocalPlayer)
+            {
+                //cnt = 2;
+                if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.NickName;
+                    player2NameBackground.SetActive(false);
+                    player3NameBackground.SetActive(false);
+                }
+                else if(PhotonNetwork.CurrentRoom.PlayerCount == 3)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.NickName;
+                    player2Name.text = PhotonNetwork.MasterClient.GetNext().NickName;
+                    player3NameBackground.SetActive(false);
+                }
+                else if(PhotonNetwork.CurrentRoom.PlayerCount == 4)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.NickName;
+                    player2Name.text = PhotonNetwork.MasterClient.GetNext().NickName;
+                    player3Name.text = PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext())).NickName;
+                }
+            }
+            if(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext())) == PhotonNetwork.LocalPlayer)
+            {
+                //cnt = 3;
+                if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.NickName;
+                    player2NameBackground.SetActive(false);
+                    player3NameBackground.SetActive(false);
+                }
+                else if(PhotonNetwork.CurrentRoom.PlayerCount == 3)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.NickName;
+                    player2Name.text = PhotonNetwork.MasterClient.GetNext().NickName;
+                    player3NameBackground.SetActive(false);
+                }
+                else if(PhotonNetwork.CurrentRoom.PlayerCount == 4)
+                {
+                    player1Name.text = PhotonNetwork.MasterClient.NickName;
+                    player2Name.text = PhotonNetwork.MasterClient.GetNext().NickName;
+                    player3Name.text = PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()).NickName;
+                }
+            }
             // 추후 수정 필요 
         }
         [PunRPC]
