@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 public class Bullet : MonoBehaviour
 {   
     private Rigidbody m_rigidbody;
-    [SerializeField] private BulletData bulletData;
+    [SerializeField] public BulletData bulletData;
     #region 전역 변수
     #endregion
     #region 전역 동작 변수

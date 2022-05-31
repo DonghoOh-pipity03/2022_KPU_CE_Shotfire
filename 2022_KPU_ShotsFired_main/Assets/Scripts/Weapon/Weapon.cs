@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using Photon.Pun;
+using Knife.Effects;
+using RayFire;
+using Andtech.ProTracer;
 
 public class Weapon : MonoBehaviourPunCallbacks
 {
@@ -10,6 +13,14 @@ public class Weapon : MonoBehaviourPunCallbacks
     [SerializeField] WeaponData weaponData; // 총기 SO
     [SerializeField] Bullet bulletPrefab;  // 총알 프리팹
     public Transform muzzlePosition; // 총구 위치
+    [SerializeField] ParticleGroupEmitter[]  shotParticle;    // 사격시 재생할 파티클
+    [SerializeField] ParticleGroupPlayer[] shotParticle2;   // 사격시 재생할 파티클
+    [SerializeField] LayerMask gunLayerMask;    // 사격판정에 사용할 레이어마스크_플레이어, 적, 레벨디자인
+    [SerializeField] LayerMask suppressLayerMask;   // 제압레이어 마스크
+    [SerializeField] RayfireGun rayfireGun; // 장애물 파괴용 컴포넌트_총
+    [SerializeField] Transform rayfireTarget;
+    [SerializeField] float fittingForward;    // AI전용_총기 앞방향 조정용 (현재 앞뒤로만 조정가능)
+    [SerializeField] Bullet2 raytracerPrefab;   // 예광탄 프리팹
 
     #region 전역 변수
     [Header("이하 디버그용")]
@@ -30,7 +41,10 @@ public class Weapon : MonoBehaviourPunCallbacks
     bool isHipFire = true;  // 기본 사격 상태인지
     float lastFireTime = -1; // 마지막 발사 시간
     Vector3 fireDirection; // 의도하는 사격 방향
+    Vector3 hitPoint;   // 피탄 위치
     float fireInterval => (60 / weaponData.FireRPM); // 발사 속도에 따른 발사 간격
+    Ray ray;
+    RaycastHit hit;
     // 명중률
     float curSpread = 1;    // 현재 스프레드
     float curRecoilX;    // 현재 x 반동 값
@@ -62,6 +76,8 @@ public class Weapon : MonoBehaviourPunCallbacks
         if (weaponUser.tag == "Player") playerAttack = weaponUser.GetComponent<PlayerAttack>();
         curRemainAmmo = weaponData.MagCappacity;
         UpdateUI();
+        rayfireGun = GetComponent<RayfireGun>();
+        rayfireTarget = transform.Find("RayFire Target");
 
         #region 오브젝트 풀링
         bulletPool = new ObjectPool<Bullet>
@@ -195,9 +211,14 @@ public class Weapon : MonoBehaviourPunCallbacks
         curRemainAmmo--;
         UpdateUI();
 
-        for (int i = 0; i < weaponData.BallPerOneShot; i++)    // 산탄총 대응용
+        for (int i = 0; i < weaponData.BallPerOneShot; i++)    // 산탄 방식을 위해, 여러 발 처리
         {
-            fireDirection = muzzlePosition.eulerAngles;
+            // 1. 투사체 방식 (폐기)
+            // fireDirection = muzzlePosition.eulerAngles;
+            // 2. 레이캐스트 방식
+            if(playerAttack != null ) fireDirection = playerAttack.aimTarget.position - muzzlePosition.position;
+            else fireDirection = transform.forward * fittingForward;
+
             curRecoilX = Random.Range(weaponData.RecoilHorizontal.x, weaponData.RecoilHorizontal.y);
             curRecoilY = Random.Range(weaponData.RecoilVertical.x, weaponData.RecoilVertical.y);
             curRecoilZ = Random.Range(weaponData.RecoilZ.x, weaponData.RecoilZ.y);
@@ -211,7 +232,9 @@ public class Weapon : MonoBehaviourPunCallbacks
                 }
 
                 // 랜덤 스프레드
-                fireDirection += new Vector3(curRecoilY, curRecoilX, 0) * curSpread;
+                //fireDirection += new Vector3(curRecoilY, curRecoilX, 0) * curSpread;
+                fireDirection = Quaternion.AngleAxis(curRecoilY, Vector3.up) * fireDirection;
+                fireDirection = Quaternion.AngleAxis(curRecoilX, Vector3.right) * fireDirection;
             }
             else    // zoom 조준 상태일 경우_플레이어만 가능한 사격 방법, 화면 반동 적용
             {
@@ -221,12 +244,79 @@ public class Weapon : MonoBehaviourPunCallbacks
             curSpread += weaponData.RecoilPerShot;
             if (curSpread > weaponData.MaxSpread) curSpread = weaponData.MaxSpread;
 
-            var bullet = bulletPool.Get();
+            // 방식1 (폐기)_투사체 발사 처리
+            //var bullet = bulletPool.Get();    
+
+            // 방식2_레이캐스트_총구에서 fireDirection방향으로
+            // 2.1. 공격처리_생명체, 장애물, 제한된 거리가 끝점
+            ray.origin = muzzlePosition.position;
+            ray.direction = fireDirection;
+            if(Physics.Raycast(ray, out hit, bulletPrefab.bulletData.MaxDistance, gunLayerMask)){
+                // (1) 생명체
+                var target = hit.transform.GetComponent<IDamageable>();
+                if( target != null)
+                {
+                    hitPoint = hit.point;
+
+                    if(hit.transform.root.tag != weaponUser.tag)
+                    {
+                        DamageMessage damageMessage;
+
+                        damageMessage.attacker = weaponUser;
+                        damageMessage.ID = Random.Range(0, 2147483647); // 사용안함_원래는 관통시스템 사용시 중복 공격 방지용이였던 것
+                        damageMessage.damageKind = DamageKind.bullet;
+                        damageMessage.damageAmount = bulletPrefab.bulletData.Damage;
+                        damageMessage.suppressAmount = bulletPrefab.bulletData.Suppress;
+                        damageMessage.hitPoint = hit.point;
+                        damageMessage.hitNormal =  hit.normal;
+
+                        target.ApplyDamage(damageMessage);
+                    }
+                }
+                else hitPoint = hit.point;
+            }
+            // (2) 제한된 거리
+            else{
+                hitPoint = muzzlePosition.position + fireDirection * bulletPrefab.bulletData.MaxDistance;
+            }
+            #if UNITY_EDITOR
+            Debug.DrawRay(muzzlePosition.position, hitPoint - muzzlePosition.position, Color.green, 1f);
+            #endif
+            // (3) 장애물
+            rayfireTarget.position = hitPoint;
+            rayfireGun.Shoot();
+
+            // 2.2. 제압처리_끝점까지 제압콜라이더 감지 및 처리
+            var hits = Physics.RaycastAll(muzzlePosition.position, fireDirection, hit.distance, suppressLayerMask);
+            foreach( var j in hits){
+                var target1 = j.transform.GetComponent<SuppressPoint>();
+                if( target1 != null) 
+                {   
+                    if(j.transform.root.tag != weaponUser.tag) target1.ApplySuppress(bulletPrefab.bulletData.Suppress);
+                }
+            }
+
+            // 2.3. 예광탄
+            Bullet2 bullet = Instantiate(raytracerPrefab);
+            bullet.Completed += OnCompleted;
+            bullet.DrawLine(muzzlePosition.position, hitPoint, speed: 500, 0);
+           
         }
+
+        foreach( var i in shotParticle){ i.Emit(1); }
+        foreach( var i in shotParticle2){ i.Play(); }
 
         lastFireTime = Time.time;
     }
-
+    // 외부 코드_TracerDemo
+    private void OnCompleted(object sender, System.EventArgs e)
+	{
+		// Handle complete event here
+		if (sender is TracerObject tracerObject)
+		{
+			Destroy(tracerObject.gameObject);
+		}
+	}
 
     public void Detached() => isTriggered = false;
     #endregion

@@ -319,7 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 611219320106855210}
   - component: {fileID: 4101088155146539543}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dummy002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6900180640410863878}
   - component: {fileID: 1561361490508906762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hair_Pony
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -765,7 +765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7849582163535698443}
   - component: {fileID: 7614273533963190586}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cloth_Balaclaba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,7 +955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3507874518467473493}
   - component: {fileID: 5332988196292433707}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1210,7 +1210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5628245748876008507}
   - component: {fileID: 8051002018895318215}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cloth_Cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1400,7 +1400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4399653725809411399}
   - component: {fileID: 6752406772976901128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hair_Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1655,7 +1655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5278615811695230466}
   - component: {fileID: 3479748248098104407}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1814,7 +1814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7062321048038594407}
   - component: {fileID: 7099662933715928021}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Helmat_HeadSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2004,7 +2004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8522920844799704357}
   - component: {fileID: 6081004276095151323}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dummy003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2163,7 +2163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8241202801925201572}
   - component: {fileID: 8821056736539923064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mag002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2417,7 +2417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 241693414024594174}
   - component: {fileID: 8866993393494758845}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plate_Buccle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2673,7 +2673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3342245274363136698}
   - component: {fileID: 6219356930146668353}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cummy_GlockMag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3028,7 +3028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3783283432271594965}
   - component: {fileID: 1523215940286266916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mag003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3219,7 +3219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159567594131953597}
   - component: {fileID: 1627440071243787369}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cloth_Boots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3503,7 +3503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6970914566259001127}
   - component: {fileID: 5376747754640286321}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cloth_Pants
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3694,7 +3694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3822507138707816434}
   - component: {fileID: 3231678815162956130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dummy001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4075,7 +4075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5069552054764430077}
   - component: {fileID: 3519197791891522840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4387,7 +4387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 351131087291359039}
   - component: {fileID: 4417430122778316093}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cummy_Glock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4641,7 +4641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7816528999169698670}
   - component: {fileID: 3633876095720852290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cloth_Glove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4979,7 +4979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5551382058169582913}
   - component: {fileID: 7573317950592918434}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hair_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5231,7 +5231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6326106749591727235}
   - component: {fileID: 3170248746089785390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cloth_windproof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5422,7 +5422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2310967391361909892}
   - component: {fileID: 3224534903974614738}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body_Teeth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7249,6 +7249,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 17792
   laserPointer: {fileID: 2819182292847421807}
+  aimTarget: {fileID: 0}
 --- !u!114 &7314911190920377185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7827,7 +7828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5383497829671514403}
   - component: {fileID: 3107941140902920528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8018,7 +8019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 907199841353201080}
   - component: {fileID: 8566935818701659011}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8209,7 +8210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4237228989668330323}
   - component: {fileID: 6207197392401468632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plate_PTT Connecter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8368,7 +8369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8768995721050997086}
   - component: {fileID: 6904829877585322257}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlateCarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8621,7 +8622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6366790779073154017}
   - component: {fileID: 1963069057751668604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cloth_WarBelt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8842,7 +8843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2432304936278518380}
   - component: {fileID: 6322000807631224851}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mag001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9125,7 +9126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6733483535074954435}
   - component: {fileID: 4434609986396439628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Helmat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9380,7 +9381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8631031107955027837}
   - component: {fileID: 717215487123552993}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plate_BellyBag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9571,7 +9572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3367523723388594309}
   - component: {fileID: 8987257842703348093}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 5.56 mag002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9856,9 +9857,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3506062258376068142, guid: 3734514999844be47add60ed7616c62b, type: 3}
+      propertyPath: m_Name
+      value: RayFire Target
+      objectReference: {fileID: 0}
     - target: {fileID: 3616356783794623735, guid: 3734514999844be47add60ed7616c62b, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628959807818440663, guid: 3734514999844be47add60ed7616c62b, type: 3}
+      propertyPath: rayfireGun
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628959807818440663, guid: 3734514999844be47add60ed7616c62b, type: 3}
+      propertyPath: rayfireTarget
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4512325148646879665, guid: 3734514999844be47add60ed7616c62b, type: 3}
       propertyPath: m_Layer
@@ -10060,35 +10073,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0272
+      value: -0.0429
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0347
+      value: 0.0266
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0331
+      value: -0.0338
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.3604401
+      value: -0.43751824
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.54045814
+      value: -0.47734255
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.4481241
+      value: 0.51483417
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.614144
+      value: 0.5618431
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -9.255
+      value: -9.254
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -10096,7 +10109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6375557292269981883, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -110.06
+      value: -95.06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1022e1745f9d6e468ce3e6f48f2b7b9, type: 3}

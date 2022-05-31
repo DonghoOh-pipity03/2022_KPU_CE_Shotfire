@@ -29,6 +29,7 @@ class EnemyAgent : LivingEntity
     [SerializeField] GameObject minimapHolder;  // 미니맵용 UI
     [SerializeField] LayerMask sightLayer;  // 시야용 레이어
     [SerializeField] LayerMask laserLayer;  // 레이저용 레이어
+    [SerializeField] float fittingAttackY;  // 공격시 Y축 회전 조정값
     [Header("이하 디버그용")]
     [SerializeField] LayerMask attackTarget;   // 공격 대상의 레이어
 
@@ -354,7 +355,7 @@ class EnemyAgent : LivingEntity
         if (aiState == AIState.engage)
         {
             var lookRotation = Quaternion.LookRotation(players[target].transform.position - transform.position, Vector3.up);
-            var targetAngleY = lookRotation.eulerAngles.y;
+            var targetAngleY = lookRotation.eulerAngles.y + fittingAttackY;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngleY, ref turnSmoothVelocity, enemyData.TurnSpeed);
         }
 

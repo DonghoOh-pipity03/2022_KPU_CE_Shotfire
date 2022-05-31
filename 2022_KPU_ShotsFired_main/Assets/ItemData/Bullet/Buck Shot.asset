@@ -17,4 +17,5 @@ MonoBehaviour:
   suppress: 2
   speed: 450
   lifeTime: 1
+  maxDistance: 25
   gravityMultiple: 0.05

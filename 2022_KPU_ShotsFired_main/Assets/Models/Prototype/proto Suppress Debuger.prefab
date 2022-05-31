@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 369735359557237204}
   - component: {fileID: 369735359557237205}
   - component: {fileID: 369735359557237210}
+  - component: {fileID: 48221006}
   m_Layer: 10
   m_Name: proto Suppress Debuger
   m_TagString: Enemy
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369735359557237211}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.206, y: 1.5, z: -7.13}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
@@ -98,21 +99,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eba4ecacf498c94d97233d0e06b1cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  MaxSuppress: 100
-  UnsuppressAmount: 7
-  HitMultiple:
+  maxHealth: 100
+  hitMultiple:
   - 2
   - 1
   - 0.8
   - 0.8
-  state: 0
+  maxSuppress: 100
+  unsuppressAmount: 7
+  entityState: 0
   debugKind: 1
   Display: {fileID: 9013592226712416104}
   hitCount: 0
   lastHitTime: 0
   supCount: 0
   lastSupTime: 0
+--- !u!135 &48221006
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369735359557237211}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9013592226486831369
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +139,7 @@ GameObject:
   - component: {fileID: 9013592226486831373}
   - component: {fileID: 9013592226486831370}
   - component: {fileID: 9013592226486831371}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Suppress Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}

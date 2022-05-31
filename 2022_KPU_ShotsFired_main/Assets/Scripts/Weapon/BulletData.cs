@@ -14,6 +14,8 @@ public class BulletData : ScriptableObject
     public float Speed{get{return speed;} set{}}
     [SerializeField]private float lifeTime; // 총알 생명시간
     public float LifeTime{ get{return lifeTime;} set{}}
+    [SerializeField]private int maxDistance; // 총알 최대 비행거리
+    public int MaxDistance{ get{return maxDistance;} set{}}
     [SerializeField]private float gravityMultiple;  // 총알 중력 계수
     public float GravityMultiple{ get{return gravityMultiple;} set{}}
 }

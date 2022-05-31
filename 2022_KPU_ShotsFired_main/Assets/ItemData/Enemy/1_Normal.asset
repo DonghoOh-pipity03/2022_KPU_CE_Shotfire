@@ -33,4 +33,4 @@ MonoBehaviour:
   attackerTargetWeight: 10
   downTargetWeight: 0.5
   moveSpeed: 1.5
-  turnSpeed: 0.2
+  turnSpeed: 0.11
