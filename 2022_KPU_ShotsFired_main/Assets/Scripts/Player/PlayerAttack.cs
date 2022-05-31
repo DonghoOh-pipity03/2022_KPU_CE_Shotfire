@@ -70,7 +70,7 @@ public class PlayerAttack : MonoBehaviourPunCallbacks
     bool isInterActionning; // 상호작용 중인지
     float lastInterActionBeginTime;  // 마지막 상호작용 시작 시간
     // 조준
-    Transform aimTarget;    // 캐릭터가 조준하는 실제위치
+    public Transform aimTarget;    // 캐릭터가 조준하는 실제위치
     Vector3 tarAimPoint;    // 캐릭터가 조준하는 목표위치
     RaycastHit aimHit; // 화면 가운데에 레이를 쏴서 검출되는 정보
     Ray ray;    // 화면 가운데에 쏠 레이
