@@ -58,9 +58,11 @@
 
 - 패키지 매니저에서 아래 패키지들을 설치
   
-  - post process
+  - Animation Rigging
   
-  - cinemachine
+  - Cinemachine
+  
+  - Post Process
   
   - ProBuilder
 
