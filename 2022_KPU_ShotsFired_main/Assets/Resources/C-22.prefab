@@ -797,7 +797,7 @@ MonoBehaviour:
   - {fileID: 7367641085901648654}
   gunLayerMask:
     serializedVersion: 2
-    m_Bits: 1408
+    m_Bits: 132480
   suppressLayerMask:
     serializedVersion: 2
     m_Bits: 4096
@@ -828,8 +828,8 @@ MonoBehaviour:
   rounds: 2
   rate: 0.3
   type: 0
-  strength: 1
-  radius: 1
+  strength: 0
+  radius: 0
   demolishCluster: 1
   affectInactive: 1
   rigid: 1
@@ -846,7 +846,7 @@ MonoBehaviour:
     rangeMax: 7
     distance: 0.4
     color: {r: 1, g: 1, b: 0.8, a: 1}
-  mask: -1
+  mask: 132480
   tagFilter: Untagged
   showRay: 1
   showHit: 1

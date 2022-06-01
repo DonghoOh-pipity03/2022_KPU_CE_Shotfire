@@ -34,9 +34,13 @@ public class WeaponData : ScriptableObject
     public Vector2 RecoilVertical => recoilVertical;
     [SerializeField] Vector2 recoilZ;  // 기본 Z 반동
     public Vector2 RecoilZ => recoilZ;
-    [Header("반동")]
+    [SerializeField] float recoilMultiple = 1;  // idle 상태에서 랜덤스프래드 계수
+    public float RecoilMultiple => recoilMultiple;
+    [Header("화면반동")]
     [SerializeField] float recoilMultipleInIdle;  // idle 사격에서 화면 반동 계수
-    public float RecoilMultipleInIdle => recoilMultipleInIdle;    
+    public float RecoilMultipleInIdle => recoilMultipleInIdle;   
+    [SerializeField] float recoilMultipleInZoom;  // zoom 사격에서 화면 반동 계수
+    public float RecoilMultipleInZoom => recoilMultipleInIdle; 
     
     [Header("무기 재장전")]
     [SerializeField] int magCappacity; // 탄창 용량

@@ -257,7 +257,7 @@ public override void OnDisable() {
         if(Input.GetButtonDown("Weapon1")) ChangeWeapon(0);
         else if(Input.GetButtonDown("Weapon2")) ChangeWeapon(1);
         else if(Input.GetButtonDown("Weapon3")) ChangeWeapon(2);
-        else if(Input.GetButtonDown("Weapon4")) ChangeWeapon(3);
+        //else if(Input.GetButtonDown("Weapon4")) ChangeWeapon(3);
     }
     private void ChangeWeapon(int _newWeaponIndex)
     {

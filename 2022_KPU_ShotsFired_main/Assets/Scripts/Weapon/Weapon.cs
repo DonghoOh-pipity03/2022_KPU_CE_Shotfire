@@ -48,6 +48,7 @@ public class Weapon : MonoBehaviourPunCallbacks
     // 명중률
     float curSpread = 1;    // 현재 스프레드
     float curRecoilX;    // 현재 x 반동 값
+    float curRecoilX2;  // 현재 x 반동 값 2
     float curRecoilY;    // 현재 y 반동 값
     float curRecoilZ;  // 현재 z 반동 값
     // 총알
@@ -76,8 +77,12 @@ public class Weapon : MonoBehaviourPunCallbacks
         if (weaponUser.tag == "Player") playerAttack = weaponUser.GetComponent<PlayerAttack>();
         curRemainAmmo = weaponData.MagCappacity;
         UpdateUI();
+        
+        // RayFire 컴포넌트 세팅
         rayfireGun = GetComponent<RayfireGun>();
         rayfireTarget = transform.Find("RayFire Target");
+        rayfireGun.target = rayfireTarget;
+        rayfireGun.maxDistance = bulletPrefab.bulletData.MaxDistance;
 
         #region 오브젝트 풀링
         bulletPool = new ObjectPool<Bullet>
@@ -216,14 +221,16 @@ public class Weapon : MonoBehaviourPunCallbacks
             // 1. 투사체 방식 (폐기)
             // fireDirection = muzzlePosition.eulerAngles;
             // 2. 레이캐스트 방식
-            if(playerAttack != null ) fireDirection = playerAttack.aimTarget.position - muzzlePosition.position;
+            if(playerAttack != null ) fireDirection = (playerAttack.aimTarget.position - muzzlePosition.position).normalized;
             else fireDirection = transform.forward * fittingForward;
 
             curRecoilX = Random.Range(weaponData.RecoilHorizontal.x, weaponData.RecoilHorizontal.y);
+            curRecoilX2 = Random.Range(weaponData.RecoilHorizontal.x, weaponData.RecoilHorizontal.y);
             curRecoilY = Random.Range(weaponData.RecoilVertical.x, weaponData.RecoilVertical.y);
             curRecoilZ = Random.Range(weaponData.RecoilZ.x, weaponData.RecoilZ.y);
 
-            if (isHipFire || weaponData.BallPerOneShot != 1)   // idle 조준상태 또는 샷건일 경우, 화면 반동과 랜더스프레드 적용
+            // idle 조준상태 또는 샷건일 경우 -> 화면 반동과 랜더스프레드 적용
+            if (isHipFire || weaponData.BallPerOneShot != 1)
             {
                 // 화면 반동
                 if (playerAttack != null && useRecoilInIdle)
@@ -232,13 +239,13 @@ public class Weapon : MonoBehaviourPunCallbacks
                 }
 
                 // 랜덤 스프레드
-                //fireDirection += new Vector3(curRecoilY, curRecoilX, 0) * curSpread;
-                fireDirection = Quaternion.AngleAxis(curRecoilY, Vector3.up) * fireDirection;
-                fireDirection = Quaternion.AngleAxis(curRecoilX, Vector3.right) * fireDirection;
+                fireDirection += new Vector3(curRecoilX, curRecoilY, curRecoilX2) * curSpread * weaponData.RecoilMultiple;
+                fireDirection = fireDirection.normalized;
             }
-            else    // zoom 조준 상태일 경우_플레이어만 가능한 사격 방법, 화면 반동 적용
+            // zoom 조준 상태일 경우 -> 화면 반동 적용 (플레이어만 가능한 사격 방법)
+            else    
             {
-                playerAttack.FireRecoil(new Vector3(-1 * Mathf.Abs(curRecoilY), curRecoilX, curRecoilZ));
+                playerAttack.FireRecoil(new Vector3(-1 * Mathf.Abs(curRecoilY), curRecoilX, curRecoilZ) * weaponData.RecoilMultipleInZoom);
             }
 
             curSpread += weaponData.RecoilPerShot;
@@ -248,11 +255,11 @@ public class Weapon : MonoBehaviourPunCallbacks
             //var bullet = bulletPool.Get();    
 
             // 방식2_레이캐스트_총구에서 fireDirection방향으로
-            // 2.1. 공격처리_생명체, 장애물, 제한된 거리가 끝점
+            // 2.1. 공격처리
             ray.origin = muzzlePosition.position;
             ray.direction = fireDirection;
             if(Physics.Raycast(ray, out hit, bulletPrefab.bulletData.MaxDistance, gunLayerMask)){
-                // (1) 생명체
+                // (1) Damageable 물체 또는 미확인물체
                 var target = hit.transform.GetComponent<IDamageable>();
                 if( target != null)
                 {
@@ -275,7 +282,7 @@ public class Weapon : MonoBehaviourPunCallbacks
                 }
                 else hitPoint = hit.point;
             }
-            // (2) 제한된 거리
+            // (2) 제한된 거리에 도달할 경우
             else{
                 hitPoint = muzzlePosition.position + fireDirection * bulletPrefab.bulletData.MaxDistance;
             }
@@ -299,7 +306,7 @@ public class Weapon : MonoBehaviourPunCallbacks
             // 2.3. 예광탄
             Bullet2 bullet = Instantiate(raytracerPrefab);
             bullet.Completed += OnCompleted;
-            bullet.DrawLine(muzzlePosition.position, hitPoint, speed: 500, 0);
+            bullet.DrawLine(muzzlePosition.position, hitPoint, bulletPrefab.bulletData.Speed, 0);
            
         }
 
