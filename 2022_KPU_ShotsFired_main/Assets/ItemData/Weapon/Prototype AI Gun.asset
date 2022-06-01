@@ -17,12 +17,15 @@ MonoBehaviour:
   fireRPM: 500
   ballPerOneShot: 1
   maxSpread: 10
+  minSpread: 0
   recoilPerShot: 10
   recoilRecover: 1
   recoilHorizontal: {x: -0.5, y: 0.5}
   recoilVertical: {x: 0.5, y: 0.5}
   recoilZ: {x: 0.5, y: 0.5}
+  recoilMultiple: 1
   recoilMultipleInIdle: 1
+  recoilMultipleInZoom: 1
   magCappacity: 30
   initMagCount: 10
   reloadTime: 4

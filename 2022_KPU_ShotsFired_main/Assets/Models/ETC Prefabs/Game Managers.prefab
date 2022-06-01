@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 6849910986925176806}
   - component: {fileID: 6849910986925176807}
   - component: {fileID: 141491043077302245}
+  - component: {fileID: 6849910988104929494}
   m_Layer: 6
   m_Name: Game Managers
   m_TagString: Untagged
@@ -194,3 +195,105 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!114 &6849910988104929494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849910986925176825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9e611035c666846981e191bbe0eba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fleshDecal:
+  - {fileID: 2980059464862511782, guid: 0d108913a24953242b9fd2615389b2d2, type: 3}
+  - {fileID: 7451982899520276796, guid: 88410d22c9389074b897fb2ee54c7544, type: 3}
+  - {fileID: 250868956377727726, guid: 2ed92d32608b2224fb205adf5e3ecfa7, type: 3}
+  - {fileID: 2426192354539326223, guid: 254e6f6087e48724eb3b80f881bc48a9, type: 3}
+  rockDecal:
+  - {fileID: 4872030368321478434, guid: 960205a0fb6e3be40a6638fe08d0f3f5, type: 3}
+  - {fileID: 7236115212231471541, guid: cf07e507cad403a478ca42da02f44087, type: 3}
+  - {fileID: 8106189462210167934, guid: f3fc4765e1729e24fada59150233fbeb, type: 3}
+  - {fileID: 8360897983169464813, guid: 54d17ef0927945b4e8a0c8c96761cfe7, type: 3}
+  woodDecal:
+  - {fileID: 5252606893518707730, guid: 59630658042d77641bc3674d4cc919d7, type: 3}
+  - {fileID: 2977146583245889734, guid: 8f87d920066555c4a866ad87b35e9d95, type: 3}
+  - {fileID: 3168561473407831383, guid: 418e993fe7b5eb94b9bfba1850ed1d08, type: 3}
+  - {fileID: 3617219631977782151, guid: 7a8c17b900ed19a459b54f23dfe9fee9, type: 3}
+  thinMetalDecal:
+  - {fileID: 3999907528169576385, guid: 041f64d7bc6e82a4f8aa7f7d91a31438, type: 3}
+  - {fileID: 4458888194215088260, guid: 273c9fdc130436e409c6f9d650bf5a33, type: 3}
+  - {fileID: 4504650418774363838, guid: 27df02a2c6c3a6c4a80f77ab9d2b9003, type: 3}
+  - {fileID: 2632853530951579261, guid: 313762adfca68c543a6695e895601518, type: 3}
+  metalDecal:
+  - {fileID: 559407491718082692, guid: edc40ca342d582448bf803ef4b0c5001, type: 3}
+  - {fileID: 8397900530049635054, guid: 280dd7b1dbbe3bb4b8a414d1e9093edf, type: 3}
+  - {fileID: 5748433917242350924, guid: f0b7c28863c7f554d9f8d4a150de9110, type: 3}
+  - {fileID: 815203494311570969, guid: ae44d0f0c6e79354795b8fd1fc7dbe25, type: 3}
+  concreteDecal:
+  - {fileID: 3304277540731227307, guid: c2db96ffe77b22a44abc04aa006f938a, type: 3}
+  - {fileID: 4961415512680774868, guid: f8e720c715da08648a8df766e69bb04a, type: 3}
+  - {fileID: 8205553486356151917, guid: 2cfb29d6014ba1e458b458f86e4049a9, type: 3}
+  - {fileID: 1151028407833869642, guid: 498a723d92e52c74092b6b181bdbf91f, type: 3}
+  - {fileID: 6590521869016229105, guid: a65faa695e486cd42b6afd7d20d3459c, type: 3}
+  - {fileID: 6806848384305137573, guid: 8354bbc609dcad84983cb4a93497a448, type: 3}
+  - {fileID: 7927313664917022203, guid: 4ff480e4d31182e4ea6d7767b4744db1, type: 3}
+  - {fileID: 2075778366754417004, guid: 40957522c40b5a24ca3e7cba6f908393, type: 3}
+  brickDecal:
+  - {fileID: 3576730523777774166, guid: bf5c1b696a58ea646a903665c9f6ce63, type: 3}
+  - {fileID: 3107260250121476021, guid: a5eb94a9a41916845972e577f5edf7af, type: 3}
+  - {fileID: 1661164461833479898, guid: 35d87a11f06e155419421d6f683b64a4, type: 3}
+  - {fileID: 8855097000657896951, guid: a6af166b4079992409ec0a85d444292c, type: 3}
+  glassDecal:
+  - {fileID: 3404704020636200716, guid: da81a59c020ec0f439c856883cc39555, type: 3}
+  - {fileID: 125942440395903232, guid: bd349ddc75e33124ea3e90c45fb20407, type: 3}
+  - {fileID: 8094461111015079689, guid: 63894f6c3e2beeb42af926f0e7246cd9, type: 3}
+  - {fileID: 4612926812550819212, guid: c0ff7f398edb1fe45ba4204be77fb2f7, type: 3}
+  plywoodDecal:
+  - {fileID: 6759681332481089502, guid: 1f219c30ad484724ab383b71e9509c8b, type: 3}
+  - {fileID: 6156110692558179887, guid: 8ddb9a91f1eac8c40b03ccdbf9927b00, type: 3}
+  - {fileID: 3016665671325219647, guid: a8ed8832f5d451a4f9f261bee93fb67a, type: 3}
+  - {fileID: 6758505445401539513, guid: 74ae7f7d4e7610a4e9311c5f28c4a603, type: 3}
+  asphaltDecal:
+  - {fileID: 6810599080319410017, guid: 6a7500b78206c9544acea35265d35a86, type: 3}
+  - {fileID: 3983964306654531483, guid: 9db5eb4af5a946d4aa5ff1d22c6c7695, type: 3}
+  - {fileID: 2988370630630160009, guid: 30be6a68b80fa0a4fb8456393488378a, type: 3}
+  - {fileID: 6533566654381714143, guid: 4758f7dadc2976e47b106d65311f55df, type: 3}
+  sandDecal:
+  - {fileID: 1678591232864039203, guid: d9caa48fdf390fa4ba4f8bb5511d2300, type: 3}
+  - {fileID: 5705763840978262066, guid: b6b269fbe72f7ba4a854d326995542b9, type: 3}
+  - {fileID: 8681616979234163121, guid: d07930b54a61b6e49b6e67ed4a04e012, type: 3}
+  - {fileID: 6694437545453530423, guid: 706680f016241274b8b3e0b0713ae1bd, type: 3}
+  mudDecal:
+  - {fileID: 6046397433407896692, guid: e741b2a1c623f93468c78cc819eaca8e, type: 3}
+  - {fileID: 8261154179701729278, guid: 07221f42ddaff57498e6512d9fd3f312, type: 3}
+  - {fileID: 8407330745493731355, guid: c5e656f5d1da6784cb47040008b79b96, type: 3}
+  - {fileID: 5549704289018148190, guid: 596e8f8a6c7d69b438d96ae885de792f, type: 3}
+  groundDecal:
+  - {fileID: 8356584871091174656, guid: 44f421c3259630440961dd531bf9dca2, type: 3}
+  - {fileID: 8896456781493149455, guid: f100d840257a6404c91788c8b4e6fdae, type: 3}
+  - {fileID: 5727433758322972350, guid: 0d2d71b0bc2e9da408cee43ec08e4950, type: 3}
+  - {fileID: 1839786171728262671, guid: 623d28bb51a14204fbee03fd896551dc, type: 3}
+  waterDecal: []
+  ceramicDecal:
+  - {fileID: 4935042766678459524, guid: 9182d58fbf1db054eaa2e725c112616a, type: 3}
+  - {fileID: 1145501737142857621, guid: 9ad43dc04a9456b459c0391657d4225f, type: 3}
+  - {fileID: 1383290702010692964, guid: 31a696fffa91d3c4fb8947b9d259566c, type: 3}
+  - {fileID: 1959440819890584970, guid: d7b8f888080ea70419b973a653035761, type: 3}
+  fleshImpact: {fileID: 258580847482720395, guid: 907189bb1273a83499f4581146d101a5, type: 3}
+  rockImpact: {fileID: 9025620440509115318, guid: 67ee14f1e2b7cbf44b97f7f8d26782bc, type: 3}
+  woodImpact: {fileID: 3061189629347133750, guid: a8e182c1811239647a9f16b1f40dd7f2, type: 3}
+  thinMetalImpact: {fileID: 7077355519987932897, guid: 579357df66620f747a0c8f99cabbd10e, type: 3}
+  metalImpact: {fileID: 7077355519987932897, guid: 6d813d766b473a04680efdb264997f8d, type: 3}
+  concreteImpact: {fileID: 1245417074158470010, guid: 4116cec408736b8408c7cea75253bb9b, type: 3}
+  brickImpact: {fileID: 1245417074158470010, guid: a97e8df82833bfe4fa18da692b508598, type: 3}
+  glassImpact: {fileID: 6116272564290920125, guid: d58f136885f6e8a4ca2a8731c8bc258d, type: 3}
+  plywoodImpact: {fileID: 3061189629347133750, guid: 3178f3f3d1492df40a2395f79abf8b76, type: 3}
+  asphaltImpact: {fileID: 1245417074158470010, guid: d87bcf25ddc8ba64495acd31a64895c7, type: 3}
+  sandImpact: {fileID: 7258679735602562000, guid: 0b38c6dd9d60f37438e0cd2d5dbbe9ef, type: 3}
+  mudImpact: {fileID: 5664013782547976066, guid: fa57485de29fa3241b0f322dad2d4191, type: 3}
+  groundImpact: {fileID: 7258679735602562000, guid: 608cb554bb30cb746956424c326042ca, type: 3}
+  waterImpact: {fileID: 5664013782547976066, guid: f6c9593ace7fede4ba0251e1010760b6, type: 3}
+  ceramicImpact: {fileID: 1245417074158470010, guid: 2c66f6a618cf19248bd3252b2e20f49e, type: 3}
