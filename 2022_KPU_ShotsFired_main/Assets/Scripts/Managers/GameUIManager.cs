@@ -24,6 +24,9 @@ public class GameUIManager : MonoBehaviour
     IEnumerator playerDamagedFadeOut;    // 플레이어_피격 이미지를 옅게 할 함수명
     [Header("플레이어 무기 계열")]
     [SerializeField] private Animator aimAnimator;  // 에임 애니메이터
+    [SerializeField] private Image[] hitMarker; // 히트 마커
+    [SerializeField] private float hitMarkTime; // 히트 마커 지속시간
+    IEnumerator hitMarkerIEnumerator;   // 히트 마커 표시함수
     [SerializeField] private TextMeshProUGUI remainAmmo;   // 플레이어_남은 탄환
     [SerializeField] private TextMeshProUGUI remainMag;    // 플레이어_남은 탄창
     [SerializeField] GameObject InterAction;    // 플레이어_상호작용 오브젝트
@@ -90,6 +93,33 @@ public class GameUIManager : MonoBehaviour
     {
         aimAnimator.SetFloat("Spread",_spread);
     }
+    public void UpdateHitMark(){
+        if(hitMarkerIEnumerator != null) StopCoroutine(hitMarkerIEnumerator);
+        hitMarkerIEnumerator = HitMarker();
+        StartCoroutine(hitMarkerIEnumerator);
+    }
+    IEnumerator HitMarker(){
+        float i = 1;
+        foreach( var j in hitMarker){
+            Color c = j.color;
+            c.a = 1;
+            j.color = c;
+        }
+
+        while(i>0){
+            i -= 1 / (hitMarkTime * 50);
+            if( i < 0) i = 0;
+
+            foreach(var k in hitMarker){
+                Color c = k.color;
+                c.a = i;
+                k.color = c;
+            }
+
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
+
     public void UpdateAmmo(int _remainAmmo)
     {
         remainAmmo.text = _remainAmmo.ToString();
@@ -133,5 +163,9 @@ public class GameUIManager : MonoBehaviour
 
             yield return new WaitForSeconds(0.02f);
         }
+    }
+
+    public void QuitProgram(){
+        Application.Quit();
     }
 }
