@@ -476,6 +476,7 @@ namespace PhotonInit
         [PunRPC]
         void game_start()
         {
+            GameUIManager.Instance.SetMouseLock(true);
             UI_delete();
             UI_delete_map();
             UI_Select(Player_UI);
@@ -600,6 +601,7 @@ namespace PhotonInit
         {
             // 추후 수정 필요 
             PhotonNetwork.Destroy(playerProtypes[0]);
+            GameUIManager.Instance.SetMouseLock(false);
         }
         #endregion
     }
