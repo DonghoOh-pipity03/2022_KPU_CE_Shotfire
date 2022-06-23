@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18350114, g: 0.22906059, b: 0.30574894, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 9a2063b35fb74eb408ee9a720167b06b, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 10fd22b2a85482e47a548fefb4923b5c, type: 2}
 --- !u!1001 &26328730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -314,47 +314,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 576c0c78174aa504db356142471b525e, type: 3}
   m_PrefabInstance: {fileID: 57453644}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &108316076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: Stage 2-2_LMA5
-  m_EditorClassIdentifier: 
-  resolution: 4096
-  bitmask: 1
-  id: 5
-  sortingID: 5
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: Stage 2-2
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1 &175940076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,7 +1164,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &231612605
 PrefabInstance:
@@ -1458,6 +1417,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 261a3fb49bd82b648a5ec0465145b800, type: 3}
   m_PrefabInstance: {fileID: 269698298}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &298096052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Stage 2-2_LMA7
+  m_EditorClassIdentifier: 
+  resolution: 2048
+  bitmask: 1
+  id: 7
+  sortingID: 7
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Stage 2-2
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &300535975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,7 +1820,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 13dcef406942d62498f0253c90e5b69c, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13dcef406942d62498f0253c90e5b69c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11532,7 +11532,7 @@ Transform:
   - {fileID: 430399499}
   - {fileID: 776825821}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545070450
 GameObject:
@@ -11581,7 +11581,7 @@ Transform:
   - {fileID: 1293052356}
   - {fileID: 2033635292}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &575709897
 GameObject:
@@ -12026,6 +12026,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 576c0c78174aa504db356142471b525e, type: 3}
   m_PrefabInstance: {fileID: 583813246}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &586628396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 586628398}
+  - component: {fileID: 586628397}
+  m_Layer: 0
+  m_Name: Reflection Probe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!215 &586628397
+ReflectionProbe:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586628396}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Type: 0
+  m_Mode: 0
+  m_RefreshMode: 0
+  m_TimeSlicingMode: 0
+  m_Resolution: 128
+  m_UpdateFrequency: 0
+  m_BoxSize: {x: 100, y: 100, z: 100}
+  m_BoxOffset: {x: 0, y: 0, z: 0}
+  m_NearClip: 0.3
+  m_FarClip: 1000
+  m_ShadowDistance: 100
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IntensityMultiplier: 1
+  m_BlendDistance: 1
+  m_HDR: 1
+  m_BoxProjection: 0
+  m_RenderDynamicObjects: 0
+  m_UseOcclusionCulling: 1
+  m_Importance: 1
+  m_CustomBakedTexture: {fileID: 0}
+--- !u!4 &586628398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586628396}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 37.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &608474014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13043,6 +13108,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 261a3fb49bd82b648a5ec0465145b800, type: 3}
   m_PrefabInstance: {fileID: 784540636}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &785847416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Stage 2-2_LMA10
+  m_EditorClassIdentifier: 
+  resolution: 512
+  bitmask: 1
+  id: 10
+  sortingID: 10
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Stage 2-2
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &792477849
 GameObject:
   m_ObjectHideFlags: 0
@@ -16540,7 +16646,7 @@ Transform:
   - {fileID: 716916356}
   - {fileID: 1105815068}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &953850549
 Mesh:
@@ -17437,8 +17543,548 @@ MonoBehaviour:
   lastBakeTime: 0
   enlightenWarningShown: 0
   enlightenWarningShown2: 0
-  lightUIDs: 2cf0674ffee58687fd0f92e1637cfec3871b3007d7d05c050806a4a3c534b366fa3e9ff1ac7707e6d88a67b9e85fcbd43938fcbcb3ab7e386cc20addb5efe0b05e4339b44bf9039b072f78aa9e8ab74de33f421faf78675eaf5cb4b71bb97c8b72f5ae2535c052523979a5c88de787f499c19a9f8585184cb4f78c85
+  lightUIDs: b5efe0b05e4339b44bf9039b9e8ab74daf78675e1bb97c8baf5cb4b772f5ae2535c052523979a5c899c19a9f8585184cb4f78c856cc20addb3ab7e38e85fcbd4e33f421ffa3e9ff12cf0674ffee58687fd0f92e1637cfec3871b3007d7d05c050806a4a3c534b366ac7707e6072f78aad88a67b93938fcbc8de787f4
   lights:
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 24.28
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 45.161495
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 36.34
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.738
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 59.970997
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 0.91778976, b: 0.80817604, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 18.74
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 60.971497
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 6.376361
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 53.361496
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 24.28
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 60.971497
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 18.74
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 45.161495
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 18.74
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 37.551495
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 6.376361
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 28.85
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 36.34
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.738
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 54.726997
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 0.91778976, b: 0.80817604, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 28.83636
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 45.161495
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 28.83636
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 28.85
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 6.376361
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 60.971497
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 36.34
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.738
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 49.697
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 0.91778976, b: 0.80817604, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 24.28
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 28.85
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 12.736361
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 45.161495
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 24.28
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 53.361496
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 6.376361
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.288
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 45.161495
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
+  - tform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 35.661
+      e10: 0
+      e11: 0.0000029206276
+      e12: -1
+      e13: 29.738
+      e20: 0
+      e21: 1
+      e22: 0.0000029206276
+      e23: 28.677998
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    color: {r: 1, g: 0.91778976, b: 0.80817604, a: 1}
+    intensity: 1.5
+    range: 20
+    radius: 0.05
+    samples: 8
+    samples2: 0
+    bitmask: 0
+    bakeToIndirect: 0
+    selfShadow: 0
+    realisticFalloff: 0
+    projMode: 1
+    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
+    angle: 120
   - tform:
       e00: 1
       e01: 0
@@ -17597,7 +18243,7 @@ MonoBehaviour:
       e10: 0
       e11: 0.0000029206276
       e12: -1
-      e13: 36.945
+      e13: 36.57
       e20: 0
       e21: 1
       e22: 0.0000029206276
@@ -17683,36 +18329,6 @@ MonoBehaviour:
       e00: 1
       e01: 0
       e02: 0
-      e03: 35.661
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.738
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 28.677998
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 0.91778976, b: 0.80817604, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
       e03: 24.28
       e10: 0
       e11: 0.0000029206276
@@ -17722,246 +18338,6 @@ MonoBehaviour:
       e21: 1
       e22: 0.0000029206276
       e23: 37.551495
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 12.736361
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 28.85
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 24.28
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 53.361496
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 12.736361
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 53.361496
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 12.736361
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 45.161495
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 24.28
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 28.85
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 24.28
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 45.161495
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 36.34
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.738
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 59.970997
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 0.91778976, b: 0.80817604, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 18.74
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 60.971497
       e30: 0
       e31: 0
       e32: 0
@@ -18013,157 +18389,7 @@ MonoBehaviour:
       e00: 1
       e01: 0
       e02: 0
-      e03: 6.376361
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 53.361496
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 6.376361
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 45.161495
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 24.28
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 60.971497
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 18.74
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 37.551495
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 18.74
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 45.161495
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 6.376361
+      e03: 12.736361
       e10: 0
       e11: 0.0000029206276
       e12: -1
@@ -18193,37 +18419,7 @@ MonoBehaviour:
       e00: 1
       e01: 0
       e02: 0
-      e03: 36.34
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.738
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 54.726997
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 0.91778976, b: 0.80817604, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 28.83636
+      e03: 12.736361
       e10: 0
       e11: 0.0000029206276
       e12: -1
@@ -18231,7 +18427,7 @@ MonoBehaviour:
       e20: 0
       e21: 1
       e22: 0.0000029206276
-      e23: 45.161495
+      e23: 53.361496
       e30: 0
       e31: 0
       e32: 0
@@ -18267,96 +18463,6 @@ MonoBehaviour:
       e32: 0
       e33: 1
     color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 28.83636
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 28.85
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 6.376361
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.288
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 60.971497
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 1, b: 1, a: 1}
-    intensity: 1.5
-    range: 20
-    radius: 0.05
-    samples: 8
-    samples2: 0
-    bitmask: 0
-    bakeToIndirect: 0
-    selfShadow: 0
-    realisticFalloff: 0
-    projMode: 1
-    cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-    angle: 120
-  - tform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 36.34
-      e10: 0
-      e11: 0.0000029206276
-      e12: -1
-      e13: 29.738
-      e20: 0
-      e21: 1
-      e22: 0.0000029206276
-      e23: 49.697
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    color: {r: 1, g: 0.91778976, b: 0.80817604, a: 1}
     intensity: 1.5
     range: 20
     radius: 0.05
@@ -18370,12 +18476,12 @@ MonoBehaviour:
     cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
     angle: 120
   implicitGroups:
-  - {fileID: 108316076}
-  - {fileID: 108316076}
-  - {fileID: 108316076}
-  - {fileID: 108316076}
-  - {fileID: 108316076}
-  - {fileID: 108316076}
+  - {fileID: 298096052}
+  - {fileID: 785847416}
+  - {fileID: 1233938460}
+  - {fileID: 2064980470}
+  - {fileID: 1902758062}
+  - {fileID: 1190410508}
   implicitGroupedObjects:
   - {fileID: 335488398}
   - {fileID: 335488399}
@@ -18384,19 +18490,33 @@ MonoBehaviour:
   - {fileID: 335488402}
   - {fileID: 1569353219}
   bounds:
-  - m_Center: {x: 0.28499985, y: 11.000024, z: 44.84458}
-    m_Extent: {x: 42.81499, y: 11.000025, z: 47.84458}
-  - m_Center: {x: -14.410999, y: 3.3275, z: 34.95}
-    m_Extent: {x: 26.488998, y: 3.8275003, z: 37.95}
-  - m_Center: {x: -11.264999, y: 3.568263, z: 68}
-    m_Extent: {x: 31.264992, y: 3.5867376, z: 14}
-  - m_Center: {x: -5.4900093, y: 11.000008, z: 67.5}
-    m_Extent: {x: 25.51001, y: 3.0000076, z: 10.499992}
   - m_Center: {x: 20.980839, y: 14.93482, z: 46.5}
     m_Extent: {x: 19.000908, y: 6.981966, z: 31.507883}
-  - m_Center: {x: 26.975002, y: 27.109901, z: 51.509506}
-    m_Extent: {x: 25.995201, y: 11.2209015, z: 27.498505}
-  hasEmissive: 010101010101
+  - m_Center: {x: 0, y: 0, z: 0.73053837}
+    m_Extent: {x: 5, y: 5, z: 2.6794662}
+  - m_Center: {x: 0.2915002, y: 1.8986297, z: -1.4199443}
+    m_Extent: {x: 0.192543, y: 0.26158068, z: 0.26158068}
+  - m_Center: {x: -14.410999, y: 3.556763, z: 34.924137}
+    m_Extent: {x: 26.488998, y: 3.5982373, z: 37.924137}
+  - m_Center: {x: -11.264999, y: 3.568263, z: 41.73602}
+    m_Extent: {x: 31.264992, y: 3.5867376, z: 40.26398}
+  - m_Center: {x: 0.28499985, y: 10.821408, z: 72.54773}
+    m_Extent: {x: 42.81499, y: 11.178613, z: 20.141418}
+  - m_Center: {x: -15.201216, y: 11.811269, z: 44.84064}
+    m_Extent: {x: 25.698782, y: 6.9519815, z: 47.84064}
+  - m_Center: {x: 26.975002, y: 27.1099, z: 51.509506}
+    m_Extent: {x: 25.995201, y: 11.220899, z: 27.498508}
+  - m_Center: {x: 50.205376, y: 18.054321, z: 28.30381}
+    m_Extent: {x: 1.5554405, y: 2.1653085, z: 3.6629558}
+  - m_Center: {x: 34.49328, y: 25.745266, z: 44.487465}
+    m_Extent: {x: 1.5085015, y: 1.7261872, z: 4.492045}
+  - m_Center: {x: 44.17781, y: 17.853062, z: 26.50143}
+    m_Extent: {x: 4.492044, y: 1.9311686, z: 1.5084887}
+  - m_Center: {x: 44.177803, y: 22.066486, z: 30.44447}
+    m_Extent: {x: 4.492033, y: 1.9511242, z: 1.5084631}
+  - m_Center: {x: 38.456326, y: 29.110146, z: 44.487473}
+    m_Extent: {x: 1.5084747, y: 1.8136821, z: 4.4920373}
+  hasEmissive: 01010101010101010101010101
   uvBuffOffsets: 
   uvBuffLengths: 
   uvSrcBuff: []
@@ -18408,42 +18528,38 @@ MonoBehaviour:
   lmGroupMinLOD: 
   lmGroupLODMatrix: 
   serverGetFileList: []
-  lightmapHasColor: 010101010101
-  lightmapHasMask: 000000000000
-  lightmapHasDir: 000000000000
-  lightmapHasRNM: 000000000000
+  lightmapHasColor: 01010101010101010101010101
+  lightmapHasMask: 00000000000000000000000000
+  lightmapHasDir: 00000000000000000000000000
+  lightmapHasRNM: 00000000000000000000000000
   modifiedAssetPathList:
-  - Assets/External_Asset/3D Assets/Stage01/Models/Pillar.fbx
+  - Assets/External_Asset/3D Assets/Weapon/KAR-416_2/KAR-416.fbx
+  - Assets/External_Asset/3D Assets/Stage01/Models/Basement Lamp.fbx
+  - Assets/External_Asset/3D Assets/Stage01/Models/pillar.fbx
+  - Assets/External_Asset/3D Assets/Stage02/stage 100.fbx
   - Assets/External_Asset/3D Assets/Stage01/Models/String.fbx
   - Assets/External_Asset/3D Assets/Stage01/Models/Support.fbx
   - Assets/External_Asset/3D Assets/Stage01/Models/HangerLight.fbx
-  - Assets/External_Asset/3D Assets/Stage02/stage 100.fbx
-  - Assets/External_Asset/3D Assets/Stage01/Models/Enviroment.fbx
-  - Assets/External_Asset/3D Assets/Stage01/Models/WaterPipe.fbx
-  - Assets/External_Asset/3D Assets/Stage01/Models/parkingStone.fbx
-  - Assets/External_Asset/3D Assets/Stage01/Models/Vent.fbx
-  - Assets/External_Asset/3D Assets/Vehicles/Models/car_fin.fbx
-  - Assets/External_Asset/3D Assets/Stage01/Models/Basement Lamp.fbx
-  - Assets/External_Asset/3D Assets/Stage01/Models/stage_curve.fbx
   modifiedAssets:
   - meshName:
-    - Pillar
+    - Stock
+    - Sight_iron
+    - Muzzle
+    - Mag
+    - KAR-416
+    - HandGaurd
+    - Barrel_11.5
+    padding: 00010000000100000001000000010000000100000001000000010000
+    unwrapper: 00000000000000000000000000000000000000000000000000000000
+  - meshName:
+    - Cube.005
+    padding: c5000000
+    unwrapper: 00000000
+  - meshName:
     - Core_vertivcal
     - Core_horizontal
-    padding: 220000004800000056000000
-    unwrapper: 000000000000000000000000
-  - meshName:
-    - String
-    padding: 00010000
-    unwrapper: 00000000
-  - meshName:
-    - Support
-    padding: f8000000
-    unwrapper: 00000000
-  - meshName:
-    - HangerLight_fin
-    padding: 9e000000
-    unwrapper: 00000000
+    padding: 4100000047000000
+    unwrapper: 0000000000000000
   - meshName:
     - Stage 2-1.005
     - Stage 2-1.002
@@ -18460,51 +18576,31 @@ MonoBehaviour:
     padding: 140000000d0000000f0000000f0000001000000002000000010000000f0000000f0000000d0000000f0000000c000000
     unwrapper: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   - meshName:
-    - Wall
-    - Floor
-    - Ceiling_Pillar
-    - Wall_0.5
-    - Ceiling
-    padding: 1800000018000000220000005300000018000000
-    unwrapper: 0000000000000000000000000000000000000000
-  - meshName:
-    - Pipe_long
-    - Pipe_Cover
-    - Pipe_Cooler
-    - Pipe_normal
-    - Pipe_Cross
-    padding: b30000000001000000010000fd00000000010000
-    unwrapper: 0000000000000000000000000000000000000000
-  - meshName:
-    - Stone
-    padding: b7000000
+    - String
+    padding: 00010000
     unwrapper: 00000000
   - meshName:
-    - Vecnt_Connector
-    - Vent
-    - Vecnt_Cover
-    - Vent_Cross
-    padding: cb00000040000000720000003f000000
-    unwrapper: 00000000000000000000000000000000
-  - meshName:
-    - low
-    padding: 19000000
+    - Support
+    padding: f8000000
     unwrapper: 00000000
   - meshName:
-    - Cube.005
-    padding: c5000000
-    unwrapper: 00000000
-  - meshName:
-    - NurbsPath.002
-    padding: 03000000
+    - HangerLight_fin
+    padding: 9e000000
     unwrapper: 00000000
   maps:
-  - {fileID: 2800000, guid: f3ccd45301907624a99f5231767178df, type: 3}
-  - {fileID: 2800000, guid: 1d3fa7599625d814fb0da6c3380e46d4, type: 3}
-  - {fileID: 2800000, guid: a9f35c450c58384408e432088a826802, type: 3}
-  - {fileID: 2800000, guid: e26d4dbe9ceea9a4ca894e0cbc23f3bd, type: 3}
-  - {fileID: 2800000, guid: b5fa8860d9aa5f64a96c6fa7e0189a3e, type: 3}
-  - {fileID: 2800000, guid: 5d8fbae803adfcd449af2c5e330b3368, type: 3}
+  - {fileID: 2800000, guid: f75d562a879650d47a493cd4b6556318, type: 3}
+  - {fileID: 2800000, guid: 8bc9caccc144aca4ea98e6388f6f8c56, type: 3}
+  - {fileID: 2800000, guid: eeb8092a086868b42bf02b1aa8d63264, type: 3}
+  - {fileID: 2800000, guid: e10f2271950e870448f077e463f56328, type: 3}
+  - {fileID: 2800000, guid: 7acbd1fba234ddc4e91df9a72443194b, type: 3}
+  - {fileID: 2800000, guid: 90aa925ca6f48bd46a3613348a3ef323, type: 3}
+  - {fileID: 2800000, guid: d95550366e37c8f448a9552d25640602, type: 3}
+  - {fileID: 2800000, guid: 1af2829a2ede89444887c289bb831ada, type: 3}
+  - {fileID: 2800000, guid: 265819f471e04004e9636697ec5cae5b, type: 3}
+  - {fileID: 2800000, guid: 2626fb8246028b5418b656fbbc3fcbbe, type: 3}
+  - {fileID: 2800000, guid: b20dfc549a4db9d4d82320708a9fa5bd, type: 3}
+  - {fileID: 2800000, guid: cba806d81d3667d42a8669965ed7a13f, type: 3}
+  - {fileID: 2800000, guid: f148dfd093389e94c9103098336b51ce, type: 3}
   masks: []
   dirMaps: []
   rnmMaps0: []
@@ -18518,14 +18614,14 @@ MonoBehaviour:
   - {fileID: 335488396}
   - {fileID: 335488397}
   - {fileID: 335488392}
-  bakedIDs: 050000000500000005000000050000000500000005000000
+  bakedIDs: 070000000a0000000b000000090000000c00000008000000
   bakedScaleOffset:
-  - {x: 0.68807656, y: 0.68806016, z: 0.00008870129, w: 0.00008871731}
-  - {x: 0.07174622, y: 0.07181224, z: 0.8644389, w: -0.00029128607}
-  - {x: 0.06847893, y: 0.068533234, z: 0.93384844, w: 0.0007606511}
-  - {x: 0.082582206, y: 0.08274644, z: 0.78987074, w: -0.00028984083}
-  - {x: 0.06605814, y: 0.06608044, z: 0.6886566, w: 0.084386125}
-  - {x: 0.10271156, y: 0.10236588, z: 0.68745303, w: -0.00043894912}
+  - {x: 1.001011, y: 1.0117955, z: -0.000245128, w: -0.00025565972}
+  - {x: 1.027184, y: 1.0272998, z: -0.013711951, w: -0.013713648}
+  - {x: 1.0456897, y: 1.0100414, z: 0.0007324219, w: 0.0007324219}
+  - {x: 1.0199299, y: 1.0201788, z: -0.011795044, w: -0.011798204}
+  - {x: 1.031269, y: 1.0166365, z: 0.0007324219, w: 0.0007324219}
+  - {x: 1.0176626, y: 1.0172402, z: -0.010995956, w: -0.010991004}
   bakedVertexOffset: ffffffffffffffffffffffffffffffffffffffffffffffff
   bakedVertexColorMesh:
   - {fileID: 0}
@@ -18573,7 +18669,7 @@ MonoBehaviour:
   bakedScaleOffsetTerrain: []
   assetList: []
   uvOverlapAssetList: 
-  idremap: 000000000100000002000000030000000400000005000000
+  idremap: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c000000
   usesRealtimeGI: 0
   emptyDirectionTex: {fileID: 0}
   anyVolumes: 0
@@ -18581,12 +18677,18 @@ MonoBehaviour:
   sectors:
   - name: $G
     maps:
-    - {fileID: 2800000, guid: eb5a0723a848413459049c7ce4e2361c, type: 3}
-    - {fileID: 2800000, guid: f834ddb6aedda93418a534a41073b4ee, type: 3}
+    - {fileID: 2800000, guid: f75d562a879650d47a493cd4b6556318, type: 3}
+    - {fileID: 2800000, guid: 8bc9caccc144aca4ea98e6388f6f8c56, type: 3}
     - {fileID: 2800000, guid: a9f35c450c58384408e432088a826802, type: 3}
     - {fileID: 2800000, guid: e10f2271950e870448f077e463f56328, type: 3}
     - {fileID: 2800000, guid: f31fc744b1bbd5b46a019ec078ff822e, type: 3}
-    - {fileID: 2800000, guid: c05dda36122b64c44adc2ec2a6d8bf9a, type: 3}
+    - {fileID: 2800000, guid: 90aa925ca6f48bd46a3613348a3ef323, type: 3}
+    - {fileID: 2800000, guid: d41cdad8136164b4bafb5d6f195b834c, type: 3}
+    - {fileID: 2800000, guid: 1af2829a2ede89444887c289bb831ada, type: 3}
+    - {fileID: 2800000, guid: 265819f471e04004e9636697ec5cae5b, type: 3}
+    - {fileID: 2800000, guid: 2626fb8246028b5418b656fbbc3fcbbe, type: 3}
+    - {fileID: 2800000, guid: b20dfc549a4db9d4d82320708a9fa5bd, type: 3}
+    - {fileID: 2800000, guid: cba806d81d3667d42a8669965ed7a13f, type: 3}
     masks: []
     dirMaps: []
     rnmMaps0: []
@@ -18601,15 +18703,15 @@ MonoBehaviour:
     - {fileID: 335488397}
     - {fileID: 335488392}
     bakedRenderersTerrain: []
-    bakedIDs: 000000000000000000000000000000000000000000000000
+    bakedIDs: 06000000090000000a000000080000000b00000007000000
     bakedIDsTerrain: 
     bakedScaleOffset:
-    - {x: 0.6975182, y: 0.697471, z: 0.00073653343, w: 0.00073653343}
-    - {x: 0.0694714, y: 0.06953532, z: 0.86873704, w: -0.0002820504}
-    - {x: 0.06630769, y: 0.06636028, z: 0.9359458, w: 0.00073653343}
-    - {x: 0.07996381, y: 0.080122836, z: 0.7965331, w: -0.00028065097}
-    - {x: 0.06396367, y: 0.063997455, z: 0.69852823, w: 0.08171053}
-    - {x: 0.09945493, y: 0.099120215, z: 0.6973627, w: -0.00042503155}
+    - {x: 1.001011, y: 1.0117955, z: -0.000245128, w: -0.00025565972}
+    - {x: 1.027184, y: 1.0272998, z: -0.013711951, w: -0.013713648}
+    - {x: 1.0456897, y: 1.0100414, z: 0.0007324219, w: 0.0007324219}
+    - {x: 1.0199299, y: 1.0201788, z: -0.011795044, w: -0.011798204}
+    - {x: 1.031269, y: 1.0166365, z: 0.0007324219, w: 0.0007324219}
+    - {x: 1.0176626, y: 1.0172402, z: -0.010995956, w: -0.010991004}
     bakedScaleOffsetTerrain: []
     bakedVertexColorMesh:
     - {fileID: 0}
@@ -18632,8 +18734,49 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1190410508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Stage 2-2_LMA8
+  m_EditorClassIdentifier: 
+  resolution: 512
+  bitmask: 1
+  id: 8
+  sortingID: 8
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Stage 2-2
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!43 &1191778588
 Mesh:
   m_ObjectHideFlags: 0
@@ -19249,6 +19392,47 @@ Transform:
   m_Father: {fileID: 545070451}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1233938460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Stage 2-2_LMA11
+  m_EditorClassIdentifier: 
+  resolution: 256
+  bitmask: 1
+  id: 11
+  sortingID: 11
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Stage 2-2
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1001 &1293052355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27069,7 +27253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 471023093413734219, guid: 0c92a0c8a11b8b942b192df5c29b29a4, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 471023093413734219, guid: 0c92a0c8a11b8b942b192df5c29b29a4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39841,6 +40025,47 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1902758062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Stage 2-2_LMA12
+  m_EditorClassIdentifier: 
+  resolution: 256
+  bitmask: 1
+  id: 12
+  sortingID: 12
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Stage 2-2
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &1943730012
 GameObject:
   m_ObjectHideFlags: 0
@@ -40595,6 +40820,47 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &2064980470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: Stage 2-2_LMA9
+  m_EditorClassIdentifier: 
+  resolution: 512
+  bitmask: 1
+  id: 9
+  sortingID: 9
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: Stage 2-2
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &2065558133
 GameObject:
   m_ObjectHideFlags: 0
@@ -40879,5 +41145,5 @@ Transform:
   m_Children:
   - {fileID: 2028928464}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

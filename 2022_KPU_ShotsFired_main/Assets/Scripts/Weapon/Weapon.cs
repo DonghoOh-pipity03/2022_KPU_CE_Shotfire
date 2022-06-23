@@ -278,6 +278,10 @@ public class Weapon : MonoBehaviourPunCallbacks
                         damageMessage.hitNormal =  hit.normal;
 
                         target.ApplyDamage(damageMessage);
+
+                        // 히트마커 표시
+                        if (!useUI || !photonView.IsMine || hit.transform.root.tag != "Enemy"){}
+                        else{ GameUIManager.Instance.UpdateHitMark();}
                     }
                 }
                 else hitPoint = hit.point;
@@ -307,12 +311,10 @@ public class Weapon : MonoBehaviourPunCallbacks
             Bullet2 bullet = Instantiate(raytracerPrefab);
             bullet.Completed += OnCompleted;
             bullet.DrawLine(muzzlePosition.position, hitPoint, bulletPrefab.bulletData.Speed, 0);
-           
         }
 
         foreach( var i in shotParticle){ i.Emit(1); }
         foreach( var i in shotParticle2){ i.Play(); }
-
         lastFireTime = Time.time;
     }
     // 외부 코드_TracerDemo
