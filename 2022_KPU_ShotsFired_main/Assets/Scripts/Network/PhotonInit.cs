@@ -500,6 +500,7 @@ namespace PhotonInit
             playerProtypes.Add(PhotonNetwork.Instantiate("Player", pos,Quaternion.identity));
 
             Debug.LogFormat("플레이어 수 : " + PhotonNetwork.CurrentRoom.PlayerCount);
+            /*
             if(PhotonNetwork.IsMasterClient)
             {
                 if(PhotonNetwork.CurrentRoom.PlayerCount == 1)
@@ -594,6 +595,7 @@ namespace PhotonInit
                     player3Name.text = PhotonNetwork.MasterClient.GetNextFor(PhotonNetwork.MasterClient.GetNext()).NickName;
                 }
             }
+            */
             // 추후 수정 필요 
         }
         [PunRPC]
