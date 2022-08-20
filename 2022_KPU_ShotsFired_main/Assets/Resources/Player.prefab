@@ -5828,7 +5828,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7314911189420681629}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GunHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7204,6 +7204,21 @@ MonoBehaviour:
   crunchLayer:
     serializedVersion: 2
     m_Bits: 128
+  clip_walk:
+  - {fileID: 8300000, guid: 82dfdbe2b8acbc540a8e5dd9acf3db59, type: 3}
+  - {fileID: 8300000, guid: 27859a867f5335340b5ff105ecade3e1, type: 3}
+  - {fileID: 8300000, guid: 7c1efa501015cfd498d770cc3598daf9, type: 3}
+  - {fileID: 8300000, guid: 4e53203f57c3163428288fe572fc9024, type: 3}
+  - {fileID: 8300000, guid: 587f8d765b6801442ba3dad67997eeee, type: 3}
+  footSoundVolume: 0.15
+  walk_steptime: 0.35
+  clip_run:
+  - {fileID: 8300000, guid: 35205f06ce5d5574692cdd29f653ca81, type: 3}
+  - {fileID: 8300000, guid: ce5623fec24ea7646b8027c266a2ab58, type: 3}
+  - {fileID: 8300000, guid: e3afee79f43c8b84086e40f7cd43afe8, type: 3}
+  - {fileID: 8300000, guid: 04d31366bbbed1448bda181769f4b9da, type: 3}
+  - {fileID: 8300000, guid: d05c0321ca56af041b2abd1ad4bb36bc, type: 3}
+  run_steptime: 0.25
   isCrouch: 0
 --- !u!114 &7314911190920377186
 MonoBehaviour:

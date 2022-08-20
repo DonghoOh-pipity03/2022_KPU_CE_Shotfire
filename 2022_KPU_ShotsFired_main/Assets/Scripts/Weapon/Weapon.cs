@@ -7,20 +7,34 @@ using Knife.Effects;
 using RayFire;
 using Andtech.ProTracer;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Weapon : MonoBehaviourPunCallbacks
 {
     PlayerAttack playerAttack;
     [SerializeField] WeaponData weaponData; // 총기 SO
     [SerializeField] Bullet bulletPrefab;  // 총알 프리팹
     public Transform muzzlePosition; // 총구 위치
+    [Header("사운드")]
+    AudioSource gunAudioPlayer;
+    [SerializeField] AudioClip[] clip_shot;  // 사격음
+    [SerializeField] float clipLifeTime = 1.1f;    // 사격음 재생시간
+    [SerializeField] float clipWaitTime = 0.02f;    // 사격음 연속재생 간격시간
+    [SerializeField] float volume_shot = 1.0f;  // 사격음 볼륨
+    [SerializeField] AudioClip[] clip_reload;  // 재장전음
+    [SerializeField] AudioClip[] clip_Suppress; // 제압소리
+    [SerializeField] int SuppressSoundPlayPercent = 10; // 제압 소리 재생 확률
+    [SerializeField] AudioClip clip_hit;    // 히트 소리
+    [Header("파티클")]
     [SerializeField] ParticleGroupEmitter[]  shotParticle;    // 사격시 재생할 파티클
     [SerializeField] ParticleGroupPlayer[] shotParticle2;   // 사격시 재생할 파티클
+    [SerializeField] Bullet2 raytracerPrefab;   // 예광탄 프리팹
+    [Header("기타")]
     [SerializeField] LayerMask gunLayerMask;    // 사격판정에 사용할 레이어마스크_플레이어, 적, 레벨디자인
     [SerializeField] LayerMask suppressLayerMask;   // 제압레이어 마스크
     [SerializeField] RayfireGun rayfireGun; // 장애물 파괴용 컴포넌트_총
     [SerializeField] Transform rayfireTarget;
     [SerializeField] float fittingForward;    // AI전용_총기 앞방향 조정용 (현재 앞뒤로만 조정가능)
-    [SerializeField] Bullet2 raytracerPrefab;   // 예광탄 프리팹
 
     #region 전역 변수
     [Header("이하 디버그용")]
@@ -77,6 +91,7 @@ public class Weapon : MonoBehaviourPunCallbacks
         if (weaponUser.tag == "Player") playerAttack = weaponUser.GetComponent<PlayerAttack>();
         curRemainAmmo = weaponData.MagCappacity;
         UpdateUI();
+        gunAudioPlayer = GetComponent<AudioSource>();
         
         // RayFire 컴포넌트 세팅
         rayfireGun = GetComponent<RayfireGun>();
@@ -260,11 +275,11 @@ public class Weapon : MonoBehaviourPunCallbacks
             ray.direction = fireDirection;
             if(Physics.Raycast(ray, out hit, bulletPrefab.bulletData.MaxDistance, gunLayerMask)){
                 // (1) Damageable 물체 또는 미확인물체
+                //Debug.Log("hit");
                 var target = hit.transform.GetComponent<IDamageable>();
                 if( target != null)
                 {
                     hitPoint = hit.point;
-
                     if(hit.transform.root.tag != weaponUser.tag)
                     {
                         DamageMessage damageMessage;
@@ -279,9 +294,13 @@ public class Weapon : MonoBehaviourPunCallbacks
 
                         target.ApplyDamage(damageMessage);
 
-                        // 히트마커 표시
+                        // 히트마커 표시, 히트소리 재생
                         if (!useUI || !photonView.IsMine || hit.transform.root.tag != "Enemy"){}
-                        else{ GameUIManager.Instance.UpdateHitMark();}
+                        else{ 
+                            GameUIManager.Instance.UpdateHitMark();
+                            //if(clip_hit != null) 
+                            gunAudioPlayer.PlayOneShot(clip_hit);
+                        }
                     }
                 }
                 else hitPoint = hit.point;
@@ -303,7 +322,17 @@ public class Weapon : MonoBehaviourPunCallbacks
                 var target1 = j.transform.GetComponent<SuppressPoint>();
                 if( target1 != null) 
                 {   
+                    // 제압 수치 부여
                     if(j.transform.root.tag != weaponUser.tag) target1.ApplySuppress(bulletPrefab.bulletData.Suppress);
+
+                    // 제압 소리 재생
+                    if(clip_Suppress != null){
+                    int randomValue = Random.Range(0, 101);
+                    if(randomValue <= SuppressSoundPlayPercent) {
+                        SoundManager.Instance.PlaySFX( clip_Suppress[Random.Range(0,clip_Suppress.Length-1)], j.point, name );
+                    }
+                    }
+
                 }
             }
 
@@ -313,10 +342,16 @@ public class Weapon : MonoBehaviourPunCallbacks
             bullet.DrawLine(muzzlePosition.position, hitPoint, bulletPrefab.bulletData.Speed, 0);
         }
 
+        // 총소리
+        if(clip_shot != null ){
+            SoundManager.Instance.PlayLimitSFX(clip_shot[Random.Range(0, clip_shot.Length-1)], volume_shot, clipLifeTime, clipWaitTime, transform.position, gameObject.GetInstanceID().ToString());
+        }
+
         foreach( var i in shotParticle){ i.Emit(1); }
         foreach( var i in shotParticle2){ i.Play(); }
         lastFireTime = Time.time;
     }
+
     // 외부 코드_TracerDemo
     private void OnCompleted(object sender, System.EventArgs e)
 	{
@@ -364,6 +399,7 @@ public class Weapon : MonoBehaviourPunCallbacks
         if (weaponData.UseMag && weaponData.UseChamber && curRemainAmmo >= 1) curRemainAmmo = 1;
         else if (weaponData.UseMag) curRemainAmmo = 0;
         UpdateUI();
+        if(clip_reload[0] != null) gunAudioPlayer.PlayOneShot(clip_reload[0]);
 
         //대기
         yield return new WaitForSeconds(weaponData.ReloadTime);
@@ -376,6 +412,7 @@ public class Weapon : MonoBehaviourPunCallbacks
 
         UpdateUI();
         isRunningReloadCoroutine = false;
+        if(clip_reload[1] != null) SoundManager.Instance.PlaySFX(clip_reload[1], transform.position, name);
 
         // 샷건식 재장전의 경우, 계속 재장전 시도
         if (!weaponData.UseMag) Reload();
