@@ -196,6 +196,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   fittingAttackY: 0
+  clip_walk: []
+  footSoundVolume: 0
+  walk_steptime: 0
   attackTarget:
     serializedVersion: 2
     m_Bits: 256
@@ -2000,7 +2003,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979377291674016857}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c23545069f709fc4481fcfba255e848e, type: 3}
   m_Name: 
@@ -2008,8 +2011,17 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 1d18de60c01cefc458b0e0777d4a5139, type: 2}
   bulletPrefab: {fileID: 3768384580321215853, guid: b0c9452bb20017542b06893933178abf, type: 3}
   muzzlePosition: {fileID: 979377290905462077}
+  clip_shot: []
+  clipLifeTime: 1.1
+  clipWaitTime: 0.02
+  volume_shot: 1
+  clip_reload: []
+  clip_Suppress: []
+  SuppressSoundPlayPercent: 10
+  clip_hit: {fileID: 0}
   shotParticle: []
   shotParticle2: []
+  raytracerPrefab: {fileID: 0}
   gunLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -2019,7 +2031,6 @@ MonoBehaviour:
   rayfireGun: {fileID: 0}
   rayfireTarget: {fileID: 0}
   fittingForward: 0
-  raytracerPrefab: {fileID: 0}
   useUI: 0
   autoReload: 1
   useRecoilInIdle: 0
@@ -5576,6 +5587,7 @@ GameObject:
   - component: {fileID: 7825284338392327109}
   - component: {fileID: 7825284338392170470}
   - component: {fileID: 6725752591795163925}
+  - component: {fileID: 5597355693683392943}
   m_Layer: 10
   m_Name: AK-74u
   m_TagString: Untagged
@@ -5620,11 +5632,35 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 1d18de60c01cefc458b0e0777d4a5139, type: 2}
   bulletPrefab: {fileID: 3228379026309742222, guid: 8756de6d532635a4c93489d84f51328e, type: 3}
   muzzlePosition: {fileID: 7825284338103619032}
+  clip_shot:
+  - {fileID: 8300000, guid: bce586d4e32a45d41a8408665e2e520a, type: 3}
+  - {fileID: 8300000, guid: 7ebb3b8cd8b834f40a638957afd86d5d, type: 3}
+  - {fileID: 8300000, guid: f0ba1d180c7fcae4a8491f773d5928d7, type: 3}
+  clipLifeTime: 1.1
+  clipWaitTime: 0.02
+  volume_shot: 0.5
+  clip_reload:
+  - {fileID: 8300000, guid: 599da24b26b1cf741905634b3259b698, type: 3}
+  - {fileID: 8300000, guid: 6757dce917303704f8fb8498959405d3, type: 3}
+  clip_Suppress:
+  - {fileID: 8300000, guid: e979f32046cb26f40924b80cf9a4acd5, type: 3}
+  - {fileID: 8300000, guid: dd09cf0b9a3fd8948a8cdcf69e4aacf0, type: 3}
+  - {fileID: 8300000, guid: 101e2aa96aca97149bb1024b6445d737, type: 3}
+  - {fileID: 8300000, guid: 411a438d117187e4fa87e341dba5111c, type: 3}
+  - {fileID: 8300000, guid: 89cad57b511a9a24db8bd4b434900a2f, type: 3}
+  - {fileID: 8300000, guid: 46b2b61866ee3454c94f9dbccb157257, type: 3}
+  - {fileID: 8300000, guid: 4880f1951e35ac04ebe0f11774e20df2, type: 3}
+  - {fileID: 8300000, guid: 6b6b655f9d271e241a4bfa7f381fbbc6, type: 3}
+  - {fileID: 8300000, guid: 6053e3b1480bd4445b947a7ef19f6f84, type: 3}
+  - {fileID: 8300000, guid: 5699e4b6ed27dff448bd892f92e15fa7, type: 3}
+  SuppressSoundPlayPercent: 10
+  clip_hit: {fileID: 0}
   shotParticle:
   - {fileID: 7352727334314324482}
   - {fileID: 3274873930088330880}
   shotParticle2:
   - {fileID: 3540503997216202487}
+  raytracerPrefab: {fileID: 1866657824718261864, guid: e0cb461bc9a6a4c34b30b2e314905dda, type: 3}
   gunLayerMask:
     serializedVersion: 2
     m_Bits: 132480
@@ -5634,7 +5670,6 @@ MonoBehaviour:
   rayfireGun: {fileID: 0}
   rayfireTarget: {fileID: 0}
   fittingForward: -1
-  raytracerPrefab: {fileID: 1866657824718261864, guid: e0cb461bc9a6a4c34b30b2e314905dda, type: 3}
   useUI: 0
   autoReload: 1
   useRecoilInIdle: 0
@@ -5681,6 +5716,102 @@ MonoBehaviour:
   showRay: 1
   showHit: 1
   shooting: 0
+--- !u!82 &5597355693683392943
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7825284338392170469}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7825284338392170471
 GameObject:
   m_ObjectHideFlags: 0

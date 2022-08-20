@@ -39,6 +39,13 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField] float m_CrouchSpeed;   // 앉기 중 이동 속도
     [SerializeField] float m_CrouchHeightRatio;  // 앉기 중 키 비율
     [SerializeField] LayerMask crunchLayer; // 앉기에서 서기로 변환할 때, 감지에 사용할 레이어
+
+    [Header("SFX")]
+    [SerializeField] AudioClip[] clip_walk;  // 발소리
+    [SerializeField] float footSoundVolume; // 발소리 크기
+    [SerializeField] float walk_steptime;   // 발소리 간격 시간
+    [SerializeField] AudioClip[] clip_run;  // 뛰는 소리
+    [SerializeField] float run_steptime;   // 뛰는 소리 간격 시간
     #endregion
 
     #region 전역 동작 변수
@@ -55,7 +62,9 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private bool isDodge = false;   // 회피 상태 여부
     private float lastDodgeTime = 0;    //마지막 회피 입력시간
     // 앉기
-    public bool isCrouch = false;  // 앉기 상태 여부
+    [HideInInspector] public bool isCrouch = false;  // 앉기 상태 여부
+    // 사운드
+    private float lastFootSoundTime;    // 마지막 발소리 출력 시간
     #endregion
 #region 콜백함수
     private void Start()
@@ -87,6 +96,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     private void Update() {
         if(animator != null) UpdateAnimation();
+        updateSound();
     }
 #endregion
 #region 함수
@@ -201,6 +211,19 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         animator.SetFloat("MoveHorizontal", playerInput.move.x * (playerInput.sprint ? 2 : 1), 0.05f, Time.deltaTime);
         animator.SetFloat("MoveVertical", playerInput.move.y  * (playerInput.sprint ? 2 : 1), 0.05f, Time.deltaTime);
         animator.SetBool("Crouch", isCrouch);
+    }
+
+    void updateSound(){
+        if(tarVelo > 0 && !isDodge && charController.isGrounded){
+            if( !isRun && Time.time > lastFootSoundTime + walk_steptime ) { 
+                SoundManager.Instance.PlaySFX( clip_walk[Random.Range(0, clip_walk.Length -1)], footSoundVolume, transform.position, name ); 
+                lastFootSoundTime = Time.time;
+                }
+            else if( isRun && Time.time > lastFootSoundTime + run_steptime ) {
+                SoundManager.Instance.PlaySFX( clip_run[Random.Range(0, clip_run.Length -1)], footSoundVolume, transform.position, name ); 
+                lastFootSoundTime = Time.time;
+            }
+        }
     }
 #endregion
 }

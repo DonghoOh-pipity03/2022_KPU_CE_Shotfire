@@ -13,50 +13,56 @@ using UnityEditor;
 public enum AIState { dead, wait, move, engage }    // AI가 가질 수 있는 상태
 class EnemyAgent : LivingEntity
 {
-    private NavMeshAgent agent; // 경로 AI 에이전트
-    LineRenderer lineRenderer;
-    Animator animator;
+    protected NavMeshAgent agent; // 경로 AI 에이전트
+    protected LineRenderer lineRenderer;
+    protected Animator animator;
     public StageManager stageManager;
     #region 전역 변수
-    [SerializeField] EnemyData enemyData;   // 적 AI SO
-    [SerializeField] Transform eyeTransform;    // 눈의 위치 정보
-    [SerializeField] Weapon weapon; // AI가 사용하는 무기
-    [SerializeField] bool useRagDoll = false;   // 래그돌 사용여부
-    [SerializeField] GameObject animModel;  // 애니메이션을 사용하는 모델
-    [SerializeField] GameObject animMeshRoot;    // 애니메이션용 메쉬루트
-    [SerializeField] GameObject ragdollModel;   // 래그돌을 사용하는 모델
-    [SerializeField] GameObject ragdollMeshRoot;    // 래그돌용 메쉬루트
-    [SerializeField] GameObject minimapHolder;  // 미니맵용 UI
-    [SerializeField] LayerMask sightLayer;  // 시야용 레이어
-    [SerializeField] LayerMask laserLayer;  // 레이저용 레이어
-    [SerializeField] float fittingAttackY;  // 공격시 Y축 회전 조정값
+    [SerializeField] protected EnemyData enemyData;   // 적 AI SO
+    [SerializeField] protected Transform eyeTransform;    // 눈의 위치 정보
+    [SerializeField] protected Weapon weapon; // AI가 사용하는 무기
+    [SerializeField] protected bool useRagDoll = false;   // 래그돌 사용여부
+    [SerializeField] protected GameObject animModel;  // 애니메이션을 사용하는 모델
+    [SerializeField] protected GameObject animMeshRoot;    // 애니메이션용 메쉬루트
+    [SerializeField] protected GameObject ragdollModel;   // 래그돌을 사용하는 모델
+    [SerializeField] protected GameObject ragdollMeshRoot;    // 래그돌용 메쉬루트
+    [SerializeField] protected GameObject minimapHolder;  // 미니맵용 UI
+    [SerializeField] protected LayerMask sightLayer;  // 시야용 레이어
+    [SerializeField] protected LayerMask laserLayer;  // 레이저용 레이어
+    [SerializeField] protected float fittingAttackY;  // 공격시 Y축 회전 조정값
+    [Header("SFX")]
+    [SerializeField] protected AudioClip[] clip_walk;  // 발소리
+    [SerializeField] protected float footSoundVolume; // 발소리 크기
+    [SerializeField] protected float walk_steptime;   // 발소리 간격 시간
     [Header("이하 디버그용")]
-    [SerializeField] LayerMask attackTarget;   // 공격 대상의 레이어
+    [SerializeField] protected LayerMask attackTarget;   // 공격 대상의 레이어
 
-    [SerializeField] TextMeshProUGUI sign;  // 디버그용 머리 위 텍스트
-    [SerializeField] private bool useSign;  // 디버그용 텍스트 사용 여부
-    [SerializeField] bool useAttack = true;   // 개발용, 공격을 하는지 여부
+    [SerializeField] protected TextMeshProUGUI sign;  // 디버그용 머리 위 텍스트
+    [SerializeField] protected bool useSign;  // 디버그용 텍스트 사용 여부
+    [SerializeField] protected bool useAttack = true;   // 개발용, 공격을 하는지 여부
     #endregion
     #region 전역 동작변수
     [HideInInspector] public AIState aiState;  // AI의 경계상태
-    Coroutine AICroutine;   // AI FSM의 행동을 실행하는 코루틴
-    int[] isPlayerOnSight = new int[4]; // 플레이어가 시야 내에 보이는지 여부
-    GameObject[] players = new GameObject[4];   // 플레이어들의 게임 오브젝트 정보
-    LivingEntity[] playerState = new LivingEntity[4];   //플레이어들의 LivingEntity, 체력상태 확인용
-    float[] playerDistance = { 9999, 9999, 9999, 9999 };  // 각 플레이어와의 거리
-    int[] targetWeight = new int[4];    // 각 플레이어별 타겟팅(어그로) 가중치
-    int target; // 최우선 공격 대상: 0~3 플레이어
-    int lastAttacker;   // 마지막으로 AI를 공격한 플레이어: 0_없음, 1~4_플레이어
-    Ray ray;    // 플레이어 탐색용 레이
-    RaycastHit hit; // 레이의 충돌 정보
-    int rayMask;    // 레이마스크
-    float turnSmoothVelocity;   // 회전에 사용하는 변수
-    float lastAttackTime;   // 마지막 공격 시간
-    float engageDistance;   // 교전 시작거리
-    bool dead_sync = false; //AI 사망 판정
+    protected Coroutine AICroutine;   // AI FSM의 행동을 실행하는 코루틴
+    protected int[] isPlayerOnSight = new int[4]; // 플레이어가 시야 내에 보이는지 여부
+    protected GameObject[] players = new GameObject[4];   // 플레이어들의 게임 오브젝트 정보
+    protected LivingEntity[] playerState = new LivingEntity[4];   //플레이어들의 LivingEntity, 체력상태 확인용
+    protected  float[] playerDistance = { 9999, 9999, 9999, 9999 };  // 각 플레이어와의 거리
+    protected int[] targetWeight = new int[4];    // 각 플레이어별 타겟팅(어그로) 가중치
+    protected int target; // 최우선 공격 대상: 0~3 플레이어
+    protected int lastAttacker;   // 마지막으로 AI를 공격한 플레이어: 0_없음, 1~4_플레이어
+    protected Ray ray;    // 플레이어 탐색용 레이
+    protected RaycastHit hit; // 레이의 충돌 정보
+    protected int rayMask;    // 레이마스크
+    protected float turnSmoothVelocity;   // 회전에 사용하는 변수
+    protected float lastAttackTime;   // 마지막 공격 시간
+    protected float engageDistance;   // 교전 시작거리
+    protected bool dead_sync = false; //AI 사망 판정
+     // 사운드
+    protected float lastFootSoundTime;    // 마지막 발소리 출력 시간
     #endregion
     #region 콜백함수
-    private void Awake()
+    protected void Awake()
     {
         SettingData();
         agent = GetComponent<NavMeshAgent>();
@@ -102,7 +108,7 @@ class EnemyAgent : LivingEntity
 
         if(animator != null) animator.SetFloat("MoveVertical", agent.velocity.magnitude / agent.speed);
     }
-    private void LateUpdate() {
+    protected void LateUpdate() {
         DrawLaser();
     }
     #endregion
@@ -128,7 +134,7 @@ class EnemyAgent : LivingEntity
 #endregion
 #region FSM
     // 상태를 변경한다.
-    private void ChangeState(AIState _state)
+    protected void ChangeState(AIState _state)
     {
         if(AICroutine != null) StopCoroutine(AICroutine);//aiState.ToString());
         aiState = _state;
@@ -136,7 +142,7 @@ class EnemyAgent : LivingEntity
     }
 
     // 상태변경타이밍을 감지한다
-    private AIState Transition()
+    protected AIState Transition()
     {
         // 죽음
         if (entityState == EntityState.dead) return AIState.dead;
@@ -173,7 +179,7 @@ class EnemyAgent : LivingEntity
     }
 
     // 아래의 FSM_행동은 입력-판단-출력의 시퀀스를 가진다.
-    IEnumerator dead()
+    protected IEnumerator dead()
     {
         // 시작시 코드
         agent.enabled = false;
@@ -197,7 +203,7 @@ class EnemyAgent : LivingEntity
         // 수행중 코드
         yield break;
     }
-    IEnumerator wait()
+    protected IEnumerator wait()
     {
         // 시작시 코드
         // 수행중 코드
@@ -212,7 +218,7 @@ class EnemyAgent : LivingEntity
             yield return new WaitForSeconds(0.1f);
         }
     }
-    IEnumerator move()
+    protected IEnumerator move()
     {
         // 시작시 코드
         agent.speed = enemyData.MoveSpeed;
@@ -234,7 +240,7 @@ class EnemyAgent : LivingEntity
         }
     }
 
-    IEnumerator engage()
+    protected IEnumerator engage()
     {
         // 시작시 코드
         agent.speed = 0;
@@ -254,7 +260,7 @@ class EnemyAgent : LivingEntity
 #endregion
 #region 유틸리티
     // 시야내 타겟 감지: 플레이어별로 시야 확인 유무를 저장하고, 1명이라도 시야 내에 있다면 true를 반환한다.
-    private bool SenseEntity()
+    protected bool SenseEntity()
     {   
         // 시야유무 정보 리셋
          for (int i = 0; i < 4; i++)
@@ -307,7 +313,7 @@ class EnemyAgent : LivingEntity
     }
 
     // 방향을 입력 받아, 레이를 쏜다.
-    private void ShotRay(Vector3 _dir)
+    protected void ShotRay(Vector3 _dir)
     {
         ray.origin = eyeTransform.position;
         ray.direction = _dir;
@@ -316,7 +322,7 @@ class EnemyAgent : LivingEntity
 
 #if UNITY_EDITOR
     // 시야 디버그용
-    private void OnDrawGizmosSelected()
+    protected void OnDrawGizmosSelected()
     {
         var leftRayRotation = Quaternion.AngleAxis(-enemyData.FieldOfView * 0.5f, Vector3.up);
         var leftRayDirection = leftRayRotation * transform.forward;
@@ -326,7 +332,7 @@ class EnemyAgent : LivingEntity
 #endif
 
     // 각 플레이어와의 거리, 타겟 가중치 계산 및 최우선 공격 대상 선정
-    private void RenewPlayerInfo()
+    protected void RenewPlayerInfo()
     {
         // 거리와 가중치 계산
         for (int i = 0; i < 4; i++)
@@ -349,7 +355,7 @@ class EnemyAgent : LivingEntity
     }
 
     // 공격
-    private void Attack()
+    protected void Attack()
     {
         // 회전
         if (aiState == AIState.engage)
@@ -364,12 +370,12 @@ class EnemyAgent : LivingEntity
         else ShotAttack();  // 원거리 공격
     }
 
-    private void MelleeAttack()
+    protected void MelleeAttack()
     {
 
     }
 
-    private void ShotAttack()
+    protected void ShotAttack()
     {
         // 시야내에 타겟이 있으며, 총기방향과 타겟방향의 차이가 허용 각도 내에 있으면, 조준을 타겟의 에임 포인트로 이동
         // 그렇지 않으면, 기본 위치로
@@ -384,7 +390,7 @@ class EnemyAgent : LivingEntity
         // 그렇지 않으면, 리턴
     }
 
-    private void SettingData()
+    protected void SettingData()
     {
         maxHealth = enemyData.MaxHealth;
         maxSuppress = enemyData.MaxSuppress;
@@ -405,7 +411,7 @@ class EnemyAgent : LivingEntity
     }
 
     // 출처: https://www.youtube.com/watch?v=cTHceZpwGt4
-    private void CopyCharacterTransformToRagdoll(Transform from, Transform to){
+    protected void CopyCharacterTransformToRagdoll(Transform from, Transform to){
         for(int i = 0 ;  i < from.childCount; i++){
             if(from.childCount != 0){
                 CopyCharacterTransformToRagdoll(from.GetChild(i), to.GetChild(i));
@@ -415,7 +421,7 @@ class EnemyAgent : LivingEntity
         }
     }
 
-    void DrawLaser(){
+    protected void DrawLaser(){
         if( entityState != EntityState.dead && lineRenderer != null){
             lineRenderer.SetPosition(0, weapon.muzzlePosition.position);
             ray.origin = weapon.muzzlePosition.position;
@@ -428,11 +434,20 @@ class EnemyAgent : LivingEntity
             }
         }
     }
+
+    protected void updateSound(){
+        if(agent.speed > 0.5f){
+            if(  Time.time > lastFootSoundTime + walk_steptime && clip_walk != null) { 
+                SoundManager.Instance.PlaySFX( clip_walk[UnityEngine.Random.Range(0, clip_walk.Length -1)], footSoundVolume, transform.position, name ); 
+                lastFootSoundTime = Time.time;
+            }
+        }
+    }
 #endregion
     #endregion
 
     [PunRPC]
-    void EnemyDead()
+    protected void EnemyDead()
     {
         this.entityState = EntityState.dead;
         this.dead_sync = true;
@@ -440,7 +455,7 @@ class EnemyAgent : LivingEntity
     }
 
     [PunRPC]
-    void GetDamge(float hp)
+    protected void GetDamge(float hp)
     {
         this.curHealth = hp;
     }
