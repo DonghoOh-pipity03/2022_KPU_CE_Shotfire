@@ -601,6 +601,15 @@ MonoBehaviour:
   laserLayer:
     serializedVersion: 2
     m_Bits: 0
+  fittingAttackY: 0
+  clip_walk:
+  - {fileID: 8300000, guid: 82dfdbe2b8acbc540a8e5dd9acf3db59, type: 3}
+  - {fileID: 8300000, guid: 27859a867f5335340b5ff105ecade3e1, type: 3}
+  - {fileID: 8300000, guid: 7c1efa501015cfd498d770cc3598daf9, type: 3}
+  - {fileID: 8300000, guid: 4e53203f57c3163428288fe572fc9024, type: 3}
+  - {fileID: 8300000, guid: 587f8d765b6801442ba3dad67997eeee, type: 3}
+  footSoundVolume: 0.15
+  walk_steptime: 0.25
   attackTarget:
     serializedVersion: 2
     m_Bits: 256

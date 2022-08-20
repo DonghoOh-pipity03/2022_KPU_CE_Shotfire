@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0810a3f69081b9744b9c6fc8a2f72a44, type: 3}
+  m_Name: Boss_AK-74U
+  m_EditorClassIdentifier: 
+  weaponName: Prototype AI Gun
+  havingFireMode: 00000000
+  fireRPM: 650
+  ballPerOneShot: 1
+  maxSpread: 0.01
+  minSpread: 1
+  recoilPerShot: 1
+  recoilRecover: 1
+  recoilHorizontal: {x: -0.5, y: 0.5}
+  recoilVertical: {x: 0.5, y: 0.5}
+  recoilZ: {x: 0.5, y: 0.5}
+  recoilMultiple: 1
+  recoilMultipleInIdle: 1
+  recoilMultipleInZoom: 1
+  magCappacity: 30
+  initMagCount: 100
+  reloadTime: 10
+  useChamber: 1
+  useMag: 1
