@@ -29,14 +29,14 @@ namespace PhotonInit
             PhotonNetwork.AutomaticallySyncScene = true;
         }
         void Start() {
-            Lobby_position.Add(new Vector3(49.0f, 1.5f, 0.5f));
-            Lobby_position.Add(new Vector3(50.5f, 1.5f, 0.5f));
-            Lobby_position.Add(new Vector3(52.0f, 1.5f, 0.5f));
-            Lobby_position.Add(new Vector3(53.5f, 1.5f, 0.5f));
-            Lobby_position.Add(new Vector3(49.0f, 1.0f, 0.5f));
-            Lobby_position.Add(new Vector3(50.5f, 1.0f, 0.5f));
-            Lobby_position.Add(new Vector3(52.0f, 1.0f, 0.5f));
-            Lobby_position.Add(new Vector3(53.5f, 1.0f, 0.5f));
+            Lobby_position.Add(new Vector3(48.5f, 0.05f, 0.5f));
+            Lobby_position.Add(new Vector3(50.0f, 0.05f, 0.5f));
+            Lobby_position.Add(new Vector3(51.5f, 0.05f, 0.5f));
+            Lobby_position.Add(new Vector3(53.0f, 0.05f, 0.5f));
+            Lobby_position.Add(new Vector3(48.5f, 0.1f, 0.5f));
+            Lobby_position.Add(new Vector3(50.0f, 0.1f, 0.5f));
+            Lobby_position.Add(new Vector3(51.5f, 0.1f, 0.5f));
+            Lobby_position.Add(new Vector3(53.0f, 0.1f, 0.5f));
             UI_delete_map();
             UI_delete();
             UI_Select(MainHome_UI,MainHome_Map);
@@ -235,7 +235,7 @@ namespace PhotonInit
             }
             Debug.LogFormat("update_lobby");
             Debug.LogFormat("Cnt : {0}", cnt);
-            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[cnt],Quaternion.identity));
+            playerTemps.Add(PhotonNetwork.Instantiate("PlayerLobby", Lobby_position[cnt], Quaternion.Euler(0, 0, 0)));
         }
         public void update_ready()
         {
@@ -410,7 +410,7 @@ namespace PhotonInit
             Lobby_roomName.text = "Room info : "+ PhotonNetwork.CurrentRoom.Name;
             ChatInput.text = "";
             for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
-            playerTemps.Add(PhotonNetwork.Instantiate("CharacterDemo", Lobby_position[PhotonNetwork.CurrentRoom.PlayerCount-1],Quaternion.identity));
+            playerTemps.Add(PhotonNetwork.Instantiate("PlayerLobby", Lobby_position[PhotonNetwork.CurrentRoom.PlayerCount-1], Quaternion.Euler(0, 0, 0)));
         }
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
