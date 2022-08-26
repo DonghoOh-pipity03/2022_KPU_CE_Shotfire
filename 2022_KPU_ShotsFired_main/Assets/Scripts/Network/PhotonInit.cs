@@ -235,7 +235,7 @@ namespace PhotonInit
             }
             Debug.LogFormat("update_lobby");
             Debug.LogFormat("Cnt : {0}", cnt);
-            playerTemps.Add(PhotonNetwork.Instantiate("PlayerLobby", Lobby_position[cnt], Quaternion.Euler(0, 0, 0)));
+            playerTemps.Add(PhotonNetwork.Instantiate("PlayerLobby", Lobby_position[cnt], Quaternion.Euler(0, 180, 0)));
         }
         public void update_ready()
         {
@@ -410,7 +410,7 @@ namespace PhotonInit
             Lobby_roomName.text = "Room info : "+ PhotonNetwork.CurrentRoom.Name;
             ChatInput.text = "";
             for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
-            playerTemps.Add(PhotonNetwork.Instantiate("PlayerLobby", Lobby_position[PhotonNetwork.CurrentRoom.PlayerCount-1], Quaternion.Euler(0, 0, 0)));
+            playerTemps.Add(PhotonNetwork.Instantiate("PlayerLobby", Lobby_position[PhotonNetwork.CurrentRoom.PlayerCount-1], Quaternion.Euler(0, 180, 0)));
         }
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
