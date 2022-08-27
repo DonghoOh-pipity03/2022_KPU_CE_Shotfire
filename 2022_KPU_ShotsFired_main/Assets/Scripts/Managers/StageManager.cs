@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
     [Tooltip("사용을 원하지 않으면 공백으로 두기")]
     [SerializeField] private string nextSceneName;  // 다음 스테이지 씬 이름
     [SerializeField] private string prevSceneName;  // 이전 스테이지 씬 이름
+    [SerializeField] bool deletePreScene = true; // 이전 씬 삭제 여부
     [SerializeField] Door[] door; // 이전 스테이지로의 방향을 막는 문 오브젝트
     [Header("마지막 스테이지 전용 세팅")]
 
@@ -62,7 +63,7 @@ public class StageManager : MonoBehaviour
                 }
                 if (nextSceneName != "") StartCoroutine(GameSceneManager.Instance.AddSceneWithAsync(nextSceneName));    // 다음 씬로딩
                 if (prevSceneName != "") GameObject.Find(prevSceneName).transform.Find("SafeRoom Trigger").GetComponent<StageManager>().DeleteAllAI(); // 이전 씬의 AI 삭제
-                if (prevSceneName != "") StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName)); // 이전 씬삭제
+                if (prevSceneName != "" && deletePreScene) StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName)); // 이전 씬삭제
                 startedNextScene = true;
             }
             else    // 마지막 스테이지일 때

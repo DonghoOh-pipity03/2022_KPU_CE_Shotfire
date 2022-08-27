@@ -10,7 +10,9 @@ public class GameUIManager : MonoBehaviour
     [Header("UI 씬")]
     [SerializeField] GameObject player_UI;
     [SerializeField] GameObject report_UI;
+    [SerializeField] GameObject boss_UI;
     [SerializeField] private GameObject m_miniMap;  // 플레이어_ 미니맵UI 오브젝트 자리
+
     [Header("주인공 캐릭터 체력 계열")]
     [SerializeField] private RectTransform playerHealthBackground;  // 플레이어_체력 GUI 배경
     [SerializeField] private RectTransform playerMaxHealthBar;  // 플레이어_최대 체력 GUI
@@ -30,6 +32,12 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI remainAmmo;   // 플레이어_남은 탄환
     [SerializeField] private TextMeshProUGUI remainMag;    // 플레이어_남은 탄창
     [SerializeField] GameObject InterAction;    // 플레이어_상호작용 오브젝트
+    [Header("보스 계열")]
+    [SerializeField] private TextMeshProUGUI bossName;  // 보스_이름
+    [SerializeField] private RectTransform bossHealthBackground;    // 보스_체력바 배경
+    [SerializeField] private RectTransform bossHealthImage; // 보스_체력바
+    [SerializeField] private TextMeshProUGUI bossHealthText;  // 보스_체력 텍스트
+
 #endregion
     //싱글톤
     private static GameUIManager instance;
@@ -61,6 +69,9 @@ public class GameUIManager : MonoBehaviour
     public void SetActiveMiniMap(bool _active) 
     {
         m_miniMap.SetActive(_active);
+    }
+    public void SetActiveBoss(bool _active){
+        boss_UI.SetActive(_active);
     }
     #endregion
     #region 주인공 캐릭터 체력
@@ -131,6 +142,16 @@ public class GameUIManager : MonoBehaviour
     }
 
     public void SetActiveInterAction(bool _active) => InterAction.SetActive(_active);
+
+    #endregion
+    #region  보스
+    public void UpdateBossUI(string _bossName){ bossName.text = _bossName; }
+    public void UpdateBossHealth(int _maxHealth, int _curHealth){
+        bossHealthText.text = _curHealth + " / " + _maxHealth;
+        bossHealthImage.sizeDelta = 
+            new Vector2(bossHealthBackground.sizeDelta.x / _maxHealth * _curHealth, 
+                bossHealthImage.sizeDelta.y);
+    }
 
     #endregion
     /*
