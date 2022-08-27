@@ -62,7 +62,7 @@ class EnemyAgent : LivingEntity
     protected float lastFootSoundTime;    // 마지막 발소리 출력 시간
     #endregion
     #region 콜백함수
-    protected void Awake()
+    protected virtual void Awake()
     {
         SettingData();
         agent = GetComponent<NavMeshAgent>();
@@ -108,7 +108,7 @@ class EnemyAgent : LivingEntity
 
         if(animator != null) animator.SetFloat("MoveVertical", agent.velocity.magnitude / agent.speed);
     }
-    protected void LateUpdate() {
+    protected virtual void LateUpdate() {
         DrawLaser();
     }
     #endregion
