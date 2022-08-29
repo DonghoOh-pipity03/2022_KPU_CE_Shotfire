@@ -8,6 +8,8 @@ public class BossStageManager : MonoBehaviour
     [SerializeField] BossAgent boss;
     [SerializeField] GameObject phase2Event;
     [SerializeField] GameObject endStageManager;
+    [SerializeField] EnvSFX BGM;
+
     bool isUsed = false;
     bool isActivePhase2 = false;
 
@@ -15,6 +17,7 @@ public class BossStageManager : MonoBehaviour
         if(other.tag == "Player" && isUsed == false){
             GameUIManager.Instance.SetActiveBoss(true);
             GameUIManager.Instance.UpdateBossUI(bossInfo.name);
+            SoundManager.Instance.SetEnv(BGM);
         }
     }
 

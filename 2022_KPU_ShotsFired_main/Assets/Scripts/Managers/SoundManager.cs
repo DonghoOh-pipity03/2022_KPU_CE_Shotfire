@@ -23,13 +23,18 @@ public class SoundManager : MonoBehaviour
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
-        SetEnv(EnvSFX.office);
+        SetEnv(EnvSFX.lobby);
     }
 
     public void SetEnv(EnvSFX _envSFX){
+        if(audioSource.clip == envSFX[(int)_envSFX]) return;
         audioSource.clip = envSFX[(int)_envSFX];
         audioSource.Play();
     }
+    public void SetEnv4OnClick(int _envSFX){
+        SetEnv((EnvSFX)_envSFX);
+    }
+
 
     // SFX 재생 함수
     public void PlaySFX(AudioClip _clip, Vector3 _pos, string _SFXName)

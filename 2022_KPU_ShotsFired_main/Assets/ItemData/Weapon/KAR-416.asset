@@ -27,7 +27,7 @@ MonoBehaviour:
   recoilMultipleInIdle: 1
   recoilMultipleInZoom: 1
   magCappacity: 30
-  initMagCount: 10
+  initMagCount: 30
   reloadTime: 2.75
   useChamber: 1
   useMag: 1

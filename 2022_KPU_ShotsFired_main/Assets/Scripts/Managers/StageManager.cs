@@ -18,12 +18,14 @@ public class StageManager : MonoBehaviour
     [SerializeField] bool useForLastStage;  // 게임이 최종적으로 끝나는 스테이지에서 사용할 것인지
     [Header("적 정보")]
     [SerializeField] List<GameObject> enemies;   // 해당 스테이지에 생성되어있는 적들의 게임오브젝트 리스트
+    [Header("BGM")]
+    [SerializeField] EnvSFX bgm;    // 배경음
     #endregion
     #region 전역 동작 변수
     private int curPlayerCountInRoom;   // 현재 세이프룸 인원
     private bool startedNextScene = false;  // 다음 씬의 로드가 시작되었는지 여부
     List<bool> aliveEnemy; // enemies 적들 중 생사여부
-    public int aliveEnemyCount;    // 살아있는 적들 수
+    [HideInInspector] public int aliveEnemyCount;    // 살아있는 적들 수
     #endregion
 
     private void OnEnable() {
@@ -64,16 +66,17 @@ public class StageManager : MonoBehaviour
                 if (nextSceneName != "") StartCoroutine(GameSceneManager.Instance.AddSceneWithAsync(nextSceneName));    // 다음 씬로딩
                 if (prevSceneName != "") GameObject.Find(prevSceneName).transform.Find("SafeRoom Trigger").GetComponent<StageManager>().DeleteAllAI(); // 이전 씬의 AI 삭제
                 if (prevSceneName != "" && deletePreScene) StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName)); // 이전 씬삭제
-                startedNextScene = true;
             }
             else    // 마지막 스테이지일 때
             {
                GameManager.Instance.EndGame(true);
 
                 if (prevSceneName != "") StartCoroutine(GameSceneManager.Instance.UnloadSceneWithAsync(prevSceneName));
-                
-                startedNextScene = true;
             }
+
+            startedNextScene = true;
+            SoundManager.Instance.SetEnv(bgm);
+            
         }
     }
 
