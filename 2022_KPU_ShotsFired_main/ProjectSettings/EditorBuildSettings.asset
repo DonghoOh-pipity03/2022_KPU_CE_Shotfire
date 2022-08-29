@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Stage01/Stage 1 grayBox.unity
     guid: 1a28f51715e44274382c1efabd3413df
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Title Scene.unity
     guid: 3c8ae8a302bb2ea49bd1837c6799f4eb
   - enabled: 1
