@@ -15,7 +15,7 @@ public class fps : MonoBehaviour
 		Application.targetFrameRate = 300;
 		//Time.captureFramerate = m_targetFrame;
 		//Screen.SetResolution(3180, 3180 / 16 * 9, true);
-		//Screen.SetResolution(1920, 1920 / 16 * 9, true);
+		//Screen.SetResolution(720, 720 / 16 * 9, true);
 	}
 
 	void Update()

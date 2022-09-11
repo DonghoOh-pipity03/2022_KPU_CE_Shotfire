@@ -135,6 +135,7 @@ Transform:
   - {fileID: 979377291861922424}
   - {fileID: 471023094923877349}
   - {fileID: 6779847801198985386}
+  - {fileID: 672114137518353918}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -182,6 +183,7 @@ MonoBehaviour:
   stageManager: {fileID: 0}
   enemyData: {fileID: 11400000, guid: f457ea6eb6d41f641a08e6e6cba02fcd, type: 2}
   eyeTransform: {fileID: 471023094923877349}
+  aim: {fileID: 0}
   weapon: {fileID: 7825284338392170470}
   useRagDoll: 1
   animModel: {fileID: 6975948591626930231}
@@ -406,6 +408,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 471023093413734219}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &514129387608550451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 672114137518353918}
+  m_Layer: 10
+  m_Name: aim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &672114137518353918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514129387608550451}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.259, y: 1.524, z: 1.423}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 471023093413734219}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &807245433193343860
 GameObject:
