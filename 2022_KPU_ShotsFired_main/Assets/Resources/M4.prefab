@@ -1011,6 +1011,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shotgun ShellEmitter
       objectReference: {fileID: 0}
+    - target: {fileID: 363681278646271554, guid: d9f202191bc68bf458d2d5a01e45dec2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027996236770757698, guid: d9f202191bc68bf458d2d5a01e45dec2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1272782684078583006, guid: d9f202191bc68bf458d2d5a01e45dec2, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1062,6 +1070,10 @@ PrefabInstance:
     - target: {fileID: 6647162611113897646, guid: d9f202191bc68bf458d2d5a01e45dec2, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861148805495482681, guid: d9f202191bc68bf458d2d5a01e45dec2, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9f202191bc68bf458d2d5a01e45dec2, type: 3}
