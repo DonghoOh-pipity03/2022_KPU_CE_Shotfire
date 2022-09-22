@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3257649183581990953}
   - component: {fileID: 5607127765452313946}
   - component: {fileID: 7663509986699360828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7001156597191890481}
   - component: {fileID: 6415740525239794725}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pistol ShellEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 4240663209661020280}
   - component: {fileID: 4175942852638906838}
   - component: {fileID: 7146861211090368104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5022,7 +5022,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3020861823202909692}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RayFire Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5211,7 +5211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3456009924545291360}
   - component: {fileID: 8633351255514846357}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pistol MuzzleflashEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5413,7 +5413,7 @@ GameObject:
   - component: {fileID: 8182922133875158946}
   - component: {fileID: 4882498786806484760}
   - component: {fileID: 5624364313314100667}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sparks (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10413,7 +10413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1619183215487380418}
   - component: {fileID: 8457573448854440538}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shotgun AfterfireSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10492,7 +10492,7 @@ GameObject:
   - component: {fileID: 7488680436006946567}
   - component: {fileID: 5749852677198331744}
   - component: {fileID: 4109001686514712463}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15401,7 +15401,7 @@ GameObject:
   - component: {fileID: 1788334500651201564}
   - component: {fileID: 6588592060457599563}
   - component: {fileID: 5902732063190351064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20828,7 +20828,7 @@ GameObject:
   - component: {fileID: 3474930228723520643}
   - component: {fileID: 4630904158700665914}
   - component: {fileID: 3713161362564248037}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzleflash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25961,7 +25961,7 @@ GameObject:
   - component: {fileID: 1173594967888511608}
   - component: {fileID: 4194082561251239573}
   - component: {fileID: 1534437473126023111}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzleflash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30845,7 +30845,7 @@ GameObject:
   - component: {fileID: 2500831407921351232}
   - component: {fileID: 2254813371089782655}
   - component: {fileID: 3874412099356766200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzleflash Light Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35726,7 +35726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2689481282063220481}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RayFire Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35917,7 +35917,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2710536317450150429}
   - component: {fileID: 7013780722477389986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Assault Rifle AfterfireSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35998,7 +35998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 507858824818008595}
   - component: {fileID: 8917601258273883753}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzleflash Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36093,7 +36093,7 @@ GameObject:
   - component: {fileID: 4307423826533777531}
   - component: {fileID: 3173661242976428249}
   - component: {fileID: 817713869928867246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36176,7 +36176,7 @@ GameObject:
   - component: {fileID: 4203617098900883609}
   - component: {fileID: 7133657917987932387}
   - component: {fileID: 5024104156741293598}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41085,7 +41085,7 @@ GameObject:
   - component: {fileID: 2789534092239583296}
   - component: {fileID: 2789534092243007598}
   - component: {fileID: 2789534092242008750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_M4_bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41168,7 +41168,7 @@ GameObject:
   - component: {fileID: 2789534092239583298}
   - component: {fileID: 2789534092243007584}
   - component: {fileID: 2789534092242008736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_M4_carrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41251,7 +41251,7 @@ GameObject:
   - component: {fileID: 2789534092239583300}
   - component: {fileID: 2789534092243007586}
   - component: {fileID: 2789534092242008738}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_M4_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41334,7 +41334,7 @@ GameObject:
   - component: {fileID: 2789534092239583302}
   - component: {fileID: 2789534092243007588}
   - component: {fileID: 2789534092242008740}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_M4_trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41417,7 +41417,7 @@ GameObject:
   - component: {fileID: 2789534092239583304}
   - component: {fileID: 2789534092243007592}
   - component: {fileID: 2789534092242008744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cal_12G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41500,7 +41500,7 @@ GameObject:
   - component: {fileID: 2789534092239583306}
   - component: {fileID: 2789534092243007594}
   - component: {fileID: 2789534092242008746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cal_12G_shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41585,7 +41585,7 @@ GameObject:
   - component: {fileID: 668527239669827906}
   - component: {fileID: 8295313419530870513}
   - component: {fileID: 3492548353535195771}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: M4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41846,7 +41846,7 @@ GameObject:
   - component: {fileID: 2789534092239583310}
   - component: {fileID: 2789534092243007596}
   - component: {fileID: 2789534092242008748}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_M4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41989,7 +41989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2921548552426915463}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GunHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42024,7 +42024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2921548552685314288}
   - component: {fileID: 2921548552685314289}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42249,7 +42249,7 @@ GameObject:
   - component: {fileID: 5222367988893466347}
   - component: {fileID: 1396401058810371733}
   - component: {fileID: 7140904548664373654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47149,7 +47149,7 @@ GameObject:
   - component: {fileID: 5182667983383923588}
   - component: {fileID: 6705587896383178551}
   - component: {fileID: 7433019856716549900}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52063,7 +52063,7 @@ GameObject:
   - component: {fileID: 8572652116181216971}
   - component: {fileID: 2337383196156396982}
   - component: {fileID: 8417465856936849000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HandGaurd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52369,7 +52369,7 @@ GameObject:
   - component: {fileID: 6582498105478010784}
   - component: {fileID: 5049187516572473616}
   - component: {fileID: 1727188977561431965}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57653,7 +57653,7 @@ GameObject:
   - component: {fileID: 2259811664225256520}
   - component: {fileID: 2555616608820441486}
   - component: {fileID: 7753560579120048566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62710,7 +62710,7 @@ GameObject:
   - component: {fileID: 7486165381126070173}
   - component: {fileID: 2599415695434937741}
   - component: {fileID: 7249481036891770435}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62943,7 +62943,7 @@ GameObject:
   - component: {fileID: 2502570265267602948}
   - component: {fileID: 331926055227901412}
   - component: {fileID: 639447659206175319}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzleflash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67890,7 +67890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1795449020316222247}
   - component: {fileID: 1097756594024550270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Assault Rifle ShellEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67938,7 +67938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7604729715515076985}
   - component: {fileID: 6247679121545142864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68150,7 +68150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1204681843587766394}
   - component: {fileID: 8962077828031235141}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pistol AfterfireSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68196,7 +68196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6591529143359039495}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68385,7 +68385,7 @@ GameObject:
   - component: {fileID: 4054068875714986185}
   - component: {fileID: 343550841363562442}
   - component: {fileID: 5432881410415007867}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke FromGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73276,7 +73276,7 @@ GameObject:
   - component: {fileID: 4763167183099275232}
   - component: {fileID: 4763167183097980894}
   - component: {fileID: 4763167183096980766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cal_40 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73359,7 +73359,7 @@ GameObject:
   - component: {fileID: 4763167183099275234}
   - component: {fileID: 4763167183097980864}
   - component: {fileID: 4763167183096980736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_MagazineRelease
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73444,7 +73444,7 @@ GameObject:
   - component: {fileID: 8290565755396264393}
   - component: {fileID: 1748739146893721566}
   - component: {fileID: 4640120324374328456}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: C-22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73707,7 +73707,7 @@ GameObject:
   - component: {fileID: 4763167183099275250}
   - component: {fileID: 4763167183097980880}
   - component: {fileID: 4763167183096980752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73790,7 +73790,7 @@ GameObject:
   - component: {fileID: 4763167183099275252}
   - component: {fileID: 4763167183097980882}
   - component: {fileID: 4763167183096980754}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73873,7 +73873,7 @@ GameObject:
   - component: {fileID: 4763167183099275254}
   - component: {fileID: 4763167183097980884}
   - component: {fileID: 4763167183096980756}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73956,7 +73956,7 @@ GameObject:
   - component: {fileID: 4763167183099275256}
   - component: {fileID: 4763167183097980886}
   - component: {fileID: 4763167183096980758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_slide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74039,7 +74039,7 @@ GameObject:
   - component: {fileID: 4763167183099275258}
   - component: {fileID: 4763167183097980888}
   - component: {fileID: 4763167183096980760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74122,7 +74122,7 @@ GameObject:
   - component: {fileID: 4763167183099275260}
   - component: {fileID: 4763167183097980890}
   - component: {fileID: 4763167183096980762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cal_40
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74205,7 +74205,7 @@ GameObject:
   - component: {fileID: 4763167183099275262}
   - component: {fileID: 4763167183097980892}
   - component: {fileID: 4763167183096980764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cal_40 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74287,7 +74287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647507408099551746}
   - component: {fileID: 8277908794057275561}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Assault Rifle MuzzleflashEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74368,7 +74368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4057004711249921557}
   - component: {fileID: 8858201381657618666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzleflash Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74461,7 +74461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8353056986356078519}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RayFire Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74494,7 +74494,7 @@ GameObject:
   - component: {fileID: 5928898731033931323}
   - component: {fileID: 80387960064163796}
   - component: {fileID: 3420973975598370182}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75346,7 +75346,7 @@ GameObject:
   - component: {fileID: 4344130698785981571}
   - component: {fileID: 7409922991036474749}
   - component: {fileID: 5054310267925734952}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80395,7 +80395,7 @@ GameObject:
   - component: {fileID: 1844149405369132959}
   - component: {fileID: 8648681900214152158}
   - component: {fileID: 127753668627754236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85773,7 +85773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4752017271617782438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzle_Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87623,7 +87623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5263486708981522385}
   - component: {fileID: 8191103533458883937}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SparksEmitter (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87741,7 +87741,7 @@ GameObject:
   - component: {fileID: 1296635341976576986}
   - component: {fileID: 4957122185740721198}
   - component: {fileID: 4648909563675265264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzleflash Light Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92741,7 +92741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5574445385715487180}
   - component: {fileID: 6059096730570091119}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzleflash Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92836,7 +92836,7 @@ GameObject:
   - component: {fileID: 8063606223220096567}
   - component: {fileID: 4555682939367838853}
   - component: {fileID: 59875474541524363}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sight_iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92950,7 +92950,7 @@ GameObject:
   - component: {fileID: 6694882588000824759}
   - component: {fileID: 5972918994657500142}
   - component: {fileID: 8687418426232611480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzleflash Light Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97959,7 +97959,7 @@ GameObject:
   - component: {fileID: 1225539701349999817}
   - component: {fileID: 9037551708290156410}
   - component: {fileID: 2453230389162222154}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102839,7 +102839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8212456208377275873}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzle_Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103150,7 +103150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6322653029172749735}
   - component: {fileID: 8011061777037846422}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SparksEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103295,7 +103295,7 @@ GameObject:
   - component: {fileID: 8966456716811667031}
   - component: {fileID: 9166864530102298578}
   - component: {fileID: 3714370210063059228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Barrel_11.5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103471,7 +103471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8042586967034241082}
   - component: {fileID: 7433455295405080592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shotgun ShellEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103521,7 +103521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6540746106108824582}
   - component: {fileID: 5814629747114119752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shotgun MuzzleflashEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
