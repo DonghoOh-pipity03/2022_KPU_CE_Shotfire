@@ -20,6 +20,7 @@ class EnemyAgent : LivingEntity
     #region 전역 변수
     [SerializeField] protected EnemyData enemyData;   // 적 AI SO
     [SerializeField] protected Transform eyeTransform;    // 눈의 위치 정보
+    [SerializeField] protected Transform aim;   // 총기 조준점
     [SerializeField] protected Weapon weapon; // AI가 사용하는 무기
     [SerializeField] protected bool useRagDoll = false;   // 래그돌 사용여부
     [SerializeField] protected GameObject animModel;  // 애니메이션을 사용하는 모델

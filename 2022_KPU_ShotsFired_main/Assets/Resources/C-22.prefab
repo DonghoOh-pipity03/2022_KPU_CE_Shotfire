@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3714604478918634167}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RayFire Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8352419908728604210}
   - component: {fileID: 5536221134482822427}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,12 +112,12 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 17792
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 6375557292269981865}
   - component: {fileID: 6375557292268654731}
   - component: {fileID: 6375557292267557451}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_MagazineRelease
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 6375557292269981867}
   - component: {fileID: 6375557292268654741}
   - component: {fileID: 6375557292267557461}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cal_40 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 6375557292269981873}
   - component: {fileID: 6375557292268654739}
   - component: {fileID: 6375557292267557459}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 6375557292269981875}
   - component: {fileID: 6375557292268654749}
   - component: {fileID: 6375557292267557469}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_slide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 6375557292269981877}
   - component: {fileID: 6375557292268654743}
   - component: {fileID: 6375557292267557463}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cal_40 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 6375557292269981879}
   - component: {fileID: 6375557292268654737}
   - component: {fileID: 6375557292267557457}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cal_40
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 6375557292269981881}
   - component: {fileID: 6375557292268654747}
   - component: {fileID: 6375557292267557467}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 7597200266527565442}
   - component: {fileID: 154362877902456981}
   - component: {fileID: 6486775680031753155}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: C-22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,6 +797,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7e313cb73354cfd4c910427bafbe8aae, type: 3}
   clipLifeTime: 1.1
   clipWaitTime: 0.02
+  volume_shot: 1
   clip_reload:
   - {fileID: 8300000, guid: 1f5aa2f6590178c4cb6c12c525c6e03e, type: 3}
   - {fileID: 8300000, guid: 8796ec0f8e50d944586d2bea80aa1983, type: 3}
@@ -981,7 +982,7 @@ GameObject:
   - component: {fileID: 6375557292269981885}
   - component: {fileID: 6375557292268654751}
   - component: {fileID: 6375557292267557471}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1064,7 +1065,7 @@ GameObject:
   - component: {fileID: 6375557292269981887}
   - component: {fileID: 6375557292268654745}
   - component: {fileID: 6375557292267557465}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WPN_Eder22_barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1145,7 +1146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7752996983485108906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzle_Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1218,9 +1219,17 @@ PrefabInstance:
       propertyPath: InitialModule.startSpeed.scalar
       value: 6.63
       objectReference: {fileID: 0}
+    - target: {fileID: 2603099217702210738, guid: 3a886e4843e092f47a377bb71912d3a3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2608979193068105061, guid: 3a886e4843e092f47a377bb71912d3a3, type: 3}
       propertyPath: m_Name
       value: Pistol ShellEmitter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608979193068105061, guid: 3a886e4843e092f47a377bb71912d3a3, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4980725344103918535, guid: 3a886e4843e092f47a377bb71912d3a3, type: 3}
       propertyPath: m_Materials.Array.size
@@ -1295,6 +1304,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6375557292269981883}
     m_Modifications:
+    - target: {fileID: 1144027742821041686, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1470206028380604473, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
       propertyPath: scalingMode
       value: 0
@@ -1307,9 +1320,21 @@ PrefabInstance:
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5474544922983361271, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501063760260191169, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6002720521190060909, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
       propertyPath: m_Name
       value: Pistol MuzzleflashEmitter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002720521190060909, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6189811849319913727, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
       propertyPath: m_Materials.Array.size
@@ -1350,6 +1375,10 @@ PrefabInstance:
     - target: {fileID: 7468290663094683110, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8191088777242935482, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8923118411543203939, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
       propertyPath: m_RootOrder
@@ -1435,6 +1464,14 @@ PrefabInstance:
     - target: {fileID: 4649297784100318458, guid: e8652b66343897041bdd944341498915, type: 3}
       propertyPath: m_Name
       value: Pistol AfterfireSmoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649297784100318458, guid: e8652b66343897041bdd944341498915, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279106971586428782, guid: e8652b66343897041bdd944341498915, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7894166206288015967, guid: e8652b66343897041bdd944341498915, type: 3}
       propertyPath: m_RootOrder

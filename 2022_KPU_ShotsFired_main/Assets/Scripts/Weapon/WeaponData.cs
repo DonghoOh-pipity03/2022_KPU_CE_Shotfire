@@ -40,7 +40,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] float recoilMultipleInIdle;  // idle 사격에서 화면 반동 계수
     public float RecoilMultipleInIdle => recoilMultipleInIdle;   
     [SerializeField] float recoilMultipleInZoom;  // zoom 사격에서 화면 반동 계수
-    public float RecoilMultipleInZoom => recoilMultipleInIdle; 
+    public float RecoilMultipleInZoom => recoilMultipleInZoom; 
     
     [Header("무기 재장전")]
     [SerializeField] int magCappacity; // 탄창 용량

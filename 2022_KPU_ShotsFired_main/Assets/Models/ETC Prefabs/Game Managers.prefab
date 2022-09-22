@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_UI: {fileID: 0}
   report_UI: {fileID: 0}
+  boss_UI: {fileID: 0}
   m_miniMap: {fileID: 0}
   playerHealthBackground: {fileID: 0}
   playerMaxHealthBar: {fileID: 0}
@@ -147,6 +148,10 @@ MonoBehaviour:
   remainAmmo: {fileID: 0}
   remainMag: {fileID: 0}
   InterAction: {fileID: 0}
+  bossName: {fileID: 0}
+  bossHealthBackground: {fileID: 0}
+  bossHealthImage: {fileID: 0}
+  bossHealthText: {fileID: 0}
 --- !u!114 &6849910986925176806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +321,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.075
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -416,3 +421,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e8a95f9e59dd6b34b807be82a25116ab, type: 3}
   - {fileID: 8300000, guid: 9cfcfe74301a7ce4aa4f66a8ce6ee4b9, type: 3}
   - {fileID: 8300000, guid: 5afeb45017927a34f83e6022b3228fb3, type: 3}
+  SFXWaitTime: 0.2

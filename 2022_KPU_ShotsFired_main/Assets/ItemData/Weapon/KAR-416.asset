@@ -24,8 +24,8 @@ MonoBehaviour:
   recoilVertical: {x: 1, y: 2}
   recoilZ: {x: 0, y: 0.1}
   recoilMultiple: 0.02
-  recoilMultipleInIdle: 1
-  recoilMultipleInZoom: 1
+  recoilMultipleInIdle: 1.25
+  recoilMultipleInZoom: 1.15
   magCappacity: 30
   initMagCount: 30
   reloadTime: 2.75
