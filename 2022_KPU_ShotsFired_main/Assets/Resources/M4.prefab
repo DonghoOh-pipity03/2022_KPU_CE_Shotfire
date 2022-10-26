@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5922456189064584940}
   - component: {fileID: 5922456189064584941}
+  - component: {fileID: 6506144567212088827}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -78,7 +79,7 @@ Light:
   m_Intensity: 2.5
   m_Range: 25
   m_SpotAngle: 30
-  m_InnerSpotAngle: 3
+  m_InnerSpotAngle: 20
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
@@ -125,6 +126,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &6506144567212088827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5922456189064584943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &6525947634157003866
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,11 +284,10 @@ MonoBehaviour:
   SuppressSoundPlayPercent: 2
   clip_hit: {fileID: 8300000, guid: a1a47e02d704d43469098fe5657d5b8f, type: 3}
   shotParticle:
-  - {fileID: 3029251952416877652}
   - {fileID: 2131142012542565900}
-  shotParticle2:
-  - {fileID: 1145304460225016902}
-  raytracerPrefab: {fileID: 1866657824718261864, guid: e755b1ca971c46b4dbbb30b41b1ed5d2, type: 3}
+  shotParticle2: []
+  shotParticle3: {fileID: 124018, guid: 1f389bb139e76154582cf3c5e4f9214b, type: 3}
+  raytracerPrefab: {fileID: 1866657824718261864, guid: c42ded2f5e4047c439c2ae5582749edc, type: 3}
   gunLayerMask:
     serializedVersion: 2
     m_Bits: 132480
@@ -1075,6 +1095,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7861148805495482681, guid: d9f202191bc68bf458d2d5a01e45dec2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9f202191bc68bf458d2d5a01e45dec2, type: 3}
 --- !u!4 &1524086218866581030 stripped
@@ -1150,17 +1174,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccb7f9a97d4bae24a9175fc5b884cce2, type: 3}
---- !u!114 &1145304460225016902 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5963160382346156016, guid: ccb7f9a97d4bae24a9175fc5b884cce2, type: 3}
-  m_PrefabInstance: {fileID: 6711936367821923254}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d569c6b0df9c5fe4b9bf4a81c86fb4e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &7837346255666222558 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3595647619364566632, guid: ccb7f9a97d4bae24a9175fc5b884cce2, type: 3}
@@ -1228,14 +1241,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5023509210303974013, guid: 7f625878ffc32db47995bc30d8bcbce4, type: 3}
   m_PrefabInstance: {fileID: 7334627133520607335}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3029251952416877652 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5747653181166883891, guid: 7f625878ffc32db47995bc30d8bcbce4, type: 3}
-  m_PrefabInstance: {fileID: 7334627133520607335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dd23736960bd2a48beef6c615cd7607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

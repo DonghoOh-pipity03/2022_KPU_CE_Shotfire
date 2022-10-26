@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5497287045240306097}
   - component: {fileID: 929793958991661475}
+  - component: {fileID: 1493357645591964114}
   m_Layer: 6
   m_Name: Default PostProcess
   m_TagString: Untagged
@@ -39,7 +40,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5258260511624968261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -49,6 +50,23 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &1493357645591964114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258260511624968261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: e1d261d1301a5a04eb688e425bb00111, type: 2}
 --- !u!1 &6849910986925176825
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,8 +161,12 @@ MonoBehaviour:
   playerDamaged: {fileID: 0}
   playerDamageRestoreTime: 2
   aimAnimator: {fileID: 0}
-  hitMarker: []
-  hitMarkTime: 0
+  hitMarker:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  hitMarkTime: 0.25
   remainAmmo: {fileID: 0}
   remainMag: {fileID: 0}
   InterAction: {fileID: 0}
@@ -197,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -292,21 +315,21 @@ MonoBehaviour:
   - {fileID: 1145501737142857621, guid: 9ad43dc04a9456b459c0391657d4225f, type: 3}
   - {fileID: 1383290702010692964, guid: 31a696fffa91d3c4fb8947b9d259566c, type: 3}
   - {fileID: 1959440819890584970, guid: d7b8f888080ea70419b973a653035761, type: 3}
-  fleshImpact: {fileID: 258580847482720395, guid: 907189bb1273a83499f4581146d101a5, type: 3}
-  rockImpact: {fileID: 9025620440509115318, guid: 67ee14f1e2b7cbf44b97f7f8d26782bc, type: 3}
-  woodImpact: {fileID: 3061189629347133750, guid: a8e182c1811239647a9f16b1f40dd7f2, type: 3}
-  thinMetalImpact: {fileID: 7077355519987932897, guid: 579357df66620f747a0c8f99cabbd10e, type: 3}
-  metalImpact: {fileID: 7077355519987932897, guid: 6d813d766b473a04680efdb264997f8d, type: 3}
-  concreteImpact: {fileID: 1245417074158470010, guid: 4116cec408736b8408c7cea75253bb9b, type: 3}
-  brickImpact: {fileID: 1245417074158470010, guid: a97e8df82833bfe4fa18da692b508598, type: 3}
-  glassImpact: {fileID: 6116272564290920125, guid: d58f136885f6e8a4ca2a8731c8bc258d, type: 3}
-  plywoodImpact: {fileID: 3061189629347133750, guid: 3178f3f3d1492df40a2395f79abf8b76, type: 3}
-  asphaltImpact: {fileID: 1245417074158470010, guid: d87bcf25ddc8ba64495acd31a64895c7, type: 3}
-  sandImpact: {fileID: 7258679735602562000, guid: 0b38c6dd9d60f37438e0cd2d5dbbe9ef, type: 3}
-  mudImpact: {fileID: 5664013782547976066, guid: fa57485de29fa3241b0f322dad2d4191, type: 3}
-  groundImpact: {fileID: 7258679735602562000, guid: 608cb554bb30cb746956424c326042ca, type: 3}
-  waterImpact: {fileID: 5664013782547976066, guid: f6c9593ace7fede4ba0251e1010760b6, type: 3}
-  ceramicImpact: {fileID: 1245417074158470010, guid: 2c66f6a618cf19248bd3252b2e20f49e, type: 3}
+  fleshImpact: {fileID: 0}
+  rockImpact: {fileID: 142740, guid: ce4fb833f44504e48b46c3474bc747fc, type: 3}
+  woodImpact: {fileID: 138412, guid: c75e5a4fa5c842546a553399e24eb22d, type: 3}
+  thinMetalImpact: {fileID: 180772, guid: 697d9a1e52bb99d468a5d727e5a4b435, type: 3}
+  metalImpact: {fileID: 180772, guid: 697d9a1e52bb99d468a5d727e5a4b435, type: 3}
+  concreteImpact: {fileID: 108086, guid: 547c2e12da8d4214098216299e70a3ba, type: 3}
+  brickImpact: {fileID: 151174, guid: e3c9439885f011549a6460a1f4da82dc, type: 3}
+  glassImpact: {fileID: 168394, guid: 93983eaa39ee5d4408c0b10200e234b4, type: 3}
+  plywoodImpact: {fileID: 0}
+  asphaltImpact: {fileID: 0}
+  sandImpact: {fileID: 0}
+  mudImpact: {fileID: 0}
+  groundImpact: {fileID: 0}
+  waterImpact: {fileID: 149956, guid: 3dc518bed1b2ee14481a2a155c19da18, type: 3}
+  ceramicImpact: {fileID: 0}
 --- !u!82 &3024328706327895857
 AudioSource:
   m_ObjectHideFlags: 0

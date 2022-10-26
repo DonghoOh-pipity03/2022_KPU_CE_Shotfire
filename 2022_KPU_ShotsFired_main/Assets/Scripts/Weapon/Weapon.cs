@@ -28,6 +28,7 @@ public class Weapon : MonoBehaviourPunCallbacks
     [Header("파티클")]
     [SerializeField] ParticleGroupEmitter[]  shotParticle;    // 사격시 재생할 파티클
     [SerializeField] ParticleGroupPlayer[] shotParticle2;   // 사격시 재생할 파티클
+    [SerializeField] GameObject shotParticle3;  // 사격시 재생할 파티클 프리팹
     [SerializeField] Bullet2 raytracerPrefab;   // 예광탄 프리팹
     [Header("기타")]
     [SerializeField] LayerMask gunLayerMask;    // 사격판정에 사용할 레이어마스크_플레이어, 적, 레벨디자인
@@ -48,6 +49,7 @@ public class Weapon : MonoBehaviourPunCallbacks
     ObjectPool<Bullet> bulletPool;  // 총알 오브젝트 풀    
     // 총기 상태
     GameObject weaponUser; // 무기 사용자 오브젝트
+    bool useParticleInLocal = false; // 무기 이펙트의 로컬생성을 허용여부, AI는 레그돌 변환시 자식의 갯수를 맞춰야 하기에 flase로 사용
     public enum State { ready, empty, reloading, shooting }
     [HideInInspector] public State state;    // 현재 상태
     int curFireMode = 0;    // 현재 발사모드
@@ -88,7 +90,10 @@ public class Weapon : MonoBehaviourPunCallbacks
     {
         curRemainMag = weaponData.InitMagCount;
         weaponUser = transform.root.gameObject;
-        if (weaponUser.tag == "Player") playerAttack = weaponUser.GetComponent<PlayerAttack>();
+        if (weaponUser.tag == "Player") {
+            playerAttack = weaponUser.GetComponent<PlayerAttack>();
+            useParticleInLocal = true;
+        }
         curRemainAmmo = weaponData.MagCappacity;
         UpdateUI();
         gunAudioPlayer = GetComponent<AudioSource>();
@@ -349,6 +354,11 @@ public class Weapon : MonoBehaviourPunCallbacks
 
         foreach( var i in shotParticle){ i.Emit(1); }
         foreach( var i in shotParticle2){ i.Play(); }
+        var impactEffectIstance = useParticleInLocal?
+            Instantiate(shotParticle3, muzzlePosition.position, muzzlePosition.rotation, this.transform) as GameObject
+            : Instantiate(shotParticle3, muzzlePosition.position, muzzlePosition.rotation) as GameObject;
+        Destroy(impactEffectIstance, 4);
+        
         lastFireTime = Time.time;
     }
 
