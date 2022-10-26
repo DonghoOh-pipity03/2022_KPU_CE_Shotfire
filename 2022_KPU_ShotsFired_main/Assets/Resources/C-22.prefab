@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8352419908728604210}
   - component: {fileID: 5536221134482822427}
+  - component: {fileID: 654193644623013416}
   m_Layer: 8
   m_Name: Light
   m_TagString: Untagged
@@ -78,7 +79,7 @@ Light:
   m_Intensity: 2.5
   m_Range: 25
   m_SpotAngle: 30
-  m_InnerSpotAngle: 3
+  m_InnerSpotAngle: 20
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
@@ -125,6 +126,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &654193644623013416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526705366682987113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &6375557292269554825
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,11 +836,10 @@ MonoBehaviour:
   SuppressSoundPlayPercent: 10
   clip_hit: {fileID: 8300000, guid: a1a47e02d704d43469098fe5657d5b8f, type: 3}
   shotParticle:
-  - {fileID: 7903676594163278814}
   - {fileID: 4857667389991914350}
-  shotParticle2:
-  - {fileID: 7367641085901648654}
-  raytracerPrefab: {fileID: 1866657824718261864, guid: e755b1ca971c46b4dbbb30b41b1ed5d2, type: 3}
+  shotParticle2: []
+  shotParticle3: {fileID: 124018, guid: 1f389bb139e76154582cf3c5e4f9214b, type: 3}
+  raytracerPrefab: {fileID: 1866657824718261864, guid: c42ded2f5e4047c439c2ae5582749edc, type: 3}
   gunLayerMask:
     serializedVersion: 2
     m_Bits: 132480
@@ -1431,17 +1451,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8923118411543203939, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
   m_PrefabInstance: {fileID: 5639582713186976584}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7903676594163278814 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2588634537992544406, guid: a082bc92011a84a43801e11d8edfde30, type: 3}
-  m_PrefabInstance: {fileID: 5639582713186976584}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dd23736960bd2a48beef6c615cd7607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7447539068441763182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1524,14 +1533,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7894166206288015967, guid: e8652b66343897041bdd944341498915, type: 3}
   m_PrefabInstance: {fileID: 7447539068441763182}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7367641085901648654 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 100741493612686944, guid: e8652b66343897041bdd944341498915, type: 3}
-  m_PrefabInstance: {fileID: 7447539068441763182}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d569c6b0df9c5fe4b9bf4a81c86fb4e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

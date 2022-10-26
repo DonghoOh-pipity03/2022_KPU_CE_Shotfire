@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
 using Photon.Pun;
+using UnityEngine.Animations.Rigging;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -48,6 +49,7 @@ class EnemyAgent : LivingEntity
     protected int[] isPlayerOnSight = new int[4]; // 플레이어가 시야 내에 보이는지 여부
     protected GameObject[] players = new GameObject[4];   // 플레이어들의 게임 오브젝트 정보
     protected LivingEntity[] playerState = new LivingEntity[4];   //플레이어들의 LivingEntity, 체력상태 확인용
+    protected Vector3? shootingPoint;    // AI가 조준 및 사격해야 할 position, 플레이어 캐릭터의 상체를 가리킨다.
     protected  float[] playerDistance = { 9999, 9999, 9999, 9999 };  // 각 플레이어와의 거리
     protected int[] targetWeight = new int[4];    // 각 플레이어별 타겟팅(어그로) 가중치
     protected int target; // 최우선 공격 대상: 0~3 플레이어
@@ -59,6 +61,7 @@ class EnemyAgent : LivingEntity
     protected float lastAttackTime;   // 마지막 공격 시간
     protected float engageDistance;   // 교전 시작거리
     protected bool dead_sync = false; //AI 사망 판정
+    [SerializeField] protected Rig rig;
      // 사운드
     protected float lastFootSoundTime;    // 마지막 발소리 출력 시간
     #endregion
@@ -111,6 +114,9 @@ class EnemyAgent : LivingEntity
     }
     protected virtual void LateUpdate() {
         DrawLaser();
+    }
+    private void FixedUpdate() {
+        aim.position = (shootingPoint!= null)?(Vector3)shootingPoint:(transform.position + transform.forward* 2f + transform.up * 1.5f);
     }
     #endregion
     #region 함수
@@ -192,6 +198,7 @@ class EnemyAgent : LivingEntity
         if(lineRenderer != null) lineRenderer.enabled = false;
         if(minimapHolder != null) minimapHolder.SetActive(false);
 
+        rig.weight=0;
         if(!useRagDoll) yield break;    // 이하 레그돌 영역
         var ragdollTime = UnityEngine.Random.Range(0f,.75f);
         yield return new WaitForSeconds(ragdollTime);
@@ -222,6 +229,7 @@ class EnemyAgent : LivingEntity
     protected IEnumerator move()
     {
         // 시작시 코드
+        rig.weight = 1;
         agent.speed = enemyData.MoveSpeed;
         // 수행중 코드
         while (true)
@@ -244,6 +252,7 @@ class EnemyAgent : LivingEntity
     protected IEnumerator engage()
     {
         // 시작시 코드
+        rig.weight = 1;
         agent.speed = 0;
         // 수행중 코드
         while (true)
@@ -277,10 +286,16 @@ class EnemyAgent : LivingEntity
             var livingEntity = collider.GetComponent<LivingEntity>();
             if (livingEntity != null && livingEntity.entityState != EntityState.dead)
             {
-                var direction = collider.transform.position - eyeTransform.position;
-                direction.y = eyeTransform.forward.y;
+                Vector3 direction;
+                shootingPoint = null;
+                if( (shootingPoint = collider.GetComponent<LivingEntity>().shotPoint.position) != null ){
+                    direction = (Vector3)shootingPoint - eyeTransform.position;
+                }else{
+                    direction = collider.transform.position - eyeTransform.position;
+                    direction.y = eyeTransform.forward.y;
+                }
 
-                // 대기상태라면 시야각 내에 있는지 파악한다.
+                // (1) 대기상태 중 시야각 내에 있거나, (2) 대기 상태가 아니라면, 육안 관측이 가능한지 파악한다.
                 if ((aiState == AIState.wait && Vector3.Angle(direction, eyeTransform.forward) < enemyData.FieldOfView * 0.5f)
                     || (aiState != AIState.wait))
                 {

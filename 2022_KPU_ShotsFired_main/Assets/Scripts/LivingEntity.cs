@@ -11,6 +11,7 @@ abstract class LivingEntity : MonoBehaviourPunCallbacks
     [Header("체력 파라미터")]
     [SerializeField] protected float maxHealth = 100; // 시작 및 최대 체력
     [SerializeField] protected float[] hitMultiple = {2f, 1f, 0.8f, 0.8f};  // 부위별 데미지 계수 / 머리,몸통,팔,다리
+    [SerializeField] public Transform shotPoint; // AI가 조준을 하기 위한 위치를 저장한다. 플레이어만 사용한다.
     [Header("제압 파라미터")]
     [SerializeField] protected float maxSuppress = 100; // 최대 제압수치
     [SerializeField] protected float unsuppressAmount   = 7; // 초당 제압해제수치

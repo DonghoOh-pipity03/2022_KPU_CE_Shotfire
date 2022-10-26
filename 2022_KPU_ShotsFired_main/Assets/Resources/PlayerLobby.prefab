@@ -20362,7 +20362,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410941581669108599}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c23545069f709fc4481fcfba255e848e, type: 3}
   m_Name: 
@@ -20397,6 +20397,7 @@ MonoBehaviour:
   - {fileID: 1097756594024550270}
   shotParticle2:
   - {fileID: 7013780722477389986}
+  shotParticle3: {fileID: 0}
   raytracerPrefab: {fileID: 1866657824718261864, guid: e755b1ca971c46b4dbbb30b41b1ed5d2, type: 3}
   gunLayerMask:
     serializedVersion: 2
@@ -41683,6 +41684,7 @@ MonoBehaviour:
   - {fileID: 7433455295405080592}
   shotParticle2:
   - {fileID: 8457573448854440538}
+  shotParticle3: {fileID: 0}
   raytracerPrefab: {fileID: 1866657824718261864, guid: e755b1ca971c46b4dbbb30b41b1ed5d2, type: 3}
   gunLayerMask:
     serializedVersion: 2
@@ -73544,6 +73546,7 @@ MonoBehaviour:
   - {fileID: 6415740525239794725}
   shotParticle2:
   - {fileID: 8962077828031235141}
+  shotParticle3: {fileID: 0}
   raytracerPrefab: {fileID: 1866657824718261864, guid: e755b1ca971c46b4dbbb30b41b1ed5d2, type: 3}
   gunLayerMask:
     serializedVersion: 2
@@ -86845,7 +86848,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.002
+    widthMultiplier: 0.0015
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -87188,6 +87191,7 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+  shotPoint: {fileID: 0}
   maxSuppress: 100
   unsuppressAmount: 7
   entityState: 0
@@ -97864,13 +97868,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2819182292847421807}
   - component: {fileID: 6128673348037796318}
+  - component: {fileID: 5433272712330574492}
   m_Layer: 0
   m_Name: LaserPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2819182292847421807
 Transform:
   m_ObjectHideFlags: 0
@@ -97948,6 +97953,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &5433272712330574492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8045120735171771452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &8102250636649578662
 GameObject:
   m_ObjectHideFlags: 0
