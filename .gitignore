@@ -492,6 +492,4 @@ FodyWeavers.xsd
 
 
 # External non-free Asset 
-2022_KPU_ShotsFired_main/Assets/External_Asset
-2022_KPU_ShotsFired_main/Assets/Editor
-2022_KPU_ShotsFired_main/Assets/BakeryLightmaps
+2022_KPU_ShotsFired_main/Assets/Assets_gitignore

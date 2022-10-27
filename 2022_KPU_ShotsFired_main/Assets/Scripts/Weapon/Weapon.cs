@@ -333,11 +333,10 @@ public class Weapon : MonoBehaviourPunCallbacks
                     // 제압 소리 재생
                     if(clip_Suppress != null){
                     int randomValue = Random.Range(0, 101);
-                    if(randomValue <= SuppressSoundPlayPercent) {
+                    if(randomValue <= SuppressSoundPlayPercent && clip_Suppress.Length!=0) {
                         SoundManager.Instance.PlaySFX( clip_Suppress[Random.Range(0,clip_Suppress.Length-1)], j.point, name );
                     }
                     }
-
                 }
             }
 
