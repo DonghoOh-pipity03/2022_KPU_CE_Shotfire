@@ -1,3 +1,8 @@
+/*
+BossStageManager.cs
+1. 페이즈 변화: 보스 체력에 따라 특정 오브젝트를 활성화한다.
+2. 보스 사망처리: 보스 사망시, 플레리어 조작 통제 및 시간 조절과 게임종료 처리를 한다.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

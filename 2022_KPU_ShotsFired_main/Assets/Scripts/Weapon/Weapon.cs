@@ -12,36 +12,63 @@ using Andtech.ProTracer;
 public class Weapon : MonoBehaviourPunCallbacks
 {
     PlayerAttack playerAttack;
-    [SerializeField] WeaponData weaponData; // 총기 SO
-    [SerializeField] Bullet bulletPrefab;  // 총알 프리팹
-    public Transform muzzlePosition; // 총구 위치
-    [Header("사운드")]
     AudioSource gunAudioPlayer;
-    [SerializeField] AudioClip[] clip_shot;  // 사격음
-    [SerializeField] float clipLifeTime = 1.1f;    // 사격음 재생시간
-    [SerializeField] float clipWaitTime = 0.02f;    // 사격음 연속재생 간격시간
-    [SerializeField] float volume_shot = 1.0f;  // 사격음 볼륨
-    [SerializeField] AudioClip[] clip_reload;  // 재장전음
-    [SerializeField] AudioClip[] clip_Suppress; // 제압소리
-    [SerializeField] int SuppressSoundPlayPercent = 10; // 제압 소리 재생 확률
-    [SerializeField] AudioClip clip_hit;    // 히트 소리
-    [Header("파티클")]
-    [SerializeField] ParticleGroupEmitter[]  shotParticle;    // 사격시 재생할 파티클
-    [SerializeField] ParticleGroupPlayer[] shotParticle2;   // 사격시 재생할 파티클
-    [SerializeField] GameObject shotParticle3;  // 사격시 재생할 파티클 프리팹
-    [SerializeField] Bullet2 raytracerPrefab;   // 예광탄 프리팹
-    [Header("기타")]
-    [SerializeField] LayerMask gunLayerMask;    // 사격판정에 사용할 레이어마스크_플레이어, 적, 레벨디자인
-    [SerializeField] LayerMask suppressLayerMask;   // 제압레이어 마스크
-    [SerializeField] RayfireGun rayfireGun; // 장애물 파괴용 컴포넌트_총
-    [SerializeField] Transform rayfireTarget;
-    [SerializeField] float fittingForward;    // AI전용_총기 앞방향 조정용 (현재 앞뒤로만 조정가능)
 
-    #region 전역 변수
+    #region 전역변수
+    [Tooltip("총기 SO")]
+    [SerializeField] WeaponData weaponData;
+    [Tooltip("총알 프리팹")]
+    [SerializeField] Bullet bulletPrefab;
+    [Tooltip("총구 위치")]
+    [SerializeField] public Transform muzzlePosition;
+
+    [Header("사운드")]
+    [Tooltip("사격음")]
+    [SerializeField] AudioClip[] clip_shot;
+    [Tooltip("사격음 재생시간")]
+    [SerializeField] float clipLifeTime = 1.1f;
+    [Tooltip("사격음 연속재생 간격시간")]
+    [SerializeField] float clipWaitTime = 0.02f;
+    [Tooltip("사격음 볼륨")]
+    [SerializeField] float volume_shot = 1.0f;
+    [Tooltip("재장전음")]
+    [SerializeField] AudioClip[] clip_reload;
+    [Tooltip("제압소리")]
+    [SerializeField] AudioClip[] clip_Suppress;
+    [Tooltip("제압 소리 재생 확률")]
+    [SerializeField] int SuppressSoundPlayPercent = 10;
+    [Tooltip("히트 소리")]
+    [SerializeField] AudioClip clip_hit;
+
+    [Header("파티클")]
+    [Tooltip("사격시 재생할 파티클")]
+    [SerializeField] ParticleGroupEmitter[] shotParticle;
+    [Tooltip("사격시 재생할 파티클")]
+    [SerializeField] ParticleGroupPlayer[] shotParticle2;
+    [Tooltip("사격시 재생할 파티클")]
+    [SerializeField] GameObject shotParticle3;
+    [Tooltip("예광탄 프리팹")]
+    [SerializeField] Bullet2 raytracerPrefab;
+
+    [Header("기타")]
+    [Tooltip("사격판정에 사용할 레이어마스크_플레이어, 적, 레벨디자인")]
+    [SerializeField] LayerMask gunLayerMask;
+    [Tooltip("제압레이어 마스크")]
+    [SerializeField] LayerMask suppressLayerMask;
+    [Tooltip("장애물 파괴용 컴포넌트_총")]
+    [SerializeField] RayfireGun rayfireGun;
+    [Tooltip("")]
+    [SerializeField] Transform rayfireTarget;
+    [Tooltip("AI전용_총기 앞방향 조정용")]
+    [SerializeField] float fittingForward;
+
     [Header("이하 디버그용")]
-    [SerializeField] bool useUI = false;    // 무기 관련 UI를 사용하는지 여부
-    [SerializeField] bool autoReload = true;    // 자동 재장전 정책 허용여부
-    [SerializeField] bool useRecoilInIdle = true;    // idle 사격에서도 화면 반동을 사용하는지
+    [Tooltip("무기 관련 UI를 사용하는지 여부")]
+    [SerializeField] bool useUI = false;
+    [Tooltip("자동 재장전 정책 허용여부")]
+    [SerializeField] bool autoReload = true;
+    [Tooltip("idle 사격에서도 화면 반동을 사용하는지")]
+    [SerializeField] bool useRecoilInIdle = true;
     float MaxSpread = 5f;   // 에임UI의 최대 스프레드 값
     #endregion
 
@@ -90,14 +117,15 @@ public class Weapon : MonoBehaviourPunCallbacks
     {
         curRemainMag = weaponData.InitMagCount;
         weaponUser = transform.root.gameObject;
-        if (weaponUser.tag == "Player") {
+        if (weaponUser.tag == "Player")
+        {
             playerAttack = weaponUser.GetComponent<PlayerAttack>();
             useParticleInLocal = true;
         }
         curRemainAmmo = weaponData.MagCappacity;
         UpdateUI();
         gunAudioPlayer = GetComponent<AudioSource>();
-        
+
         // RayFire 컴포넌트 세팅
         rayfireGun = GetComponent<RayfireGun>();
         rayfireTarget = transform.Find("RayFire Target");
@@ -241,7 +269,7 @@ public class Weapon : MonoBehaviourPunCallbacks
             // 1. 투사체 방식 (폐기)
             // fireDirection = muzzlePosition.eulerAngles;
             // 2. 레이캐스트 방식
-            if(playerAttack != null ) fireDirection = (playerAttack.aimTarget.position - muzzlePosition.position).normalized;
+            if (playerAttack != null) fireDirection = (playerAttack.aimTarget.position - muzzlePosition.position).normalized;
             else fireDirection = transform.forward * fittingForward;
 
             curRecoilX = Random.Range(weaponData.RecoilHorizontal.x, weaponData.RecoilHorizontal.y);
@@ -263,7 +291,7 @@ public class Weapon : MonoBehaviourPunCallbacks
                 fireDirection = fireDirection.normalized;
             }
             // zoom 조준 상태일 경우 -> 화면 반동 적용 (플레이어만 가능한 사격 방법)
-            else    
+            else
             {
                 playerAttack.FireRecoil(new Vector3(-1 * Mathf.Abs(curRecoilY), curRecoilX, curRecoilZ) * weaponData.RecoilMultipleInZoom);
             }
@@ -278,14 +306,15 @@ public class Weapon : MonoBehaviourPunCallbacks
             // 2.1. 공격처리
             ray.origin = muzzlePosition.position;
             ray.direction = fireDirection;
-            if(Physics.Raycast(ray, out hit, bulletPrefab.bulletData.MaxDistance, gunLayerMask)){
+            if (Physics.Raycast(ray, out hit, bulletPrefab.bulletData.MaxDistance, gunLayerMask))
+            {
                 // (1) Damageable 물체 또는 미확인물체
                 //Debug.Log("hit");
                 var target = hit.transform.GetComponent<IDamageable>();
-                if( target != null)
+                if (target != null)
                 {
                     hitPoint = hit.point;
-                    if(hit.transform.root.tag != weaponUser.tag)
+                    if (hit.transform.root.tag != weaponUser.tag)
                     {
                         DamageMessage damageMessage;
 
@@ -295,13 +324,14 @@ public class Weapon : MonoBehaviourPunCallbacks
                         damageMessage.damageAmount = bulletPrefab.bulletData.Damage;
                         damageMessage.suppressAmount = bulletPrefab.bulletData.Suppress;
                         damageMessage.hitPoint = hit.point;
-                        damageMessage.hitNormal =  hit.normal;
+                        damageMessage.hitNormal = hit.normal;
 
                         target.ApplyDamage(damageMessage);
 
                         // 히트마커 표시, 히트소리 재생
-                        if (!useUI || !photonView.IsMine || hit.transform.root.tag != "Enemy"){}
-                        else{ 
+                        if (!useUI || !photonView.IsMine || hit.transform.root.tag != "Enemy") { }
+                        else
+                        {
                             GameUIManager.Instance.UpdateHitMark();
                             //if(clip_hit != null) 
                             gunAudioPlayer.PlayOneShot(clip_hit);
@@ -311,31 +341,35 @@ public class Weapon : MonoBehaviourPunCallbacks
                 else hitPoint = hit.point;
             }
             // (2) 제한된 거리에 도달할 경우
-            else{
+            else
+            {
                 hitPoint = muzzlePosition.position + fireDirection * bulletPrefab.bulletData.MaxDistance;
             }
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             Debug.DrawRay(muzzlePosition.position, hitPoint - muzzlePosition.position, Color.green, 1f);
-            #endif
+#endif
             // (3) 장애물
             rayfireTarget.position = hitPoint;
             rayfireGun.Shoot();
 
             // 2.2. 제압처리_끝점까지 제압콜라이더 감지 및 처리
             var hits = Physics.RaycastAll(muzzlePosition.position, fireDirection, hit.distance, suppressLayerMask);
-            foreach( var j in hits){
+            foreach (var j in hits)
+            {
                 var target1 = j.transform.GetComponent<SuppressPoint>();
-                if( target1 != null) 
-                {   
+                if (target1 != null)
+                {
                     // 제압 수치 부여
-                    if(j.transform.root.tag != weaponUser.tag) target1.ApplySuppress(bulletPrefab.bulletData.Suppress);
+                    if (j.transform.root.tag != weaponUser.tag) target1.ApplySuppress(bulletPrefab.bulletData.Suppress);
 
                     // 제압 소리 재생
-                    if(clip_Suppress != null){
-                    int randomValue = Random.Range(0, 101);
-                    if(randomValue <= SuppressSoundPlayPercent && clip_Suppress.Length!=0) {
-                        SoundManager.Instance.PlaySFX( clip_Suppress[Random.Range(0,clip_Suppress.Length-1)], j.point, name );
-                    }
+                    if (clip_Suppress != null)
+                    {
+                        int randomValue = Random.Range(0, 101);
+                        if (randomValue <= SuppressSoundPlayPercent && clip_Suppress.Length != 0)
+                        {
+                            SoundManager.Instance.PlaySFX(clip_Suppress[Random.Range(0, clip_Suppress.Length - 1)], j.point, name);
+                        }
                     }
                 }
             }
@@ -347,29 +381,30 @@ public class Weapon : MonoBehaviourPunCallbacks
         }
 
         // 총소리
-        if(clip_shot != null ){
-            SoundManager.Instance.PlayLimitSFX(clip_shot[Random.Range(0, clip_shot.Length-1)], volume_shot, clipLifeTime, clipWaitTime, transform.position, gameObject.GetInstanceID().ToString());
+        if (clip_shot != null)
+        {
+            SoundManager.Instance.PlayLimitSFX(clip_shot[Random.Range(0, clip_shot.Length - 1)], volume_shot, clipLifeTime, clipWaitTime, transform.position, gameObject.GetInstanceID().ToString());
         }
 
-        foreach( var i in shotParticle){ i.Emit(1); }
-        foreach( var i in shotParticle2){ i.Play(); }
-        var impactEffectIstance = useParticleInLocal?
+        foreach (var i in shotParticle) { i.Emit(1); }
+        foreach (var i in shotParticle2) { i.Play(); }
+        var impactEffectIstance = useParticleInLocal ?
             Instantiate(shotParticle3, muzzlePosition.position, muzzlePosition.rotation, this.transform) as GameObject
             : Instantiate(shotParticle3, muzzlePosition.position, muzzlePosition.rotation) as GameObject;
         Destroy(impactEffectIstance, 4);
-        
+
         lastFireTime = Time.time;
     }
 
     // 외부 코드_TracerDemo
     private void OnCompleted(object sender, System.EventArgs e)
-	{
-		// Handle complete event here
-		if (sender is TracerObject tracerObject)
-		{
-			Destroy(tracerObject.gameObject);
-		}
-	}
+    {
+        // Handle complete event here
+        if (sender is TracerObject tracerObject)
+        {
+            Destroy(tracerObject.gameObject);
+        }
+    }
 
     public void Detached() => isTriggered = false;
     #endregion
@@ -408,7 +443,7 @@ public class Weapon : MonoBehaviourPunCallbacks
         if (weaponData.UseMag && weaponData.UseChamber && curRemainAmmo >= 1) curRemainAmmo = 1;
         else if (weaponData.UseMag) curRemainAmmo = 0;
         UpdateUI();
-        if(clip_reload[0] != null) gunAudioPlayer.PlayOneShot(clip_reload[0]);
+        if (clip_reload[0] != null) gunAudioPlayer.PlayOneShot(clip_reload[0]);
 
         //대기
         yield return new WaitForSeconds(weaponData.ReloadTime);
@@ -421,7 +456,7 @@ public class Weapon : MonoBehaviourPunCallbacks
 
         UpdateUI();
         isRunningReloadCoroutine = false;
-        if(clip_reload[1] != null) SoundManager.Instance.PlaySFX(clip_reload[1], transform.position, name);
+        if (clip_reload[1] != null) SoundManager.Instance.PlaySFX(clip_reload[1], transform.position, name);
 
         // 샷건식 재장전의 경우, 계속 재장전 시도
         if (!weaponData.UseMag) Reload();
@@ -442,7 +477,7 @@ public class Weapon : MonoBehaviourPunCallbacks
     {
         if (!useUI || !photonView.IsMine) return;    // 네트워크 통제 영역
         GameUIManager.Instance.UpdateAmmo(curRemainAmmo);
-        GameUIManager.Instance.Updatemag(curRemainMag);
+        GameUIManager.Instance.UpdateMag(curRemainMag);
     }
     #endregion
 }

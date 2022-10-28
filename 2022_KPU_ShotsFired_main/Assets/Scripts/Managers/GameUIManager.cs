@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +6,7 @@ using TMPro;
 
 public class GameUIManager : MonoBehaviour
 {
-#region 전역 변수
+    #region 전역 변수
     [Header("UI 씬")]
     [SerializeField] GameObject player_UI;
     [SerializeField] GameObject report_UI;
@@ -20,7 +20,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerHealth;  // 플레이어_체력 텍스트
     private float playerHealthGUIRatio => playerMaxHealthBar.sizeDelta.x / 100f; // 플레이어_체력 포인트와 체력 GUI 바의 비율 
     private float playerHealthBackgorundHorizonMargine;    // 플레이어_체력 배경 GUI 가로 마진
-     // 피격 필터
+                                                           // 피격 필터
     [SerializeField] Image playerDamaged;    // 플레이어_피격시 핏빛 이미지
     [SerializeField] float playerDamageRestoreTime;   // 플레이어_피격 이미지가 옅어지는 시간
     IEnumerator playerDamagedFadeOut;    // 플레이어_피격 이미지를 옅게 할 함수명
@@ -38,10 +38,10 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private RectTransform bossHealthImage; // 보스_체력바
     [SerializeField] private TextMeshProUGUI bossHealthText;  // 보스_체력 텍스트
 
-#endregion
+    #endregion
     //싱글톤
     private static GameUIManager instance;
-    public static GameUIManager Instance 
+    public static GameUIManager Instance
     {
         get
         {
@@ -49,14 +49,14 @@ public class GameUIManager : MonoBehaviour
             return instance;
         }
     }
-#region 콜백함수
-    private void Awake() 
-    {   
-        if(playerHealthBackground != null && playerMaxHealthBar != null)
-        playerHealthBackgorundHorizonMargine = (playerHealthBackground.sizeDelta.x - playerMaxHealthBar.sizeDelta.x) / 2f; 
+    #region 콜백함수
+    private void Awake()
+    {
+        if (playerHealthBackground != null && playerMaxHealthBar != null)
+            playerHealthBackgorundHorizonMargine = (playerHealthBackground.sizeDelta.x - playerMaxHealthBar.sizeDelta.x) / 2f;
     }
-#endregion
-#region 함수
+    #endregion
+    #region 함수
     #region UI 씬
     public void SetActivePlayer(bool _active)
     {
@@ -66,11 +66,12 @@ public class GameUIManager : MonoBehaviour
     {
         report_UI.SetActive(_active);
     }
-    public void SetActiveMiniMap(bool _active) 
+    public void SetActiveMiniMap(bool _active)
     {
         m_miniMap.SetActive(_active);
     }
-    public void SetActiveBoss(bool _active){
+    public void SetActiveBoss(bool _active)
+    {
         boss_UI.SetActive(_active);
     }
     #endregion
@@ -78,15 +79,15 @@ public class GameUIManager : MonoBehaviour
     public void UpdatePlayerHealth(float _playerHealth, float _maxHealth)
     {
         playerHealth.text = _playerHealth + "/" + _maxHealth;
-        playerCurHealthBar.sizeDelta = new Vector2(_playerHealth * playerHealthGUIRatio, 
+        playerCurHealthBar.sizeDelta = new Vector2(_playerHealth * playerHealthGUIRatio,
                                                 playerCurHealthBar.sizeDelta.y);
     }
 
     public void SetActviePlayerDamaged(bool _active)
     {
-        if(_active)
+        if (_active)
         {
-            if(playerDamagedFadeOut != null) StopCoroutine(playerDamagedFadeOut);
+            if (playerDamagedFadeOut != null) StopCoroutine(playerDamagedFadeOut);
             Color c = playerDamaged.color;
             c.a = 1;
             playerDamaged.color = c;
@@ -102,26 +103,31 @@ public class GameUIManager : MonoBehaviour
     #region 플레이어 무기
     public void UpdateAim(float _spread)
     {
-        aimAnimator.SetFloat("Spread",_spread);
+        aimAnimator.SetFloat("Spread", _spread);
     }
-    public void UpdateHitMark(){
-        if(hitMarkerIEnumerator != null) StopCoroutine(hitMarkerIEnumerator);
+    public void UpdateHitMark()
+    {
+        if (hitMarkerIEnumerator != null) StopCoroutine(hitMarkerIEnumerator);
         hitMarkerIEnumerator = HitMarker();
         StartCoroutine(hitMarkerIEnumerator);
     }
-    IEnumerator HitMarker(){
+    IEnumerator HitMarker()
+    {
         float i = 1;
-        foreach( var j in hitMarker){
+        foreach (var j in hitMarker)
+        {
             Color c = j.color;
             c.a = 1;
             j.color = c;
         }
 
-        while(i>0){
+        while (i > 0)
+        {
             i -= 1 / (hitMarkTime * 50);
-            if( i < 0) i = 0;
+            if (i < 0) i = 0;
 
-            foreach(var k in hitMarker){
+            foreach (var k in hitMarker)
+            {
                 Color c = k.color;
                 c.a = i;
                 k.color = c;
@@ -136,8 +142,8 @@ public class GameUIManager : MonoBehaviour
         remainAmmo.text = _remainAmmo.ToString();
     }
 
-    public void Updatemag(int _remainMag)
-    {   
+    public void UpdateMag(int _remainMag)
+    {
         remainMag.text = _remainMag.ToString();
     }
 
@@ -145,11 +151,12 @@ public class GameUIManager : MonoBehaviour
 
     #endregion
     #region  보스
-    public void UpdateBossUI(string _bossName){ bossName.text = _bossName; }
-    public void UpdateBossHealth(int _maxHealth, int _curHealth){
+    public void UpdateBossUI(string _bossName) { bossName.text = _bossName; }
+    public void UpdateBossHealth(int _maxHealth, int _curHealth)
+    {
         bossHealthText.text = _curHealth + " / " + _maxHealth;
-        bossHealthImage.sizeDelta = 
-            new Vector2(bossHealthBackground.sizeDelta.x / _maxHealth * _curHealth, 
+        bossHealthImage.sizeDelta =
+            new Vector2(bossHealthBackground.sizeDelta.x / _maxHealth * _curHealth,
                 bossHealthImage.sizeDelta.y);
     }
 
@@ -162,10 +169,10 @@ public class GameUIManager : MonoBehaviour
         // (내용채우기)
     }
     */
-#endregion
+    #endregion
     public void SetMouseLock(bool _active)
     {
-        if(_active) Cursor.lockState = CursorLockMode.Locked;
+        if (_active) Cursor.lockState = CursorLockMode.Locked;
         else Cursor.lockState = CursorLockMode.None;
         Cursor.visible = !_active;
     }
@@ -174,10 +181,10 @@ public class GameUIManager : MonoBehaviour
     {
         float i = 1;
         Color c = _image.color;
-        while(i > 0)
+        while (i > 0)
         {
             i -= 1 / (_time * 50);
-            if(i<0) i = 0;
+            if (i < 0) i = 0;
 
             c.a = i;
             _image.color = c;
@@ -186,7 +193,8 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
-    public void QuitProgram(){
+    public void QuitProgram()
+    {
         Application.Quit();
     }
 }
