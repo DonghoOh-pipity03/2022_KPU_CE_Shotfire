@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 public class PlayerInput : MonoBehaviourPunCallbacks
@@ -66,8 +66,9 @@ public class PlayerInput : MonoBehaviourPunCallbacks
         // 공격 관련
         if (playerController.ableControlAttack)
         {   
-            if(Input.GetButtonUp("Fire1")) fire = false;
-            else fire = Input.GetButton("Fire1");
+            //if(Input.GetButtonUp("Fire1")) fire = false;
+            //else 
+            fire = Input.GetButton("Fire1");
             //Debug.Log(Input.GetButton("Fire1"));
             zoom = Input.GetButton("Fire2");
             if (Input.GetButtonDown("Reload")) reload = true;
