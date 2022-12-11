@@ -2,7 +2,7 @@
 
 ## Demo Video
 
-### [비디오 영상 링크](./demoVideo/S4-4%203D%20%EC%8A%88%ED%8C%85%20%EB%A9%80%ED%8B%B0%20PC%20%EA%B2%8C%EC%9E%84%20%EA%B5%AC%ED%98%84.mp4)
+### [비디오 영상 링크](https://drive.google.com/file/d/1miHIUWK3hSFgOFWya59s_EQkEq9fKK42/view?usp=sharing)
 
 ## 2022년 한국공학대학교 컴퓨터공학과 졸업작품_팀_Shotsfired
 
